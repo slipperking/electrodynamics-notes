@@ -1,0 +1,30 @@
+{
+    "cSpell.words": [
+        "cetz",
+        "doubletilde",
+        "dtheta",
+        "dzeta",
+        "emph",
+        "extcomplex",
+        "forall",
+        "liminf",
+        "limsup",
+        "logp",
+        "meromorphy",
+        "namefmt",
+        "Nevanlinna",
+        "pagebreak",
+        "qedhere",
+        "smallcaps",
+        "subcovering",
+        "titlefmt",
+        "Typst",
+        "uppi"
+    ],
+    "tinymist.typstExtraArgs": [
+        "--features",
+        "html,bundle",
+        "--package-path",
+        "packages"
+    ]
+}
