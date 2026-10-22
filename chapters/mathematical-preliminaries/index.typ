@@ -7,6 +7,7 @@
     include "differentiation/index.typ"
     include "integration/index.typ"
     include "generalized-functions/index.typ"
+    include "helmholtz-theorem/index.typ"
   },
 )
 

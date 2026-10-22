@@ -170,7 +170,7 @@ The time derivative of a one-dimensional integral with a time-varying boundary i
     })
   },
   caption: [The surface $S(t)$ and the advanced $S(t+delta)$ with the differential elements.],
-)
+) <fig:reynolds-transport-volume>
 
 Analogously assume a time-varying surface $S(t)$ in three dimensions with boundary $partial S(t)$, where at a given time $t$, a particular point $va(r) in S(t)$ moves with velocity $va(v) = va(v)(va(r), t)$, and points in $partial S(t)$ move to those in $partial S(t + delta t)$. The position of the point $va(r)$ after $delta t$ time has elapsed is $va(r) + va(v) delta t$. Then with the given variation in $t$,
 $
@@ -184,13 +184,14 @@ Multiplying by $1 / (delta t)$ gives
 $
   dv(, t)integral.double_S(t) va(B)(va(r), t) dot dif va(S) = integral.double_S(t) pdv(va(B), t) dot dif va(S) + 1 / (delta t) [integral.double_S(t + delta t) - integral.double_S(t)] va(B)(va(r), t) dot dif va(S).
 $ <eq:reynolds-transport-volume-derivative-separation>
-The field $va(B)$ in the bracketed sum is no longer time-varying. In the span of $delta t$, the region $S(t)$ sweeps out a thin oriented region $V$. Then by the Divergence Theorem
+The field $va(B)$ in the bracketed sum is no longer time-varying. In the span of $delta t$, the region $S(t)$ sweeps out a thin oriented region $V$, as demonstrated in @fig:reynolds-transport-volume. Then by the Divergence Theorem
 $
   integral.triple_V div vb(B) dif V = integral.double_S(t + delta t) va(B) dot dif va(S) - integral.double_S(t) va(B) dot dif va(S) + integral.double_"ribbon" va(B) dot dif va(S),
 $ <eq:reynolds-transport-volume-integral-expansion>
 where the sign of the second term is due to orientation. In the third term, the oriented surface element $dif va(S) = vu(n) dif S$ is orthogonal to both the displacement $dif va(ell)$ along $S(t)$ and the displacement $va(v) delta t$, implying that
 $
-  integral.double_"ribbon" va(B) dot dif va(S) = integral_(partial S(t)) va(B) dot [dif va(ell) times va(v) delta t] = integral_(partial S(t)) dif va(ell) dot (va(v) delta t times va(B)) = integral.double_S(t) curl(va(v) delta t times va(B)) dot dif va(S).
+  integral.double_"ribbon" va(B) dot dif va(S) &= integral_(partial S(t)) va(B) dot [dif va(ell) times va(v) delta t] \
+  &= integral_(partial S(t)) dif va(ell) dot (va(v) delta t times va(B)) = integral.double_S(t) curl(va(v) delta t times va(B)) dot dif va(S).
 $
 Similarly, the volume element in @eq:reynolds-transport-volume-integral-expansion may be interpreted as the volume of a small cylinder with base $dif S$ and height $op("proj")_(vu(n)) va(v) delta t$:
 $
@@ -200,7 +201,7 @@ Therefore @eq:reynolds-transport-volume-integral-expansion gives
 $
   delta t integral.double_S(t) [(div vb(B)) va(v) - curl(va(v) times va(B))] dot dif va(S) = integral.double_S(t + delta t) va(B) dot dif va(S) - integral.double_S(t) va(B) dot dif va(S),
 $
-which by @eq:reynolds-transport-volume-derivative-separation, gives
+which by @eq:reynolds-transport-volume-derivative-separation, yields
 #theorem[Reynolds Transport Theorem][
   $
     dv(, t)integral.double_S(t) va(B) dot dif va(S) = integral.double_S(t) [pdv(va(B), t) + (div vb(B)) va(v) - curl(va(v) times va(B))] dot dif va(S),
