@@ -3,5 +3,4 @@
 #show: docs-cover.with(
   title: "Home",
   route: none,
-  // description: "",
 )

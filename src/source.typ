@@ -3,7 +3,9 @@
 #let date = "October 21, 2026"
 #let source-url = "https://github.com/slipperking/electrodynamics-notes"
 #let abstract = [
-  #lorem(50)
+  // #lorem(40)
+
+  To the avower of the impertinence and presumptuosity of my selections, the saint, even in the course of my amelioration.
 ]
 
 #let web-view-recommendation = [

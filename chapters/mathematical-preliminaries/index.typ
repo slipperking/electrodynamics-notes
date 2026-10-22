@@ -4,7 +4,9 @@
   route: "mathematical-preliminaries",
   children: {
     include "vectors/index.typ"
-    include "calculus/index.typ"
+    include "differentiation/index.typ"
+    include "integration/index.typ"
+    include "generalized-functions/index.typ"
   },
 )
 

@@ -169,7 +169,7 @@ The time derivative of a one-dimensional integral with a time-varying boundary i
       )
     })
   },
-  caption: [Surface transport and its local volume element.],
+  caption: [The surface $S(t)$ and the advanced $S(t+delta)$ with the differential elements.],
 )
 
 Analogously assume a time-varying surface $S(t)$ in three dimensions with boundary $partial S(t)$, where at a given time $t$, a particular point $va(r) in S(t)$ moves with velocity $va(v) = va(v)(va(r), t)$, and points in $partial S(t)$ move to those in $partial S(t + delta t)$. The position of the point $va(r)$ after $delta t$ time has elapsed is $va(r) + va(v) delta t$. Then with the given variation in $t$,
