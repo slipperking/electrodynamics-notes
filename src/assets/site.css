@@ -517,6 +517,13 @@ math {
   text-align: left;
 }
 
+.todo-inline {
+  display: inline;
+  margin: 0 0.12em;
+  padding: 0.08em 0.3em;
+  border-left-width: 1px;
+}
+
 [data-theme="dark"] .todo-callout {
   border-color: #dcae32;
   background: #3c3010;
@@ -1153,11 +1160,11 @@ figure svg {
     display: none !important;
   }
 
-  .thm-solution {
+  details.thm-proof {
     display: block;
   }
 
-  .thm-solution>* {
+  details.thm-proof>* {
     display: block;
   }
 

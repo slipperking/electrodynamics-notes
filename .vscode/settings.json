@@ -25,6 +25,8 @@
         "--features",
         "html,bundle",
         "--package-path",
-        "packages"
+        "packages",
+        "--input",
+        "debug-build=true",
     ]
 }

@@ -1,13 +1,13 @@
 #let title = "Notes on Electrodynamics"
 #let authors = ("Slipper King",)
-#let date = "September 4, 2026"
+#let date = "October 21, 2026"
 #let source-url = "https://github.com/slipperking/electrodynamics-notes"
 #let abstract = [
-  Notes on electrodynamics. #lorem(30)
+  #lorem(50)
 ]
 
 #let web-view-recommendation = [
-  For the best web viewing experience, we recommend using a Mozilla-based browser such as Firefox. This will be subject to change as browsers improve their MathML support.
+  For the best web viewing experience, we recommend using a Mozilla-based browser such as Firefox. This will be subject to change as browsers improve their MathML support. (For instance, displayed overlines will not stretch)
 ]
 
 #let join-oxford-commas(v) = {
@@ -16,16 +16,18 @@
   }
 }
 
-#let web-cover(href) = {
+#let web-cover(href, show-pdf: true) = {
   html.elem("section", attrs: (class: "cover"), {
     html.elem("h1", title)
     html.elem("p", attrs: (class: "authors"), [by #join-oxford-commas(authors.map(smallcaps))])
     html.elem("p", attrs: (class: "date"), date)
     html.elem("div", attrs: (class: "abstract"), abstract)
     html.elem("div", attrs: (class: "recommendation"), web-view-recommendation)
-    html.elem("p", attrs: (class: "download"), {
-      html.elem("a", attrs: (class: "button", href: href("pdf/notes.pdf")), [Download PDF])
-    })
+    if show-pdf {
+      html.elem("p", attrs: (class: "download"), {
+        html.elem("a", attrs: (class: "button", href: href("pdf/notes.pdf")), [View PDF])
+      })
+    }
   })
 }
 

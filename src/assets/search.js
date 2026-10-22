@@ -72,11 +72,13 @@
       var orderedHits = 0;
       var wholeHits = 0;
       var partialHits = 0;
+      var matchedTokens = 0;
       tokens.forEach(function (token) {
         var wholeMatches = wholeWordCount(text, token);
         var next = wholeMatches > 0 ? firstWholeWordIndex(text.slice(position + 1), token) : -1;
         if (wholeMatches > 0) {
           wholeHits += wholeMatches;
+          matchedTokens += 1;
           matched = true;
           if (next >= position) {
             orderedHits += 1;
@@ -84,10 +86,12 @@
           }
         } else if (text.indexOf(token) !== -1) {
           partialHits += substringCount(text, token);
+          matchedTokens += 1;
           matched = true;
         }
       });
 
+      if (matchedTokens < tokens.length) return 0;
       if (orderedHits === tokens.length && tokens.length > 1) score += 700;
       score += wholeHits * 170;
       score += partialHits * 35;
@@ -100,85 +104,39 @@
     return score;
   }
 
-  function pageScore(page, query, tokens) {
+  function titleScore(page, query, tokens) {
     var title = page.titleNormalized || "";
-    var text = page.textNormalized || "";
     var score = 0;
-    var matched = false;
 
     if (title === query) {
       score += 3600;
-      matched = true;
     } else if (title.indexOf(query) !== -1) {
       score += 1650;
-      matched = true;
-    }
-    if (text.indexOf(query) !== -1) {
-      score += 820;
-      matched = true;
     }
 
     if (tokens.length > 0) {
       var titleWholeHits = 0;
-      var textWholeHits = 0;
       var titlePartialHits = 0;
-      var textPartialHits = 0;
-      var cursor = -1;
-      var ordered = 0;
+      var matchedTokens = 0;
 
       tokens.forEach(function (token) {
         var titleWhole = wholeWordCount(title, token);
-        var textWhole = wholeWordCount(text, token);
         titleWholeHits += titleWhole;
-        textWholeHits += textWhole;
-        if (titleWhole === 0 && title.indexOf(token) !== -1) titlePartialHits += substringCount(title, token);
-        if (textWhole === 0 && text.indexOf(token) !== -1) textPartialHits += substringCount(text, token);
-        if (titleWhole > 0 || textWhole > 0) matched = true;
-        if (titleWhole === 0 && textWhole === 0 && (title.indexOf(token) !== -1 || text.indexOf(token) !== -1)) {
-          matched = true;
-        }
-        var next = textWhole > 0 ? firstWholeWordIndex(text.slice(cursor + 1), token) : -1;
-        if (next !== -1) {
-          ordered += 1;
-          cursor = cursor + 1 + next;
+        if (titleWhole > 0) {
+          matchedTokens += 1;
+        } else if (title.indexOf(token) !== -1) {
+          titlePartialHits += substringCount(title, token);
+          matchedTokens += 1;
         }
       });
 
+      if (matchedTokens < tokens.length) return 0;
       if (titleWholeHits >= tokens.length) score += 1100;
-      if (ordered === tokens.length && tokens.length > 1) score += 780;
-      score += titleWholeHits * 200 + textWholeHits * 90;
-      score += titlePartialHits * 45 + textPartialHits * 18;
+      score += titleWholeHits * 200;
+      score += titlePartialHits * 45;
     }
 
-    var bestBlock = null;
-    var bestBlockScore = 0;
-    var bestSnippetBlock = null;
-    var bestSnippetScore = 0;
-    (page.blocks || []).forEach(function (block) {
-      var scoreForBlock = blockScore(block, query, tokens);
-      if (scoreForBlock > bestBlockScore) {
-        bestBlockScore = scoreForBlock;
-        bestBlock = block;
-      }
-      if (block.kind !== "heading" && scoreForBlock > bestSnippetScore) {
-        bestSnippetScore = scoreForBlock;
-        bestSnippetBlock = block;
-      }
-    });
-
-    if (!matched && bestBlockScore <= 0) {
-      return {
-        score: 0,
-        bestBlock: null,
-        bestSnippetBlock: null
-      };
-    }
-
-    return {
-      score: score + bestBlockScore,
-      bestBlock: bestBlock,
-      bestSnippetBlock: bestSnippetBlock || bestBlock
-    };
+    return score;
   }
 
   function renderEmpty(target, message) {
@@ -256,17 +214,31 @@
   }
 
   function highlightHtmlSnippet(html, tokens) {
-    if (!html || tokens.length === 0) return html || "";
+    if (!html) return "";
+
+    var template = document.createElement("template");
+    template.innerHTML = html;
+    template.content.querySelectorAll(".page-nav, sup[role='doc-backlink'], .typst-multi-label-list, .eq-tag, .equation-tag-group, .equation-tag-holder, .page-source-heading, script, style").forEach(function (node) {
+      node.remove();
+    });
+    template.content.querySelectorAll("[id]").forEach(function (node) {
+      node.removeAttribute("id");
+    });
+    template.content.querySelectorAll("a").forEach(function (link) {
+      var fragment = document.createDocumentFragment();
+      while (link.firstChild) fragment.appendChild(link.firstChild);
+      link.replaceWith(fragment);
+    });
+
+    if (tokens.length === 0) return template.innerHTML;
 
     var pattern = tokens
       .filter(function (token) { return token.length > 1; })
       .map(function (token) { return escapeRegex(token); })
       .join("|");
-    if (!pattern) return html;
+    if (!pattern) return template.innerHTML;
 
     var regex = new RegExp("(" + pattern + ")", "giu");
-    var template = document.createElement("template");
-    template.innerHTML = html;
     var walker = document.createTreeWalker(template.content, NodeFilter.SHOW_TEXT);
     var nodes = [];
     while (walker.nextNode()) {
@@ -306,7 +278,7 @@
 
   function snippetHtmlForBlock(block, tokens) {
     if (!block) return "";
-    if ((block.html || "").indexOf("<math") !== -1) {
+    if (block.kind === "math" && (block.html || "").indexOf("<math") !== -1) {
       return highlightHtmlSnippet(block.html || "", tokens);
     }
     var snippet = textSnippet(block.text || "", tokens, 220);
@@ -372,6 +344,22 @@
     });
   }
 
+  function focusSearchTarget() {
+    if (!window.location.hash) return;
+    var id;
+    try {
+      id = decodeURIComponent(window.location.hash.slice(1));
+    } catch (_error) {
+      id = window.location.hash.slice(1);
+    }
+    var target = document.getElementById(id);
+    if (!target || !target.closest(".content")) return;
+    target.classList.add("search-target");
+    requestAnimationFrame(function () {
+      target.scrollIntoView({ block: "center" });
+    });
+  }
+
   function renderResults(query) {
     var summary = document.getElementById("search-summary");
     var resultsRoot = document.getElementById("search-results");
@@ -388,37 +376,71 @@
       return;
     }
 
-    var ranked = pages.map(function (page) {
-      var scored = pageScore(page, normalizedQuery, tokens);
-      return {
-        page: page,
-        score: scored.score,
-        block: scored.bestSnippetBlock,
-        titleMatch: (page.titleNormalized || "").indexOf(normalizedQuery) !== -1
-      };
-    }).filter(function (entry) {
-      return entry.score > 0 && (entry.block || entry.titleMatch);
-    }).sort(function (a, b) {
+    var ranked = [];
+    pages.forEach(function (page) {
+      var scoreForTitle = titleScore(page, normalizedQuery, tokens);
+      var pageHasPassage = false;
+      (page.blocks || []).forEach(function (block) {
+        var scoreForBlock = blockScore(block, normalizedQuery, tokens);
+        if (scoreForBlock <= 0) return;
+        pageHasPassage = true;
+        ranked.push({
+          page: page,
+          block: block,
+          score: scoreForBlock + Math.min(scoreForTitle, 400)
+        });
+      });
+      if (!pageHasPassage && scoreForTitle > 0) {
+        ranked.push({ page: page, block: null, score: scoreForTitle });
+      }
+    });
+
+    ranked.sort(function (a, b) {
       if (b.score !== a.score) return b.score - a.score;
       return a.page.title.localeCompare(b.page.title);
-    }).slice(0, 200);
+    });
 
-    summary.textContent = ranked.length + " result" + (ranked.length === 1 ? "" : "s") + ' for "' + query + '"';
+    var resultLimit = 200;
+    var pageCount = new Set(ranked.map(function (entry) { return entry.page.path; })).size;
+    var resultCount = ranked.length + " result" + (ranked.length === 1 ? "" : "s");
+    if (ranked.length > resultLimit) resultCount = "the first " + resultLimit + " of " + resultCount;
+    summary.textContent = "Showing " + resultCount + " on " + pageCount + " page" + (pageCount === 1 ? "" : "s") + ' for "' + query + '"';
 
     if (ranked.length === 0) {
       renderEmpty(resultsRoot, "No matches found. Try a shorter phrase or a page title.");
       return;
     }
 
-    resultsRoot.innerHTML = ranked.map(function (entry) {
-      var page = entry.page;
-      var block = entry.block;
-      var snippetHtml = snippetHtmlForBlock(block, tokens) || "<p>" + highlightText(page.title, tokens) + "</p>";
+    var groups = [];
+    var groupsByPath = new Map();
+    ranked.slice(0, resultLimit).forEach(function (entry) {
+      var group = groupsByPath.get(entry.page.path);
+      if (!group) {
+        group = { page: entry.page, entries: [] };
+        groupsByPath.set(entry.page.path, group);
+        groups.push(group);
+      }
+      group.entries.push(entry);
+    });
+
+    resultsRoot.innerHTML = groups.map(function (group) {
+      var page = group.page;
+      var passages = group.entries.map(function (entry) {
+        var block = entry.block;
+        var snippetHtml = snippetHtmlForBlock(block, tokens) || "<p>" + highlightText(page.title, tokens) + "</p>";
+        return [
+          '<li class="search-result-passage">',
+          '<a class="search-result-match" href="' + escapeHtml(buildResultUrl(page, block, query)) + '">',
+          '<div class="search-result-snippet">' + snippetHtml + "</div>",
+          "</a>",
+          "</li>"
+        ].join("");
+      }).join("");
       return [
         '<article class="search-result">',
-        '<h2 class="search-result-title"><a href="' + escapeHtml(buildResultUrl(page, block, query)) + '">' + highlightText(page.title, tokens) + "</a></h2>",
+        '<h2 class="search-result-title"><a href="' + escapeHtml(buildResultUrl(page, null, query)) + '">' + highlightText(page.title, tokens) + "</a></h2>",
         '<p class="search-result-link">' + escapeHtml("/" + page.route) + "</p>",
-        '<div class="search-result-snippet">' + snippetHtml + "</div>",
+        '<ol class="search-result-passages">' + passages + "</ol>",
         "</article>"
       ].join("");
     }).join("");
@@ -448,6 +470,7 @@
     var query = params.get("search") || "";
     if (!query) return;
     highlightContent(document.querySelector(".content"), tokenize(query));
+    focusSearchTarget();
   }
 
   if (document.readyState === "loading") {

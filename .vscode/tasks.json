@@ -1,0 +1,264 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "WATCHER: bundle both (debug)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "watch",
+        "--features", "bundle,html",
+        "--format", "bundle",
+        "--package-path", "packages",
+        "--input", "debug-build=true",
+        "main.typ", "dist"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "WATCHER: PDF only (debug)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "watch",
+        "--features", "bundle,html",
+        "--package-path", "packages",
+        "--input", "legacy-label-routing=true",
+        "--input", "debug-build=true",
+        "main.typ", "main.pdf"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "WATCHER: HTML only (debug)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "watch",
+        "--features", "bundle,html",
+        "--format", "bundle",
+        "--package-path", "packages",
+        "--input", "html-only=true",
+        "--input", "debug-build=true",
+        "main.typ", "dist"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "WATCHER: bundle both (non-debug)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "watch",
+        "--features", "bundle,html",
+        "--format", "bundle",
+        "--package-path", "packages",
+        "main.typ", "dist"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "WATCHER: PDF only (non-debug)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "watch",
+        "--features", "bundle,html",
+        "--package-path", "packages",
+        "--input", "legacy-label-routing=true",
+        "main.typ", "main.pdf"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "WATCHER: HTML only (non-debug)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "watch",
+        "--features", "bundle,html",
+        "--format", "bundle",
+        "--package-path", "packages",
+        "--input", "html-only=true",
+        "main.typ", "dist"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "COMPILE: bundle both (debug)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "compile",
+        "--features", "bundle,html",
+        "--format", "bundle",
+        "--package-path", "packages",
+        "--input", "debug-build=true",
+        "main.typ", "dist"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "COMPILE: PDF only (debug)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "compile",
+        "--features", "bundle,html",
+        "--package-path", "packages",
+        "--input", "legacy-label-routing=true",
+        "--input", "debug-build=true",
+        "main.typ", "main.pdf"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "COMPILE: HTML only (debug)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "compile",
+        "--features", "bundle,html",
+        "--format", "bundle",
+        "--package-path", "packages",
+        "--input", "html-only=true",
+        "--input", "debug-build=true",
+        "main.typ", "dist"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "COMPILE: bundle both (non-debug)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "compile",
+        "--features", "bundle,html",
+        "--format", "bundle",
+        "--package-path", "packages",
+        "main.typ", "dist"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "COMPILE: PDF only (non-debug)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "compile",
+        "--features", "bundle,html",
+        "--package-path", "packages",
+        "--input", "legacy-label-routing=true",
+        "main.typ", "main.pdf"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "COMPILE: HTML only (non-debug)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "compile",
+        "--features", "bundle,html",
+        "--format", "bundle",
+        "--package-path", "packages",
+        "--input", "html-only=true",
+        "main.typ", "dist"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    }
+  ]
+}

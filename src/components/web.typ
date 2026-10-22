@@ -1,4 +1,4 @@
-#import "styles.typ": document-styles, explicit-label, pdf-doc-label, web-doc-label
+#import "styles.typ": document-styles, explicit-label, pdf-scope-label, web-scope-label
 #import "theorems.typ": *
 #import "/src/source.typ" as source
 
@@ -9,8 +9,51 @@
 #let abstract = source.abstract
 
 #let render-mode = state("render-mode", "web")
-#let route-prefix = state("route-prefix", ())
-#let route-folders = state("route-folders", ())
+#let html-only = sys.inputs.at("html-only", default: "false") == "true"
+
+#let _route-tag-key = "typst-project-route"
+
+#let _tag-data() = {
+  let carrier = bibliography.title
+  if carrier != auto and carrier.func() == metadata and type(carrier.value) == dictionary {
+    carrier.value
+  } else {
+    (:)
+  }
+}
+
+#let _route-context() = {
+  let route = _tag-data().at(_route-tag-key, default: (:))
+  if type(route) != dictionary {
+    route = (:)
+  }
+  (
+    prefix: route.at("prefix", default: ()),
+    folders: route.at("folders", default: ()),
+  )
+}
+
+#let _route-scope(prefix: auto, folders: auto, body) = context {
+  let current = _route-context()
+  let next = (
+    prefix: if prefix == auto { current.prefix } else { prefix },
+    folders: if folders == auto { current.folders } else { folders },
+  )
+  let tags = _tag-data()
+  tags.insert(_route-tag-key, next)
+
+  show label("meta:" + _route-tag-key + "-scope"): it => {
+    set bibliography(title: metadata(tags))
+    it.body
+  }
+  [#block(body)#label("meta:" + _route-tag-key + "-scope")]
+}
+
+/// Apply a route prefix to `body`. Child page folders start at this prefix.
+#let route-prefix(prefix, body) = _route-scope(prefix: prefix, folders: (), body)
+
+/// Apply an exact inherited folder path to `body`.
+#let route-folders(folders, body) = _route-scope(folders: folders, body)
 
 #let _normalize-route(route) = {
   let value = route
@@ -32,6 +75,8 @@
     route
   }
 }
+
+#let _section-label(segment) = if segment == none { none } else { label("sec:" + segment) }
 
 #let _route-from-folders(folders) = {
   if folders.len() == 0 {
@@ -112,11 +157,6 @@
   )
 }
 
-#let _first-page-heading(page) = {
-  let headings = query(selector(heading).within(label("doc-" + page.id)))
-  if headings.len() > 0 { headings.first() } else { none }
-}
-
 #let _heading-number(h) = {
   if h != none and h.numbering != none {
     counter(heading).display(at: h.location())
@@ -125,28 +165,79 @@
   }
 }
 
-#let _page-depth(page) = {
-  let h = _first-page-heading(page)
-  if h == none { 0 } else { calc.max(0, h.level - 1) }
-}
-
-#let _page-label(page) = {
-  let h = _first-page-heading(page)
-  let number = _heading-number(h)
-  let title = if h != none { h.body } else { page.title }
-
-  (page.heading-format)(number, title)
-}
-
-#let _set-route-folders(level, route) = route-folders.update(folders => {
-  let keep = calc.min(folders.len(), calc.max(0, level - 1))
-  let next = folders.slice(0, keep)
-  let segment = _route-segment(route)
-  if segment != none {
-    next.push(segment)
+#let _site-data() = {
+  let carrier = outline.title
+  if carrier != auto and carrier.func() == metadata and type(carrier.value) == dictionary {
+    carrier.value
+  } else {
+    (:)
   }
-  next
-})
+}
+
+#let _page-entry(page) = {
+  let entries = _site-data().at("entries", default: (:))
+  let entry = entries.at(page.id, default: none)
+  if entry != none {
+    entry
+  } else {
+    (
+      label: (page.heading-format)(none, page.title),
+      depth: calc.max(0, page.heading-level - 1),
+      prev: none,
+      next: none,
+    )
+  }
+}
+
+#let _page-label(page) = _page-entry(page).label
+
+#let _build-site-data() = {
+  let records = query(
+    selector(heading).or(<page-meta>).or(<page-nav-meta>).within(web-scope-label),
+  )
+  let pages = ()
+  let nav = (:)
+  let last-heading = none
+
+  for record in records {
+    if record.func() == heading {
+      last-heading = record
+    } else if record.value.record == "page" {
+      pages.push(record.value.page)
+      last-heading = none
+    } else if record.value.record == "nav" {
+      let page = record.value.page
+      let source-heading = if record.value.has-heading { last-heading } else { none }
+      let number = _heading-number(source-heading)
+      let title = if source-heading != none { source-heading.body } else { page.title }
+
+      nav.insert(page.id, (
+        label: (page.heading-format)(number, title),
+        depth: if source-heading == none { 0 } else { calc.max(0, source-heading.level - 1) },
+      ))
+      last-heading = none
+    }
+  }
+
+  let entries = (:)
+  for (index, page) in pages.enumerate() {
+    let page-nav = nav.at(page.id, default: none)
+    if page-nav == none {
+      page-nav = (
+        label: (page.heading-format)(none, page.title),
+        depth: calc.max(0, page.heading-level - 1),
+      )
+    }
+    entries.insert(page.id, (
+      label: page-nav.label,
+      depth: page-nav.depth,
+      prev: if index > 0 { pages.at(index - 1) } else { none },
+      next: if index + 1 < pages.len() { pages.at(index + 1) } else { none },
+    ))
+  }
+
+  (pages: pages, entries: entries)
+}
 
 #let _page-heading(page) = {
   if page.label == none {
@@ -156,19 +247,22 @@
   }
 }
 
-#let _pages() = query(<page-meta>).map(it => it.value)
 #let _icon(name, path) = html.elem("img", attrs: (class: "icon", src: path, alt: name))
 
 #let _todo-description(body) = if body == none { [] } else { body }
 
-#let todo(..args) = context {
+/// Mark an open task. Set `block: false` to keep the callout inline.
+#let todo(..args, block: true) = context {
   assert(args.pos().len() <= 1, message: "todo accepts at most one content argument")
+  assert(type(block) == bool, message: "todo's block argument must be a boolean")
   let body = args.pos().first(default: none)
   let description = _todo-description(body)
   if render-mode.get() == "web" {
+    let tag = if block { "aside" } else { "span" }
+    let class = if block { "todo-callout" } else { "todo-callout todo-inline" }
     [
       #metadata((description: description)) <todo-marker>
-      #html.elem("aside", attrs: (class: "todo-callout", role: "note", "aria-label": "Todo"), {
+      #html.elem(tag, attrs: (class: class, role: "note", "aria-label": "Todo"), {
         link(<sec:todo>, html.elem("em", attrs: (class: "proof-head"), [Todo.]))
         sym.space.nobreak
         html.elem("span", attrs: (class: "todo-callout-description"), description)
@@ -177,8 +271,8 @@
   }
 }
 
-#let _nav-link(current, page) = context {
-  let depth = _page-depth(page)
+#let _nav-link(current, page, entry: none) = context {
+  let page-entry = if entry == none { _page-entry(page) } else { entry }
   let cls = (
     "nav-item",
     if page.id == current.id { "active" } else { none },
@@ -186,90 +280,42 @@
     .filter(x => x != none)
     .join(" ")
 
-  html.elem("li", attrs: (class: cls, style: "--depth: " + str(depth)), {
-    html.elem("a", attrs: (href: _href-from(current.path, page.path)), _page-label(page))
+  html.elem("li", attrs: (class: cls, style: "--depth: " + str(page-entry.depth)), {
+    html.elem("a", attrs: (href: _href-from(current.path, page.path)), page-entry.label)
   })
 }
 
 #let _global-nav(current) = context {
-  let pages = _pages()
+  let site-data = _site-data()
+  let pages = site-data.at("pages", default: ())
+  let entries = site-data.at("entries", default: (:))
   html.elem("nav", attrs: (class: "global-nav", "aria-label": "Site navigation"), {
     html.elem("ul", {
       for page in pages {
-        _nav-link(current, page)
+        _nav-link(current, page, entry: entries.at(page.id, default: none))
       }
     })
   })
 }
 
 #let theorem-heading(thm) = {
-  let head = [*#thm.supplement~#thm.number*]
-  if thm.name != none {
-    head += [~(#thm.name)]
-  }
-  head
+  theorem-toc-entry(thm)
 }
 
-#let _toc-entry(class, location, body, depth: 0) = html.elem(
-  "li",
-  attrs: (
-    class: class,
-    style: "--toc-depth: " + str(depth),
-  ),
-  {
-    link(location, body)
-  },
-)
-
-#let _heading-toc-entry(h, page) = {
-  let number = _heading-number(h)
-  let page-heading = _first-page-heading(page)
-  if page-heading != none and h.location() == page-heading.location() {
-    (page.heading-format)(number, h.body)
-  } else if number != none {
-    [#sym.section#number #h.body]
-  } else {
-    h.body
-  }
-}
-
-#let _local-toc(current) = context {
-  let doc-label = label("doc-" + current.id)
-  let first-heading = _first-page-heading(current)
-  let targets = query(selector(heading).within(doc-label).or(selector(<meta:thm-env-counter>)).within(doc-label))
-
-  let entries = ()
-  for el in targets {
-    if el.func() == heading {
-      entries.push((level: el.level, kind: "heading", loc: el.location(), body: _heading-toc-entry(el, current)))
-    } else {
-      let thm = el.value
-      entries.push((level: 3, kind: "theorem", loc: el.location(), body: theorem-toc-entry(thm)))
-    }
-  }
-  entries = entries.sorted(key: e => e.loc.position().page * 100000 + e.loc.position().y / 1pt) // establish hierarchy and sub-hierarchy
-
+#let _local-toc() = {
   html.elem("nav", attrs: (class: "local-toc", "aria-label": "On this page"), {
     html.elem("h2", [On This Page])
-    if entries.len() == 0 {
-      html.elem("p", attrs: (class: "muted"), [No entries yet.])
-    } else {
-      html.elem("ul", {
-        for entry in entries {
-          let depth = calc.max(0, entry.level - 2)
-          let cls = "toc-" + entry.kind
-          _toc-entry(cls, entry.loc, entry.body, depth: depth)
-        }
-      })
-    }
+    html.elem("ul", attrs: ("data-local-toc-list": "true"), [])
   })
 }
 
 #let _prev-next(current) = context {
-  let pages = _pages()
-  let idx = pages.position(page => page.id == current.id)
-  let prev = if idx != none and idx > 0 { pages.at(idx - 1) } else { none }
-  let next = if idx != none and idx < pages.len() - 1 { pages.at(idx + 1) } else { none }
+  if sys.inputs.at("debug-build", default: none) == "true" {
+    return
+  }
+  let entry = _page-entry(current)
+  let prev = entry.prev
+  let next = entry.next
 
   html.elem("nav", attrs: (class: "page-nav", "aria-label": "Previous and next pages"), {
     if prev != none {
@@ -334,18 +380,20 @@
         _icon("Print", _asset-href(current.path, "assets/print.svg"))
       },
     )
-    html.elem(
-      "a",
-      attrs: (
-        class: "icon-button export-pdf-link",
-        href: _href-from(current.path, "pdf/notes.pdf"),
-        "aria-label": "Export PDF",
-        title: "Export PDF",
-      ),
-      {
-        _icon("Export PDF", _asset-href(current.path, "assets/download.svg"))
-      },
-    )
+    if not html-only {
+      html.elem(
+        "a",
+        attrs: (
+          class: "icon-button export-pdf-link",
+          href: _href-from(current.path, "pdf/notes.pdf"),
+          "aria-label": "Export PDF",
+          title: "Export PDF",
+        ),
+        {
+          _icon("Export PDF", _asset-href(current.path, "assets/download.svg"))
+        },
+      )
+    }
     html.elem("a", attrs: (class: "icon-button github-link", href: source-url, "aria-label": "GitHub source"), {
       _icon("GitHub", _asset-href(current.path, "assets/github.svg"))
     })
@@ -359,17 +407,20 @@
   })
 })
 
-#let _cover-content(current) = source.web-cover(path => _href-from(current.path, path))
+#let _cover-content(current) = source.web-cover(
+  path => _href-from(current.path, path),
+  show-pdf: not html-only,
+)
 
-#let _pdf-cover() = source.pdf-cover(outline-target: selector(heading).within(pdf-doc-label))
+#let _pdf-cover() = source.pdf-cover(outline-target: selector(heading).within(pdf-scope-label))
 
 #let _pdf-document(path: none) = context {
   let body = [
     #[
       #render-mode.update("pdf")
-      #show: document-styles.with(mode: "pdf")
+      #show: document-styles.with(mode: "pdf", todo: todo)
       #include "/chapters/index.typ"
-    ] #pdf-doc-label
+    ] #pdf-scope-label
   ]
 
   if path == none {
@@ -379,41 +430,45 @@
   }
 }
 
-#let _html-page(page, body) = [
-  #metadata(page) <page-meta>
-  #document(page.doc-path, title: [#_page-label(page) | #notes-title])[
-    #show: document-styles.with(mode: "web")
-    #counter(math.equation).update(0)
-    #thm-counter.thm-counters.update((:))
-    #html.elem("link", attrs: (rel: "stylesheet", href: _asset-href(page.path, "assets/site.css")))
-    #html.elem("link", attrs: (rel: "stylesheet", href: _asset-href(page.path, "assets/search.css")))
-    #_topbar(page)
-    #html.elem("div", attrs: (class: "layout"))[
-      #html.elem("aside", attrs: (class: "sidebar-left"))[
-        #_global-nav(page)
+#let _html-page(page, body) = {
+  let page-label = _page-label(page)
+  [
+    #metadata((record: "page", page: page)) <page-meta>
+    #document(page.doc-path, title: [#page-label | #notes-title])[
+      #show: document-styles.with(mode: "web", todo: todo)
+      #counter(math.equation).update(0)
+      #thm-counter.thm-counters.update((:))
+      #html.elem("link", attrs: (rel: "stylesheet", href: _asset-href(page.path, "assets/site.css")))
+      #html.elem("link", attrs: (rel: "stylesheet", href: _asset-href(page.path, "assets/search.css")))
+      #_topbar(page)
+      #html.elem("div", attrs: (class: "layout"))[
+        #html.elem("aside", attrs: (class: "sidebar-left"))[
+          #_global-nav(page)
+        ]
+        #html.elem("main", attrs: (class: "content", id: "main"))[
+          #if page.kind != "cover" {
+            html.elem("h1", attrs: (class: "page-title"), page-label)
+          }
+          #body
+          #_prev-next(page)
+        ]
+        #html.elem("aside", attrs: (class: "sidebar-right"))[
+          #_local-toc()
+        ]
       ]
-      #html.elem("main", attrs: (class: "content", id: "main"))[
-        #if page.kind != "cover" {
-          html.elem("h1", attrs: (class: "page-title"), _page-label(page))
-        }
-        #body
-        #_prev-next(page)
-      ]
-      #html.elem("aside", attrs: (class: "sidebar-right"))[
-        #_local-toc(page)
-      ]
+      #html.elem("div", attrs: (class: "sidebar-backdrop", id: "sidebar-backdrop"))
+      #html.elem("script", attrs: (src: _asset-href(page.path, "assets/site.js")), [])
+      #html.elem("script", attrs: (src: _asset-href(page.path, "assets/search.js")), [])
     ]
-    #html.elem("div", attrs: (class: "sidebar-backdrop", id: "sidebar-backdrop"))
-    #html.elem("script", attrs: (src: _asset-href(page.path, "assets/site.js")), [])
-    #html.elem("script", attrs: (src: _asset-href(page.path, "assets/search.js")), [])
-  ] #label("doc-" + page.id)
-]
+    #label("doc-" + page.id)
+  ]
+}
 
 #let _standalone-page(page, main-class: none, extra-scripts: (), body) = {
   let main-classes = ("content", main-class).filter(value => value != none).join(" ")
 
   document(page.doc-path, title: [#page.title | #notes-title])[
-    #show: document-styles.with(mode: "web")
+    #show: document-styles.with(mode: "web", todo: todo)
     #html.elem("link", attrs: (rel: "stylesheet", href: _asset-href(page.path, "assets/site.css")))
     #html.elem("link", attrs: (rel: "stylesheet", href: _asset-href(page.path, "assets/search.css")))
     #_topbar(page)
@@ -425,7 +480,7 @@
         #body
       ]
       #html.elem("aside", attrs: (class: "sidebar-right"))[
-        #_local-toc(page)
+        #_local-toc()
       ]
     ]
     #html.elem("div", attrs: (class: "sidebar-backdrop", id: "sidebar-backdrop"))
@@ -453,7 +508,7 @@
   _standalone-page(page, main-class: "search-page", extra-scripts: ("assets/search-index.js",))[
     #html.elem("h1", attrs: (class: "page-title"), [Search])
     #html.elem("p", attrs: (class: "search-warning"), [
-      Search functionality is still experimental, and math expressions do not work well yet.
+      Search functionality is still experimental.
     ])
     #html.elem("p", attrs: (class: "search-summary", id: "search-summary"), [
       Enter a word or phrase to search the notes.
@@ -476,7 +531,7 @@
     heading-level: 1,
     description: none,
   )
-  let todos = query(selector(<todo-marker>).within(web-doc-label))
+  let todos = query(selector(<todo-marker>).within(web-scope-label))
 
   _standalone-page(page, main-class: "todo-page")[
     #html.elem("h1", attrs: (class: "page-title"), [Todos]) <sec:todo>
@@ -555,7 +610,7 @@
 
 #let _docs-page(
   title: none,
-  route: none,
+  route: auto,
   kind: "section",
   level: 1,
   heading-format: (number, title) => if number != none { [#number #title] } else { [#title] },
@@ -563,14 +618,21 @@
   cover: false,
   heading: true,
   children: none,
-  label: none,
+  label: auto,
   body,
 ) = {
   assert(type(heading-format) == function, message: "heading-format must be a function")
-  _set-route-folders(level, route)
+  assert(route != auto, message: "docs page needs a route")
   context {
-    let mode = render-mode.get()
-    let route = _route-from-folders(route-prefix.get() + route-folders.get())
+    let route-context = _route-context()
+    let segment = _route-segment(route)
+    let page-label = if label == auto { _section-label(segment) } else { label }
+    let folders = if segment == none {
+      route-context.folders
+    } else {
+      route-context.folders + (segment,)
+    }
+    let route = _route-from-folders(route-context.prefix + folders)
     let page = _page-info(
       title: title,
       route: route,
@@ -579,19 +641,26 @@
       heading-level: level,
       heading-format: heading-format,
       description: description,
-      label: label,
+      label: page-label,
     )
 
-    if target() == "bundle" and mode == "web" {
+    let page-content = if target() == "bundle" and render-mode.get() == "web" {
       let page-body = if cover {
-        _cover-content(page)
+        [
+          #metadata((record: "nav", page: page, has-heading: false)) <page-nav-meta>
+          #_cover-content(page)
+        ]
       } else if heading {
         [
           #html.elem("div", attrs: (class: "page-source-heading"), _page-heading(page))
+          #metadata((record: "nav", page: page, has-heading: true)) <page-nav-meta>
           #body
         ]
       } else {
-        body
+        [
+          #metadata((record: "nav", page: page, has-heading: false)) <page-nav-meta>
+          #body
+        ]
       }
       _html-page(page, page-body)
     } else if cover {
@@ -602,9 +671,14 @@
       }
       body
     }
-  }
-  if children != none {
-    children
+
+    page-content
+    if children != none {
+      route-folders(folders, children)
+    }
+    if render-mode.get() == "pdf" and level == 1 {
+      std.pagebreak()
+    }
   }
 }
 
@@ -641,17 +715,21 @@
 #let notes() = context {
   if target() == "bundle" {
     include "/src/assets/index.typ"
-    _pdf-document(path: "pdf/notes.pdf")
+    if not html-only {
+      _pdf-document(path: "pdf/notes.pdf")
+    }
 
     render-mode.update("web")
     context [
       #{
+        // Store ordered pages and random-access navigation data from one query.
+        set outline(title: metadata(_build-site-data()))
         include "/chapters/index.typ"
         _search-page()
         _todo-page()
         _not-found-page()
         _redirect-404-page()
-      } #web-doc-label
+      } #web-scope-label
     ]
   } else {
     _pdf-document()

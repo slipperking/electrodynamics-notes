@@ -53,10 +53,10 @@
 }
 
 #context {
-  let web-thms = query(selector(<meta:thm-env-counter>).within(web-doc-label))
+  let web-thms = query(selector(<meta:thm-env-counter>).within(web-scope-label))
     .map(marker => marker.value)
     .filter(theorem-filter)
-  let pdf-thms = query(selector(<meta:thm-env-counter>).within(pdf-doc-label))
+  let pdf-thms = query(selector(<meta:thm-env-counter>).within(pdf-scope-label))
     .map(marker => marker.value)
     .filter(theorem-filter)
 

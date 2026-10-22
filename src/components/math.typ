@@ -26,6 +26,12 @@
   reset-heading-scoped-counters()
 }
 
+#let math-markup(x, link-wrap: false) = context {
+  if link-wrap and state("render-mode").get() == "web" {
+    link(here(), math.equation([#x]))
+  } else { math.equation([#x]) }
+}
+
 #let vb(x) = Vb(math.upright(x))
 #let vu(x) = Vu(vb(x))
 #let va(x) = Va(vb(x))
@@ -54,7 +60,9 @@
 #let length = math.op("length")
 #let jinterior = math.op("int")
 #let jexterior = math.op("ext")
+#let span = math.op("span")
 #let wp = $pee$
+#let chev(..args) = $lr(chevron.l #args.pos().join($,$) chevron.r)$
 
 #let extcomplex = $hat(CC)$
 #let uppi = $upright(pi)$

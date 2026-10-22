@@ -1,4 +1,5 @@
 #import "packages.typ": *
+#import "web.typ": todo
 
 #let potential-frame(arg) = context {
   if target() != "paged" {
@@ -7,8 +8,13 @@
     arg
   }
 }
-#let canvas(..args) = {
-  potential-frame(cetz.canvas(..args))
+#let canvas(..args, debug-show: false) = {
+  if debug-show {
+    todo[Argument `debug-show` should be disabled in final production.]
+  }
+  if (sys.inputs.at("debug-build", default: none) != "true" or debug-show) {
+    potential-frame(cetz.canvas(..args))
+  }
 }
 #let ray(body, dy: 0em, tag: none) = context {
   if target() != "paged" {
@@ -16,7 +22,7 @@
   }
   let body = pad(top: 0em, $#body$)
 
-  mannot.core-mark(body, tag: tag, color: none, outset: (top: 0em), overlay: (width, height, color) => {
+  mannot.core-mark(body, tag: tag, color: none, mark-outset: (top: 0em), overlay: (width, height, color) => {
     place(bottom, dy: dy, math.stretch(sym.arrow, size: width))
   })
 }
@@ -90,16 +96,10 @@
   }
   canvas(..canvas-args, plot)
 }
-// store all figures within the wrapper into a state: "typst-stored-figures"
-#let typst-stored-figures = state("typst-stored-figures", (pdf: (), web: ()))
 #let figure-wrapper(..items, columns: auto) = context {
   let figures = items.pos()
   let column-count = if columns == auto { figures.len() } else { columns }
   if target() == "paged" {
-    typst-stored-figures.update(stored-figures => {
-      stored-figures.at("pdf") += figures
-      stored-figures
-    })
     place(
       top + center,
       float: true,
@@ -111,10 +111,6 @@
       ),
     )
   } else {
-    typst-stored-figures.update(stored-figures => {
-      stored-figures.at("web") += figures
-      stored-figures
-    })
     // combine the figures
     let body = for fig in figures {
       fig

@@ -7,6 +7,7 @@
   var assetIcon = document.querySelector(".icon");
   var storedTheme = localStorage.getItem("theme") || "auto";
   var printThemeOverrideActive = false;
+  var proofPrintOverrideActive = false;
   var THEME_ICON_FILES = {
     light: "sun.svg",
     dark: "moon.svg",
@@ -168,6 +169,11 @@
     }, 0) / items.length;
   }
 
+  function equationTagTargetCenter(target, wrapperRect) {
+    var rect = target.getBoundingClientRect();
+    return rect.top - wrapperRect.top + rect.height / 2;
+  }
+
   function setMathSpaceWidth(space, width) {
     var value = Math.max(0, Math.ceil(width + 8)) + "px";
     space.setAttribute("width", value);
@@ -186,8 +192,8 @@
       if (anchors.length === 0) return;
 
       var top = anchors.reduce(function (sum, anchor) {
-        var rect = anchor.getBoundingClientRect();
-        return sum + rect.top - wrapperRect.top - (parseFloat(getComputedStyle(group).fontSize) || 0) / 2;
+        var target = anchor._equationTagVerticalTarget || anchor;
+        return sum + equationTagTargetCenter(target, wrapperRect);
       }, 0) / anchors.length;
 
       group.style.top = top + "px";
@@ -214,9 +220,9 @@
     var mathmlNs = "http://www.w3.org/1998/Math/MathML";
     var wrapperRect = wrapper.getBoundingClientRect();
     var items = tags.map(function (tag) {
-      var tagRect = tag.getBoundingClientRect();
       var isInsideMath = math.contains(tag);
       var anchor = tag;
+      var verticalTarget = isInsideMath ? (tag.closest("mtr") || math) : math;
 
       tag.classList.add("equation-tag");
 
@@ -237,10 +243,11 @@
       }
 
       tag._equationTagAnchor = anchor;
+      anchor._equationTagVerticalTarget = verticalTarget;
       return {
         tag: tag,
         anchor: anchor,
-        top: tagRect.top - wrapperRect.top + tagRect.height / 2 + wrapper.scrollTop
+        top: equationTagTargetCenter(verticalTarget, wrapperRect)
       };
     }).sort(function (a, b) {
       return a.top - b.top;
@@ -275,11 +282,9 @@
   }
 
   function externalEquationTag(tag, anchor) {
-    if (tag.tagName && tag.tagName.toLowerCase() !== "a") {
-      tag._equationTagAnchor = anchor;
-      return tag;
-    }
-
+    // Convert the inline marker to a standalone HTML element before placing
+    // it in the overlay. Its contents may include links, so the marker itself
+    // must never be an anchor.
     var replacement = document.createElement("div");
     Array.from(tag.attributes).forEach(function (attr) {
       if (attr.name !== "href") {
@@ -287,7 +292,11 @@
       }
     });
     replacement.classList.add("equation-tag");
-    replacement.innerHTML = tag.innerHTML;
+    var math = document.createElementNS("http://www.w3.org/1998/Math/MathML", "math");
+    while (tag.firstChild) {
+      math.appendChild(tag.firstChild);
+    }
+    replacement.appendChild(math);
     replacement._equationTagAnchor = anchor;
     tag.remove();
     return replacement;
@@ -485,19 +494,64 @@
     }
   }
 
-  function expandSolutionsForPrint() {
-    document.querySelectorAll("details.thm-solution").forEach(function (details) {
+  function setupProofCollapsePersistence() {
+    var proofs = Array.from(document.querySelectorAll("details.thm-proof"));
+    if (proofs.length === 0) return;
+
+    var pagePath = window.location.pathname.replace(/\/index\.html$/, "/");
+    var storageKey = "proofOpen:" + pagePath;
+    var savedState = null;
+
+    try {
+      savedState = sessionStorage.getItem(storageKey);
+    } catch (_error) {
+      // The native details controls still work when storage is unavailable.
+    }
+
+    if (savedState !== null) {
+      proofs.forEach(function (details, index) {
+        var savedOpen = savedState.charAt(index);
+        if (savedOpen === "0" || savedOpen === "1") {
+          details.open = savedOpen === "1";
+        }
+      });
+    }
+
+    function saveProofStates() {
+      if (proofPrintOverrideActive) return;
+      var state = proofs.map(function (details) {
+        return details.open ? "1" : "0";
+      }).join("");
+
+      try {
+        sessionStorage.setItem(storageKey, state);
+      } catch (_error) {
+        // Keep proof toggles usable even when storage is unavailable.
+      }
+    }
+
+    proofs.forEach(function (details) {
+      details.addEventListener("toggle", saveProofStates);
+    });
+  }
+
+  function expandProofsForPrint() {
+    proofPrintOverrideActive = true;
+    document.querySelectorAll("details.thm-proof").forEach(function (details) {
       details.dataset.printWasOpen = details.open ? "true" : "false";
       details.open = true;
     });
   }
 
-  function restoreSolutionsAfterPrint() {
-    document.querySelectorAll("details.thm-solution").forEach(function (details) {
+  function restoreProofsAfterPrint() {
+    document.querySelectorAll("details.thm-proof").forEach(function (details) {
       var wasOpen = details.dataset.printWasOpen === "true";
       details.open = wasOpen;
       delete details.dataset.printWasOpen;
     });
+    setTimeout(function () {
+      proofPrintOverrideActive = false;
+    }, 0);
   }
 
   function applyPrintThemeOverride() {
@@ -511,9 +565,9 @@
     document.documentElement.dataset.theme = resolvedTheme(storedTheme);
   }
 
-  function tocDepthForHeading(heading) {
+  function tocDepthForHeading(heading, baseLevel) {
     var level = Number(heading.tagName.slice(1));
-    return Math.max(0, level - 2);
+    return Math.max(0, level - (baseLevel || 2));
   }
 
   function nearestHeadingDepth(node) {
@@ -528,6 +582,122 @@
     return depth;
   }
 
+  function theoremNestingDepth(node) {
+    var depth = 0;
+    var ancestor = node.parentElement && node.parentElement.closest(".thm-box, .thm-proof");
+    while (ancestor) {
+      depth += 1;
+      ancestor = ancestor.parentElement && ancestor.parentElement.closest(".thm-box, .thm-proof");
+    }
+    return depth;
+  }
+
+  function buildLocalToc(root) {
+    root = root || document;
+    if (!root.querySelectorAll) return;
+
+    var toc = root.querySelector(".local-toc");
+    var main = root.querySelector(".content");
+    if (!toc || !main || toc.dataset.generated === "true") return;
+
+    var list = toc.querySelector("[data-local-toc-list]");
+    if (!list) return;
+
+    function uniqueId(base) {
+      var candidate = base;
+      var suffix = 2;
+      while (document.getElementById(candidate)) {
+        candidate = base + "-" + suffix;
+        suffix += 1;
+      }
+      return candidate;
+    }
+
+    function ensureTargetId(target, index) {
+      if (target.id) return target.id;
+      target.id = uniqueId("local-toc-entry-" + (index + 1));
+      return target.id;
+    }
+
+    function stripNestedLinks(node) {
+      node.querySelectorAll(".typst-multi-label-list").forEach(function (hiddenLinks) {
+        hiddenLinks.remove();
+      });
+      node.querySelectorAll("a").forEach(function (nestedLink) {
+        var span = document.createElement("span");
+        while (nestedLink.firstChild) span.appendChild(nestedLink.firstChild);
+        nestedLink.replaceWith(span);
+      });
+    }
+
+    function trimFinalPeriod(node) {
+      var walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+      var textNodes = [];
+      while (walker.nextNode()) textNodes.push(walker.currentNode);
+      for (var i = textNodes.length - 1; i >= 0; i -= 1) {
+        if (!textNodes[i].nodeValue.trim()) continue;
+        textNodes[i].nodeValue = textNodes[i].nodeValue.replace(/\.\s*$/, "");
+        break;
+      }
+    }
+
+    var pageSourceHeading = main.querySelector(".page-source-heading h2, .page-source-heading h3, .page-source-heading h4, .page-source-heading h5, .page-source-heading h6");
+    var pageTitle = main.querySelector(":scope > .page-title");
+    var headings = main.querySelectorAll("h2, h3, h4, h5, h6");
+    var baseHeadingLevel = Array.from(headings).reduce(function (lowest, heading) {
+      return Math.min(lowest, Number(heading.tagName.slice(1)));
+    }, 6);
+    var lastHeadingDepth = 0;
+    var targets = main.querySelectorAll("h2, h3, h4, h5, h6, .thm-box, .thm-proof");
+
+    targets.forEach(function (target, index) {
+      var isHeading = /^H[2-6]$/.test(target.tagName);
+      var source;
+      var depth;
+      var className;
+
+      if (isHeading) {
+        depth = tocDepthForHeading(target, baseHeadingLevel);
+        lastHeadingDepth = depth;
+        source = target === pageSourceHeading && pageTitle ? pageTitle : target;
+        className = "toc-heading";
+      } else {
+        depth = lastHeadingDepth + 1 + theoremNestingDepth(target);
+        source = target.querySelector(".thm-head, .proof-head");
+        className = "toc-theorem";
+      }
+
+      if (!source) return;
+
+      var item = document.createElement("li");
+      item.className = className;
+      item.style.setProperty("--toc-depth", String(depth));
+
+      var anchor = document.createElement("a");
+      anchor.href = "#" + encodeURIComponent(ensureTargetId(target, index));
+      var label = source.cloneNode(true);
+      label.removeAttribute("id");
+      label.removeAttribute("class");
+      stripNestedLinks(label);
+      if (!isHeading) trimFinalPeriod(label);
+      if (isHeading && target !== pageSourceHeading && /^\d+(?:\.\d+)*\s/.test(label.textContent.trim())) {
+        anchor.appendChild(document.createTextNode("§"));
+      }
+      while (label.firstChild) anchor.appendChild(label.firstChild);
+      item.appendChild(anchor);
+      list.appendChild(item);
+    });
+
+    if (!list.children.length) {
+      var empty = document.createElement("p");
+      empty.className = "muted";
+      empty.textContent = "No entries yet.";
+      list.replaceWith(empty);
+    }
+
+    toc.dataset.generated = "true";
+  }
+
   function setupReferenceTooltips() {
     var tooltip = document.createElement("div");
     tooltip.className = "ref-tooltip";
@@ -538,7 +708,23 @@
     var activeTrigger = null;
     var hideTimer = null;
 
-    var activePreviews = new Map(); // url -> previewObject
+    var activePreviews = new Map();
+    var previewStack = [];
+
+    function updatePreviewStack() {
+      previewStack.forEach(function (previewObj, index) {
+        previewObj.element.style.zIndex = String(45 + index);
+      });
+    }
+
+    function bringPreviewToFront(previewObj) {
+      var index = previewStack.indexOf(previewObj);
+      if (index !== -1) {
+        previewStack.splice(index, 1);
+      }
+      previewStack.push(previewObj);
+      updatePreviewStack();
+    }
 
     var previewResizeObserver = typeof ResizeObserver !== "undefined" ? new ResizeObserver(function (entries) {
       for (var i = 0; i < entries.length; i++) {
@@ -592,17 +778,19 @@
       tooltip.style.top = Math.min(rect.bottom + gap, window.innerHeight - tipRect.height - 8) + "px";
     }
 
-    function showTooltip(trigger, linksData) {
+    function showTooltip(trigger, linksData, previewOnly) {
       clearHideTimer();
       activeTrigger = trigger;
       tooltip.textContent = "";
 
-      linksData.forEach(function (data) {
-        var item = document.createElement("a");
-        item.href = data.href;
-        item.textContent = data.label;
-        tooltip.appendChild(item);
-      });
+      if (!previewOnly) {
+        linksData.forEach(function (data) {
+          var item = document.createElement("a");
+          item.href = data.href;
+          item.textContent = data.label;
+          tooltip.appendChild(item);
+        });
+      }
 
       var previewHref = previewSourceUrl(linksData);
       if (previewHref) {
@@ -627,7 +815,7 @@
         tooltip.appendChild(previewButton);
       }
 
-      tooltip.hidden = linksData.length === 0;
+      tooltip.hidden = previewOnly ? !previewHref : linksData.length === 0;
       if (!tooltip.hidden) {
         placeTooltip(trigger);
       }
@@ -889,6 +1077,11 @@
           if (previewResizeObserver) {
             previewResizeObserver.unobserve(element);
           }
+          var stackIndex = previewStack.indexOf(obj);
+          if (stackIndex !== -1) {
+            previewStack.splice(stackIndex, 1);
+            updatePreviewStack();
+          }
           element.remove();
           activePreviews.delete(urlHref);
         }
@@ -902,13 +1095,14 @@
 
       element.addEventListener("pointerdown", function (event) {
         if (event.button !== 0) return;
+        bringPreviewToFront(obj);
         if (event.target !== element) return; // Only drag on the padding/edges
 
         var rect = element.getBoundingClientRect();
 
         // Prevent drag on the bottom-right resize handle
-        var isResizeHandle = (event.clientX - rect.left >= rect.width - 24) && 
-                             (event.clientY - rect.top >= rect.height - 24);
+        var isResizeHandle = (event.clientX - rect.left >= rect.width - 24) &&
+          (event.clientY - rect.top >= rect.height - 24);
         if (isResizeHandle) return;
 
         obj.dragged = true;
@@ -947,6 +1141,8 @@
       element.addEventListener("pointerup", stopPreviewDrag);
       element.addEventListener("pointercancel", stopPreviewDrag);
 
+      previewStack.push(obj);
+      updatePreviewStack();
       return obj;
     }
 
@@ -1015,6 +1211,7 @@
             label: linkLabel(link, index, links)
           };
         });
+        var previewOnly = source.dataset.previewOnly === "true";
 
         source.dataset.refTooltipProcessed = "true";
         source.remove();
@@ -1022,11 +1219,11 @@
         trigger.classList.add("ref-with-tooltip");
 
         trigger.addEventListener("mouseenter", function () {
-          showTooltip(trigger, linksData);
+          showTooltip(trigger, linksData, previewOnly);
         });
         trigger.addEventListener("mouseleave", scheduleHide);
         trigger.addEventListener("focus", function () {
-          showTooltip(trigger, linksData);
+          showTooltip(trigger, linksData, previewOnly);
         });
         trigger.addEventListener("blur", scheduleHide);
       });
@@ -1133,6 +1330,7 @@
 
   normalizeDisplayMath(document);
   setupGlobalNavCollapse();
+  buildLocalToc(document);
   setupLocalTocRowNavigation(document);
   whenDomReady(moveFootnotesAbovePageNav);
   upgradeMathLinks(document);
@@ -1140,8 +1338,9 @@
   setupMathLinkNavigation();
   setupPrintButton();
   setupSidebarScroll();
-  addEventListener("beforeprint", expandSolutionsForPrint);
-  addEventListener("afterprint", restoreSolutionsAfterPrint);
+  setupProofCollapsePersistence();
+  addEventListener("beforeprint", expandProofsForPrint);
+  addEventListener("afterprint", restoreProofsAfterPrint);
   addEventListener("beforeprint", applyPrintThemeOverride);
   addEventListener("afterprint", clearPrintThemeOverride);
   fillReferenceLeaders(document);

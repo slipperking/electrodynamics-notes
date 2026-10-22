@@ -1,8 +1,9 @@
 #import "counter.typ": thm-counter-get, thm-counter-step, thm-counters
-#import "state.typ": thm-stored
-
 #let _numbering = numbering
 #let _counter = counter
+
+#let _default-title-fmt = strong
+#let _default-name-fmt = x => [(#x)]
 
 #let _computed-number(number, numbering, counter-name, base) = {
   if number != auto {
@@ -25,8 +26,9 @@
 
 /// Default formatting function for theorem environments, wrapping everything in a block.
 /// Intended for use in @thm.fmt.
-/// Named arguments from @thm.args can override all of the arguments below;
-/// any remaining named arguments are passed to the block.
+/// @thm.title-fmt and @thm.name-fmt provide the title format unless explicitly
+/// overridden here. Other named arguments from @thm.args can override the
+/// remaining arguments below; any leftovers are passed to the block.
 /// Blocks have ```typc width: 100%``` set by default.
 /// #example(
 /// ```
@@ -57,10 +59,10 @@
   block-args: (:),
   /// Formatting for the environment name.
   /// -> function
-  name-fmt: x => [(#x)],
+  name-fmt: auto,
   /// Formatting for the environment title (head and number).
   /// -> function
-  title-fmt: strong,
+  title-fmt: auto,
   /// Formatting for the environment body.
   /// -> function
   body-fmt: emph,
@@ -68,6 +70,9 @@
   /// -> content
   separator: [*.* ],
 ) = {
+  if name-fmt == auto { name-fmt = thm.at("name-fmt", default: _default-name-fmt) }
+  if title-fmt == auto { title-fmt = thm.at("title-fmt", default: _default-title-fmt) }
+
   let name = []
   if thm.name != none {
     name = [ #name-fmt(thm.name)]
@@ -75,8 +80,6 @@
 
   // Swallow formatting arguments passed directly to the `thm`
   block-args = thm.args.remove("block-args", default: block-args)
-  name-fmt = thm.args.remove("name-fmt", default: name-fmt)
-  title-fmt = thm.args.remove("title-fmt", default: title-fmt)
   body-fmt = thm.args.remove("body-fmt", default: body-fmt)
   separator = thm.args.remove("separator", default: separator)
 
@@ -227,6 +230,14 @@
   /// )
   /// -> str | function | none
   numbering: "1.1",
+  /// Formatting for the environment title (supplement and number). This is
+  /// stored on the theorem marker so outlines can reuse the exact formatter.
+  /// -> function
+  title-fmt: _default-title-fmt,
+  /// Formatting for the optional theorem name. The formatter is responsible
+  /// for punctuation such as parentheses and is also reused by outlines.
+  /// -> function
+  name-fmt: _default-name-fmt,
   /// Mark for being restated later. See @thm-restate.
   /// -> bool
   restate: false,
@@ -336,6 +347,8 @@
     name: name,
     body: body,
     fmt: fmt,
+    title-fmt: title-fmt,
+    name-fmt: name-fmt,
     numbering: numbering,
     restate: restate,
     defer: defer,
@@ -343,35 +356,30 @@
     ref-fmt: ref-fmt,
   )
 
-  let thm-update = context {
-    let loc = here()
-    let number-computed = _computed-number(number, numbering, counter, base)
-    thm-stored.update(thms => {
-      let thm = thm + (number: number-computed, loc: loc)
-      if thms == none {
-        return (thm,)
-      } else {
-        return thms + (thm,)
-      }
-    })
-  }
-
   if defer {
-    return number-update + thm-update
+    return (
+      number-update
+        + [#context {
+          let loc = here()
+          let number-computed = _computed-number(number, numbering, counter, base)
+          let group = state("render-mode").get()
+          [#metadata(thm + (number: number-computed, loc: loc, group: group)) <meta:thm-env-counter>]
+        }]
+    )
   }
 
   return figure(
     number-update
-      + thm-update
-      + context {
+      + [#context {
         let loc = here()
         let number-computed = _computed-number(number, numbering, counter, base)
-        let thm = thm + (number: number-computed, loc: loc)
+        let group = state("render-mode").get()
+        let thm = thm + (number: number-computed, loc: loc, group: group)
         [
           #metadata(thm) <meta:thm-env-counter>
           #fmt(thm)
         ]
-      },
+      }],
     kind: "thm-env",
     outlined: false,
     caption: name,
@@ -461,14 +469,17 @@
   tag-metadata-counter.step()
   context {
     if state("render-mode").get() == "web" {
-      html.elem("a", attrs: (class: "eq-tag"), t)
+      html.elem("mrow", attrs: (class: "eq-tag"), t)
     } else {
-      let key = "pre-extra-diff-" + str(tag-metadata-counter.get().first())
-      metadata((
+      state("tag-reserves", ()).update(x => {
+        x.push(0pt)
+        x
+      })
+      box(metadata((
         eq-tag: t,
         move: move,
-        pre-extra-diff: state(key),
-      ))
+        reserve-idx: tag-metadata-counter.get().first() - 1,
+      )))
     }
   }
 }
@@ -544,6 +555,22 @@
   separator: [. ],
 ))
 
+#let theorem-reference(reference, target) = context {
+  let citation = reference.fields().at("citation", default: none)
+  let supplement = if citation != none {
+    citation.supplement
+  } else {
+    reference.fields().at("supplement", default: none)
+  }
+  if supplement == auto {
+    supplement = none
+  }
+
+  let marker = query(selector(<meta:thm-env-counter>).after(target.location())).first()
+  let theorem = marker.value
+  (theorem.ref-fmt)(theorem + (ref-supplement: supplement))
+}
+
 
 /// Rules for styling theorem environments, references, proofs, etc.
 /// _Must appear at the beginning of the document._
@@ -578,85 +605,46 @@
     it.body
   }
 
-  show ref: it => {
-    let targets = query(it.target)
-    if targets.len() == 0 {
-      return it
-    }
-    let target = if mode == "pdf" {
-      targets.first()
-    } else {
-      targets.last()
-    }
-
-    if target.func() != figure {
-      return it
-    }
-    if target.kind != "thm-env" {
-      return it
-    }
-
-    // let ref-supplement = it.element.supplement
-    // if it.citation.supplement != none {
-    //   ref-supplement = it.citation.supplement
-    // }
-
-    let ref-supplement = it.citation.supplement
-    // if (ref-supplement == none or ref-supplement == [] or (ref-supplement.has("text") and ref-supplement.text == "")) {
-    //   ref-supplement = none
-    // }
-
-    let loc = target.location()
-    let thms = query(selector(<meta:thm-env-counter>).after(loc))
-    let thmloc = thms.first().location()
-    let thm = thm-stored.at(thmloc).last()
-    return (thm.ref-fmt)(thm + (ref-supplement: ref-supplement))
-  }
-
   show math.equation: eq => {
     show metadata.where(value: "thm-qedhere"): tag(thm-qed-show)
     show metadata: data => {
       if (
         type(data.value) == dictionary
           and data.value.keys().contains("eq-tag")
-          and data.value.keys().contains("pre-extra-diff")
+          and data.value.keys().contains("reserve-idx")
       ) {
         context {
-          let equation-numbering-metadata = query(
+          let gap = 0.4em
+          let quantum = 3pt
+          let tag-width = measure(data.value.eq-tag).width
+          let edge = query(
             selector(<thm-equation-numbering>).after(eq.location()),
           ).first()
-          let pos-numbering = equation-numbering-metadata.location().position()
-          let pre-extra-diff = data.value.pre-extra-diff.final() // hacky but we reuse data from previous passes
-          let dy = 0em
-          if pre-extra-diff == none {
-            pre-extra-diff = 0pt
-          }
-          let pos-here-x = here().position().x + pre-extra-diff
-          let width = measure(data.value.eq-tag).width
-          if (
-            equation-numbering-metadata.value.keys().contains("align")
-              and equation-numbering-metadata.value.align == "left"
-          ) {
-            move(dx: 0.4em, dy: dy, {
-              data.value.eq-tag
-            })
+
+          if edge.value.keys().contains("align") and edge.value.align == "left" {
+            move(dx: gap, data.value.eq-tag)
           } else {
-            let tag-start = pos-numbering.x - width
-            let diff = tag-start - pos-here-x
-            if (data.value.move) {
-              let raw-overlap = (-diff + 0.4em).to-absolute()
-              // if the marker/position metadata of numbering, minus width (so tag start) is before equation end (here), we add spaces after to add effective spaces
-              // otherwise do nothing
-              let extra-diff = calc.max(0pt, raw-overlap) // amount of space to add
-              extra-diff = calc.round(extra-diff * 3 / 1pt) * 1pt / 3 // help out convergence a bit
-              place(horizon, dx: diff + extra-diff, dy: dy, data.value.eq-tag)
-              // place(horizon, dx: diff + extra-diff + 2em, repr(extra-diff))
-              // place(horizon, dx: diff + extra-diff + 6em, repr(pre-extra-diff))
-              box(width: 2 * extra-diff, height: 0pt, stroke: none)
-              data.value.pre-extra-diff.update(extra-diff)
+            let previous-reserve = state("tag-reserves", ()).final().at(data.value.reserve-idx, default: 0pt)
+            let tag-start = edge.location().position().x - tag-width
+            if data.value.move {
+              // add a spacer of 2 reserve to shift equation to the left to avoid an overlap
+              let natural-end = here().position().x + previous-reserve
+              let required = (natural-end - tag-start + gap).to-absolute()
+              required = calc.max(0pt, required)
+              required = calc.ceil(required / quantum) * quantum
+
+              // never shrink reserve
+              let reserve = calc.max(previous-reserve, required)
+              let dx = tag-start - natural-end + reserve
+              place(bottom, dx: dx, data.value.eq-tag)
+              box(width: 2 * reserve, height: 0pt, stroke: none)
+              state("tag-reserves", ()).update(reserves => {
+                reserves.at(data.value.reserve-idx) = reserve
+                reserves
+              })
             } else {
-              place(horizon, dx: diff, dy: dy, data.value.eq-tag)
-              data.value.pre-extra-diff.update(0pt)
+              let dx = tag-start - here().position().x
+              place(bottom, dx: dx, data.value.eq-tag)
             }
           }
         }

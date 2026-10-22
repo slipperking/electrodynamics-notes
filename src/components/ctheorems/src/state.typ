@@ -1,11 +1,19 @@
-/// State containing theorem environment data, as an array of `thm` dictionaries.
-/// -> state
-#let thm-stored = state("thm-stored", ())
+// The theorem marker is the single source of truth. Keeping full theorem bodies
+// in an append-only state duplicated this data and repeatedly copied a growing
+// array during layout.
+#let _stored-theorems(at: auto, final: false) = {
+  let target = selector(<meta:thm-env-counter>)
+  if not final {
+    target = target.before(if at == auto { here() } else { at })
+  }
+  let group = state("render-mode").get()
+  query(target).map(marker => marker.value).filter(thm => thm.group == group)
+}
 
 /// Displays all theorem environments, can be filtered.
 ///
-/// Every call to @thm appends a `thm` dictionary to @thm-stored.
-/// A `thm` dictionary contains complete information about a theorem
+/// Every call to @thm emits a queryable metadata marker containing a `thm`
+/// dictionary. A `thm` dictionary contains complete information about a theorem
 /// environment; its keys are as described in @thm.fmt.
 /// This lets theorems be restated, filtered, and otherwise manipulated
 /// elsewhere in a document.
@@ -114,21 +122,13 @@
   /// before they've been stated.
   /// Overrides @thm-display.at.
   /// -> bool
-  final: false
+  final: false,
 ) = {
   context {
-    let thms = thm-stored.get()
-    if at != auto {
-      thms = thm-stored.at(at)
-    }
-    if final {
-      thms = thm-stored.final()
-    }
+    let thms = _stored-theorems(at: at, final: final)
     if filters.pos().len() > 0 {
       // Use arg_1 or ... or arg_n style filter
-      thms = thms.filter(thm =>
-        filters.pos().any(x => x(thm))
-      )
+      thms = thms.filter(thm => filters.pos().any(x => x(thm)))
     }
 
     for thm in thms {
@@ -298,23 +298,18 @@
   /// Calling ```typc thm-restate(all: true)``` is equivalent to
   /// ```typc thm-display()```.
   /// -> bool
-  all: false
+  all: false,
 ) = {
   context {
-    let thms = thm-stored.get()
-    if at != auto {
-      thms = thm-stored.at(at)
-    }
-    if final {
-      thms = thm-stored.final()
-    }
+    let thms = _stored-theorems(at: at, final: final)
     if not all {
       thms = thms.filter(thm => (thm.restate or thm.defer))
     }
     if keys.pos().len() > 0 {
       // Use arg_1 or ... or arg_n style filter
-      thms = thms.filter(thm =>
-        keys.pos().any(x => {
+      thms = thms.filter(thm => keys
+        .pos()
+        .any(x => {
           if type(x) == array {
             // keys contain x_1 and ... and x_n
             return x.all(key => thm.restate-keys.contains(key))
@@ -325,8 +320,7 @@
             // keys contains x
             return thm.restate-keys.contains(x)
           }
-        })
-      )
+        }))
     }
 
     for thm in thms {
