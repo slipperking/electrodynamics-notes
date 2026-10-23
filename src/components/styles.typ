@@ -94,7 +94,8 @@
       if target() != "paged" {
         html.elem("mover", attrs: (accent: "true"), {
           html.elem("mrow", it.body)
-          math.op("\u{203E}")
+          // math.op("\u{203E}")
+          $class("diacritic", stretch(\u{00AF}))$
         })
       } else {
         it
