@@ -2,10 +2,35 @@
 #asset("assets/site.js", read("/src/assets/site.js"))
 #asset("assets/search.css", read("/src/assets/search.css"))
 #asset("assets/search.js", read("/src/assets/search.js"))
-#asset("assets/fonts/NotoSans-VariableFont_wdth,wght.ttf", read("/src/assets/fonts/NotoSans-VariableFont_wdth,wght.ttf", encoding: none))
-#asset("assets/fonts/NotoSansMath-Regular.otf", read("/src/assets/fonts/NotoSansMath-Regular.otf", encoding: none))
-#asset("assets/fonts/FiraMath-Regular.otf", read("/src/assets/fonts/FiraMath-Regular.otf", encoding: none))
-#asset("assets/fonts/NewCMMath-Book.otf", read("/src/assets/fonts/NewCMMath-Book.otf", encoding: none))
+#for font-path in (
+  "Lato/Lato-Hairline.woff2",
+  "Lato/Lato-HairlineItalic.woff2",
+  "Lato/Lato-Thin.woff2",
+  "Lato/Lato-ThinItalic.woff2",
+  "Lato/Lato-Light.woff2",
+  "Lato/Lato-LightItalic.woff2",
+  "Lato/Lato-Regular.woff2",
+  "Lato/Lato-Italic.woff2",
+  "Lato/Lato-Medium.woff2",
+  "Lato/Lato-MediumItalic.woff2",
+  "Lato/Lato-Semibold.woff2",
+  "Lato/Lato-SemiboldItalic.woff2",
+  "Lato/Lato-Bold.woff2",
+  "Lato/Lato-BoldItalic.woff2",
+  "Lato/Lato-Heavy.woff2",
+  "Lato/Lato-HeavyItalic.woff2",
+  "Lato/Lato-Black.woff2",
+  "Lato/Lato-BlackItalic.woff2",
+  "Lato/LICENSE.txt",
+  "LeteSansMath/LeteSansMath.woff2",
+  "LeteSansMath/LeteSansMath-Bold.woff2",
+  "LeteSansMath/LICENSE.txt",
+  "RobotoMono/RobotoMono-VariableFont_wght.woff2",
+  "RobotoMono/RobotoMono-Italic-VariableFont_wght.woff2",
+  "RobotoMono/OFL.txt",
+) {
+  asset("assets/fonts/" + font-path, read("/src/assets/fonts/" + font-path, encoding: none))
+}
 #asset("assets/github.svg", read("/src/assets/github.svg"))
 #asset("assets/search.svg", read("/src/assets/search.svg"))
 #asset("assets/print.svg", read("/src/assets/print.svg"))
