@@ -35,13 +35,13 @@
   })
 }
 
-#let _html-proof-like-fmt(head, css-class, collapsible: false, expanded: false) = thm => {
+#let _html-proof-like-fmt(head, css-class, collapsible: false, collapsed: false) = thm => {
   let title = (thm.title-fmt)([#head])
   if thm.name != none { title += [ #(thm.name-fmt)(thm.name)] }
   if collapsible {
     let classes = if css-class == "thm-proof" { "thm-proof" } else { "thm-proof " + css-class }
     let attrs = (class: classes)
-    if expanded { attrs.insert("open", "") }
+    if not collapsed { attrs.insert("open", "") }
     html.elem("details", attrs: attrs, {
       html.elem("summary", attrs: (class: "proof-head solution-head"), [#title.])
       proof-body-fmt(thm.body)
@@ -102,17 +102,20 @@
   )
 }
 
-#let _wrap-proof(head, css-class, pdf-fmt, title-fmt, name-fmt, collapsible: false, expanded: false) = {
+#let _wrap-proof(head, css-class, pdf-fmt, title-fmt, name-fmt, collapsible: false, collapsed: false) = {
   thm.with(
     supplement: head,
     numbering: none,
     title-fmt: title-fmt,
     name-fmt: name-fmt,
     fmt: thm => context {
+      let args = thm.args
+      let initially-collapsed = args.remove("collapsed", default: collapsed)
+      let normalized-thm = thm + (args: args,)
       if _is-web-render() {
-        _html-proof-like-fmt(head, css-class, collapsible: collapsible, expanded: expanded)(thm)
+        _html-proof-like-fmt(head, css-class, collapsible: collapsible, collapsed: initially-collapsed)(normalized-thm)
       } else {
-        pdf-fmt(thm)
+        pdf-fmt(normalized-thm)
       }
     },
   )
@@ -139,8 +142,9 @@
 #let remark = _wrap("Remark", "thm-remark", thm-rem-fmt, emph, _remark-name-fmt, numbered: false, numbering: none)
 #let claim = _wrap("Claim", "thm-claim", thm-rem-fmt, emph, _remark-name-fmt, numbered: false, numbering: none)
 
-#let proof = _wrap-proof("Proof", "thm-proof", proof-pdf-fmt, emph, emph, collapsible: true, expanded: true)
-#let solution = _wrap-proof("Solution", "thm-solution", proof-pdf-fmt, emph, emph, collapsible: true)
+// `collapsed` controls only the initial HTML state; PDF formatting ignores it.
+#let proof = _wrap-proof("Proof", "thm-proof", proof-pdf-fmt, emph, emph, collapsible: true)
+#let solution = _wrap-proof("Solution", "thm-solution", proof-pdf-fmt, emph, emph, collapsible: true, collapsed: true)
 
 #let theorem-toc-entry(thm) = {
   let head = [#thm.supplement]
