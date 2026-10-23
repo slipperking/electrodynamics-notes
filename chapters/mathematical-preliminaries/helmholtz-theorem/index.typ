@@ -55,7 +55,7 @@ Moreover, the representation above is unique for all decompositions with potenti
 
   Now assume $V = RR^3$, then if there exists two decompositions $va(F) = curl va(psi)_1 - grad phi_1 = curl va(psi)_2 - grad phi_2$, then writing $va(W) = curl(va(psi)_1 - va(psi)_2) = grad(phi_1 - phi_2)$, it must follow that $div va(W) = 0$ and $curl va(W) = 0$.
 
-  Applying Green's first identity with $psi = phi = W$, where $W_i = va(W) dot vu(e)_i$ is an arbitrary Cartesian component of $va(W)$, we have
+  Applying Green's first identity (see @cor:greens-identities) with $psi = phi = W$, where $W_i = va(W) dot vu(e)_i$ is an arbitrary Cartesian component of $va(W)$, we have
   $
     integral.triple_V [W_i laplacian W_i + (grad W_i)^2] dif V = integral.surf_(partial V) W_i grad W_i dot dif va(S) -> 0
   $
