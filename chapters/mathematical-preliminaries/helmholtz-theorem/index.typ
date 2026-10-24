@@ -57,16 +57,29 @@ Moreover, the representation above is unique for all decompositions with potenti
   $
   (the result follows similarly for the second surface integral) permitting the ellision of both in this case.
 
-  Now assume $V = RR^3$ and $va(F)(va(r)) = order(1 / r)$; if there exist two decompositions $va(F) = curl va(A)_1 - grad phi_1 = curl va(A)_2 - grad phi_2$, then writing $va(W) = curl(va(A)_1 - va(A)_2) = grad(phi_1 - phi_2)$, it must follow that $div va(W) = 0$ and $curl va(W) = 0$.
-
-  Applying Green's first identity (see @cor:greens-identities) with $psi = phi = W$, where $W_i = va(W) dot vu(e)_i$ is an arbitrary Cartesian component of $va(W)$, we have
+  Now assume $V = RR^3$ and $va(F)(va(r)) = order(1 / r)$; if there exist two decompositions $ va(F) = curl va(A)_1 - grad phi_1 = curl va(A)_2 - grad phi_2 $ such that $va(A)_1, va(A)_2, phi_1, phi_2$ vanish at $oo$, then writing /* $va(W) = curl(va(A)_1 - va(A)_2) = grad(phi_1 - phi_2)$, it must follow that $div va(W) = 0$ and $curl va(W) = 0$. */$W = phi_1 - phi_2$, we obtain that $ laplacian (phi_1 - phi_2) = div [grad(phi_1 - phi_2)] = div [curl(va(A)_1 - va(A)_2)] = 0. $
+  /* Applying Green's first identity (see @cor:greens-identities) with $psi = phi = W$, where $W_i = va(W) dot vu(e)_i$ is an arbitrary Cartesian component of $va(W)$, we have
   $
     integral.triple_V [W_i laplacian W_i + (grad W_i)^2] dif V = integral.surf_(partial V) W_i grad W_i dot dif va(S) -> 0
   $
   #todo[Justify vanishes]
-  as $V -> RR^3$. Since $curl(curl va(W)) = grad(div va(W)) - laplacian va(W) = 0$, it follows that $laplacian va(W) = 0$, implying $laplacian W_i = 0$, giving that
+  as $V -> RR^3$.  */
+  // Let $W_i = va(W) dot vu(e)_i$ be an arbitrary Cartesian component of $va(W)$.
+
+  // Since $curl(curl va(W)) = grad(div va(W)) - laplacian va(W) = 0$, it follows that $laplacian va(W) = 0$, implying $laplacian W_i = 0$. Therefore the harmonicity of $W_i$, implying harmonicity of any of $W_i$'s derivatives, yields the following representation for any $R > 0$ and fixed $j$:
+  Then for any $i$, by the Divergence Theorem (@thm:divergence)
   $
-    integral.triple_(RR^3) (grad W_i)^2 dif V = 0.
+    abs(partial_i W(va(r))) &= abs(1 / (4 / 3 uppi R^3) integral.triple_(norm(va(r)' - va(r)) <= R) partial_i W(va(r)') dif V') \
+    &=1 / (4 / 3 uppi R^3) abs(integral.triple_(norm(va(r)' - va(r)) <= R) div [W(va(r)') vu(e)_i] dif V') \
+    & = 3 / (4 uppi R^3) abs(integral.surf_(norm(va(r)' - va(r)) = R) W(va(r)') vu(e)_i dot dif va(S)') \
+    & <= 3 / (4 uppi R^3) sup_(va(r)' in RR^3) abs(W(va(r)')) 4 uppi R^2 = 3 / R sup_(va(r)' in RR^3) abs(W(va(r)')).
   $
-  Notice the nonnegativity of the integrand. Since the integral vanishes, we forcibly have $grad W_i = 0,$ or that $W_i$ is constant. Since $va(W) -> 0$, we have $W_i = 0$ everywhere, whence $va(W) = W_i vu(e)_i = 0$ everywhere. Therefore, the irrotational field $-grad phi_1=-grad phi_2$ of the decomposition is uniquely determined, as is the solenoidal field $curl va(A)_1 = curl va(A)_2$.
+  The supremum is finite from the decay condition. Since this holds for arbitrary $R > 0$, letting $R -> oo$ gives $partial_i W = 0$ for all $i$. Therefore $W$ is constant.
+
+  // $
+  //   integral.triple_(RR^3) (grad W_i)^2 dif V = 0.
+  // $
+  // Notice the nonnegativity of the integrand. Since the integral vanishes, we forcibly have $grad W_i = 0,$ or that $W_i$ is constant. Since $va(W) -> 0$, we have $W_i = 0$ everywhere, whence $va(W) = W_i vu(e)_i = 0$ everywhere.
+  //
+  Hence, the irrotational field $-grad phi_1=-grad phi_2$ of the decomposition is uniquely determined, as is the solenoidal field $curl va(A)_1 = curl va(A)_2$.
 ]
