@@ -189,7 +189,7 @@ $
 $ <eq:reynolds-transport-volume-derivative-separation>
 The field $va(B)$ in the bracketed sum is no longer time-varying. In the span of $delta t$, the region $S(t)$ sweeps out a thin oriented region $V$, as demonstrated in @fig:reynolds-transport-volume. Then by the Divergence Theorem
 $
-  integral.triple_V div vb(B) dif V = integral.double_S(t + delta t) va(B) dot dif va(S) - integral.double_S(t) va(B) dot dif va(S) + integral.double_"ribbon" va(B) dot dif va(S),
+  integral.triple_V div va(B) dif V = integral.double_S(t + delta t) va(B) dot dif va(S) - integral.double_S(t) va(B) dot dif va(S) + integral.double_"ribbon" va(B) dot dif va(S),
 $ <eq:reynolds-transport-volume-integral-expansion>
 where the sign of the second term is due to orientation. In the third term, the oriented surface element $dif va(S) = vu(n) dif S$ is orthogonal to both the displacement $dif va(ell)$ along $S(t)$ and the displacement $va(v) delta t$, implying that
 $
@@ -202,12 +202,12 @@ $
 $
 Therefore @eq:reynolds-transport-volume-integral-expansion gives
 $
-  delta t integral.double_S(t) [(div vb(B)) va(v) - curl(va(v) times va(B))] dot dif va(S) = integral.double_S(t + delta t) va(B) dot dif va(S) - integral.double_S(t) va(B) dot dif va(S),
+  delta t integral.double_S(t) [(div va(B)) va(v) - curl(va(v) times va(B))] dot dif va(S) = integral.double_S(t + delta t) va(B) dot dif va(S) - integral.double_S(t) va(B) dot dif va(S),
 $
 which by @eq:reynolds-transport-volume-derivative-separation, yields
 #theorem[Reynolds Transport Theorem][
   $
-    dv(, t)integral.double_S(t) va(B) dot dif va(S) = integral.double_S(t) [pdv(va(B), t) + (div vb(B)) va(v) - curl(va(v) times va(B))] dot dif va(S),
+    dv(, t)integral.double_S(t) va(B) dot dif va(S) = integral.double_S(t) [pdv(va(B), t) + (div va(B)) va(v) - curl(va(v) times va(B))] dot dif va(S),
   $
 ]
 whose utility will be most demonstrated by Faraday's Law of Electromagnetic Induction.
