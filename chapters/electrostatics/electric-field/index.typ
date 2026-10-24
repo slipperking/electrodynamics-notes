@@ -16,7 +16,10 @@ There exists a generalization of @thm:coulombs-law which does not depend on the 
   $
     va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral.triple (dif Q') / norm(va(r) - va(r)')^3 (va(r) - va(r)') = 1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)'),
   $ <eq:electric-field>
-  known as the _electric field_.
+  known as the _electric field_. For a surface or line charge distribution, this is
+  $
+    va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral.double (sigma(va(r)') dif S') / norm(va(r) - va(r)')^3 (va(r) - va(r)'),\ va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral (lambda(va(r)') dif s') / norm(va(r) - va(r)')^3 (va(r) - va(r)').
+  $
 ]
 Then Coulomb's Law states
 $
@@ -49,4 +52,7 @@ Subsequently,
     & = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') [-4 uppi delta(va(r) - va(r)')] dif V' = (rho(va(r))) / (epsilon_0). qedhere
   $
 ]
-Gauss' Law (@thm:gauss-law) is the first of the four _Maxwell's equations_.
+Gauss' Law (@thm:gauss-law) is the first of the four _Maxwell's equations_. We shall eventually see that the first equation $div va(E) = rho / epsilon_0$ will hold not only for electrostatics but for any general situation, as with all Maxwell's equations.
+#example[
+  Find the electric field a distance $z$ above the midpoint of a straight line segment of length $2 L$ carrying a uniform charge density $lambda$.
+]
