@@ -15,7 +15,7 @@ There exists a generalization of @thm:coulombs-law which does not depend on the 
   For a time-static source charge density distribution $rho(va(r))$, define
   $
     va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral.triple (dif Q') / norm(va(r) - va(r)')^3 (va(r) - va(r)') = 1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)'),
-  $
+  $ <eq:electric-field>
   known as the _electric field_.
 ]
 Then Coulomb's Law states
@@ -27,12 +27,26 @@ Moreover, this definition also well demonstrates the _principle of superposition
 The abstraction as represented by the transition from @eq:coulombs-law to @eq:coulombs-law-electric-field demonstrates an important conceptual shift between force acting between charges at a large distance and a force determined by a local value of a single value, the electric field. It is likely entirely possible to develop the entirety of classical electrodynamics through the lens of action-at-a-distance, although doing so would likely prove to be cumbersome.
 
 Subsequently,
-#theorem[
+#theorem[Gauss' Law][
   For electrostatics,
   $ div va(E) = rho / epsilon_0 quad "and" quad curl va(E) = 0. $
-]
+] <thm:gauss-law>
 #proof[
-  Write
-  $// using dirac delta identities and gradient identities
+  Recall from @todo that
+  $
+    // using dirac delta identities and gradient identities
+    (va(r) - va(r)') / norm(va(r) - va(r)')^3 = - grad 1 / norm(va(r) - va(r)') quad "and" quad laplacian 1 / (norm(va(r) - va(r)')) = - 4 uppi delta(va(r) - va(r)'),
+  $
+  whence @eq:electric-field can be rewritten to yield
+  $
+    va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral.triple_V (rho(va(r)') dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') = -1 / (4 uppi epsilon_0) integral.triple_V grad rho(va(r)') 1 / norm(va(r) - va(r)') dif V'.\
+    curl va(E)(va(r)) = -1 / (4 uppi epsilon_0) integral.triple_V curl grad rho(va(r)') 1 / norm(va(r) - va(r)') dif V' = 0,
+  $
+  proving the first identity, and
+  $
+    div va(E)(va(r)) & = -1 / (4 uppi epsilon_0) integral.triple_V div grad rho(va(r)') 1 / norm(va(r) - va(r)') dif V' \
+    & = -1 / (4 uppi epsilon_0) integral.triple_V laplacian rho(va(r)') 1 / norm(va(r) - va(r)') dif V' \
+    & = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') [-4 uppi delta(va(r) - va(r)')] dif V' = Q_"enc" / (epsilon_0). qedhere
   $
 ]
+Gauss' Law (@thm:gauss-law) is the first of the four _Maxwell's equations_.
