@@ -46,7 +46,7 @@ Subsequently,
   $
     div va(E)(va(r)) & = -1 / (4 uppi epsilon_0) integral.triple_V div grad rho(va(r)') 1 / norm(va(r) - va(r)') dif V' \
     & = -1 / (4 uppi epsilon_0) integral.triple_V laplacian rho(va(r)') 1 / norm(va(r) - va(r)') dif V' \
-    & = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') [-4 uppi delta(va(r) - va(r)')] dif V' = Q_"enc" / (epsilon_0). qedhere
+    & = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') [-4 uppi delta(va(r) - va(r)')] dif V' = (rho(va(r))) / (epsilon_0). qedhere
   $
 ]
 Gauss' Law (@thm:gauss-law) is the first of the four _Maxwell's equations_.
