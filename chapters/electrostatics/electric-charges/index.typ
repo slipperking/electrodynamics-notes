@@ -21,8 +21,8 @@ $
 In many hypothetical discussions, it is of greater simplicity to consider charges concentrated at singular points, known as _point charges_. The charge density of $n$ point charges $q_1,...,q_1$ at $va(r)_1,...,va(r)_n$ respectively is then given by
 $
   rho(va(r)) = sum_(k = 1)^n q_k delta(va(r) - va(r)_k).
-$
-The utilization of the Dirac $delta$ here is natural, as we have
+$ <eq:electric-point-charges-charge-density>
+The utilization of the Dirac $delta$ here follows naturally, as we have
 $
   Q = integral.triple_V sum_(k = 1)^n q_k delta(va(r) - va(r)_k) dif V = sum_(k=1)^n q_k.
 $

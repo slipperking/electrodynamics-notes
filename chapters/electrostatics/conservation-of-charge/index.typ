@@ -27,3 +27,25 @@ $
   div va(J) + pdv(rho, t) = 0,
 $
 known as the _continuity equation_.
+
+Our proof above implicitly utilized a weak assumption of continuity of the integrand. Therefore, in the following example we demonstrate its continued validity for the case of point charges:
+#example[
+  Let $n$ point charges $q_k$ ($k in n$) follow trajectories $va(r)_k (t)$. Then the time-varying charge density is simply a time-dependent generalization of @eq:electric-point-charges-charge-density:
+  $ rho(va(r), t) = sum_(k = 1)^n q_k delta(va(r) - va(r)_k (t)). $
+  By the chain rule,
+  $
+    pdv(rho, t) &= sum_(k = 1)^n q_k pdv(, t) delta(va(r) - va(r)_k (t)) = sum_(k = 1)^n q_k grad_(va(r)_k) delta(va(r) - va(r)_k) dot va(v)_k \
+    & = -sum_(k = 1)^n q_k grad_(va(r)) delta(va(r) - va(r)_k) dot va(v)_k \
+    & = -div sum_(k = 1)^n q_k delta(va(r) - va(r)_k) va(v)_k + sum_(k = 1)^n q_k delta(va(r) - va(r)_k) div va(v)_k \
+    & = -div sum_(k = 1)^n q_k delta(va(r) - va(r)_k) va(v)_k
+  $ <eq:continuity-equation-point-charges>
+  (since the charge velocities are functions of $t$ only). The current density of any charge distribution is given by
+  $
+    va(J)(va(r)) = rho(va(r)) va(v)(va(r)) = sum_(k = 1)^n q_k delta(va(r) - va(r)_k (t)) va(v)(va(r)) = sum_(k = 1)^n q_k delta(va(r) - va(r)_k (t)) va(v)_k/* _k */,
+  $
+  where the last equality is obtained from the fact that for all $va(r)$ not coinciding with the point charges, $sum delta = 0$; and for $va(r)$ coinciding with point charges, $va(v)(va(r)) = va(v)_k$. Therefore, @eq:continuity-equation-point-charges is equivalent to
+  $
+    pdv(rho, t) = sum_(k = 1)^n q_k pdv(, t) delta(va(r) - va(r)_k (t)) = -div sum_(k = 1)^n q_k delta(va(r) - va(r)_k) va(v)_k = -div va(J)(va(r)),
+  $
+  which is consistent with the continuity equation.
+]
