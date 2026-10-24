@@ -2,5 +2,7 @@
 #show: docs-subchapter.with(
   title: [Differentiation],
   route: "differentiation",
-  children: {},
+  children: {
+    include "convective-derivative/index.typ"
+  },
 )
