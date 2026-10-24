@@ -15,12 +15,13 @@ The surface current density is analogously
 $
   va(K)(va(r),t) = sigma(va(r), t) va(v)(va(r),t).
 $
-The total volume current is then
-$ I = integral.surf_(partial V) va(J) dot dif va(S), $
-and in the case of the total surface current, the outward pointing vector normal to $partial S$ whilst lying in the plane of $S$ is given by $dif va(r) times vu(n)$, (where $vu(n)$ is normal to $S$). Then
+The total volume current through a surface $S$ is then
+$ I = integral.double_S va(J) dot dif va(S), $
+and in consideration of total surface current, for a given curve $C$ in a surface $S$, the normal vector with respect to $C$ whilst lying in the plane of $S$ is given by $dif va(r) times vu(n)$, (where $vu(n)$ is normal to $S$). Then
 $
-  I = integral.cont_(partial S) va(K) dot (dif va(r) times vu(n)) = integral.cont_(partial S) (vu(n) times va(K)) dot dif va(r).
+  I = integral_C va(K) dot (dif va(r) times vu(n)) = integral_C (vu(n) times va(K)) dot dif va(r).
 $
-(The convention of sign dictates whether we consider current flowing out of a region or flowing into one.) Where $Q(t)$ is the amount of charge that has the boundary at time $t$, it follows immediately that
+#todo[Potential figure]
+(The convention of sign dictates the direction through which a surface needs to be crossed to constitute positive current.) Where $Q(t)$ is the amount of charge that passes the boundary at time $t$, it follows immediately that
 $ I = dv(Q, t) $
 by the endowed definition.
