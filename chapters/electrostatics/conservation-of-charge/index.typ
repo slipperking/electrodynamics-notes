@@ -30,7 +30,7 @@ known as the _continuity equation_.
 
 Our proof above implicitly utilized a weak assumption of continuity of the integrand. Therefore, in the following example we demonstrate its continued validity for the case of point charges:
 #example[
-  Let $n$ point charges $q_k$ ($k in n$) follow trajectories $va(r)_k (t)$. Then the time-varying charge density is simply a time-dependent generalization of @eq:electric-point-charges-charge-density:
+  Let $n$ point charges $q_k$ ($1 <= k <= n$) follow trajectories $va(r)_k (t)$. Then the time-varying charge density is simply a time-dependent generalization of @eq:electric-point-charges-charge-density:
   $ rho(va(r), t) = sum_(k = 1)^n q_k delta(va(r) - va(r)_k (t)). $
   By the chain rule,
   $
