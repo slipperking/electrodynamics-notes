@@ -56,63 +56,95 @@ Gauss' Law (@thm:gauss-law) is the first of the four _Maxwell's equations_. We s
 #figure-wrapper[
   #figure(
     {
-      set text(size: 0.75em)
-      canvas({
-        import cetz.draw: *
+      canvas(
+        // debug-show: true,
+        {
+          import cetz.draw: *
 
-        let axis-stroke = (paint: black, thickness: 0.45pt)
-        let wire-stroke = (paint: black, thickness: 1.25pt)
-        let vector-stroke = (paint: black, thickness: 0.8pt)
-        let guide-stroke = (
-          paint: black,
-          thickness: 0.35pt,
-          dash: "dashed",
-        )
+          let axis-stroke = (paint: black, thickness: 0.45pt)
+          let wire-stroke = (paint: black, thickness: 1.25pt)
+          let vector-stroke = (paint: black, thickness: 0.8pt)
+          let guide-stroke = (
+            paint: black,
+            thickness: 0.35pt,
+            dash: "dashed",
+          )
 
-        line(
-          (-3.6, 0),
-          (3.7, 0),
-          stroke: axis-stroke,
-          mark: (end: ">", fill: black),
-        )
-        line(
-          (0, -0.45),
-          (0, 3.15),
-          stroke: axis-stroke,
-          mark: (end: ">", fill: black),
-        )
-        line((-3, 0), (3, 0), name: "wire", stroke: wire-stroke)
-        line((-3, -0.11), (-3, 0.11), stroke: wire-stroke)
-        line((3, -0.11), (3, 0.11), stroke: wire-stroke)
+          line(
+            (-3.6, 0),
+            (3.7, 0),
+            stroke: axis-stroke,
+            mark: (end: ">>", fill: black),
+          )
+          line(
+            (0, -0.45),
+            (0, 3.15),
+            stroke: axis-stroke,
+            mark: (end: ">>", fill: black),
+          )
+          line((-3, 0), (3, 0), name: "wire", stroke: wire-stroke)
+          line((-3, -0.11), (-3, 0.11), stroke: wire-stroke)
+          line((3, -0.11), (3, 0.11), stroke: wire-stroke)
 
-        line((0, 0), (0, 2.45), name: "height", stroke: guide-stroke)
-        line(
-          (1.35, 0),
-          (0, 2.45),
-          name: "separation-vector",
-          stroke: vector-stroke,
-          mark: (end: ">>", fill: black),
-        )
-        circle((1.35, 0), radius: 2pt, fill: black, stroke: none)
-        circle((0, 2.45), radius: 2pt, fill: black, stroke: none)
+          line((0, 0), (0, 2.45), name: "height", stroke: guide-stroke)
+          line(
+            (1.35, 0),
+            (0, 2.45),
+            name: "separation-vector",
+            stroke: vector-stroke,
+            mark: (end: ">>", fill: black),
+          )
+          circle((1.35, 0), radius: 2pt, fill: black, stroke: none)
+          circle((0, 2.45), radius: 2pt, fill: black, stroke: none)
 
-        content((-3, -0.16), anchor: "north", padding: 2pt, $-L / 2$)
-        content((3, -0.16), anchor: "north", padding: 2pt, $L / 2$)
-        content((3.7, 0), anchor: "west", padding: 2pt, $x$)
-        content((0, 3.15), anchor: "south", padding: 2pt, $z$)
-        content("wire.50%", anchor: "south", padding: 4pt, $lambda$)
-        content((1.35, 0), anchor: "north", padding: 3pt, $x$)
-        content((0, 2.45), anchor: "south", padding: 3pt, $P$)
-        content("height.50%", anchor: "east", padding: 3pt, $z$)
-        content(
-          "separation-vector.52%",
-          anchor: "south-west",
-          padding: 3pt,
-          math-rect($va(r) - va(r)'$),
-        )
-      })
+          content(
+            (-3, -0.16),
+            anchor: "north",
+            padding: 2pt,
+            math-rect($-L / 2$),
+          )
+          content(
+            (3, -0.16),
+            anchor: "north",
+            padding: 2pt,
+            math-rect($L / 2$),
+          )
+          content((3.7, 0), anchor: "west", padding: 2pt, math-rect($x$))
+          content((0, 3.15), anchor: "south", padding: 2pt, math-rect($z$))
+          content(
+            "wire.25%",
+            anchor: "south",
+            padding: 4pt,
+            math-rect($lambda$),
+          )
+          content(
+            (1.35, 0),
+            anchor: "north",
+            padding: 3pt,
+            math-rect($va(x)$),
+          )
+          content(
+            (0, 2.45),
+            anchor: "east",
+            padding: 3pt,
+            math-rect($va(z)$),
+          )
+          content(
+            "height.50%",
+            anchor: "east",
+            padding: 3pt,
+            math-rect($z$),
+          )
+          content(
+            "separation-vector.52%",
+            anchor: "south-west",
+            padding: 3pt,
+            math-rect($va(r) - va(r)'$),
+          )
+        },
+      )
     },
-    caption: [Geometry of the uniformly charged line segment.],
+    caption: [The uniformly charged line segment and the observation point $va(z) = z vu(z)$.],
   ) <fig:uniformly-charged-line-geometry>
 ]
 #example[

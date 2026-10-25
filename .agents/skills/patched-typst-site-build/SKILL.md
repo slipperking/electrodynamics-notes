@@ -33,6 +33,8 @@ Run search-index generation after a bundle build only when search assets/indexin
 python build-search-index.py
 ```
 
+For CetZ diagrams, follow the repository's established annotation convention: wrap mathematical labels passed to `content(...)` in `math-rect(...)`. This gives labels a lightly backed, consistent treatment and keeps geometry from showing through the text.
+
 For a PDF-only check, use the local executable with the legacy routing input:
 
 ```powershell
