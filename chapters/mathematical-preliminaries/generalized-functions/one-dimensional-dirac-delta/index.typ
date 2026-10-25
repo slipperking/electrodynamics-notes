@@ -31,4 +31,20 @@ However, it is also paramount to note that it is insufficient to extend the coll
 $
   delta(x) & = lim_(n -> oo) (sin (n x)) / (uppi x),
 $
-whose values do not vanish away from $0$: for any $epsilon > 0$, $exists delta > 0 : exists N in NN$ such that $forall n > N$, exists $x' : abs(x') > delta$ such that $abs((sin (n x)) / (uppi x)) > epsilon$. (The previously discussed representations do not have this irregularity.) Graphically, it is the limit of increasingly oscillatory functions dampened by $uppi / x$.
+whose values do not vanish away from $0$: for any $epsilon > 0$, $exists delta > 0 : exists N in NN$ such that $forall n > N$, $exists x' : abs(x') > delta$ such that $abs((sin (n x)) / (uppi x)) > epsilon$. (The previously discussed representations do not have this irregularity.) Graphically, it is the limit of increasingly oscillatory functions dampened by $uppi / x$.
+#proof(collapsed: true)[of the $sinc$ representation][
+  //
+  We have
+  $
+    lim_(n -> oo) integral_RR f(x) sin(n x) / (uppi x) dx & = lim_(n -> oo) integral_RR f(x / n) (sin x) / (uppi x) dx.
+  $
+  More involvedly, we avoid directly transmuting the limit into the integral as it is not absolutely integrable (we will avoid paying attention into details as such in future sections. For our purposes this is to emphasize a singularity). Thence in
+  $
+    lim integral_RR f(x / n) (sin x) / (uppi x) dx - f(0) &= lim integral_RR f(x / n) (sin x) / (uppi x) dx - f(0) integral_RR (sin x) / (uppi x) dx \
+    &= lim (integral_(-oo)^(-epsilon) + integral_(-epsilon)^epsilon + integral_epsilon^oo) [f(x / n) - f(0)] (sin x) / (uppi x) dx,
+  $
+  the middle integral allows for such a transmutation, while the outer two tails vanish by the Riemann--Lebesgue Lemma (or even by integration by parts). Then
+  $
+    lim integral_RR f(x / n) (sin x) / (uppi x) dx - f(0) = integral_(-epsilon)^epsilon lim [f(x / n) - f(0)] (sin x) / (uppi x) dx = 0 #qedhere
+  $
+]
