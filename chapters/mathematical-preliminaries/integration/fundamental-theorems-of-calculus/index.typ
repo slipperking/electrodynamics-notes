@@ -24,7 +24,7 @@ and its generalization
   $ integral_(partial S) va(F) dot dif va(l) = integral.double_S (curl va(F)) dot dif va(S) $
 ] <thm:stokes>
 #corollary[
-  $ integral.double_S (va(c) dot grad) va(psi) dot dif va(S) - va(c) dot integral.double_S (div va(psi)) dif va(S) $
+  $ integral.cont_(partial S) phi dif va(l) = integral.double_S dif va(S) times grad phi $
   and
   $
     integral.cont_(partial S) dif va(l) times va(psi) = integral.double_S grad psi_k dif S_k - integral.double_S (div va(psi)) dif va(S).
