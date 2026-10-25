@@ -22,6 +22,6 @@ $
   I = integral_C va(K) dot (dif va(l) times vu(n)) = integral_C (vu(n) times va(K)) dot dif va(l).
 $
 #todo[Potential figure]
-(The convention of sign dictates the direction through which a surface needs to be crossed to constitute positive current.) Where $Q(t)$ is the amount of charge that passes the boundary at time $t$, it follows immediately that
+(The convention of sign dictates the direction through which a surface needs to be crossed to constitute positive current.) Where $Q(t)$ is cumulative the amount of charge that passes the boundary by time $t$, it follows immediately that
 $ I = dv(Q, t) $
 by the endowed definition.
