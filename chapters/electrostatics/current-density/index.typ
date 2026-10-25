@@ -17,9 +17,9 @@ $
 $
 The total volume current through a surface $S$ is then
 $ I = integral.double_S va(J) dot dif va(S), $
-and in consideration of total surface current, for a given curve $C$ in a surface $S$, the normal vector with respect to $C$ whilst lying in the plane of $S$ is given by $dif va(r) times vu(n)$, (where $vu(n)$ is normal to $S$). Then
+and in consideration of total surface current, for a given curve $C$ in a surface $S$, the normal vector with respect to $C$ whilst lying in the plane of $S$ is given by $dif va(l) times vu(n)$, (where $vu(n)$ is normal to $S$). Then
 $
-  I = integral_C va(K) dot (dif va(r) times vu(n)) = integral_C (vu(n) times va(K)) dot dif va(r).
+  I = integral_C va(K) dot (dif va(l) times vu(n)) = integral_C (vu(n) times va(K)) dot dif va(l).
 $
 #todo[Potential figure]
 (The convention of sign dictates the direction through which a surface needs to be crossed to constitute positive current.) Where $Q(t)$ is the amount of charge that passes the boundary at time $t$, it follows immediately that

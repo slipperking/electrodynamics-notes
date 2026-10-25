@@ -12,44 +12,44 @@ Let $va(c)$ be a constant vector, $phi$ be a scalar, and $va(A) = A_k vu(e)_k$ b
 
 By virtue of a suitable generalization of differentiation, the previous relation can then be extended to the following:
 #theorem[Gradient Theorem][
-  If $gamma$ is a curve between $a$ and $b$ in $RR^n$, then for $phi : C -> RR$, $ integral_gamma grad phi dot dif va(r) = phi(b) - phi(a). $
+  If $gamma$ is a curve between $a$ and $b$ in $RR^n$, then for $phi : C -> RR$, $ integral_gamma grad phi dot dif va(l) = phi(b) - phi(a). $
 ]
 #theorem[Green's Theorem][
   If $S$ is a planar domain with boundary $partial S$, then for $va(F) : S -> RR^2$,
-  $ integral_(partial S) va(F) dot dif va(r) = integral.double_S nabla times va(F) dif A $
+  $ integral_(partial S) va(F) dot dif va(l) = integral.double_S nabla times va(F) dif A $
 ]
 and its generalization
 #theorem[Stokes' Theorem][
   If $S subset RR^3$ is a surface with boundary $partial S$, then for $va(F) : S -> RR^3$,
-  $ integral_(partial S) va(F) dot dif va(r) = integral.double_S (curl va(F)) dot dif va(S) $
+  $ integral_(partial S) va(F) dot dif va(l) = integral.double_S (curl va(F)) dot dif va(S) $
 ] <thm:stokes>
 #corollary[
   $ integral.double_S (va(c) dot grad) va(psi) dot dif va(S) - va(c) dot integral.double_S (div va(psi)) dif va(S) $
   and
   $
-    integral.cont_(partial S) dif va(r) times va(psi) = integral.double_S grad psi_k dif S_k - integral.double_S (div va(psi)) dif va(S).
+    integral.cont_(partial S) dif va(l) times va(psi) = integral.double_S grad psi_k dif S_k - integral.double_S (div va(psi)) dif va(S).
   $
 ] <cor:stokes-substitutions>
 #proof(collapsed: true)[
   Choose $va(F) = phi va(c)$ to get
   $
-    integral.cont_(partial S) phi va(c) dot dif va(r) &= integral.double_S curl (phi va(c)) dot dif va(S) = integral.double_S (grad phi times va(c) + phi curl va(c)) dot dif va(S) \
+    integral.cont_(partial S) phi va(c) dot dif va(l) &= integral.double_S curl (phi va(c)) dot dif va(S) = integral.double_S (grad phi times va(c) + phi curl va(c)) dot dif va(S) \
     &=integral.double_S (grad phi times va(c)) dot dif va(S) = integral.double_S (dif va(S) times grad phi) dot va(c),
   $
   giving
   $
-    va(c) dot integral.cont_(partial S) phi dif va(r) = va(c) dot integral.double_S dif va(S) times grad phi, \
-    (integral.cont_(partial S) phi dif va(r) - integral.double_S dif va(S) times grad phi) perp RR^3, \
-    integral.cont_(partial S) phi dif va(r) = integral.double_S dif va(S) times grad phi;
+    va(c) dot integral.cont_(partial S) phi dif va(l) = va(c) dot integral.double_S dif va(S) times grad phi, \
+    (integral.cont_(partial S) phi dif va(l) - integral.double_S dif va(S) times grad phi) perp RR^3, \
+    integral.cont_(partial S) phi dif va(l) = integral.double_S dif va(S) times grad phi;
   $
   and choose $va(F) = va(psi) times va(c)$ to get
   $
-    &integral.cont_(partial S) (va(psi) times va(c)) dot dif va(r) = integral.cont_(partial S) (dif va(r) times va(psi)) dot va(c) = integral.double_S [curl (va(psi) times va(c))] dot dif va(S) \
+    &integral.cont_(partial S) (va(psi) times va(c)) dot dif va(l) = integral.cont_(partial S) (dif va(l) times va(psi)) dot va(c) = integral.double_S [curl (va(psi) times va(c))] dot dif va(S) \
     &wide ""= integral.double_S [va(psi) (div va(c)) - va(c) (div va(psi)) + (va(c) dot grad) va(psi) -(va(psi) dot grad) va(c)] dot dif va(S),
   $
   whence
   $
-    va(c) dot integral.cont_(partial S) dif va(r) times va(psi) &= integral.double_S [(va(c) dot grad) va(psi) - va(c) (div va(psi))] dot dif va(S) \
+    va(c) dot integral.cont_(partial S) dif va(l) times va(psi) &= integral.double_S [(va(c) dot grad) va(psi) - va(c) (div va(psi))] dot dif va(S) \
     &= integral.double_S (va(c) dot grad) va(psi) dot dif va(S) - va(c) dot integral.double_S (div va(psi)) dif va(S).
   $
   From the first integrand of the right-hand side giving
@@ -58,9 +58,9 @@ and its generalization
   $
   we have
   $
-    va(c) dot integral.cont_(partial S) dif va(r) times va(psi) = va(c) dot integral.double_S grad psi_k dif S_k - va(c) dot integral.double_S (div va(psi)) dif va(S), \
-    (integral.cont_(partial S) dif va(r) times va(psi) - va(c) dot integral.double_S grad psi_k dif S_k + va(c) dot integral.double_S (div va(psi)) dif va(S)) perp RR^3.\
-    integral.cont_(partial S) dif va(r) times va(psi) = integral.double_S grad psi_k dif S_k - integral.double_S (div va(psi)) dif va(S). #qedhere
+    va(c) dot integral.cont_(partial S) dif va(l) times va(psi) = va(c) dot integral.double_S grad psi_k dif S_k - va(c) dot integral.double_S (div va(psi)) dif va(S), \
+    (integral.cont_(partial S) dif va(l) times va(psi) - va(c) dot integral.double_S grad psi_k dif S_k + va(c) dot integral.double_S (div va(psi)) dif va(S)) perp RR^3.\
+    integral.cont_(partial S) dif va(l) times va(psi) = integral.double_S grad psi_k dif S_k - integral.double_S (div va(psi)) dif va(S). #qedhere
   $
 ]
 and
