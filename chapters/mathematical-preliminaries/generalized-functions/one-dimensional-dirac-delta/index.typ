@@ -10,4 +10,4 @@ $
   delta(x) = cases(0 & quad "if" x != 0, oo & quad "if" x = 0) quad "such that" quad integral_(-oo)^oo delta(x) dx = 1.
 $
 It can also be understood as the limit of a sequence of functions each integrating to $1$, such that the point at $0$ becomes more highly peaked at each iteration and the ones around it decrease to $0$ for sufficiently many iterations, including, but not limited to the following:
-$ delta(x) = lim_(n -> oo) sin (n x) / (n x) $
+$ delta(x) = lim_(n -> oo) (sin (n x)) / (uppi x) $
