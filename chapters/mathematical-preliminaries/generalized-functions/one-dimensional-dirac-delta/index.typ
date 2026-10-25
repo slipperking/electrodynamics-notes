@@ -48,3 +48,16 @@ whose values do not vanish away from $0$: for any $epsilon > 0$, $exists delta >
     lim integral_RR f(x / n) (sin x) / (uppi x) dx - f(0) = integral_(-epsilon)^epsilon lim [f(x / n) - f(0)] (sin x) / (uppi x) dx = 0 #qedhere
   $
 ]
+The same methodology can be used for the following identities:
+#let dv-t = math-markup(eref(<eq:dirac-delta-derivative>)[(#sym.ast.op)]);
+#etarget(
+  $
+    delta(a x) = - delta(x) / abs(a) quad "for" quad a != 0, \
+    integral_RR delta'(x - x') f(x) dx = -f'(x'), #tag[#math-markup(link-wrap: true)[(#sym.ast.op)]] \
+    delta(g(x)) = sum_(x' in RR \ g(x') = 0, \
+    g'(x') != 0) delta(x - x') / abs(g'(x')), \
+    delta(x) = 1 / (2 uppi) integral_RR ee^(ii x x') dif x',
+  $,
+  <eq:dirac-delta-derivative>,
+)
+where the derivative in #dv-t is formally the definition given to the _distributional derivative_. To understand its motivation, we appeal to integration by parts:
