@@ -52,7 +52,7 @@ The same methodology can be used for the following identities:
 #let dv-t = math-markup(eref(<eq:dirac-delta-derivative>)[(#sym.ast.op)]);
 #etarget(
   $
-    delta(a x) = - delta(x) / abs(a) quad "for" quad a != 0, \
+    delta(a x) = delta(x) / abs(a) quad "for" quad a != 0, \
     integral_RR delta'(x - x') f(x) dx = -f'(x'), #tag[#math-markup(link-wrap: true)[(#sym.ast.op)]] \
     delta(g(x)) = sum_(x' in RR \ g(x') = 0, \
     g'(x') != 0) delta(x - x') / abs(g'(x')), \
