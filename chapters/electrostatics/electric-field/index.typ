@@ -78,7 +78,7 @@ Gauss' Law (@thm:gauss-law) is the first of the four _Maxwell's equations_. We s
 
 Notably, in consideration of a wire of infinite length, then the electric field evaluated at a point a distance $z > 0$ away is given by
 $
-  va(E)(va(r)) = lim_(L -> oo) 1 / (4 uppi epsilon_0 z) (L lambda vu(z)) / sqrt(L^2 + z^2) = (lambda_0 vu(z)) / (4 uppi epsilon_0 z).
+  va(E)(va(r)) = lim_(L -> oo) 1 / (4 uppi epsilon_0 z) (L lambda vu(z)) / sqrt(L^2 + z^2) = (lambda vu(z)) / (4 uppi epsilon_0 z).
 $
 At a long distance ($z >> L$),
 $
