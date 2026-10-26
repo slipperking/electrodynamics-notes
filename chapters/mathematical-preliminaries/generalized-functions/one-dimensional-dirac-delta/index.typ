@@ -3,7 +3,7 @@
   title: [The One-Dimensional Dirac Delta],
   route: "one-dimensional-dirac-delta",
 )
-Define the Dirac Delta (generalized) function to be a function with the property that for any smooth (compactly supported) function $f: RR -> RR$ and $a in RR$,
+Define the Dirac Delta (generalized) function to be a function with the property that for any smooth compactly supported function (formally referred to as a _bump function_) $f: RR -> RR$ and $a in RR$,
 $ integral_(-oo)^oo f(x) delta(x - a) dx = f(a), $ <eq:dirac-delta-filtering>
 or the satisfaction of the _filtering_ property. It is commonly expressed and thought of colloquially as
 $
@@ -49,15 +49,54 @@ whose values do not vanish away from $0$: for any $epsilon > 0$, $exists delta >
   $
 ]
 The same methodology can be used for the following identities:
-#let dv-t = math-markup(eref(<eq:dirac-delta-derivative>)[(#sym.ast.op)]);
+#let dv-t(n) = math-markup(eref(<eq:dirac-delta-identities>)[(#{ [#sym.ast.op] * n })]);
 #etarget(
   $
-    delta(a x) = delta(x) / abs(a) quad "for" quad a != 0, \
-    integral_RR delta'(x - x') f(x) dx = -f'(x'), #tag[#math-markup(link-wrap: true)[(#sym.ast.op)]] \
-    delta(g(x)) = sum_(x' in RR \ g(x') = 0, \
-    g'(x') != 0) delta(x - x') / abs(g'(x')), \
-    delta(x) = 1 / (2 uppi) integral_RR ee^(ii x x') dif x',
+    delta(a x) = delta(x) / abs(a) quad "for" quad a != 0, #tag[#math-markup(link-wrap: true)[(#sym.ast.op)]] \
+    integral_RR delta'(x - x') f(x) dx = -f'(x'), #tag[#math-markup(link-wrap: true)[(#sym.ast.op#sym.ast.op)]] \
+    delta(g(x)) = sum_(
+    x' in RR \ g(x') = 0, \
+    abs(g'(x'))<oo
+    ) delta(x - x') / abs(g'(x')), #tag[(if $f'$ never vanishes at a zero)]\
+    delta(x) = 1 / (2 uppi) integral_RR ee^(ii k x) dif k,
   $,
-  <eq:dirac-delta-derivative>,
+  <eq:dirac-delta-identities>,
 )
-where the derivative in #dv-t is formally the definition given to the _distributional derivative_. To understand its motivation, we appeal to integration by parts:
+where the derivative in #dv-t(2) is formally the definition given to the _distributional derivative_. To understand its motivation, we appeal to integration by parts:
+$
+  integral_RR delta'(x - x') f(x) dx & = evaluated(delta(x - x') f(x))_(-oo)^oo - integral_RR delta(x-x') f'(x) dx \
+                                     & = - integral_RR delta(x-x') f'(x) dx = -f'(x')
+$
+(the first term vanishes under the assumption $f$ has compact support). We also point out that the last identity does not converge as an integral; it behaves analogously to the $op("sinc")$ representation, as it shall transpire later.
+#proof(collapsed: true)[of the scaling property #dv-t(1)][
+  To ensure consistency in the substitution properties of integration,
+  $
+    integral_(-oo)^oo delta(a x) f(x) dx &= integral_(-oo sgn(a))^(oo sgn(a)) delta(x) f(x / a) dx / a =/*  sgn(a) */ integral_(-oo)^oo (delta(x)) / abs(a) f(x / a) dx \
+    &= f(0) / abs(a) = integral_(-oo)^oo (delta(x)) / abs(a) f(x) dx.
+  $
+  By comparison of the left- and right-hand sides, $delta(a x) = (delta(x)) / abs(a)$ (recall that the utilization of the Dirac delta appertains exclusively to "integration").
+]
+#proof(collapsed: true)[of the composition identity][
+  #lorem(1)
+]
+#proof(collapsed: true)[of the Fourier identity][
+  Let $n > 0$ be arbitrary. Then
+  $
+    lim_(n -> oo) 1 / (2 uppi) integral_(-n)^n ee^(ii k x) dif k = lim_(n -> oo) 1 / (2 uppi ii x) evaluated(ee^(ii k x))_(-n)^n = lim_(n -> oo) sin(n x) / (uppi x) = delta(x)
+  $
+  by a previously proven identity.
+]
+#proof(collapsed: true)[of the Fourier identity (alternative 1)][
+  By introduction of a convergence factor dampening the oscillation,
+  $
+    1 / (2 uppi) integral_RR ee^(ii k x) dif k &= 1 / (2 uppi) lim_(epsilon -> 0^+) integral_0^oo [ee^(ii k x - k epsilon) + ee^(-ii k x - k epsilon)] dif k \ &= 1 / (2 uppi) lim_(epsilon -> 0^+) evaluated([ee^(ii k x - k epsilon) / (ii x - epsilon) - ee^(-ii k x - k epsilon) / (ii x + epsilon)])_0^oo \ &= 1 / (2 uppi) lim_(epsilon -> 0^+) 1 / (ii x + epsilon) - 1 / (ii x - epsilon)\ &= 1 / (2 uppi) lim_(epsilon -> 0^+) epsilon / (uppi(x^2 + epsilon^2)) = delta(x)
+  $
+  by a previously proven identity.
+]
+
+#proof(collapsed: true)[of the Fourier identity (alternative 2)][
+  #todo[Decide upon the prospect of doing an alternative one of greater directness.]
+]
+
+// heaviside stuff, maybe appeal to distributions,
+// maybe add distributions to an appendix!!!!!
