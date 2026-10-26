@@ -44,7 +44,7 @@ Moreover, the representation above is unique for all decompositions with potenti
     & = -curl 1 / (4 uppi) integral.triple_V [curlp (va(F)(va(r)')) / (norm(va(r)' - va(r))) - (curlp va(F)(va(r)')) / (norm(va(r)' - va(r)))]dif V' \
     & wide "" + grad 1/ (4 uppi) integral.triple_V [divp (va(F)(va(r)')) / (norm(va(r)' - va(r))) - (divp va(F)(va(r)')) / (norm(va(r)' - va(r)))] dif V'. \
   $
-  Applying variations of the Divergence Theorem (c.f. @thm:divergence, @cor:divergence-substitutions),
+  Applying variations of the Divergence Theorem (cf. @thm:divergence, @cor:divergence-substitutions),
   $
     va(F)(va(r)) & = curl 1 / (4 uppi) [
       integral.triple_V (curlp va(F)(va(r)')) / (norm(va(r)' - va(r))) dif V' - integral.surf_(partial V) dif va(S)' times (va(F)(va(r)')) / (norm(va(r)' - va(r)))

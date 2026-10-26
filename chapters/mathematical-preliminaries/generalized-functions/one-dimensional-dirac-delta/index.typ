@@ -55,9 +55,8 @@ The same methodology can be used for the following identities:
     delta(a x) = delta(x) / abs(a) quad "for" quad a != 0, #tag[#math-markup(link-wrap: true)[(#sym.ast.op)]] \
     integral_RR delta'(x - x') f(x) dx = -f'(x'), #tag[#math-markup(link-wrap: true)[(#sym.ast.op#sym.ast.op)]] \
     delta(g(x)) = sum_(
-    x' in RR \ g(x') = 0, \
-    abs(g'(x'))<oo
-    ) delta(x - x') / abs(g'(x')), #tag[(if $f'$ never vanishes at a zero)]\
+    x' in RR \ g(x') = 0,
+    ) delta(x - x') / abs(g'(x')), #tag[(if $0 < abs(g') < oo$ at all zeros)]\
     delta(x) = 1 / (2 uppi) integral_RR ee^(ii k x) dif k,
   $,
   <eq:dirac-delta-identities>,
@@ -67,7 +66,7 @@ $
   integral_RR delta'(x - x') f(x) dx & = evaluated(delta(x - x') f(x))_(-oo)^oo - integral_RR delta(x-x') f'(x) dx \
                                      & = - integral_RR delta(x-x') f'(x) dx = -f'(x')
 $
-(the first term vanishes under the assumption $f$ has compact support). We also point out that the last identity does not converge as an integral; it behaves analogously to the $op("sinc")$ representation, as it shall transpire later.
+(the first term vanishes under the assumption $f$ has compact support). Strictly speaking, the composition identity is also by distributional definition; therefore the "proof" we shall proceed to give comprises a heuristic explanation. We also point out that the last identity does not converge as an integral; it behaves analogously to the $op("sinc")$ representation, as it shall transpire later.
 #proof(collapsed: true)[of the scaling property #dv-t(1)][
   To ensure consistency in the substitution properties of integration,
   $
@@ -76,8 +75,12 @@ $
   $
   By comparison of the left- and right-hand sides, $delta(a x) = (delta(x)) / abs(a)$ (recall that the utilization of the Dirac delta appertains exclusively to "integration").
 ]
-#proof(collapsed: true)[of the composition identity][
+#proof(collapsed: true)[of the composition identity (heuristic)][
   #lorem(1)
+  Consider $g$ to be a function with zeros of multiplicities not exceeding $1$. Then
+  $
+    integral_(-oo)^oo delta(g(x))
+  $
 ]
 #proof(collapsed: true)[of the Fourier identity][
   Let $n > 0$ be arbitrary. Then
@@ -97,6 +100,16 @@ $
 #proof(collapsed: true)[of the Fourier identity (alternative 2)][
   #todo[Decide upon the prospect of doing an alternative one of greater directness.]
 ]
+With consideration of the present coverage, it is natural to consider the result of integrating $delta$. In accordance, appealing somewhat to heuristics, let
+$
+  tilde(H)(x) = cases(0 & quad "if" x < 0, 1 & quad "if" x > 0),
+$
+so that
+$
+  H(x) = integral_(-oo)^x delta(x') dx' = integral_(-oo)^oo delta(x') tilde(H)(x - x') dx = tilde(H)(x),
+$
+The function $H$ is formally referred to as the _Heaviside function_, where popular convention dictates $H(0) = 1/2$. As a distribution, it is defined by $H' = delta$, with respect to the distributional derivative. It naturally transpires to be an affine transformation of the sign function:
+$ sgn(x) = 2 H(x) - 1, wide sgn'(x) = 2 delta(x). $
 
 // heaviside stuff, maybe appeal to distributions,
 // maybe add distributions to an appendix!!!!!

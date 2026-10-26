@@ -2,13 +2,14 @@
 #show: docs-subchapter.with(
   title: [The Electric Field],
   route: "electric-field",
+  children: include "applications-of-gauss-law/index.typ",
 )
 Experimental work nearing the end of the 18th century established that in the case of approximated point charges, the force on a _test charge_ $q$ at $va(r)$ (which may or may not be stationary) due to $n$ stationary _source_ point charges $q_k$ at $va(r)_k$ follows the inverse-square law. We (for this instant) only consider the case of _electrostatics_ (where source charges are time-static), in which the relation holds. The formulation thereof is given by _Coulomb's Law_, for the case of a vacuum:
 #theorem[Coulomb's Law][
   //
   $ va(F) = 1 / (4 uppi epsilon_0) sum_(k=1)^n (q q_k) / norm(va(r) - va(r)_k)^3 (va(r) - va(r)_k). $ <eq:coulombs-law>
 ] <thm:coulombs-law>
-The coefficient $1 / (4 uppi epsilon_0) = #qty("8.9875517923e9", "N * m^2 / C^2")$ is also known as _Coulomb's constant_ and reflects our choice of units. In certain mediums, the constant $epsilon_0$ is replaced by a more general $epsilon$ which more accurately reflects the given medium (c.f. @todo).
+The coefficient $1 / (4 uppi epsilon_0) = #qty("8.9875517923e9", "N * m^2 / C^2")$ is also known as _Coulomb's constant_ and reflects our choice of units. In certain mediums, the constant $epsilon_0$ is replaced by a more general $epsilon$ which more accurately reflects the given medium (cf. @todo).
 
 There exists a generalization of @thm:coulombs-law which does not depend on the necessitated use of point source charges nor the explicitness of the test charge $q$.
 #definition[Electric Field][
@@ -52,7 +53,10 @@ Subsequently,
     & = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') [-4 uppi delta(va(r) - va(r)')] dif V' = (rho(va(r))) / (epsilon_0). qedhere
   $
 ]
-Gauss' Law (@thm:gauss-law) is the first of the four _Maxwell's equations_. We shall eventually see that the first equation $div va(E) = rho / epsilon_0$ will hold not only for electrostatics but for any general situation, as with all Maxwell's equations.
+Gauss' Law (@thm:gauss-law) is the first of the four _Maxwell's equations_. We shall eventually see that the first equation $div va(E) = rho / epsilon_0$ will hold not only for electrostatics but for any general situation, as with all Maxwell's equations. There also is an integral representation, whose obtention follows naturally from the Divergence Theorem:
+$
+  Q_"enc" / epsilon_0 = integral.triple_V rho(va(r)) / epsilon_0 dif V = integral.triple_V div va(E) dif V = integral.surf_(partial V) va(E) dot dif va(S).
+$ <eq:gauss-law-integral>
 #figure-wrapper[
   #figure(
     {
@@ -194,7 +198,7 @@ $
 which once again is the electric field due to a single point charge $sigma uppi R^2$ at the origin. Lastly, we consider the case of a time-static surface density distribution on a spherical shell of radius $R > 0$ centered at the origin, which will prove analogous to the case of the gravitational force.
 #theorem[Spherical Shell Theorem][
   Let $S$ be the hollow sphere centered at the origin of radius $R$ carrying a uniform surface charge distribution $sigma$. Then the electric field vanishes at all points within the sphere, and attains values equal to if $S$ was a point charge $4 uppi R^2 sigma$ outside the sphere.
-]
+] <thm:spherical-shell>
 #proof[
   A transformation of $op("SO")(3)$ permits the assumption of the observation point lying on the nonnegative $z$-axis at $va(z) = z vu(z)$. By @eq:electric-field-surface-line, writing
   $

@@ -78,6 +78,47 @@
 
 #let _section-label(segment) = if segment == none { none } else { label("sec:" + segment) }
 
+#let _plain-text(value) = {
+  if type(value) == str {
+    value
+  } else if type(value) == content {
+    let fields = value.fields()
+    if fields.keys().contains("text") {
+      fields.text
+    } else if fields.keys().contains("children") {
+      fields.children.map(_plain-text).join("")
+    } else if fields.keys().contains("body") {
+      _plain-text(fields.body)
+    } else if fields.keys().contains("child") {
+      _plain-text(fields.child)
+    } else if value.func() == [ ].func() {
+      " "
+    } else {
+      ""
+    }
+  } else {
+    str(value)
+  }
+}
+
+#let _title-route(title) = {
+  lower(_plain-text(title))
+    .replace(regex("['’‘ʼ＇]"), "")
+    .replace(regex("[^a-z0-9]+"), "-")
+    .trim("-")
+}
+
+/// Build the common `title` and derived `route` arguments for a docs page.
+#let dargs(title) = {
+  let route = _title-route(title)
+  assert(route != "", message: "docs page title needs at least one letter or digit")
+  assert(
+    route.match(regex("^[a-z0-9-]+$")) != none,
+    message: "generated docs route may contain only lowercase ASCII letters, digits, and hyphens",
+  )
+  (title: title, route: route)
+}
+
 #let _route-from-folders(folders) = {
   if folders.len() == 0 {
     "/"
