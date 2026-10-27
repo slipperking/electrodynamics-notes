@@ -251,7 +251,6 @@ The first usage is readily demonstrated by the proof above. We hence provide the
               stroke: plane-stroke,
             )
             line(plane.at(3), plane.at(2), name: "plane-back-edge", stroke: none)
-            content("plane-back-edge.08%", anchor: "east", padding: 4pt, math-rect([$x y$-plane]))
             let middle = face(0)
             let top = face(half-height)
             let bottom = face(-half-height)
@@ -312,16 +311,17 @@ The first usage is readily demonstrated by the proof above. We hence provide the
               stroke: guide-stroke,
               mark: length-mark,
             )
-
-            content("top-center", anchor: "west", padding: 5pt, math-rect($A$))
-            content("top-face.75%", anchor: "west", padding: 2pt, math-rect($S$))
-            content("field-up.end", anchor: "south", padding: 2pt, math-rect($va(E)$))
-            content("field-down.end", anchor: "north", padding: 2pt, math-rect($va(E)$))
-            content("height-up.52%", anchor: "west", padding: 2pt, math-rect($abs(z)$))
-            content("height-down.50%", anchor: "west", padding: 2pt, math-rect($abs(z)$))
           })
-          circle("field-up.start", radius: 1.9pt, fill: black, stroke: none)
-          circle("field-down.start", radius: 1.9pt, fill: black, stroke: none)
+          circle("field-up.start", radius: 2pt, fill: black, stroke: none)
+          circle("field-down.start", radius: 2pt, fill: black, stroke: none)
+
+          content("plane-back-edge.1%", anchor: "north", padding: 2pt, math-rect([$x y$-plane]))
+          content("top-center", anchor: "west", padding: 5pt, math-rect($A$))
+          content("top-face.75%", anchor: "west", padding: 2pt, math-rect($S$))
+          content("field-up.end", anchor: "south", padding: 2pt, math-rect($va(E)$))
+          content("field-down.end", anchor: "north", padding: 2pt, math-rect($va(E)$))
+          content("height-up.52%", anchor: "west", padding: 2pt, math-rect($abs(z)$))
+          content("height-down.50%", anchor: "west", padding: 2pt, math-rect($abs(z)$))
         },
       )
     },
