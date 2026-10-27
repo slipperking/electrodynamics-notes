@@ -42,5 +42,16 @@ The first usage is readily demonstrated by the proof above. We hence provide the
   $
 ]
 #example[
-  An infinite plane with surface charge distribution
+  An infinite plane coplanar with the $x y$-plane carries a surface charge density distribution $sigma$, whereby an electric field $va(E)$ is generated. Find $va(E)(va(r))$ at an arbitrary point $va(r)$.
+] <ex:gaussian-surface-pillbox>
+#solution[to @ex:gaussian-surface-pillbox][
+  By virtue of symmetry, the electric field at $va(r)$ points in the $vu(z)$ direction (denote the respective component by $va(z) = z vu(z)$). Let $S$ be a "Gaussian pillbox," the colloquial term for a rectangular prism with two square faces of respective area $A$, parallel to the $x y$-plane equidistantly $abs(z)$ away therefrom, with four vertical faces whose normal vectors are orthogonal to the electric field thereat. Then
+  $
+    Q_"enc" / epsilon_0 = integral.surf_S va(E)(va(r)') dot dif va(S)' = integral.double_(4 perp "faces") va(E)(va(r)') dot dif va(S)' + integral.double_(2 parallel "faces") va(E)(va(r)') dot dif va(S)' = 2 A E(va(r)).
+  $
+  Geometrically, we have $op("area")[jinterior S inter #[$x y$-"plane"]] = A$, whence
+  $
+    Q_"enc" / epsilon_0 = (A sigma) / epsilon_0 = 2 A E ==> E(va(r)) = sigma / (2 epsilon_0) ==> va(E)(va(r)) = sigma / (2 epsilon_0) va(z)/abs(z). qedhere
+  $
 ]
+(Notice the independence---save the preceding signage---of the electric field from $va(r)$ itself.)
