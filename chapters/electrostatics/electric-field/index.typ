@@ -47,7 +47,7 @@ The abstraction as represented by the transition from @eq:coulombs-law to @eq:co
 Subsequently,
 #theorem[Gauss' Law][
   For electrostatics,
-  $ div va(E) = rho / epsilon_0 quad "and" quad curl va(E) = 0. $
+  $ div va(E) = rho / epsilon_0 quad "and" quad curl va(E) = 0. $ <eq:gauss-law>
 ] <thm:gauss-law>
 #proof[
   Recall from @todo that

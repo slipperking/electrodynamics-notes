@@ -13,7 +13,7 @@ Let $va(c)$ be a constant vector, $phi$ be a scalar, and $va(A) = A_k vu(e)_k$ b
 By virtue of a suitable generalization of differentiation, the previous relation can then be extended to the following:
 #theorem[Gradient Theorem][
   If $gamma$ is a curve between $a$ and $b$ in $RR^n$, then for $phi : C -> RR$, $ integral_gamma grad phi dot dif va(l) = phi(b) - phi(a). $
-]
+] <thm:gradient>
 #theorem[Green's Theorem][
   If $S$ is a planar domain with boundary $partial S$, then for $va(F) : S -> RR^2$,
   $ integral_(partial S) va(F) dot dif va(l) = integral.double_S nabla times va(F) dif A $

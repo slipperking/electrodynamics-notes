@@ -24,6 +24,148 @@ Such is the utility herein of an auxiliary surface as $S'$, that it has received
 - A cylindrical surface coaxial with a uniformly charged cylinder and passing through the evaluation point.
 - A pillbox-shaped surface centered on an infinite charged plane, with its faces parallel to the plane and equidistant from it.
 The first usage is readily demonstrated by the proof above. We hence provide the examples in which electric field can be determined through the latter two.
+#figure-wrapper[
+  #figure(
+    {
+      set text(size: 0.75em)
+      canvas(
+        debug-show: true,
+        {
+          import cetz.draw: *
+
+          let body-stroke = (paint: black, thickness: 0.62pt)
+          let body-extension-stroke = (
+            paint: black,
+            thickness: 0.62pt,
+            dash: "dotted",
+          )
+          let cross-section-stroke = (paint: black, thickness: 0.62pt)
+          let gaussian-stroke = (
+            paint: black,
+            thickness: 0.62pt,
+            dash: "dashed",
+          )
+          let axis-stroke = (paint: black, thickness: 0.62pt)
+          let guide-stroke = (paint: black, thickness: 0.62pt)
+          let vector-stroke = (paint: black, thickness: 0.62pt)
+          let length-mark = (
+            start: (pos: 5%, symbol: "|", inset: 0%),
+            end: (pos: 5%, symbol: "|", inset: 0%),
+          )
+          let full-length-mark = (
+            start: (pos: 0%, symbol: "|", inset: 0%),
+            end: (pos: 0%, symbol: "|", inset: 0%),
+          )
+
+          let ellipse-points(cx, cy, rx, ry, start: 0deg, stop: 360deg, steps: 48) = {
+            range(steps + 1).map(i => {
+              let angle = start + (stop - start) * i / steps
+              (
+                cx + rx * calc.cos(angle),
+                cy + ry * calc.sin(angle),
+              )
+            })
+          }
+          // Primary geometry; subsequent construction is anchored to these paths.
+          let base-left = -2.55
+          let base-right = 2.55
+          let body-radius = 0.72
+          let gaussian-radius = 1.45
+          line((base-left, 0), (base-right, 0), name: "axis-core", stroke: axis-stroke)
+          line((-4.0, 0), "axis-core.start", name: "axis-left", stroke: axis-stroke)
+          line("axis-core.end", (4.25, 0), name: "axis-right", stroke: axis-stroke)
+          line(
+            (base-left, body-radius),
+            (base-right, body-radius),
+            name: "body-top",
+            stroke: body-stroke,
+          )
+          line(
+            (base-left, -body-radius),
+            (base-right, -body-radius),
+            name: "body-bottom",
+            stroke: body-stroke,
+          )
+          line((-4.0, body-radius), "body-top.start", stroke: body-extension-stroke)
+          line("body-top.end", (4.0, body-radius), stroke: body-extension-stroke)
+          line((-4.0, -body-radius), "body-bottom.start", stroke: body-extension-stroke)
+          line("body-bottom.end", (4.0, -body-radius), stroke: body-extension-stroke)
+          line(
+            (base-left, gaussian-radius),
+            (base-right, gaussian-radius),
+            name: "gaussian-top",
+            stroke: gaussian-stroke,
+          )
+          line(
+            (base-left, -gaussian-radius),
+            (base-right, -gaussian-radius),
+            name: "gaussian-bottom",
+            stroke: gaussian-stroke,
+          )
+          line(
+            ..ellipse-points(base-left, 0, 0.34, gaussian-radius),
+            name: "gaussian-left-base",
+            stroke: gaussian-stroke,
+          )
+          line(
+            ..ellipse-points(base-right, 0, 0.34, gaussian-radius),
+            name: "gaussian-right-base",
+            stroke: gaussian-stroke,
+          )
+          for (x, name) in ((base-left, "body-left-base"), (base-right, "body-right-base")) {
+            line(
+              ..ellipse-points(x, 0, 0.12, body-radius),
+              name: name,
+              stroke: cross-section-stroke,
+            )
+          }
+
+          // Guides inherit their feet and endpoints from the named cylinder edges.
+          line(
+            "axis-core.25%",
+            "body-top.25%",
+            name: "body-radius",
+            stroke: guide-stroke,
+            mark: length-mark,
+          )
+          line(
+            "axis-core.65%",
+            "gaussian-top.65%",
+            name: "gaussian-radius",
+            stroke: guide-stroke,
+            mark: length-mark,
+          )
+          circle("gaussian-radius.end", radius: 1.9pt, fill: black, stroke: none)
+          line(
+            "gaussian-radius.end",
+            (rel: "gaussian-radius.end", to: (0, 0.85)),
+            name: "field-at-r",
+            stroke: vector-stroke,
+            mark: (end: ">>", fill: black),
+          )
+
+          // Overall Gaussian length.
+          line(
+            (rel: "gaussian-bottom.start", to: (0, -0.37)),
+            (rel: "gaussian-bottom.end", to: (0, -0.37)),
+            name: "length",
+            stroke: guide-stroke,
+            mark: full-length-mark,
+          )
+
+          content("axis-right.end", anchor: "west", padding: 2pt, math-rect($x$))
+          content("body-radius.48%", anchor: "east", padding: 2pt, math-rect($R$))
+          content("gaussian-radius.58%", anchor: "west", padding: 2pt, math-rect($s$))
+          content("gaussian-radius.end", anchor: "south-west", padding: 3pt, math-rect($va(r)$))
+          content("field-at-r.end", anchor: "south", padding: 2pt, math-rect($va(E)(va(r))$))
+          content("gaussian-right-base.12%", anchor: "west", padding: 2pt, math-rect($S$))
+          content("length.50%", anchor: "north", padding: 2pt, math-rect($2L$))
+        },
+      )
+    },
+    caption: [A coaxial Gaussian cylinder $S$ about the uniformly charged cylinder.],
+  ) <fig:gaussian-cylinder>
+]
 #example[
   A solid cylinder of infinite length and radius $R$ axially centered at the $x$-axis is uniformly charged with a volume density $rho$. Find the electric field at some arbitrary point $va(r)$.
 ] <ex:gaussian-surface-cylinder>
@@ -41,6 +183,151 @@ The first usage is readily demonstrated by the proof above. We hence provide the
     Q_"enc" / epsilon_0 = (2L uppi min{s, R}^2 rho) / epsilon_0 = E(va(r)) 4 uppi s L ==> va(E) (va(r)) = (min{s, R}^2 rho vu(s)) / (2 epsilon_0 s). qedhere
   $
 ]
+#figure-wrapper[
+  #figure(
+    {
+      set text(size: 0.75em)
+      canvas(
+        debug-show: true,
+        {
+          import cetz.draw: *
+
+          let plane-stroke = (
+            paint: black,
+            thickness: 0.62pt,
+            dash: "dotted",
+          )
+          let plane-gradient = gradient.linear(
+            color.transparentize(black, 98%),
+            color.transparentize(black, 86%),
+            angle: 45deg,
+          )
+          let gaussian-stroke = (
+            paint: black,
+            thickness: 0.62pt,
+            dash: "dashed",
+          )
+          let guide-stroke = (paint: black, thickness: 0.62pt)
+          let auxiliary-stroke = (
+            paint: black,
+            thickness: 0.62pt,
+            dash: "dotted",
+          )
+          let section-stroke = (
+            paint: black,
+            thickness: 0.62pt,
+            dash: "dotted",
+          )
+          let vector-stroke = (paint: black, thickness: 0.62pt)
+          let length-mark = (
+            start: (pos: 5%, symbol: "|", inset: 0%),
+            end: (pos: 5%, symbol: "|", inset: 0%),
+          )
+          let half-side = 1.10
+          let half-height = 0.48
+          let plane-half-x = 3.75
+          let plane-half-y = 2.10
+          let dimension-offset = 0.52
+          let field-length = 1.28
+          let face(elevation) = (
+            (-half-side, elevation, -half-side),
+            (half-side, elevation, -half-side),
+            (half-side, elevation, half-side),
+            (-half-side, elevation, half-side),
+          )
+
+          ortho(x: 30deg, y: 40deg, cull-face: none, {
+            let plane = (
+              (-plane-half-x, 0, -plane-half-y),
+              (plane-half-x, 0, -plane-half-y),
+              (plane-half-x, 0, plane-half-y),
+              (-plane-half-x, 0, plane-half-y),
+            )
+            line(
+              ..plane,
+              close: true,
+              name: "charged-plane",
+              fill: plane-gradient,
+              stroke: plane-stroke,
+            )
+            line(plane.at(3), plane.at(2), name: "plane-back-edge", stroke: none)
+            content("plane-back-edge.08%", anchor: "east", padding: 4pt, math-rect([$x y$-plane]))
+            let middle = face(0)
+            let top = face(half-height)
+            let bottom = face(-half-height)
+            anchor("plane-center", (0, 0, 0))
+            anchor("top-center", (0, half-height, 0))
+            anchor("bottom-center", (0, -half-height, 0))
+            anchor("field-up-tip", (0, half-height + field-length, 0))
+            anchor("field-down-tip", (0, -half-height - field-length, 0))
+            line(..middle, close: true, name: "middle-face", stroke: section-stroke)
+
+            line(..top, close: true, name: "top-face", stroke: gaussian-stroke)
+            line(..bottom, close: true, name: "bottom-face", stroke: gaussian-stroke)
+            for i in range(4) {
+              line(top.at(i), bottom.at(i), stroke: gaussian-stroke)
+            }
+
+            line(
+              "top-center",
+              "field-up-tip",
+              name: "field-up",
+              stroke: vector-stroke,
+              mark: (end: ">>", fill: black),
+            )
+            line(
+              "bottom-center",
+              "field-down-tip",
+              name: "field-down",
+              stroke: vector-stroke,
+              mark: (end: ">>", fill: black),
+            )
+
+            anchor(
+              "dimension-middle",
+              (half-side + dimension-offset, 0, -half-side),
+            )
+            anchor(
+              "dimension-top",
+              (half-side + dimension-offset, half-height, -half-side),
+            )
+            anchor(
+              "dimension-bottom",
+              (half-side + dimension-offset, -half-height, -half-side),
+            )
+            line(top.at(1), "dimension-top", name: "top-extension", stroke: auxiliary-stroke)
+            line(middle.at(1), "dimension-middle", name: "middle-extension", stroke: auxiliary-stroke)
+            line(bottom.at(1), "dimension-bottom", name: "bottom-extension", stroke: auxiliary-stroke)
+            line(
+              "dimension-middle",
+              "dimension-top",
+              name: "height-up",
+              stroke: guide-stroke,
+              mark: length-mark,
+            )
+            line(
+              "dimension-middle",
+              "dimension-bottom",
+              name: "height-down",
+              stroke: guide-stroke,
+              mark: length-mark,
+            )
+
+            content("top-center", anchor: "west", padding: 5pt, math-rect($A$))
+            content("top-face.75%", anchor: "west", padding: 2pt, math-rect($S$))
+            content("field-up.end", anchor: "south", padding: 2pt, math-rect($va(E)$))
+            content("field-down.end", anchor: "north", padding: 2pt, math-rect($va(E)$))
+            content("height-up.52%", anchor: "west", padding: 2pt, math-rect($abs(z)$))
+            content("height-down.50%", anchor: "west", padding: 2pt, math-rect($abs(z)$))
+          })
+          circle("field-up.start", radius: 1.9pt, fill: black, stroke: none)
+          circle("field-down.start", radius: 1.9pt, fill: black, stroke: none)
+        },
+      )
+    },
+    caption: [A Gaussian pillbox $S$ centered on the uniformly charged plane.],
+  ) <fig:gaussian-pillbox>
+]
 #example[
   An infinite plane coplanar with the $x y$-plane carries a surface charge density distribution $sigma$, whereby an electric field $va(E)$ is generated. Find $va(E)(va(r))$ at an arbitrary point $va(r)$.
 ] <ex:gaussian-surface-pillbox>
@@ -55,3 +342,17 @@ The first usage is readily demonstrated by the proof above. We hence provide the
   $
 ]
 (Notice the independence---save the preceding signage---of the electric field from $va(r)$ itself.)
+#example[
+  Compute the electric field generated by two infinitely large parallel planes $S_+, S_-$, carrying respective uniform surface charge density distributions $+sigma$ and $-sigma$.
+] <ex:electric-field-of-two-parallel-planes>
+#proof[
+  By the principle of superposition, the total electric field is thereby equivalent to the calculated summation of the individual constituent fields from $S_plus.minus$. An arbitrary point $va(r)$---upon projection onto $S_plus.minus$---emits the expression $va(r)_plus.minus^perp + va(r)_plus.minus^parallel,$ where $va(r)_plus.minus^perp perp S_plus.minus$ and $va(r)_plus.minus^parallel in S_plus.minus$.
+
+  From observation that the planar normals point in the same direction, we aver that $va(r)_+^perp = lambda va(r)_-^perp$, whence @ex:gaussian-surface-pillbox gives
+  $
+    va(E) & = sigma / (2 epsilon_0) ((va(r)_+^perp) / norm(va(r)_+^perp)+(va(r)_-^perp) / norm(va(r)_-^perp)) \
+          & = sigma / (2 epsilon_0) (sgn(lambda) (va(r)_-^perp) / norm(va(r)_-^perp) + (va(r)_-^perp) / norm(va(r)_-^perp)) \
+          & = (sigma Theta(lambda)) / epsilon_0 (va(r)_-^perp) / norm(va(r)_-^perp).
+  $
+  Qualitatively, the electric field transpires to be independent of the precise value of $va(r)$. When it is not in the region between the two planes there is no electric field, whilst otherwise it is directed orthogonally away from both planes with a field strength $sigma / epsilon_0$.
+]

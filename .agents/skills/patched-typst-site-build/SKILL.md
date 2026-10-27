@@ -15,6 +15,8 @@ For ordinary subject-content, prose, equation, and local layout changes, prefer 
 
 This skips canvas-generated drawings, the theorem and figure lists, and the downloadable PDF. A canvas needed for a focused check can opt back in with `debug-show: true`.
 
+Treat `debug-show` as a user-controlled source preference. Preserve every existing `debug-show` setting exactly as written unless the user explicitly asks to change it; a production build, emitted todo, or pre-push convention is not authorization to remove or disable it.
+
 Use the non-debug or combined-output build when changing publishing infrastructure, cross-output routing, references, generated pages/assets, figures, or PDF behavior, or when the user requests production verification:
 
 ```powershell

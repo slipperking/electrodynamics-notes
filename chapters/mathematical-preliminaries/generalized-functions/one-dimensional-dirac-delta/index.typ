@@ -102,14 +102,14 @@ $
 ]
 With consideration of the present coverage, it is natural to consider the result of integrating $delta$. In accordance, appealing somewhat to heuristics, let
 $
-  tilde(H)(x) = cases(0 & quad "if" x < 0, 1 & quad "if" x > 0),
+  tilde(Theta)(x) = cases(0 & quad "if" x < 0, 1 & quad "if" x > 0),
 $
 so that
 $
-  H(x) = integral_(-oo)^x delta(x') dx' = integral_(-oo)^oo delta(x') tilde(H)(x - x') dx = tilde(H)(x),
+  Theta(x) = integral_(-oo)^x delta(x') dx' = integral_(-oo)^oo delta(x') tilde(Theta)(x - x') dx = tilde(Theta)(x),
 $
-The function $H$ is formally referred to as the _Heaviside function_, where popular convention dictates $H(0) = 1/2$. As a distribution, it is defined by $H' = delta$, with respect to the distributional derivative. It naturally transpires to be an affine transformation of the sign function:
-$ sgn(x) = 2 H(x) - 1, wide sgn'(x) = 2 delta(x). $
+The function $Theta$ is formally referred to as the _Heaviside function_, where popular convention dictates $Theta(0) = 1/2$. As a distribution, it is defined by $Theta' = delta$, with respect to the distributional derivative. It naturally transpires to be an affine transformation of the sign function:
+$ sgn(x) = 2 Theta(x) - 1, wide sgn'(x) = 2 delta(x). $
 
 // heaviside stuff, maybe appeal to distributions,
 // maybe add distributions to an appendix!!!!!

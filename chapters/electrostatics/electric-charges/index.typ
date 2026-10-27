@@ -5,7 +5,9 @@
   route: "electric-charges",
 )
 Electric phenomena arise from a property known as _electric charge_. Charged objects are observed to exert forces on each other, which comprise attractive and repulsive forces. This motivated the formulation of a charge, denoted by $q in RR$. By observation, all free charges are _quantized_, implying all particles observed to have a charge equal to an integer multiple of the elementary electron charge
-$ e = #qty("1.602176634e-19", "C") $
+$ e = #qty("1.602176634e-19", "C"), $
+(wherein $"C"$ is the SI unit of charge, a coulomb).
+
 Despite this fundamental discreteness of charge, the historical developments of electromagnetic theory utilized the definition of a continuous charge per unit volume, or _volume charge density_ $rho(va(r))$ (here we omit the modern formulation of particles of fractional charge). In an infinitesimal volume $dif V$, the charge contained therein is thence $dif Q = rho(va(r)) dif V$. Then the total charge $Q$ in a volume $V$ is given by
 $
   Q = integral.triple_V rho(va(r)) dif V.
@@ -19,7 +21,7 @@ $
   rho(va(r)) = integral.double_S sigma(va(r)') delta^3(va(r) - va(r)') dif S', //  #tag[#math-markup(link-wrap: true)[(#sym.ast.op)]]
 $ <eq:surface-charge-density-as-volume>
 which can be interpreted, by virtue of some generalized heuristic "filtering property," to yield a product between a $sigma$ value and some one-dimensional variant of the Dirac delta.
-#proof(collapsed: true)[of @eq:surface-charge-density-as-volume][
+#proof(collapsed: true)[of the surface-volume charge density relationship @eq:surface-charge-density-as-volume][
   The essence of our methodology here is to prove that the hypothesized relationship can be used to derive the equivalence of the expressions of the enclosed charge $Q$ within any arbitrary volume $V$.
 
   Defining $rho$ as in @eq:surface-charge-density-as-volume,
@@ -37,7 +39,7 @@ Similar to the above, we have
 $
   rho(va(r)) = integral_C lambda(va(r)') delta^3(va(r) - va(r)') dif l.
 $ <eq:line-charge-density-as-volume>
-#proof(collapsed: true)[of the line-volume charge density relationship][
+#proof(collapsed: true)[of the line-volume charge density relationship @eq:line-charge-density-as-volume][
   Let $Q_rho$ be the enclosed charge as calculated in @eq:enclosed-volume-charge and let $Q_lambda$ be the enclosed charge as calculated by the line integral. Then for any volume $V$
   $
     Q_rho & = integral.triple_V integral_C lambda(va(r)') delta^3(va(r) - va(r)') dif l' dif V \
