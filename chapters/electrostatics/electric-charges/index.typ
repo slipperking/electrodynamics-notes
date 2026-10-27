@@ -31,18 +31,18 @@ which can be interpreted, by virtue of some generalized heuristic "filtering pro
 ]
 When a charge is distributed in a one dimensional filament, the notion of a _linear charge density_ $lambda(va(r))$ exists, in which case
 $
-  Q = integral_C lambda(va(r)) dif s.
+  Q = integral_C lambda(va(r)) dif l.
 $
 Similar to the above, we have
 $
-  rho(va(r)) = integral_C lambda(va(r)') delta^3(va(r) - va(r)') dif s.
+  rho(va(r)) = integral_C lambda(va(r)') delta^3(va(r) - va(r)') dif l.
 $ <eq:line-charge-density-as-volume>
 #proof(collapsed: true)[of the line-volume charge density relationship][
   Let $Q_rho$ be the enclosed charge as calculated in @eq:enclosed-volume-charge and let $Q_lambda$ be the enclosed charge as calculated by the line integral. Then for any volume $V$
   $
-    Q_rho & = integral.triple_V integral_C lambda(va(r)') delta^3(va(r) - va(r)') dif s' dif V \
-          & = integral_C lambda(va(r)') integral.triple_V delta^3(va(r) - va(r)') dif V dif s' \
-          & = integral_(C inter V) lambda(va(r)') dif s = Q_lambda. qedhere
+    Q_rho & = integral.triple_V integral_C lambda(va(r)') delta^3(va(r) - va(r)') dif l' dif V \
+          & = integral_C lambda(va(r)') integral.triple_V delta^3(va(r) - va(r)') dif V dif l' \
+          & = integral_(C inter V) lambda(va(r)') dif l = Q_lambda. qedhere
   $
 ]
 In many hypothetical discussions, it is of greater simplicity to consider charges concentrated at singular points, known as _point charges_. The charge density of $n$ point charges $q_1,...,q_n$ at $va(r)_1,...,va(r)_n$ respectively is then given by

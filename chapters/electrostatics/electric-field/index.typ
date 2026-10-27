@@ -19,7 +19,7 @@ There exists a generalization of @thm:coulombs-law which does not depend on the 
   $ <eq:electric-field>
   known as the _electric field_. For a surface or line charge distribution, this is
   $
-    va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral.double (sigma(va(r)') dif S') / norm(va(r) - va(r)')^3 (va(r) - va(r)'),\ va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral (lambda(va(r)') dif s') / norm(va(r) - va(r)')^3 (va(r) - va(r)').
+    va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral.double (sigma(va(r)') dif S') / norm(va(r) - va(r)')^3 (va(r) - va(r)'),\ va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral (lambda(va(r)') dif l') / norm(va(r) - va(r)')^3 (va(r) - va(r)').
   $ <eq:electric-field-surface-line>
 ]
 #remark[
@@ -31,9 +31,9 @@ There exists a generalization of @thm:coulombs-law which does not depend on the 
   $
   and similarly for the case of line charge distributions,
   $
-    1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') &= 1 / (4 uppi epsilon_0) integral.triple [integral lambda(va(r)'') delta^3(va(r)'' - va(r)') dif s''](dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') \
-    &= 1 / (4 uppi epsilon_0) integral lambda(va(r)'') [integral.triple delta^3(va(r)'' - va(r)') (va(r) - va(r)') / norm(va(r) - va(r)')^3 dif V'] dif s'' \
-    &= 1 / (4 uppi epsilon_0) integral lambda(va(r)'') (va(r) - va(r)'') / norm(va(r) - va(r)'')^3 dif s''.
+    1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') &= 1 / (4 uppi epsilon_0) integral.triple [integral lambda(va(r)'') delta^3(va(r)'' - va(r)') dif l''](dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') \
+    &= 1 / (4 uppi epsilon_0) integral lambda(va(r)'') [integral.triple delta^3(va(r)'' - va(r)') (va(r) - va(r)') / norm(va(r) - va(r)')^3 dif V'] dif l'' \
+    &= 1 / (4 uppi epsilon_0) integral lambda(va(r)'') (va(r) - va(r)'') / norm(va(r) - va(r)'')^3 dif l''.
   $
 ]
 Then in terms of electric fields, Coulomb's Law states
