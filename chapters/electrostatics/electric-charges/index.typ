@@ -15,19 +15,18 @@ $
   Q = integral.double_S sigma(va(r)) dif S.
 $
 It is possible to derive an expression for the volume charge density for a given surface charge density. For this we write
-#etarget(<eq:surface-charge-density-as-volume>)[$
-  rho(va(r)) = integral.double_S sigma(va(r)') delta^3(va(r) - va(r)') dif S', #tag[#math-markup(link-wrap: true)[(#sym.ast.op)]]
-$]
+$
+  rho(va(r)) = integral.double_S sigma(va(r)') delta^3(va(r) - va(r)') dif S', //  #tag[#math-markup(link-wrap: true)[(#sym.ast.op)]]
+$ <eq:surface-charge-density-as-volume>
 which can be interpreted, by virtue of some generalized heuristic "filtering property," to yield a product between a $sigma$ value and some one-dimensional variant of the Dirac delta.
-#let surf-vol = math-markup(link-wrap: true)[#eref(<eq:surface-charge-density-as-volume>)[(#sym.ast.op)]]
-#proof(collapsed: true)[of #surf-vol][
-  The essence of our methodology here is to prove that the hypothesized relationship can be used to derive the equivalence of the expressions of the enclosed charge $Q$.
+#proof(collapsed: true)[of @eq:surface-charge-density-as-volume][
+  The essence of our methodology here is to prove that the hypothesized relationship can be used to derive the equivalence of the expressions of the enclosed charge $Q$ within any arbitrary volume $V$.
 
-  Defining $rho$ as in #surf-vol,
+  Defining $rho$ as in @eq:surface-charge-density-as-volume,
   $
-    Q_rho & = integral.triple_(RR^3) integral.double_S sigma(va(r)') delta^3(va(r) - va(r)') dif S' dif V \
-          & = integral.double_S sigma(va(r)') integral.triple_(RR^3)delta^3(va(r) - va(r)') dif V dif S' \
-          & = integral.double_S sigma(va(r)') dif S' = Q_sigma. qedhere
+    Q_rho & = integral.triple_V integral.double_S sigma(va(r)') delta^3(va(r) - va(r)') dif S' dif V \
+          & = integral.double_S sigma(va(r)') integral.triple_V delta^3(va(r) - va(r)') dif V dif S' \
+          & = integral.double_(S inter V) sigma(va(r)') dif S' = Q_sigma. qedhere
   $
 ]
 When a charge is distributed in a one dimensional filament, the notion of a _linear charge density_ $lambda(va(r))$ exists, in which case
@@ -37,13 +36,13 @@ $
 Similar to the above, we have
 $
   rho(va(r)) = integral_C lambda(va(r)') delta^3(va(r) - va(r)') dif s.
-$
+$ <eq:line-charge-density-as-volume>
 #proof(collapsed: true)[of the line-volume charge density relationship][
-  Let $Q_rho$ be the enclosed charge as calculated in @eq:enclosed-volume-charge and let $Q_lambda$ be the enclosed charge as calculated by the line integral. Then
+  Let $Q_rho$ be the enclosed charge as calculated in @eq:enclosed-volume-charge and let $Q_lambda$ be the enclosed charge as calculated by the line integral. Then for any volume $V$
   $
-    Q_rho & = integral.triple_(RR^3) integral_C lambda(va(r)') delta^3(va(r) - va(r)') dif s' dif V \
-          & = integral_C lambda(va(r)') integral.triple_(RR^3) delta^3(va(r) - va(r)') dif V dif s' \
-          & = integral_C lambda(va(r)') dif s = Q_lambda. qedhere
+    Q_rho & = integral.triple_V integral_C lambda(va(r)') delta^3(va(r) - va(r)') dif s' dif V \
+          & = integral_C lambda(va(r)') integral.triple_V delta^3(va(r) - va(r)') dif V dif s' \
+          & = integral_(C inter V) lambda(va(r)') dif s = Q_lambda. qedhere
   $
 ]
 In many hypothetical discussions, it is of greater simplicity to consider charges concentrated at singular points, known as _point charges_. The charge density of $n$ point charges $q_1,...,q_n$ at $va(r)_1,...,va(r)_n$ respectively is then given by

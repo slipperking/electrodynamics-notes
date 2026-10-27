@@ -41,3 +41,6 @@ The first usage is readily demonstrated by the proof above. We hence provide the
     Q_"enc" / epsilon_0 = (2L uppi min{s, R}^2 rho) / epsilon_0 = E(va(r)) 4 uppi s L ==> va(E) (va(r)) = (min{s, R}^2 rho vu(s)) / (2 epsilon_0 s). qedhere
   $
 ]
+#example[
+  An infinite plane with surface charge distribution
+]

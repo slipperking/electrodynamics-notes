@@ -15,14 +15,28 @@ There exists a generalization of @thm:coulombs-law which does not depend on the 
 #definition[Electric Field][
   For a time-static source charge density distribution $rho(va(r))$, define
   $
-    va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral.triple (dif Q') / norm(va(r) - va(r)')^3 (va(r) - va(r)') = 1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)'),
+    va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral (dif Q') / norm(va(r) - va(r)')^3 (va(r) - va(r)') = 1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)'),
   $ <eq:electric-field>
   known as the _electric field_. For a surface or line charge distribution, this is
   $
     va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral.double (sigma(va(r)') dif S') / norm(va(r) - va(r)')^3 (va(r) - va(r)'),\ va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral (lambda(va(r)') dif s') / norm(va(r) - va(r)')^3 (va(r) - va(r)').
   $ <eq:electric-field-surface-line>
 ]
-Then Coulomb's Law states
+#remark[
+  By virtue of the equations @eq:surface-charge-density-as-volume and @eq:line-charge-density-as-volume, the specific representations in @eq:electric-field-surface-line to those of @eq:electric-field. In particular,
+  $
+    1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') &= 1 / (4 uppi epsilon_0) integral.triple [integral.double sigma(va(r)'') delta^3(va(r)'' - va(r)') dif S''](dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') \
+    &= 1 / (4 uppi epsilon_0) integral.double sigma(va(r)'') [integral.triple delta^3(va(r)'' - va(r)') (va(r) - va(r)') / norm(va(r) - va(r)')^3 dif V'] dif S'' \
+    &= 1 / (4 uppi epsilon_0) integral.double sigma(va(r)'') (va(r) - va(r)'') / norm(va(r) - va(r)'')^3 dif S'',
+  $
+  and similarly for the case of line charge distributions,
+  $
+    1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') &= 1 / (4 uppi epsilon_0) integral.triple [integral lambda(va(r)'') delta^3(va(r)'' - va(r)') dif s''](dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') \
+    &= 1 / (4 uppi epsilon_0) integral lambda(va(r)'') [integral.triple delta^3(va(r)'' - va(r)') (va(r) - va(r)') / norm(va(r) - va(r)')^3 dif V'] dif s'' \
+    &= 1 / (4 uppi epsilon_0) integral lambda(va(r)'') (va(r) - va(r)'') / norm(va(r) - va(r)'')^3 dif s''.
+  $
+]
+Then in terms of electric fields, Coulomb's Law states
 $
   va(F) = q va(E).
 $ <eq:coulombs-law-electric-field>
