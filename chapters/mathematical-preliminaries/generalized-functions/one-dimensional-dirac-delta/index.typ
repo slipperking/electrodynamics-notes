@@ -13,7 +13,7 @@ The above corresponds to the understanding thereof as the limit of a sequence of
 $
   delta(x) & = lim_(n -> oo) n / sqrt(uppi) ee^(-n^2 x^2), \
   delta(x) & = lim_(epsilon -> 0^+) epsilon / (uppi(x^2 + epsilon^2)),
-$
+$ <eq:delta-basic-identities>
 (where we note that the given limits are evaluated _distributionally_.) The proof of the the two given representations is the involved process of proving the filtering property.
 #proof(collapsed: true)[of the Gaussian representation][
   For any such function,

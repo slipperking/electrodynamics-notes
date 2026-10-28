@@ -27,6 +27,18 @@ $
 $ <eq:gradient-of-electric-potential>
 by the arbitrariness of $va(a),va(b)$, for indeed if some $va(r)$ satisfied $va(E)(va(r)) + grad V (va(r))!= 0$, then letting $ vu(u) = (va(E)(va(r)) + grad V(va(r))) / norm(va(E)(va(r)) + grad V(va(r))), $ the integral from $va(r)$ to $va(r) + vu(u) epsilon$ of $(va(E) + grad V) dot dif va(l)'$ would be asymptotically equal to $norm(va(E)(va(r)) + grad V(va(r))) epsilon != 0$ as $epsilon -> 0$, thereby insinuating a contradiction.
 
+Using the identity $laplacian = op(bold("div")) op(bold("grad"))$, Gauss' Law @thm:gauss-law entails that
+#theorem[Poisson's equation][
+  $
+    laplacian V = -div va(E) = -rho / epsilon_0,
+  $
+]
+and in regions free of charge,
+$
+  laplacian V = 0,
+$
+i.e. $V$ is harmonic.
+
 At times, it becomes incumbent to resolve the fundamental ambiguity---the reference point wherefrom the integral in @eq:electric-potential starts. The electric potential itself comprises no real physical significance, so for any given point a relocation of the starting point may be performed, as with the definition of potential energies in mechanics. There is a correspondence between its behavior and the characterization of altitude; wherein the reference point is commonly taken to be sea level. The only pertaining quantity wherein we are interested is the altitude difference between two points.
 
 However, it does transpire that there is a heuristically "natural" spot to define our reference point, and that is the point which is infinitely far from charge---the motivation hereof presupposes that $V(va(r)_0) = 0$, where $va(r)_0$ is the chosen reference point. That is, we are integrating from the $oo$ point itself:
@@ -52,4 +64,21 @@ In a great number of previous examples a notion of an unbounded, infinite, and e
     V(va(r)) = lim_(va(r)' -> S \
     va(r)' in jexterior S) V(va(r)') = 1 / (4 uppi epsilon_0) Q / R. qedhere
   $
+]
+Previously we have defined $V$ in terms of $va(E)$. However the vector expression of $va(E)$ itself tends to transpire as cumbersome to compute. It will transpire that---as shall we aver---that the computation of $va(E)$ is generally much simpler by presupposing a suitable expression for $V$ and the subsequent application of the gradient.
+
+For a given volume charge density distribution $rho(va(r))$,
+$
+  V(va(r)) &= -integral_oo^va(r) integral.triple (rho(va(r)') dif V') / norm(va(r)'' - va(r)')^3 (va(r)'' - va(r)') dot dif va(l)'' = - integral.triple rho(va(r)') integral_oo^va(r) (va(r)'' - va(r)') / norm(va(r)'' - va(r)')^3 dot dif va(l)'' dif V' \
+  &= integral.triple rho(va(r)') integral_oo^va(r) grad 1 / norm(va(r)'' - va(r)') dot dif va(l)'' dif V'
+$
+whereby the Gradient Theorem (@thm:gradient) implies
+#theorem[
+  $
+    V(va(r)) = integral.triple rho(va(r)') evaluated(1 / norm(va(r)'' - va(r)'))_oo^va(r) dif V' = integral.triple rho(va(r)') / norm(va(r) - va(r)') dif V'.
+  $ <thm:electric-potential-integral>
+]
+It is necessary to observe that this representation implicitly assumes that the reference point is at $oo$, as it was assumed in our derivation. Thus, @thm:electric-potential-integral may prove to be inapplicable in the hypothetical situations of an infinite charge density distribution; the divergence of the integral would necessitate a revision of the reference point.
+#example[
+
 ]
