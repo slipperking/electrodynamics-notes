@@ -1,6 +1,6 @@
-# Notes on Complex Analysis
+# Notes on Electrodynamics
 
-This repository contains a Typst version of typesetted notes on complex analysis by
+This repository contains a Typst version of typeset notes on electrodynamics by
 Slipper King. The project relies on the experimental `html` and `bundle` export formats of the Typst compiler.
 
 ## Build
@@ -9,7 +9,7 @@ The full site build has two steps:
 
 ```powershell
 python scripts/build.py
-.\typst.exe compile --features bundle,html --format bundle --package-path packages main.typ dist
+.\typst.exe compile --features bundle,html --format bundle --package-path packages --font-path src/assets/fonts main.typ dist
 python build-search-index.py
 ```
 
@@ -21,13 +21,29 @@ Typst data for regions in visuals for Mergelyan's Theorem. The bundled `typst.ex
 The `--package-path packages` argument points Typst at the repository's local
 package directory. Currently, all custom packages have been incorporated or refactored in a way such that this is not currently necessary.
 
+### PDF typography
+
+PDF output uses the website's Lato and Lete Sans Math typography by default. The
+standard build command includes the repository font path so those same local font
+sources are available to Typst. To restore Typst's traditional book typography,
+select the `book` text-font mode:
+
+```powershell
+.\typst.exe compile --features bundle,html --package-path packages --font-path src/assets/fonts --input text-font=book --input legacy-label-routing=true main.typ notes-book-fonts.pdf
+```
+
+The accepted values are `web` (the default) and `book`. The local Typst-compatible
+font files in `src/assets/fonts/typst/` are derived from the same WOFF2 files used
+by the website, so the two modes share the same font sources.
+
 ## Project Layout
 
 - `main.typ` is the entry point, importing `notes()` from
   `src/components/web.typ`.
 - `chapters/` contains the mathematical content, organized as routed sections
   with various helpers such as `docs-chapter`, `docs-subchapter`, and `docs-appendix`.
-- `src/source.typ` stores document metadata, cover content, and source links.
+- `src/source.typ` stores document metadata and source links.
+- `chapters/cover.typ` owns the web and PDF cover designs, including the dedication.
 - `src/components/` is the custom Typst framework for this project. These are generalizations of general functionality and can be directly reused for other projects, containing math helpers, graphics helpers, web helpers, and custom integrations.
 - `src/components/ctheorems/` is the local theorem environment implementation used instead of the Typst Universe package for modified functionality.
 - `src/assets/` contains CSS, JavaScript, and icons that are directly embedded into the Typst bundle with `asset(...)`.

@@ -6,7 +6,6 @@
 #let authors = source.authors
 #let date = source.date
 #let source-url = source.source-url
-#let abstract = source.abstract
 
 #let render-mode = state("render-mode", "web")
 #let html-only = sys.inputs.at("html-only", default: "false") == "true"
@@ -309,6 +308,8 @@
         html.elem("span", attrs: (class: "todo-callout-description"), description)
       })
     ]
+  } else if render-mode.get() == "pdf" and not block {
+    highlight[#strong[TODO]]
   }
 }
 
@@ -448,12 +449,12 @@
   })
 })
 
-#let _cover-content(current) = source.web-cover(
+#let _cover-content(current, cover-content) = cover-content(
   path => _href-from(current.path, path),
   show-pdf: not html-only,
 )
 
-#let _pdf-cover() = source.pdf-cover(outline-target: selector(heading).within(pdf-scope-label))
+#let _pdf-cover(cover-content) = cover-content(outline-target: selector(heading).within(pdf-scope-label))
 
 #let _pdf-document(path: none) = context {
   let body = [
@@ -657,9 +658,12 @@
   heading-format: (number, title) => if number != none { [#number #title] } else { [#title] },
   description: none,
   cover: false,
+  web-cover: none,
+  pdf-cover: none,
   heading: true,
   children: none,
   label: auto,
+  break-after: true,
   body,
 ) = {
   assert(type(heading-format) == function, message: "heading-format must be a function")
@@ -674,6 +678,10 @@
       route-context.folders + (segment,)
     }
     let route = _route-from-folders(route-context.prefix + folders)
+    if cover {
+      assert(type(web-cover) == function, message: "docs cover needs a web-cover function")
+      assert(type(pdf-cover) == function, message: "docs cover needs a pdf-cover function")
+    }
     let page = _page-info(
       title: title,
       route: route,
@@ -689,7 +697,7 @@
       let page-body = if cover {
         [
           #metadata((record: "nav", page: page, has-heading: false)) <page-nav-meta>
-          #_cover-content(page)
+          #_cover-content(page, web-cover)
         ]
       } else if heading {
         [
@@ -705,7 +713,7 @@
       }
       _html-page(page, page-body)
     } else if cover {
-      _pdf-cover()
+      _pdf-cover(pdf-cover)
     } else {
       if heading {
         _page-heading(page)
@@ -717,7 +725,7 @@
     if children != none {
       route-folders(folders, children)
     }
-    if render-mode.get() == "pdf" and level == 1 {
+    if render-mode.get() == "pdf" and level == 1 and break-after {
       std.pagebreak()
     }
   }

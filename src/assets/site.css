@@ -178,7 +178,7 @@
   --bg: #fafafa;
   --paper: #fff;
   --ink: #1f2328;
-  --muted: #687076;
+  --muted: var(--ink);
   --line: #d8dee4;
   --line-strong: #afb8c1;
   --accent: #0b7285;
@@ -200,7 +200,7 @@
   --bg: #10130f;
   --paper: #161a15;
   --ink: #ecefe9;
-  --muted: #a8afa4;
+  --muted: var(--ink);
   --line: #343b33;
   --line-strong: #4b544a;
   --accent: #80cbc4;
@@ -589,21 +589,33 @@ p {
   max-width: 12ch;
   border: 0;
   padding: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
   font-size: clamp(3rem, 9vw, 5.4rem);
 }
 
-.cover .abstract {
-  max-width: 42rem;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  color: var(--muted);
+.cover-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  align-items: baseline;
+}
+
+.cover-meta p {
+  margin: 0;
+}
+
+.cover .dedication {
+  max-width: 38rem;
+  margin: clamp(2.5rem, 8vh, 5.5rem) 0 1.5rem;
+  color: var(--ink);
+  font-style: italic;
+  text-align: left;
 }
 
 .cover .recommendation {
   font-size: 0.85rem;
   max-width: 42rem;
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   color: var(--gold);
 }

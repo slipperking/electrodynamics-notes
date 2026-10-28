@@ -41,7 +41,7 @@ jobs:
         run: |
           Remove-Item -Recurse -Force web/dist -ErrorAction SilentlyContinue
           Remove-Item -Recurse -Force dist -ErrorAction SilentlyContinue
-          .\typst.exe compile --features bundle,html --format bundle --package-path packages main.typ dist
+          .\typst.exe compile --features bundle,html --format bundle --package-path packages --font-path src/assets/fonts main.typ dist
 
       - name: Build Search Index
         run: python build-search-index.py

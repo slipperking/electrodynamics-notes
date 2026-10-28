@@ -197,11 +197,6 @@ The first usage is readily demonstrated by the proof above. We hence provide the
             thickness: 0.62pt,
             dash: "dotted",
           )
-          let plane-gradient = gradient.linear(
-            color.transparentize(black, 98%),
-            color.transparentize(black, 86%),
-            angle: 45deg,
-          )
           let gaussian-stroke = (
             paint: black,
             thickness: 0.62pt,
@@ -247,7 +242,7 @@ The first usage is readily demonstrated by the proof above. We hence provide the
               ..plane,
               close: true,
               name: "charged-plane",
-              fill: plane-gradient,
+              fill: black.transparentize(85%),
               stroke: plane-stroke,
             )
             line(plane.at(3), plane.at(2), name: "plane-back-edge", stroke: none)

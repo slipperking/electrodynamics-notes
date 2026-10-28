@@ -24,9 +24,11 @@
     ],
     "tinymist.typstExtraArgs": [
         "--features",
-        "html,bundle",
+        "bundle,html",
         "--package-path",
         "packages",
+        "--font-path",
+        "src/assets/fonts",
         "--input",
         "debug-build=true",
     ]

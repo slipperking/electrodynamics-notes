@@ -10,7 +10,7 @@ Use the repository-local `./typst.exe`; this publishing infrastructure depends o
 For ordinary subject-content, prose, equation, and local layout changes, prefer the fast HTML-only debug bundle:
 
 ```powershell
-./typst.exe compile --features bundle,html --format bundle --package-path packages --input html-only=true --input debug-build=true main.typ dist
+./typst.exe compile --features bundle,html --format bundle --package-path packages --font-path src/assets/fonts --input html-only=true --input debug-build=true main.typ dist
 ```
 
 This skips canvas-generated drawings, the theorem and figure lists, and the downloadable PDF. A canvas needed for a focused check can opt back in with `debug-show: true`.
@@ -20,7 +20,7 @@ Treat `debug-show` as a user-controlled source preference. Preserve every existi
 Use the non-debug or combined-output build when changing publishing infrastructure, cross-output routing, references, generated pages/assets, figures, or PDF behavior, or when the user requests production verification:
 
 ```powershell
-./typst.exe compile --features bundle,html --format bundle --package-path packages main.typ dist
+./typst.exe compile --features bundle,html --format bundle --package-path packages --font-path src/assets/fonts main.typ dist
 ```
 
 Run preprocessing first only when generated visual data is affected:
@@ -40,5 +40,5 @@ For CetZ diagrams, follow the repository's established annotation convention: wr
 For a PDF-only check, use the local executable with the legacy routing input:
 
 ```powershell
-./typst.exe compile --features bundle,html --package-path packages --input legacy-label-routing=true main.typ
+./typst.exe compile --features bundle,html --package-path packages --font-path src/assets/fonts --input legacy-label-routing=true main.typ
 ```

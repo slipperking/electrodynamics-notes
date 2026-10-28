@@ -6,6 +6,114 @@
 #import "../source.typ": *
 
 #let equation-revoke = <typst-equation-revoke>
+#let text-font-mode = sys.inputs.at("text-font", default: "web")
+#assert(
+  text-font-mode in ("book", "web"),
+  message: "text-font must be either 'book' or 'web'",
+)
+
+#let _pdf-running-header() = context {
+  let page-number = counter(page).get().first()
+  let chapters = query(heading.where(level: 1)).filter(
+    it => it.location().page() <= page-number,
+  )
+
+  if chapters.len() > 0 {
+    let chapter = chapters.last()
+    let sections = query(heading.where(level: 2)).filter(
+      it => (
+        it.location().page() >= chapter.location().page()
+          and it.location().page() <= page-number
+      ),
+    )
+    let selected = if chapter.location().page() == page-number {
+      chapter
+    } else if calc.odd(page-number) and sections.len() > 0 {
+      sections.last()
+    } else {
+      chapter
+    }
+    let number = if selected.numbering == none {
+      none
+    } else {
+      numbering(selected.numbering, ..counter(heading).at(selected.location()))
+    }
+    let is-appendix = (
+      type(selected.numbering) == str
+        and selected.numbering.starts-with("A")
+    )
+    let heading-line = [
+      #if number != none {
+        if selected.level == 1 {
+          if is-appendix [Appendix #number] else [Chapter #number]
+        } else {
+          [#sym.section#number]
+        }
+        box(width: 1.2em, align(center)[·])
+      }
+      #smallcaps(selected.body)
+    ]
+
+    block(width: 100%)[
+      #align(if calc.odd(page-number) { right } else { left })[
+        #text(size: 0.78em)[#heading-line]
+      ]
+      #v(-0.18em)
+      #line(length: 100%, stroke: (paint: black, thickness: 0.45pt))
+    ]
+  }
+}
+
+#let _pdf-heading(it) = context {
+  let number = if it.numbering == none {
+    none
+  } else {
+    counter(heading).display(it.numbering)
+  }
+  let is-appendix = (
+    type(it.numbering) == str
+      and it.numbering.starts-with("A")
+  )
+
+  let rendered = if it.level == 1 {
+    let eyebrow = if number == none {
+      none
+    } else if is-appendix {
+      [Appendix #number]
+    } else {
+      [Chapter #number]
+    }
+    block(breakable: false)[
+      #v(0.78in)
+      #text(size: 1.8em, weight: "bold")[
+        #if eyebrow != none {
+          eyebrow
+          linebreak()
+        }
+        #it.body
+      ]
+      #v(0.42in)
+    ]
+  } else if it.level == 2 {
+    block(breakable: false)[
+      #v(1.5em)
+      #text(size: 1.4em, weight: "bold")[
+        #if number != none [#sym.section#number#h(0.55em)]#it.body
+      ]
+      #v(0.8em)
+    ]
+  } else {
+    block(breakable: false)[
+      #v(1em)
+      #text(size: 1.2em, weight: "bold")[
+        #if number != none [#sym.section#number#h(0.55em)]#it.body
+      ]
+      #v(0.5em)
+    ]
+  }
+
+  [#rendered#heading-reset-marker(it.level)]
+}
 
 #let document-styles(doc, mode: "pdf", todo: none) = {
   show: layout-limiter.with(max-iterations: 15)
@@ -31,7 +139,11 @@
 
   set par(justify: true)
 
-  show heading: it => [#it#heading-reset-marker(it.level)]
+  show heading: it => if mode == "pdf" {
+    _pdf-heading(it)
+  } else {
+    [#it#heading-reset-marker(it.level)]
+  }
   set figure(numbering: (n, ..) => {
     numbering("1.1", counter(heading).get().first(), n)
   })
@@ -43,7 +155,21 @@
   }
 
   if mode == "pdf" {
-    set page(numbering: "1", margin: 1.75in)
+    set text(font: "Lato") if text-font-mode == "web"
+    show math.equation: set text(font: "Lete Sans Math") if text-font-mode == "web"
+    set page(
+      paper: "a4",
+      numbering: "1",
+      number-align: center,
+      header: _pdf-running-header(),
+      margin: (
+        top: 2.5cm,
+        bottom: 2.5cm,
+        inside: 3cm,
+        outside: 2.5cm,
+      ),
+    )
+    set par(justify: true, leading: 0.65em, first-line-indent: 1.5em)
 
     set figure(placement: alignment.top)
     show figure.caption: it => context [

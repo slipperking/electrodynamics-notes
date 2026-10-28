@@ -11,16 +11,12 @@
 #include "mathematical-preliminaries/index.typ"
 #include "electrostatics/index.typ"
 
-#context if render-mode.get() == "pdf" {
-  pagebreak()
-}
-
 #set heading(numbering: "A.1")
 #counter(heading).update(0)
 #route-prefix(("appendices",))[
   #include "appendices/index.typ"
 
-  #docs-backmatter(title: [Bibliography], route: "bibliography")[
+  #docs-backmatter(title: [Bibliography], route: "bibliography", break-after: false)[
     #set bibliography(title: auto)
     #context bibliography("/references.bib", full: true, group: state("render-mode").get())
   ]

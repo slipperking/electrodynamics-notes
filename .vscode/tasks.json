@@ -10,6 +10,7 @@
         "--features", "bundle,html",
         "--format", "bundle",
         "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
         "--input", "debug-build=true",
         "main.typ", "dist"
       ],
@@ -31,6 +32,7 @@
         "watch",
         "--features", "bundle,html",
         "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
         "--input", "legacy-label-routing=true",
         "--input", "debug-build=true",
         "main.typ", "main.pdf"
@@ -54,6 +56,7 @@
         "--features", "bundle,html",
         "--format", "bundle",
         "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
         "--input", "html-only=true",
         "--input", "debug-build=true",
         "main.typ", "dist"
@@ -80,6 +83,7 @@
         "--features", "bundle,html",
         "--format", "bundle",
         "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
         "main.typ", "dist"
       ],
       "options": { "cwd": "${workspaceFolder}" },
@@ -100,6 +104,7 @@
         "watch",
         "--features", "bundle,html",
         "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
         "--input", "legacy-label-routing=true",
         "main.typ", "main.pdf"
       ],
@@ -122,8 +127,32 @@
         "--features", "bundle,html",
         "--format", "bundle",
         "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
         "--input", "html-only=true",
         "main.typ", "dist"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "WATCHER: PDF only (book fonts)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "watch",
+        "--features", "bundle,html",
+        "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
+        "--input", "legacy-label-routing=true",
+        "--input", "text-font=book",
+        "main.typ", "notes-book-fonts.pdf"
       ],
       "options": { "cwd": "${workspaceFolder}" },
       "isBackground": true,
@@ -144,6 +173,7 @@
         "--features", "bundle,html",
         "--format", "bundle",
         "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
         "--input", "debug-build=true",
         "main.typ", "dist"
       ],
@@ -164,6 +194,7 @@
         "compile",
         "--features", "bundle,html",
         "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
         "--input", "legacy-label-routing=true",
         "--input", "debug-build=true",
         "main.typ", "main.pdf"
@@ -186,6 +217,7 @@
         "--features", "bundle,html",
         "--format", "bundle",
         "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
         "--input", "html-only=true",
         "--input", "debug-build=true",
         "main.typ", "dist"
@@ -208,6 +240,7 @@
         "--features", "bundle,html",
         "--format", "bundle",
         "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
         "main.typ", "dist"
       ],
       "options": { "cwd": "${workspaceFolder}" },
@@ -227,6 +260,7 @@
         "compile",
         "--features", "bundle,html",
         "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
         "--input", "legacy-label-routing=true",
         "main.typ", "main.pdf"
       ],
@@ -248,8 +282,31 @@
         "--features", "bundle,html",
         "--format", "bundle",
         "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
         "--input", "html-only=true",
         "main.typ", "dist"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "COMPILE: PDF only (book fonts)",
+      "type": "process",
+      "command": "${workspaceFolder}/typst.exe",
+      "args": [
+        "compile",
+        "--features", "bundle,html",
+        "--package-path", "packages",
+        "--font-path", "src/assets/fonts",
+        "--input", "legacy-label-routing=true",
+        "--input", "text-font=book",
+        "main.typ", "notes-book-fonts.pdf"
       ],
       "options": { "cwd": "${workspaceFolder}" },
       "problemMatcher": [],
