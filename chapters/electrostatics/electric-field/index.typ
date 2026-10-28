@@ -228,7 +228,8 @@ which once again is the electric field due to a single point charge $sigma uppi 
   $ dif u = 2z R sin theta dtheta, \ z - R cos theta = z - (z^2 + R^2 - u) / (2 z) = (z^2 - R^2 + u) / (2 z), $
   whence
   $
-    va(E)(va(z)) & = (sigma vu(z) R) / (8 z^2 epsilon_0) integral_((z-R)^2)^((z+R)^2) (z^2 - R^2 + u) / u^(3/2) dif u = (sigma vu(z) R) / (8 z^2 epsilon_0) integral_((z-R)^2)^((z+R)^2) [(z^2 - R^2)u^(-3/2) + u^(-1/2)] dif u \
+    va(E)(va(z)) & = (sigma vu(z) R) / (8 z^2 epsilon_0) integral_((z-R)^2)^((z+R)^2) (z^2 - R^2 + u) / u^(3/2) dif u \
+    &= (sigma vu(z) R) / (8 z^2 epsilon_0) integral_((z-R)^2)^((z+R)^2) [(z^2 - R^2)u^(-3/2) + u^(-1/2)] dif u \
     &= (sigma vu(z) R) / (4 z^2 epsilon_0) evaluated([(u - z^2 + R^2) / sqrt(u)])_((z-R)^2)^((z+R)^2) \
     &= (sigma vu(z) R) / (4 z^2 epsilon_0) [((z+R)^2 - z^2 + R^2) / abs(z + R) - ((z - R)^2 - z^2 + R^2) / abs(z - R)] \
     & = (sigma vu(z) R) / (2 z^2 epsilon_0) cases((z R + R^2) / (z + R) - (R^2 - z R) / (R - z)& quad "if" z < R, (z R + R^2) / (z + R) - (R^2 - z R) / (z - R)& quad "if" z > R) \

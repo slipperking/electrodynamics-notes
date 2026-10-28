@@ -172,7 +172,7 @@ The first usage is readily demonstrated by the proof above. We hence provide the
 #solution[to @ex:gaussian-surface-cylinder][
   Denote by $S$ the coaxial cylinder of length $2L$ centered at $va(x) = op("proj")_vu(x) va(r)$ and disposed with axis parallel to the $x$-axis to be the Gaussian surface. By Gauss' Law,
   $
-    Q_"enc" / epsilon_0 = integral.surf_S va(E)(va(r)') dot dif va(S)' = integral.double_"lateral" va(E)(va(r)') dot dif va(S)' + integral.double_"base1" va(E)(va(r)') dot dif va(S)' + integral.double_"base2" va(E)(va(r)') dot dif va(S)'.
+    Q_"enc" / epsilon_0 = integral.surf_S va(E)(va(r)') dot dif va(S)' = (integral.double_"lateral" + integral.double_"base1" + integral.double_"base2") va(E)(va(r)') dot dif va(S)'.
   $
   The symmetry of the cylinder entails that the electric field at any point in space possesses a vanishing $x$-component, whence the integrals over the bases vanish from the observation that $va(E)(va(r)') perp dif va(S)'$ thereon. There remains, therefore, only the contribution of the lateral surface; wherein the outward normal is parallel to the electric field, once again by symmetry, giving that
   $
@@ -334,7 +334,7 @@ The first usage is readily demonstrated by the proof above. We hence provide the
 #solution[to @ex:gaussian-surface-pillbox][
   By virtue of symmetry, the electric field at $va(r)$ points in the $vu(z)$ direction (denote the respective component by $va(z) = z vu(z)$). Let $S$ be a "Gaussian pillbox," the colloquial term for a rectangular prism with two square faces of respective area $A$, parallel to the $x y$-plane equidistantly $abs(z)$ away therefrom, with four vertical faces whose normal vectors are orthogonal to the electric field thereat. Then
   $
-    Q_"enc" / epsilon_0 = integral.surf_S va(E)(va(r)') dot dif va(S)' = integral.double_(4 perp "faces") va(E)(va(r)') dot dif va(S)' + integral.double_(2 parallel "faces") va(E)(va(r)') dot dif va(S)' = 2 A E(va(r)).
+    Q_"enc" / epsilon_0 = integral.surf_S va(E)(va(r)') dot dif va(S)' = (integral.double_(4 perp "faces") + integral.double_(2 parallel "faces")) va(E)(va(r)') dot dif va(S)' = 2 A E(va(r)).
   $
   Geometrically, we have $op("area")[jinterior S inter #[$x y$-"plane"]] = A$, whence
   $
@@ -350,9 +350,7 @@ The first usage is readily demonstrated by the proof above. We hence provide the
 
   From observation that the planar normals point in the same direction, we aver that $va(r)_+^perp = lambda va(r)_-^perp$, whence @ex:gaussian-surface-pillbox gives
   $
-    va(E) & = sigma / (2 epsilon_0) ((va(r)_+^perp) / norm(va(r)_+^perp)+(va(r)_-^perp) / norm(va(r)_-^perp)) \
-          & = sigma / (2 epsilon_0) (sgn(lambda) (va(r)_-^perp) / norm(va(r)_-^perp) + (va(r)_-^perp) / norm(va(r)_-^perp)) \
-          & = (sigma Theta(lambda)) / epsilon_0 (va(r)_-^perp) / norm(va(r)_-^perp).
+    va(E) & = sigma / (2 epsilon_0) ((va(r)_+^perp) / norm(va(r)_+^perp)+(va(r)_-^perp) / norm(va(r)_-^perp)) = sigma / (2 epsilon_0) (sgn(lambda) (va(r)_-^perp) / norm(va(r)_-^perp) + (va(r)_-^perp) / norm(va(r)_-^perp)) = (sigma Theta(lambda)) / epsilon_0 (va(r)_-^perp) / norm(va(r)_-^perp).
   $
   Qualitatively, the electric field transpires to be independent of the precise value of $va(r)$. When it is not in the region between the two planes there is no electric field, whilst otherwise it is directed orthogonally away from both planes with a field strength $sigma / epsilon_0$.
 ]

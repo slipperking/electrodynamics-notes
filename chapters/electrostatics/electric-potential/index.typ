@@ -69,7 +69,8 @@ Previously we have defined $V$ in terms of $va(E)$. However the vector expressio
 
 For a given volume charge density distribution $rho(va(r))$,
 $
-  V(va(r)) &= -integral_oo^va(r) integral.triple (rho(va(r)') dif V') / norm(va(r)'' - va(r)')^3 (va(r)'' - va(r)') dot dif va(l)'' = - integral.triple rho(va(r)') integral_oo^va(r) (va(r)'' - va(r)') / norm(va(r)'' - va(r)')^3 dot dif va(l)'' dif V' \
+  V(va(r)) &= -integral_oo^va(r) integral.triple (rho(va(r)') dif V') / norm(va(r)'' - va(r)')^3 (va(r)'' - va(r)') dot dif va(l)'' \
+  &= - integral.triple rho(va(r)') integral_oo^va(r) (va(r)'' - va(r)') / norm(va(r)'' - va(r)')^3 dot dif va(l)'' dif V' \
   &= integral.triple rho(va(r)') integral_oo^va(r) grad 1 / norm(va(r)'' - va(r)') dot dif va(l)'' dif V'
 $
 whereby the Gradient Theorem (@thm:gradient) implies
