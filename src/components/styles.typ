@@ -22,8 +22,7 @@
     let chapter = chapters.last()
     let sections = query(heading.where(level: 2)).filter(
       it => (
-        it.location().page() >= chapter.location().page()
-          and it.location().page() <= page-number
+        it.location().page() >= chapter.location().page() and it.location().page() <= page-number
       ),
     )
     let selected = if chapter.location().page() == page-number {
@@ -39,8 +38,7 @@
       numbering(selected.numbering, ..counter(heading).at(selected.location()))
     }
     let is-appendix = (
-      type(selected.numbering) == str
-        and selected.numbering.starts-with("A")
+      type(selected.numbering) == str and selected.numbering.starts-with("A")
     )
     let heading-line = [
       #if number != none {
@@ -71,8 +69,7 @@
     counter(heading).display(it.numbering)
   }
   let is-appendix = (
-    type(it.numbering) == str
-      and it.numbering.starts-with("A")
+    type(it.numbering) == str and it.numbering.starts-with("A")
   )
 
   let rendered = if it.level == 1 {
@@ -169,7 +166,7 @@
         outside: 2.5cm,
       ),
     )
-    set par(justify: true, leading: 0.65em, first-line-indent: 1.5em)
+    set par(justify: true)
 
     set figure(placement: alignment.top)
     show figure.caption: it => context [

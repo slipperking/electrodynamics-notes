@@ -81,5 +81,6 @@ Moreover, the representation above is unique for all decompositions with potenti
   // $
   // Notice the nonnegativity of the integrand. Since the integral vanishes, we forcibly have $grad W_i = 0,$ or that $W_i$ is constant. Since $va(W) -> 0$, we have $W_i = 0$ everywhere, whence $va(W) = W_i vu(e)_i = 0$ everywhere.
   //
+
   Hence, the irrotational field $-grad phi_1=-grad phi_2$ of the decomposition is uniquely determined, as is the solenoidal field $curl va(A)_1 = curl va(A)_2$.
 ]
