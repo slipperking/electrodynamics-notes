@@ -24,42 +24,38 @@ In essence, the normal component of the electric field is discontinuous across a
 #figure-wrapper[
   #figure(
     {
-      set text(size: 0.75em)
+      set text(size: 1.125em)
       canvas(
+        length: 1.5cm,
         debug-show: true,
         {
           import cetz.draw: *
 
-          let stroke = (paint: black, thickness: 0.62pt)
+          let stroke = (paint: black, thickness: 0.93pt)
           let mesh-stroke = (
-            paint: black.transparentize(40%),
-            thickness: 0.42pt,
+            paint: black.transparentize(20%),
+            thickness: 0.45pt,
           )
           let auxiliary-stroke = (
             paint: black,
-            thickness: 0.62pt,
+            thickness: 0.93pt,
             dash: "dotted",
           )
           let hidden-stroke = (
             paint: black,
-            thickness: 0.62pt,
+            thickness: 0.93pt,
             dash: "dashed",
           )
-          let length-mark = (
-            start: (pos: 5%, symbol: "|", inset: 0%),
-            end: (pos: 5%, symbol: "|", inset: 0%),
-          )
-
           let x-min = -3.0
           let x-max = 3.0
           let z-min = -1.65
           let z-max = 1.65
-          let x-steps = 8
-          let z-steps = 6
+          let x-steps = 10
+          let z-steps = 8
           let curve-steps = 36
           let surface-height = z => 0.18 * z * z
 
-          ortho(x: 32deg, y: 22deg, cull-face: none, {
+          ortho(x: 32deg, y: 48deg, cull-face: none, {
             // Lightly filled mesh cells establish that S' is a surface rather
             // than the boundary of a solid body.
             for i in range(x-steps) {
@@ -122,8 +118,9 @@ In essence, the normal component of the electric field is discontinuous across a
             let loop-left = -0.72
             let loop-right = 0.72
             let half-height = 0.55
-            let dimension-left = loop-left - 0.38
-            let length-y = -half-height - 0.28
+            let dimension-left = loop-left - 0.2
+            let length-y = half-height + 0.2
+            let tick-half-length = 0.10
 
             line(
               (loop-left, half-height, 0),
@@ -139,6 +136,8 @@ In essence, the normal component of the electric field is discontinuous across a
               name: "loop-midline",
               stroke: stroke,
             )
+            anchor("midline-left", (loop-left, 0, 0))
+            anchor("midline-right", (loop-right, 0, 0))
             line((loop-left, 0, 0), (loop-left, -half-height, 0), stroke: hidden-stroke)
             line((loop-right, 0, 0), (loop-right, -half-height, 0), stroke: hidden-stroke)
             line(
@@ -154,7 +153,15 @@ In essence, the normal component of the electric field is discontinuous across a
               ">>",
               fill: black,
               stroke: none,
-              scale: 0.52,
+              scale: 1.12,
+            )
+            mark(
+              (loop-left, 0.38, 0),
+              (loop-left, 0.12, 0),
+              ">>",
+              fill: black,
+              stroke: none,
+              scale: 1.12,
             )
             mark(
               (-0.30, -half-height, 0),
@@ -162,34 +169,48 @@ In essence, the normal component of the electric field is discontinuous across a
               ">>",
               fill: black,
               stroke: none,
-              scale: 0.52,
+              scale: 1.12,
+            )
+            mark(
+              (loop-right, -0.38, 0),
+              (loop-right, -0.12, 0),
+              ">>",
+              fill: black,
+              stroke: none,
+              scale: 1.12,
             )
 
-            // Thickness epsilon and tangent length ell.
+            // Upper half-thickness epsilon/2 and tangent length ell.
             line(
               (loop-left, half-height, 0),
               (dimension-left, half-height, 0),
               stroke: auxiliary-stroke,
             )
             line(
-              (loop-left, -half-height, 0),
-              (dimension-left, -half-height, 0),
+              (loop-left, 0, 0),
+              (dimension-left, 0, 0),
               stroke: auxiliary-stroke,
             )
             line(
               (dimension-left, half-height, 0),
-              (dimension-left, -half-height, 0),
+              (dimension-left, 0, 0),
               name: "thickness",
               stroke: stroke,
-              mark: length-mark,
             )
+            for y in (0, half-height) {
+              line(
+                (dimension-left - tick-half-length, y, 0),
+                (dimension-left + tick-half-length, y, 0),
+                stroke: stroke,
+              )
+            }
             line(
-              (loop-left, -half-height, 0),
+              (loop-left, half-height, 0),
               (loop-left, length-y, 0),
               stroke: auxiliary-stroke,
             )
             line(
-              (loop-right, -half-height, 0),
+              (loop-right, half-height, 0),
               (loop-right, length-y, 0),
               stroke: auxiliary-stroke,
             )
@@ -198,41 +219,29 @@ In essence, the normal component of the electric field is discontinuous across a
               (loop-right, length-y, 0),
               name: "length",
               stroke: stroke,
-              mark: length-mark,
             )
+            for x in (loop-left, loop-right) {
+              line(
+                (x, length-y - tick-half-length, 0),
+                (x, length-y + tick-half-length, 0),
+                stroke: stroke,
+              )
+            }
 
-            // Tangential fields immediately above and below the surface.
-            line(
-              (2.30, 0.72, 0),
-              (1.30, 0.72, 0),
-              name: "field-above",
-              stroke: stroke,
-              mark: (end: ">>", fill: black),
-            )
-            line(
-              (2.55, -0.62, 0),
-              (1.55, -0.62, 0),
-              name: "field-below",
-              stroke: stroke,
-              mark: (end: ">>", fill: black),
-            )
-
-            anchor("sigma-anchor", (-2.35, surface-height(-0.75), -0.75))
             anchor("surface-label", (2.75, surface-height(1.35), 1.35))
-            anchor("loop-label", (loop-left, half-height, 0))
+            anchor("loop-label", (loop-right, half-height, 0))
           })
 
-          content("sigma-anchor", anchor: "east", padding: 2pt, math-rect($sigma$))
-          content("surface-label", anchor: "west", padding: 2pt, math-rect($S'$))
-          content("loop-label", anchor: "south-east", padding: 2pt, math-rect($C$))
-          content("thickness.50%", anchor: "east", padding: 2pt, math-rect($epsilon$))
-          content("length.50%", anchor: "north", padding: 2pt, math-rect($ell$))
-          content("field-above.start", anchor: "south", padding: 2pt, math-rect($va(E)_"above"^parallel$))
-          content("field-below.start", anchor: "north", padding: 2pt, math-rect($va(E)_"below"^parallel$))
+          circle("midline-left", radius: 2.85pt, fill: black, stroke: none)
+          circle("midline-right", radius: 2.85pt, fill: black, stroke: none)
+          content("surface-label", anchor: "west", padding: 3pt, math-rect($S'$))
+          content("loop-label", anchor: "north-east", padding: 3pt, math-rect($C$))
+          content("thickness.50%", anchor: "east", padding: 3pt, math-rect($epsilon / 2$))
+          content("length.50%", anchor: "south", padding: 3pt, math-rect($ell$))
         },
       )
     },
-    caption: [],
+    caption: [The rectangular loop with dimensions $epsilon times L$.],
   ) <fig:electric-boundary-condition-rectangular-loop>
 ]
 
