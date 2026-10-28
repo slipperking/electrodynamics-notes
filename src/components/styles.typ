@@ -13,12 +13,19 @@
 )
 
 #let _pdf-running-header() = context {
-  let page-number = counter(page).get().first()
+  let page-number = here().page()
+  let numbered-chapters = query(heading.where(level: 1)).filter(
+    it => it.numbering != none,
+  )
   let chapters = query(heading.where(level: 1)).filter(
     it => it.location().page() <= page-number,
   )
 
-  if chapters.len() > 0 {
+  let is-frontmatter = (
+    numbered-chapters.len() == 0 or page-number < numbered-chapters.first().location().page()
+  )
+
+  if not is-frontmatter and chapters.len() > 0 {
     let chapter = chapters.last()
     let sections = query(heading.where(level: 2)).filter(
       it => (

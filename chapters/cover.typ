@@ -27,15 +27,13 @@
 #let web-cover(href, show-pdf: true) = {
   html.elem("section", attrs: (class: "cover"), {
     html.elem("h1", source.title)
-    html.elem("div", attrs: (class: "cover-meta"), {
-      html.elem(
-        "p",
-        attrs: (class: "authors"),
-        [by #source.join-oxford-commas(source.authors.map(smallcaps))],
-      )
-      html.elem("p", attrs: (class: "date"), source.date)
-    })
-    html.elem("div", attrs: (class: "dedication"), dedication)
+    html.elem(
+      "p",
+      attrs: (class: "authors"),
+      [by #source.join-oxford-commas(source.authors.map(smallcaps))],
+    )
+    html.elem("p", attrs: (class: "date"), source.date)
+    html.elem("div", attrs: (class: "abstract"), dedication)
     html.elem("div", attrs: (class: "recommendation"), web-view-recommendation)
     if show-pdf {
       html.elem("p", attrs: (class: "download"), {
@@ -90,7 +88,36 @@
     background: none,
   )
   #set align(left)
-  #outline(title: [Contents], target: outline-target)
+  #show outline.entry.where(level: 1): set block(above: 0.65em)
+  #show outline.entry.where(level: 1): set text(weight: "bold")
+  #show outline.entry: it => context {
+    let item = it.element
+    let number = if item.numbering == none {
+      none
+    } else {
+      numbering(item.numbering, ..counter(heading).at(item.location()))
+    }
+    let appendix = (
+      type(item.numbering) == str and item.numbering.starts-with("A")
+    )
+    let prefix = if number == none {
+      none
+    } else if item.level == 1 {
+      if appendix {
+        [Appendix #number#h(0.35em)·]
+      } else {
+        [Chapter #number#h(0.35em)·]
+      }
+    } else {
+      [#sym.section#number#h(0.35em)·]
+    }
+
+    link(
+      item.location(),
+      it.indented(prefix, it.inner(), gap: 0.35em),
+    )
+  }
+  #outline(title: [Contents], target: outline-target, indent: 1.2em)
   #pagebreak()
 ]
 
