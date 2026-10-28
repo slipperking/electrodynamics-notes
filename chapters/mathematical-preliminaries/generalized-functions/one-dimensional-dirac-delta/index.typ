@@ -81,6 +81,7 @@ $
   $
     integral_(-oo)^oo delta(g(x))
   $
+  #todo()
 ]
 #proof(collapsed: true)[of the Fourier identity][
   Let $n > 0$ be arbitrary. Then

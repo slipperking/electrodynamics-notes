@@ -29,7 +29,7 @@ The first usage is readily demonstrated by the proof above. We hence provide the
     {
       set text(size: 0.75em)
       canvas(
-        debug-show: true,
+        // debug-show: true,
         {
           import cetz.draw: *
 
@@ -188,7 +188,7 @@ The first usage is readily demonstrated by the proof above. We hence provide the
     {
       set text(size: 0.75em)
       canvas(
-        debug-show: true,
+        // debug-show: true,
         {
           import cetz.draw: *
 
@@ -197,21 +197,16 @@ The first usage is readily demonstrated by the proof above. We hence provide the
             thickness: 0.62pt,
             dash: "dotted",
           )
-          let gaussian-stroke = (
-            paint: black,
-            thickness: 0.62pt,
-            dash: "dashed",
-          )
           let guide-stroke = (paint: black, thickness: 0.62pt)
           let auxiliary-stroke = (
             paint: black,
             thickness: 0.62pt,
             dash: "dotted",
           )
-          let section-stroke = (
+          let hidden-stroke = (
             paint: black,
             thickness: 0.62pt,
-            dash: "dotted",
+            dash: "dashed",
           )
           let vector-stroke = (paint: black, thickness: 0.62pt)
           let length-mark = (
@@ -254,28 +249,11 @@ The first usage is readily demonstrated by the proof above. We hence provide the
             anchor("bottom-center", (0, -half-height, 0))
             anchor("field-up-tip", (0, half-height + field-length, 0))
             anchor("field-down-tip", (0, -half-height - field-length, 0))
-            line(..middle, close: true, name: "middle-face", stroke: section-stroke)
-
-            line(..top, close: true, name: "top-face", stroke: gaussian-stroke)
-            line(..bottom, close: true, name: "bottom-face", stroke: gaussian-stroke)
             for i in range(4) {
-              line(top.at(i), bottom.at(i), stroke: gaussian-stroke)
+              anchor("middle-" + str(i), middle.at(i))
+              anchor("top-" + str(i), top.at(i))
+              anchor("bottom-" + str(i), bottom.at(i))
             }
-
-            line(
-              "top-center",
-              "field-up-tip",
-              name: "field-up",
-              stroke: vector-stroke,
-              mark: (end: ">>", fill: black),
-            )
-            line(
-              "bottom-center",
-              "field-down-tip",
-              name: "field-down",
-              stroke: vector-stroke,
-              mark: (end: ">>", fill: black),
-            )
 
             anchor(
               "dimension-middle",
@@ -307,12 +285,73 @@ The first usage is readily demonstrated by the proof above. We hence provide the
               mark: length-mark,
             )
           })
+          // Draw the pillbox after the 3D scene. This keeps the projected
+          // geometry while ensuring the plane cannot tint its visible faces.
+          line(
+            "bottom-0",
+            "bottom-1",
+            "bottom-2",
+            "bottom-3",
+            close: true,
+            name: "bottom-face",
+            stroke: hidden-stroke,
+          )
+          for i in range(4) {
+            line("middle-" + str(i), "bottom-" + str(i), stroke: hidden-stroke)
+          }
+          line(
+            "middle-0",
+            "middle-1",
+            "middle-2",
+            "middle-3",
+            close: true,
+            name: "middle-face",
+            stroke: guide-stroke,
+          )
+          for i in range(4) {
+            let next = calc.rem(i + 1, 4)
+            line(
+              "middle-" + str(i),
+              "middle-" + str(next),
+              "top-" + str(next),
+              "top-" + str(i),
+              close: true,
+              fill: rgb("#ffffff"),
+              stroke: guide-stroke,
+            )
+          }
+          line(
+            "top-0",
+            "top-1",
+            "top-2",
+            "top-3",
+            close: true,
+            name: "top-face",
+            fill: rgb("#ffffff"),
+            stroke: guide-stroke,
+          )
+
+          // Keep both field vectors in the final overlay layer as well.
+          line(
+            "top-center",
+            "field-up-tip",
+            name: "field-up",
+            stroke: vector-stroke,
+            mark: (end: ">>", fill: black),
+          )
+          line(
+            "bottom-center",
+            "field-down-tip",
+            name: "field-down",
+            stroke: vector-stroke,
+            mark: (end: ">>", fill: black),
+          )
           circle("field-up.start", radius: 2pt, fill: black, stroke: none)
           circle("field-down.start", radius: 2pt, fill: black, stroke: none)
 
           content("plane-back-edge.1%", anchor: "north", padding: 2pt, math-rect([$x y$-plane]))
           content("top-center", anchor: "west", padding: 5pt, math-rect($A$))
-          content("top-face.75%", anchor: "west", padding: 2pt, math-rect($S$))
+          content("top-face.75%", anchor: "north", padding: 1pt, math-rect($S$))
           content("field-up.end", anchor: "south", padding: 2pt, math-rect($va(E)$))
           content("field-down.end", anchor: "north", padding: 2pt, math-rect($va(E)$))
           content("height-up.52%", anchor: "west", padding: 2pt, math-rect($abs(z)$))
@@ -323,7 +362,7 @@ The first usage is readily demonstrated by the proof above. We hence provide the
     caption: [A Gaussian pillbox $S$ centered on the uniformly charged plane.],
   ) <fig:gaussian-pillbox>
 ]
-#example[
+#example(restate: true, restate-keys: "ex:gaussian-surface-pillbox")[
   An infinite plane coplanar with the $x y$-plane carries a surface charge density distribution $sigma$, whereby an electric field $va(E)$ is generated. Find $va(E)(va(r))$ at an arbitrary point $va(r)$.
 ] <ex:gaussian-surface-pillbox>
 #solution[to @ex:gaussian-surface-pillbox][

@@ -1,6 +1,7 @@
 #import "/lib.typ": *
 #show: docs-subchapter.with(
   ..dargs("Electric Potential"),
+  children: include "boundary-conditions/index.typ",
 )
 In the electrostatic case, the electric field $va(E)$ is irrotational by @eq:gauss-law. Then Stokes' Theorem (@thm:stokes) implies that for any arbitrary surface $S$,
 $
@@ -65,7 +66,7 @@ In a great number of previous examples a notion of an unbounded, infinite, and e
     va(r)' in jexterior S) V(va(r)') = 1 / (4 uppi epsilon_0) Q / R. qedhere
   $
 ]
-Previously we have defined $V$ in terms of $va(E)$. However the vector expression of $va(E)$ itself tends to transpire as cumbersome to compute. It will transpire that---as shall we aver---that the computation of $va(E)$ is generally much simpler by presupposing a suitable expression for $V$ and the subsequent application of the gradient.
+Previously we have defined $V$ in terms of $va(E)$. However the vector expression of $va(E)$ itself tends to transpire as cumbersome to compute. It will transpire that---as shall we aver---that the computation of $va(E)$ can prove simpler by presupposing a suitable expression for $V$ and the subsequent application of the gradient. At this we note that the voltage itself is also a conformer to the principle of superposition, and it is of even simpler computational nature: it is the sum of scalars and not vectors.
 
 For a given volume charge density distribution $rho(va(r))$,
 $
@@ -81,4 +82,20 @@ whereby the Gradient Theorem (@thm:gradient) implies
 ]
 It is necessary to observe that this representation implicitly assumes that the reference point is at $oo$, as it was assumed in our derivation. Thus, @thm:electric-potential-integral may prove to be inapplicable in the hypothetical situations of an infinite charge density distribution; the divergence of the integral would necessitate a revision of the reference point.
 #example[
+  Let $C$ be a closed ring of radius $R$ in the $x y$-plane of uniform linear charge distribution $lambda$. Then find the electric field $va(E)$ at some point $va(z) = z vu(z)$ in the $z$-axis.
 ]
+#proof[
+  The potential, with $V(oo) = 0$, is given by for $va(r) = va(z)$:
+  $
+    V(va(r)) & = 1 / (4 uppi epsilon_0) integral_C lambda / norm(va(z) - va(r)') dif l = integral_(-uppi)^uppi (lambda R dtheta) / sqrt(z^2 + R^2) = (2 uppi lambda R) / sqrt(z^2 + R^2).
+  $
+  Therefore, remarking by symmetry that the $x$- and $y$- components vanish,
+  $
+    va(E)(va(r)) = -pdv(, x) V(va(r)) vu(x) - pdv(, y) V(va(r)) vu(y) - pdv(, z) V(va(r)) vu(z) = - 1 / (4 uppi epsilon_0) pdv(, z) (2 uppi lambda R) / (z^2 + R^2) vu(z) = 1 / (4 uppi epsilon_0) (2 uppi lambda R) / (z^2 + R^2)^(3/2) va(z). qedhere
+  $
+]
+In the case of electrostatics, the six relations between $rho$, $va(E)$, and $V$, all of which derived from superposition and Coulomb's law, are given as follows:
+$
+  rho = epsilon_0 div va(E) = -epsilon_0 laplacian V,\ V = -integral va(E) dot dif va(l) = 1 / (4 uppi epsilon_0) integral.triple rho / s dif V,\ va(E) = -grad V = 1 / (4 uppi epsilon_0) integral.triple rho / s^2 vu(s) dif V,
+$
+where $va(s)$ is the separation vector.
