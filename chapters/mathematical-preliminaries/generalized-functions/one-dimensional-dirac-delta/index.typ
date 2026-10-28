@@ -45,7 +45,7 @@ whose values do not vanish away from $0$: for any $epsilon > 0$, $exists delta >
   $
   the middle integral allows for such a transmutation, while the outer two tails vanish by the Riemann--Lebesgue Lemma (or even by integration by parts). Then
   $
-    lim integral_RR f(x / n) (sin x) / (uppi x) dx - f(0) = integral_(-epsilon)^epsilon lim [f(x / n) - f(0)] (sin x) / (uppi x) dx = 0 #qedhere
+    lim integral_RR f(x / n) (sin x) / (uppi x) dx - f(0) = integral_(-epsilon)^epsilon lim [f(x / n) - f(0)] (sin x) / (uppi x) dx = 0. #qedhere
   $
 ]
 The same methodology can be used for the following identities:
