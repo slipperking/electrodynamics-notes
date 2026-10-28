@@ -8,5 +8,6 @@
     include "conservation-of-charge/index.typ"
     include "electric-field/index.typ"
     include "electric-potential/index.typ"
+    include "work-and-energy/index.typ"
   },
 )

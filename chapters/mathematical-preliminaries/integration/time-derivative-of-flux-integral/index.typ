@@ -189,7 +189,7 @@ $
 $ <eq:reynolds-transport-volume-derivative-separation>
 The field $va(B)$ in the bracketed sum is no longer time-varying. In the span of $delta t$, the region $S(t)$ sweeps out a thin oriented region $V$, as demonstrated in @fig:reynolds-transport-volume. Then by the Divergence Theorem
 $
-  integral.triple_V div va(B) dif V = integral.double_S(t + delta t) va(B) dot dif va(S) - integral.double_S(t) va(B) dot dif va(S) + integral.double_"ribbon" va(B) dot dif va(S),
+  integral.triple_V div va(B) dif^3 r = integral.double_S(t + delta t) va(B) dot dif va(S) - integral.double_S(t) va(B) dot dif va(S) + integral.double_"ribbon" va(B) dot dif va(S),
 $ <eq:reynolds-transport-volume-integral-expansion>
 where the sign of the second term is due to orientation. In the third term, the oriented surface element $dif va(S) = vu(n) dif S$ is orthogonal to both the displacement $dif va(ell)$ along $S(t)$ and the displacement $va(v) delta t$, implying that
 $
@@ -198,7 +198,7 @@ $
 $
 Similarly, the volume element in @eq:reynolds-transport-volume-integral-expansion may be interpreted as the volume of a small cylinder with base $dif S$ and height $op("proj")_(vu(n)) va(v) delta t$:
 $
-  dif V = dif S (vu(n) dot va(v) delta t) = va(v) delta t dot dif va(S).
+  dif^3 r = dif S (vu(n) dot va(v) delta t) = va(v) delta t dot dif va(S).
 $
 Therefore @eq:reynolds-transport-volume-integral-expansion gives
 $

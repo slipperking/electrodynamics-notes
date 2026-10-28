@@ -15,7 +15,7 @@ There exists a generalization of @thm:coulombs-law which does not depend on the 
 #definition[Electric Field][
   For a time-static source charge density distribution $rho(va(r))$, define
   $
-    va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral (dif Q') / norm(va(r) - va(r)')^3 (va(r) - va(r)') = 1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)'),
+    va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral (dif Q') / norm(va(r) - va(r)')^3 (va(r) - va(r)') = 1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif^3 r') / norm(va(r) - va(r)')^3 (va(r) - va(r)'),
   $ <eq:electric-field>
   known as the _electric field_. For a surface or line charge distribution, this is
   $
@@ -25,14 +25,14 @@ There exists a generalization of @thm:coulombs-law which does not depend on the 
 #remark[
   By virtue of the equations @eq:surface-charge-density-as-volume and @eq:line-charge-density-as-volume, the specific representations in @eq:electric-field-surface-line to those of @eq:electric-field. In particular,
   $
-    1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') &= 1 / (4 uppi epsilon_0) integral.triple [integral.double sigma(va(r)'') delta^3(va(r)'' - va(r)') dif S''](dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') \
-    &= 1 / (4 uppi epsilon_0) integral.double sigma(va(r)'') [integral.triple delta^3(va(r)'' - va(r)') (va(r) - va(r)') / norm(va(r) - va(r)')^3 dif V'] dif S'' \
+    1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif^3 r') / norm(va(r) - va(r)')^3 (va(r) - va(r)') &= 1 / (4 uppi epsilon_0) integral.triple [integral.double sigma(va(r)'') delta^3(va(r)'' - va(r)') dif S''](dif^3 r') / norm(va(r) - va(r)')^3 (va(r) - va(r)') \
+    &= 1 / (4 uppi epsilon_0) integral.double sigma(va(r)'') [integral.triple delta^3(va(r)'' - va(r)') (va(r) - va(r)') / norm(va(r) - va(r)')^3 dif^3 r'] dif S'' \
     &= 1 / (4 uppi epsilon_0) integral.double sigma(va(r)'') (va(r) - va(r)'') / norm(va(r) - va(r)'')^3 dif S'',
   $
   and similarly for the case of line charge distributions,
   $
-    1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') &= 1 / (4 uppi epsilon_0) integral.triple [integral lambda(va(r)'') delta^3(va(r)'' - va(r)') dif l''](dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') \
-    &= 1 / (4 uppi epsilon_0) integral lambda(va(r)'') [integral.triple delta^3(va(r)'' - va(r)') (va(r) - va(r)') / norm(va(r) - va(r)')^3 dif V'] dif l'' \
+    1 / (4 uppi epsilon_0) integral.triple (rho(va(r)') dif^3 r') / norm(va(r) - va(r)')^3 (va(r) - va(r)') &= 1 / (4 uppi epsilon_0) integral.triple [integral lambda(va(r)'') delta^3(va(r)'' - va(r)') dif l''](dif^3 r') / norm(va(r) - va(r)')^3 (va(r) - va(r)') \
+    &= 1 / (4 uppi epsilon_0) integral lambda(va(r)'') [integral.triple delta^3(va(r)'' - va(r)') (va(r) - va(r)') / norm(va(r) - va(r)')^3 dif^3 r'] dif l'' \
     &= 1 / (4 uppi epsilon_0) integral lambda(va(r)'') (va(r) - va(r)'') / norm(va(r) - va(r)'')^3 dif l''.
   $
 ]
@@ -57,19 +57,19 @@ Subsequently,
   $
   whence @eq:electric-field can be rewritten to yield
   $
-    va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral.triple_V (rho(va(r)') dif V') / norm(va(r) - va(r)')^3 (va(r) - va(r)') = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') grad 1 / norm(va(r) - va(r)') dif V'.\
-    curl va(E)(va(r)) = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') curl grad 1 / norm(va(r) - va(r)') dif V' = 0,
+    va(E)(va(r)) = 1 / (4 uppi epsilon_0) integral.triple_V (rho(va(r)') dif^3 r') / norm(va(r) - va(r)')^3 (va(r) - va(r)') = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') grad 1 / norm(va(r) - va(r)') dif^3 r'.\
+    curl va(E)(va(r)) = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') curl grad 1 / norm(va(r) - va(r)') dif^3 r' = 0,
   $
   proving the second identity, and
   $
-    div va(E)(va(r)) & = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') div grad 1 / norm(va(r) - va(r)') dif V' \
-    & = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') laplacian 1 / norm(va(r) - va(r)') dif V' \
-    & = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') [-4 uppi delta(va(r) - va(r)')] dif V' = (rho(va(r))) / (epsilon_0). qedhere
+    div va(E)(va(r)) & = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') div grad 1 / norm(va(r) - va(r)') dif^3 r' \
+    & = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') laplacian 1 / norm(va(r) - va(r)') dif^3 r' \
+    & = -1 / (4 uppi epsilon_0) integral.triple_V rho(va(r)') [-4 uppi delta(va(r) - va(r)')] dif^3 r' = (rho(va(r))) / (epsilon_0). qedhere
   $
 ]
 Gauss' Law (@thm:gauss-law) is the first of the four _Maxwell's equations_. We shall eventually see that the first equation $div va(E) = rho / epsilon_0$ will hold not only for electrostatics but for any general situation, as with all Maxwell's equations. There also is an integral representation, whose obtention follows naturally from the Divergence Theorem:
 $
-  Q_"enc" / epsilon_0 = integral.triple_V rho(va(r)) / epsilon_0 dif V = integral.triple_V div va(E) dif V = integral.surf_(partial V) va(E) dot dif va(S).
+  Q_"enc" / epsilon_0 = integral.triple_V rho(va(r)) / epsilon_0 dif^3 r = integral.triple_V div va(E) dif^3 r = integral.surf_(partial V) va(E) dot dif va(S).
 $ <eq:gauss-law-integral>
 #figure-wrapper[
   #figure(

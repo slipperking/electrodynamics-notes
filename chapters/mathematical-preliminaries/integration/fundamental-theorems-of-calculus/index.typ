@@ -66,65 +66,65 @@ and its generalization
 and
 #theorem[Divergence Theorem][
   If $V subset RR^3$ is a region with boundary $partial V$, then for $va(F) : V -> RR^3$,
-  $ integral.surf_(partial V) va(F) dot dif va(S) = integral.triple_V div va(F) dif V. $ <eq:divergence>
+  $ integral.surf_(partial V) va(F) dot dif va(S) = integral.triple_V div va(F) dif^3 r. $ <eq:divergence>
 ] <thm:divergence>
 #corollary[
-  $ integral.surf_(partial V) phi dif va(S) = integral.triple_V grad phi dif V $
+  $ integral.surf_(partial V) phi dif va(S) = integral.triple_V grad phi dif^3 r $
   and
-  $ integral.surf_(partial V) dif va(S) times va(psi) = integral.triple_V curl va(psi) dif V $
+  $ integral.surf_(partial V) dif va(S) times va(psi) = integral.triple_V curl va(psi) dif^3 r $
 ] <cor:divergence-substitutions>
 #proof(collapsed: true)[
   Choose $va(F) = phi va(c)$ to get
   $
-    integral.double_(partial V) phi va(c) dot dif va(S) = integral.triple_V div (phi va(c)) dif V = integral.triple_V [grad phi dot va(c) + phi div va(c)] dif V, \
-    va(c) dot integral.double_(partial V) phi dif va(S) = va(c) dot integral.triple_V grad phi dif V, \
+    integral.double_(partial V) phi va(c) dot dif va(S) = integral.triple_V div (phi va(c)) dif^3 r = integral.triple_V [grad phi dot va(c) + phi div va(c)] dif^3 r, \
+    va(c) dot integral.double_(partial V) phi dif va(S) = va(c) dot integral.triple_V grad phi dif^3 r, \
     (integral.double_(partial V) phi dif va(S) - integral.triple_V grad phi) perp RR^3, \
-    integral.double_(partial V) phi dif va(S) = integral.triple_V grad phi dif V;
+    integral.double_(partial V) phi dif va(S) = integral.triple_V grad phi dif^3 r;
   $
   and choose $va(F) = va(psi) times va(c)$ to get
   $
-    &integral.double_(partial V) (va(psi) times va(c)) dot dif va(S) = integral.double_(partial V) (dif va(S) times va(psi)) dot va(c)=integral.triple_V div (va(psi) times va(c)) dif V \
-    &wide wide"" = integral.triple_V [va(c) dot (curl va(psi)) - va(psi) dot (curl va(c))] dif V,
+    &integral.double_(partial V) (va(psi) times va(c)) dot dif va(S) = integral.double_(partial V) (dif va(S) times va(psi)) dot va(c)=integral.triple_V div (va(psi) times va(c)) dif^3 r \
+    &wide wide"" = integral.triple_V [va(c) dot (curl va(psi)) - va(psi) dot (curl va(c))] dif^3 r,
   $
   whence
   $
-    va(c) dot integral.surf_(partial V) dif va(S) times va(psi) = va(c) dot integral.triple_V curl va(psi) dif V, \
-    (integral.surf_(partial V) dif va(S) times va(psi) - integral.triple_V curl va(psi) dif V) perp RR^3, \
-    integral.surf_(partial V) dif va(S) times va(psi) = integral.triple_V curl va(psi) dif V. #qedhere
+    va(c) dot integral.surf_(partial V) dif va(S) times va(psi) = va(c) dot integral.triple_V curl va(psi) dif^3 r, \
+    (integral.surf_(partial V) dif va(S) times va(psi) - integral.triple_V curl va(psi) dif^3 r) perp RR^3, \
+    integral.surf_(partial V) dif va(S) times va(psi) = integral.triple_V curl va(psi) dif^3 r. #qedhere
   $
 ]
 #corollary[Green's Identities][
   If $phi, psi$ are scalars and $va(P), va(Q)$ are vectors, then we have
   $
-    integral.triple_V (phi laplacian psi + grad phi dot grad psi) dif V = integral.surf_(partial V) phi grad psi dot dif va(S)
+    integral.triple_V (phi laplacian psi + grad phi dot grad psi) dif^3 r = integral.surf_(partial V) phi grad psi dot dif va(S)
   $
   (Green's first identity) and
   $
-    integral.triple_V (phi laplacian psi - psi laplacian phi) dif V = integral.surf_(partial V) (phi grad psi - psi grad phi) dot dif va(S)
+    integral.triple_V (phi laplacian psi - psi laplacian phi) dif^3 r = integral.surf_(partial V) (phi grad psi - psi grad phi) dot dif va(S)
   $
   (Green's second identity) and their vector forms
   $
-    integral.triple_V [-va(P) dot /* op(bold("curl"))^2 */ curl curl va(Q) + curl va(P) dot curl va(Q)] dif V = integral.surf_(partial V) va(P) times curl va(Q) dot dif va(S),
+    integral.triple_V [-va(P) dot /* op(bold("curl"))^2 */ curl curl va(Q) + curl va(P) dot curl va(Q)] dif^3 r = integral.surf_(partial V) va(P) times curl va(Q) dot dif va(S),
   $
   (Green's first identity) or less verbosely,
   $
-    integral.triple_V [-va(P) dot op(bold("curl"))^2 va(Q) + op(bold("curl")) va(P) dot op(bold("curl")) va(Q)] dif V = integral.surf_(partial V) va(P) times op(bold("curl")) va(Q) dot dif va(S),
+    integral.triple_V [-va(P) dot op(bold("curl"))^2 va(Q) + op(bold("curl")) va(P) dot op(bold("curl")) va(Q)] dif^3 r = integral.surf_(partial V) va(P) times op(bold("curl")) va(Q) dot dif va(S),
   $
   and Green's second identity
   $
-    integral.triple_V [-va(P) dot curl curl va(Q) + va(Q) dot curl curl va(P)] dif V = integral.surf_(partial V) [va(P) times curl va(Q) - va(Q) times curl va(P)] dot dif va(S), \
-    integral.triple_V [-va(P) dot op(bold("curl"))^2 va(Q) + va(Q) dot op(bold("curl"))^2 va(P)] dif V = integral.surf_(partial V) [va(P) times op(bold("curl")) va(Q) - va(Q) times op(bold("curl")) va(P)] dot dif va(S).
+    integral.triple_V [-va(P) dot curl curl va(Q) + va(Q) dot curl curl va(P)] dif^3 r = integral.surf_(partial V) [va(P) times curl va(Q) - va(Q) times curl va(P)] dot dif va(S), \
+    integral.triple_V [-va(P) dot op(bold("curl"))^2 va(Q) + va(Q) dot op(bold("curl"))^2 va(P)] dif^3 r = integral.surf_(partial V) [va(P) times op(bold("curl")) va(Q) - va(Q) times op(bold("curl")) va(P)] dot dif va(S).
   $
 ] <cor:greens-identities>
 #proof(collapsed: not false)[
   #todo[Green's first and second]
   Let $va(F) = phi grad psi$ in @thm:divergence to obtain Green's first identity:
   $
-    integral.surf_(partial V) phi grad psi dot dif va(S) & = integral.triple_V div(phi grad psi) dif V= integral.triple_V [phi div grad psi + grad phi dot grad psi] dif V.
+    integral.surf_(partial V) phi grad psi dot dif va(S) & = integral.triple_V div(phi grad psi) dif^3 r= integral.triple_V [phi div grad psi + grad phi dot grad psi] dif^3 r.
   $
   Now interchanging $phi$ and $psi$,
   $
-    integral.surf_(partial V) psi grad phi dot dif va(S) = integral.triple_V [psi div grad phi + grad psi dot grad phi] dif V;
+    integral.surf_(partial V) psi grad phi dot dif va(S) = integral.triple_V [psi div grad phi + grad psi dot grad phi] dif^3 r;
   $
   the difference of the two equations above gives the second identity.
 

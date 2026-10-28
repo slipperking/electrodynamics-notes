@@ -11,16 +11,16 @@ $
 $
 where $I$ is the total surface current through $partial V$. The appendage of a sign represents the fact that a negative change in enclosed entails charges flowing out, giving a positive flux and current. Expressing
 $
-  I = integral.surf_(partial V) va(J) dot dif va(S) = integral.triple_V div va(J) dif V,
+  I = integral.surf_(partial V) va(J) dot dif va(S) = integral.triple_V div va(J) dif^3 r,
 $
 we have
 $
-  integral.triple_V div va(J) dif V = -dv(, t) integral.triple_V rho dif V = -integral.triple_V pdv(rho, t) dif V,\
-  integral.triple_V (div va(J) + pdv(rho, t)) dif V = 0.
+  integral.triple_V div va(J) dif^3 r = -dv(, t) integral.triple_V rho dif^3 r = -integral.triple_V pdv(rho, t) dif^3 r,\
+  integral.triple_V (div va(J) + pdv(rho, t)) dif^3 r = 0.
 $ <eq:charge-continuity-equation-triple-integral>
 If at any point $va(r)'$ the integrand is nonzero (without loss of generality assume positivity), then on a neighborhood $V_(va(r)')$ thereof,
 $
-  integral.triple_V_(va(r)') (div va(J) + pdv(rho, t)) dif V > 0,
+  integral.triple_V_(va(r)') (div va(J) + pdv(rho, t)) dif^3 r > 0,
 $
 which contradicts the condition set forth by @eq:charge-continuity-equation-triple-integral; the arbitariness of $V$ entails that the equation holds for $V = V_(va(r)')$ as well. Thus,
 $

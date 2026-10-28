@@ -8,9 +8,9 @@ Electric phenomena arise from a property known as _electric charge_. Charged obj
 $ e = #qty("1.602176634e-19", "C"), $
 (wherein $"C"$ is the SI unit of charge, a coulomb).
 
-Despite this fundamental discreteness of charge, the historical developments of electromagnetic theory utilized the definition of a continuous charge per unit volume, or _volume charge density_ $rho(va(r))$ (here we omit the modern formulation of particles of fractional charge). In an infinitesimal volume $dif V$, the charge contained therein is thence $dif Q = rho(va(r)) dif V$. Then the total charge $Q$ in a volume $V$ is given by
+Despite this fundamental discreteness of charge, the historical developments of electromagnetic theory utilized the definition of a continuous charge per unit volume, or _volume charge density_ $rho(va(r))$ (here we omit the modern formulation of particles of fractional charge). In an infinitesimal volume $dif^3 r$, the charge contained therein is thence $dif Q = rho(va(r)) dif^3 r$. Then the total charge $Q$ in a volume $V$ is given by
 $
-  Q = integral.triple_V rho(va(r)) dif V.
+  Q = integral.triple_V rho(va(r)) dif^3 r.
 $ <eq:enclosed-volume-charge>
 Oftentimes it is convenient to consider charge distributions on surfaces. In this case we entertain the definition of a charge per unit area (in the surface), or _surface charge density_ $sigma(va(r))$. Therefore, the charge contained in an infinitesimal surface element $dif S$ is $sigma(va(r)) dif S$ and the total charge in the surface is given by
 $
@@ -26,8 +26,8 @@ which can be interpreted, by virtue of some generalized heuristic "filtering pro
 
   Defining $rho$ as in @eq:surface-charge-density-as-volume,
   $
-    Q_rho & = integral.triple_V integral.double_S sigma(va(r)') delta^3(va(r) - va(r)') dif S' dif V \
-          & = integral.double_S sigma(va(r)') integral.triple_V delta^3(va(r) - va(r)') dif V dif S' \
+    Q_rho & = integral.triple_V integral.double_S sigma(va(r)') delta^3(va(r) - va(r)') dif S' dif^3 r \
+          & = integral.double_S sigma(va(r)') integral.triple_V delta^3(va(r) - va(r)') dif^3 r dif S' \
           & = integral.double_(S inter V) sigma(va(r)') dif S' = Q_sigma. qedhere
   $
 ]
@@ -42,8 +42,8 @@ $ <eq:line-charge-density-as-volume>
 #proof(collapsed: true)[of the line-volume charge density relationship @eq:line-charge-density-as-volume][
   Let $Q_rho$ be the enclosed charge as calculated in @eq:enclosed-volume-charge and let $Q_lambda$ be the enclosed charge as calculated by the line integral. Then for any volume $V$
   $
-    Q_rho & = integral.triple_V integral_C lambda(va(r)') delta^3(va(r) - va(r)') dif l' dif V \
-          & = integral_C lambda(va(r)') integral.triple_V delta^3(va(r) - va(r)') dif V dif l' \
+    Q_rho & = integral.triple_V integral_C lambda(va(r)') delta^3(va(r) - va(r)') dif l' dif^3 r \
+          & = integral_C lambda(va(r)') integral.triple_V delta^3(va(r) - va(r)') dif^3 r dif l' \
           & = integral_(C inter V) lambda(va(r)') dif l = Q_lambda. qedhere
   $
 ]
@@ -53,5 +53,5 @@ $
 $ <eq:electric-point-charges-charge-density>
 The utilization of the Dirac $delta$ here follows naturally, as we have
 $
-  Q = integral.triple_V sum_(k = 1)^n q_k delta(va(r) - va(r)_k) dif V = sum_(k=1)^n q_k.
+  Q = integral.triple_V sum_(k = 1)^n q_k delta(va(r) - va(r)_k) dif^3 r = sum_(k=1)^n q_k.
 $

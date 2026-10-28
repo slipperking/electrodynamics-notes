@@ -70,14 +70,14 @@ Previously we have defined $V$ in terms of $va(E)$. However the vector expressio
 
 For a given volume charge density distribution $rho(va(r))$,
 $
-  V(va(r)) &= -integral_oo^va(r) integral.triple (rho(va(r)') dif V') / norm(va(r)'' - va(r)')^3 (va(r)'' - va(r)') dot dif va(l)'' \
-  &= - integral.triple rho(va(r)') integral_oo^va(r) (va(r)'' - va(r)') / norm(va(r)'' - va(r)')^3 dot dif va(l)'' dif V' \
-  &= integral.triple rho(va(r)') integral_oo^va(r) grad 1 / norm(va(r)'' - va(r)') dot dif va(l)'' dif V'
+  V(va(r)) &= -integral_oo^va(r) integral.triple (rho(va(r)') dif^3 r') / norm(va(r)'' - va(r)')^3 (va(r)'' - va(r)') dot dif va(l)'' \
+  &= - integral.triple rho(va(r)') integral_oo^va(r) (va(r)'' - va(r)') / norm(va(r)'' - va(r)')^3 dot dif va(l)'' dif^3 r' \
+  &= integral.triple rho(va(r)') integral_oo^va(r) grad 1 / norm(va(r)'' - va(r)') dot dif va(l)'' dif^3 r'
 $
 whereby the Gradient Theorem (@thm:gradient) implies
 #theorem[
   $
-    V(va(r)) = integral.triple rho(va(r)') evaluated(1 / norm(va(r)'' - va(r)'))_oo^va(r) dif V' = integral.triple rho(va(r)') / norm(va(r) - va(r)') dif V'.
+    V(va(r)) = integral.triple rho(va(r)') evaluated(1 / norm(va(r)'' - va(r)'))_oo^va(r) dif^3 r' = integral.triple rho(va(r)') / norm(va(r) - va(r)') dif^3 r'.
   $ <thm:electric-potential-integral>
 ]
 It is necessary to observe that this representation implicitly assumes that the reference point is at $oo$, as it was assumed in our derivation. Thus, @thm:electric-potential-integral may prove to be inapplicable in the hypothetical situations of an infinite charge density distribution; the divergence of the integral would necessitate a revision of the reference point.
@@ -96,6 +96,6 @@ It is necessary to observe that this representation implicitly assumes that the 
 ]
 In the case of electrostatics, the six relations between $rho$, $va(E)$, and $V$, all of which derived from superposition and Coulomb's law, are given as follows:
 $
-  rho = epsilon_0 div va(E) = -epsilon_0 laplacian V,\ V = -integral va(E) dot dif va(l) = 1 / (4 uppi epsilon_0) integral.triple rho / s dif V,\ va(E) = -grad V = 1 / (4 uppi epsilon_0) integral.triple rho / s^2 vu(s) dif V,
+  rho = epsilon_0 div va(E) = -epsilon_0 laplacian V,\ V = -integral va(E) dot dif va(l) = 1 / (4 uppi epsilon_0) integral.triple rho / s dif^3 r,\ va(E) = -grad V = 1 / (4 uppi epsilon_0) integral.triple rho / s^2 vu(s) dif^3 r,
 $
 where $va(s)$ is the separation vector.
