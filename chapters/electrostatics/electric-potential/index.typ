@@ -81,5 +81,4 @@ whereby the Gradient Theorem (@thm:gradient) implies
 ]
 It is necessary to observe that this representation implicitly assumes that the reference point is at $oo$, as it was assumed in our derivation. Thus, @thm:electric-potential-integral may prove to be inapplicable in the hypothetical situations of an infinite charge density distribution; the divergence of the integral would necessitate a revision of the reference point.
 #example[
-
 ]

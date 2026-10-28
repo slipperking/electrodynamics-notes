@@ -12,12 +12,50 @@
   message: "text-font must be either 'book' or 'web'",
 )
 
+#let pdf-page-margin = (
+  top: 2.5cm,
+  bottom: 2.5cm,
+  inside: 3cm,
+  outside: 2.5cm,
+)
+
+#let pdf-heading-prefix(level, numbering-pattern, number) = {
+  if number == none {
+    none
+  } else if level == 1 {
+    if type(numbering-pattern) == str and numbering-pattern.starts-with("A") {
+      [Appendix #number]
+    } else {
+      [Chapter #number]
+    }
+  } else {
+    [#sym.section#number]
+  }
+}
+
+#let pdf-heading-label(label, body) = [
+  #label#(sym.space.en)·#(sym.space.en)#body
+]
+
+// Adapted from Jassiel Ovando's MIT-licensed fake-smallcaps experiment:
+// https://github.com/jassielof/typst-packages/tree/main/fake-smallcaps
+#let _pdf-fake-smallcaps(body, scaling: 0.75, stroke: 0.005cm) = context {
+  show regex("\p{Ll}+"): it => text(
+    size: scaling * 1em,
+    stroke: stroke + text.fill,
+    upper(it),
+  )
+  text(body)
+}
+
 #let _pdf-running-header() = context {
-  let page-number = here().page()
-  let numbered-chapters = query(heading.where(level: 1)).filter(
+  let page-number = counter(page).get().first()
+  let level-one-headings = selector(heading.where(level: 1)).within(pdf-scope-label)
+  let level-two-headings = selector(heading.where(level: 2)).within(pdf-scope-label)
+  let numbered-chapters = query(level-one-headings).filter(
     it => it.numbering != none,
   )
-  let chapters = query(heading.where(level: 1)).filter(
+  let chapters = query(level-one-headings).filter(
     it => it.location().page() <= page-number,
   )
 
@@ -27,7 +65,7 @@
 
   if not is-frontmatter and chapters.len() > 0 {
     let chapter = chapters.last()
-    let sections = query(heading.where(level: 2)).filter(
+    let sections = query(level-two-headings).filter(
       it => (
         it.location().page() >= chapter.location().page() and it.location().page() <= page-number
       ),
@@ -44,20 +82,13 @@
     } else {
       numbering(selected.numbering, ..counter(heading).at(selected.location()))
     }
-    let is-appendix = (
-      type(selected.numbering) == str and selected.numbering.starts-with("A")
-    )
-    let heading-line = [
-      #if number != none {
-        if selected.level == 1 {
-          if is-appendix [Appendix #number] else [Chapter #number]
-        } else {
-          [#sym.section#number]
-        }
-        box(width: 1.2em, align(center)[·])
-      }
-      #smallcaps(selected.body)
-    ]
+    let title = smallcaps(selected.body)
+    let heading-line = if number == none {
+      title
+    } else {
+      let label = pdf-heading-prefix(selected.level, selected.numbering, number)
+      pdf-heading-label(label, title)
+    }
 
     block(width: 100%)[
       #align(if calc.odd(page-number) { right } else { left })[
@@ -75,18 +106,9 @@
   } else {
     counter(heading).display(it.numbering)
   }
-  let is-appendix = (
-    type(it.numbering) == str and it.numbering.starts-with("A")
-  )
 
   let rendered = if it.level == 1 {
-    let eyebrow = if number == none {
-      none
-    } else if is-appendix {
-      [Appendix #number]
-    } else {
-      [Chapter #number]
-    }
+    let eyebrow = pdf-heading-prefix(it.level, it.numbering, number)
     block(breakable: false)[
       #v(0.78in)
       #text(size: 1.8em, weight: "bold")[
@@ -159,6 +181,7 @@
   }
 
   if mode == "pdf" {
+    show smallcaps: it => _pdf-fake-smallcaps(it.body)
     set text(font: "Lato") if text-font-mode == "web"
     show math.equation: set text(font: "Lete Sans Math") if text-font-mode == "web"
     set page(
@@ -166,14 +189,8 @@
       numbering: "1",
       number-align: center,
       header: _pdf-running-header(),
-      margin: (
-        top: 2.5cm,
-        bottom: 2.5cm,
-        inside: 3cm,
-        outside: 2.5cm,
-      ),
+      margin: pdf-page-margin,
     )
-    set par(justify: true)
 
     set figure(placement: alignment.top)
     show figure.caption: it => context [

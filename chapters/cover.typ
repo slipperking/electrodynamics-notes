@@ -1,4 +1,5 @@
 #import "/src/components/index.typ": docs-cover
+#import "/src/components/styles.typ": pdf-heading-label, pdf-heading-prefix, pdf-page-margin
 #import "/src/source.typ" as source
 
 #let dedication = [
@@ -8,21 +9,6 @@
 #let web-view-recommendation = [
   For the best web viewing experience, we recommend using a Mozilla-based browser such as Firefox. This will be subject to change as browsers improve their MathML support. (For instance, displayed overlines will not stretch)
 ]
-
-#let faux-smallcaps(value, size: 1em, weight: "regular") = {
-  for glyph in value.clusters() {
-    if glyph == " " {
-      h(0.3em)
-    } else {
-      let is-lowercase = glyph == lower(glyph) and glyph != upper(glyph)
-      box(text(
-        size: if is-lowercase { size * 0.72 } else { size },
-        weight: weight,
-      )[#upper(glyph)])
-      h(0.015em)
-    }
-  }
-}
 
 #let web-cover(href, show-pdf: true) = {
   html.elem("section", attrs: (class: "cover"), {
@@ -50,18 +36,13 @@
   )
   #set page(
     numbering: none,
-    margin: (
-      top: 2.5cm,
-      bottom: 2.5cm,
-      inside: 3cm,
-      outside: 2.5cm,
-    ),
+    margin: pdf-page-margin,
     background: none,
   )
   #set align(center)
 
   #v(1.5fr)
-  #faux-smallcaps(source.title, size: 3em, weight: "bold")
+  #text(size: 3em, weight: "bold")[#smallcaps(source.title)]
 
   #v(0.8fr)
   #text(size: 1.2em)[by #source.join-oxford-commas(source.authors.map(smallcaps))]
@@ -79,17 +60,10 @@
   #pagebreak()
   #set page(
     numbering: "1",
-    margin: (
-      top: 2.5cm,
-      bottom: 2.5cm,
-      inside: 3cm,
-      outside: 2.5cm,
-    ),
+    margin: pdf-page-margin,
     background: none,
   )
   #set align(left)
-  #show outline.entry.where(level: 1): set block(above: 0.65em)
-  #show outline.entry.where(level: 1): set text(weight: "bold")
   #show outline.entry: it => context {
     let item = it.element
     let number = if item.numbering == none {
@@ -97,25 +71,26 @@
     } else {
       numbering(item.numbering, ..counter(heading).at(item.location()))
     }
-    let appendix = (
-      type(item.numbering) == str and item.numbering.starts-with("A")
-    )
-    let prefix = if number == none {
-      none
-    } else if item.level == 1 {
-      if appendix {
-        [Appendix #number#h(0.35em)·]
-      } else {
-        [Chapter #number#h(0.35em)·]
-      }
+    let label = pdf-heading-prefix(item.level, item.numbering, number)
+    let entry-body = if label == none {
+      it.body()
     } else {
-      [#sym.section#number#h(0.35em)·]
+      pdf-heading-label(label, it.body())
     }
+    let inner = [
+      #entry-body#box(width: 1fr, it.fill)#it.page()
+    ]
 
-    link(
+    let rendered = link(
       item.location(),
-      it.indented(prefix, it.inner(), gap: 0.35em),
+      it.indented(none, inner, gap: 0pt),
     )
+    if item.level == 1 {
+      v(0.65em)
+      strong(rendered)
+    } else {
+      rendered
+    }
   }
   #outline(title: [Contents], target: outline-target, indent: 1.2em)
   #pagebreak()
