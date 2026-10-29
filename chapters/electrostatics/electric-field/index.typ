@@ -69,7 +69,7 @@ Subsequently,
 ]
 Gauss' Law (@thm:gauss-law) is the first of the four _Maxwell's equations_. We shall eventually see that the first equation $div va(E) = rho / epsilon_0$ will hold not only for electrostatics but for any general situation, as with all Maxwell's equations. There also is an integral representation, whose obtention follows naturally from the Divergence Theorem:
 $
-  Q_"enc" / epsilon_0 = integral.triple_V rho(va(r)) / epsilon_0 dif^3 r = integral.triple_V div va(E) dif^3 r = integral.surf_(partial V) va(E) dot dif va(S).
+  Phi_va(E) = integral.surf_(partial V) va(E) dot dif va(S) = integral.triple_V div va(E) dif^3 r = integral.triple_V rho(va(r)) / epsilon_0 dif^3 r = Q_"enc" / epsilon_0.
 $ <eq:gauss-law-integral>
 #figure-wrapper[
   #figure(

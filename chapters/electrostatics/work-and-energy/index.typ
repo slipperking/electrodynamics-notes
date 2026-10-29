@@ -1,5 +1,8 @@
 #import "/lib.typ": *
-#show: docs-subchapter.with(..dargs("Work and Energy"))
+#show: docs-subchapter.with(
+  ..dargs("Work and Energy"),
+  children: include "total-electrostatic-energy/index.typ",
+)
 Allow us to entertain the following electrostatic situation: for a specified charge density $rho(va(r))$, if it were desired upon us to move a point charge $q$ from $va(a)$ to $va(b)$, what would be the work required to perform as such?
 
 // Considering an arbitrary given moment $t$ in time, the electric force is given by $q va(E)(va(r)(t))$. Therefore, the exigent force to be exerted is then $-q va(E)(va(r)(t))$.
@@ -15,7 +18,7 @@ $
 Where $va(a) = oo$ (i.e. to bring the test charge from far away), conforming to the common convention,
 $
   W_"req" = q phi(va(r))
-$
+$ <eq:electrostatic-work-to-bring-charge-to-point>
 represents the work necessitated to deliver an existing charge from a great distance to $va(r)$. In analogy with classical mechanics, the _electrostatic potential energy_ of a given point charge $q$ at $va(r)$ subject to an electric field is given to be
 $ U_va(E) = q phi(va(r)). $ <eq:electrostatic-potential-energy>
 Consequently, the generalization thereof for a charge distribution $rho_2(va(r))$ in the electric field with potential $phi_1(va(r))$ is
@@ -91,7 +94,3 @@ $
   va(F)_(1 "on" 2) = -grad_va(r)_2 U_va(E) = 1 / (4 uppi epsilon_0) (Q_1 Q_2) / norm(va(r)_2 - va(r)_1)^3 (va(r)_2 - va(r)_1).
 $
 by virtue of fact that a change in $va(r)_2$ entails a rigid shift of the body of $rho_2$.
-
-#todo()
-
-Now instead entertain the case of a collection of $n in NN$ point charges $q_1, ..., q_n$. The total electrostatic energy
