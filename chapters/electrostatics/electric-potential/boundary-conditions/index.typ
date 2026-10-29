@@ -3,7 +3,7 @@
   ..dargs("Boundary Conditions"),
 )
 
-Oftentimes, as it has been observed on earlier occasion, a surface charge distribution will give rise to discontinuities in $va(E)$ when crossing the surface, as with @ex:spherical-shell-electric-potential, wherein we assumed the continuity of $V$.
+Oftentimes, as it has been observed on earlier occasion, a surface charge distribution will give rise to discontinuities in $va(E)$ when crossing the surface, as with @ex:spherical-shell-electric-potential, wherein we assumed the continuity of $phi$.
 
 Consider such a surface charge distribution $sigma(va(r))$ on a surface $S'$. Fixate $va(r)$, then for a sufficiently small Gaussian pillbox $S$ centered at $va(r)$ with area $A$ and thickness $epsilon -> 0$, the constant normal vector of the bases are approximately the normal vectors of the surface, even more so as $S -> {va(r)}$, wherewith the normal vector of the vertical sides are approximately orthogonal to the surface normals at the respective points.
 
@@ -260,6 +260,6 @@ $
 $
 entailing the normal component as the sole component in the difference:
 $
-  Delta va(E) = sigma / epsilon_0 vu(n) ==> Delta grad V = -sigma / epsilon_0 vu(n) ==> Delta grad V dot vu(n) = Delta pdv(V, n) = -sigma / epsilon_0,
+  Delta va(E) = sigma / epsilon_0 vu(n) ==> Delta grad phi = -sigma / epsilon_0 vu(n) ==> Delta grad phi dot vu(n) = Delta pdv(phi, n) = -sigma / epsilon_0,
 $
-where $pdv(V, n)$ is the normal derivative.
+where $pdv(phi, n)$ is the normal derivative.
