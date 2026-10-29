@@ -10,10 +10,15 @@ $
 $
 whereupon the potential field is now
 $
-  phi_2(va(r)) = phi_1(va(r)) + 1 / (4 uppi epsilon_0) [q_2 1 / norm(va(r) - va(r)_2)] = 1 / (4 uppi epsilon) [q_1 / norm(va(r) - va(r)_1) + q_2 / norm(va(r) - va(r)_2)].
+  phi_2(va(r)) = phi_1(va(r)) + 1 / (4 uppi epsilon_0) [q_2 1 / norm(va(r) - va(r)_2)] = 1 / (4 uppi epsilon_0) [q_1 / norm(va(r) - va(r)_1) + q_2 / norm(va(r) - va(r)_2)].
 $
 By repetition of said process across the span of all point charges,
 $
-  sum_(k = 1)^n W_k = sum_(k = 1)^n q_k phi_(k-1)(va(r)_k) = sum_(k=1)^n q_k 1 / (4 uppi epsilon_0)[sum_(j = 1)^(k-1) q_j / norm(va(r)_k - va(r)_j)] = 1 / (4 uppi epsilon_0) sum_(k = 1)^n sum_(j = 1)^(k - 1) (q_k q_j) / norm(va(r)_k - va(r)_j).
+  U_(va(E), "tot") &= sum_(k = 1)^n W_k = sum_(k = 1)^n q_k phi_(k-1)(va(r)_k) = sum_(k=1)^n q_k 1 / (4 uppi epsilon_0)[sum_(j = 1)^(k-1) q_j / norm(va(r)_k - va(r)_j)] = 1 / (4 uppi epsilon_0) sum_(k = 1)^n sum_(j = 1)^(k - 1) (q_k q_j) / norm(va(r)_k - va(r)_j) \
+  & = 1 / (8 uppi epsilon_0) sum_(k = 1)^n sum_(j = 1)^(k - 1) (q_k q_j) / norm(va(r)_k - va(r)_j) + 1 / (8 uppi epsilon_0) sum_(j = 1)^(n - 1) sum_(k = j + 1)^n (q_k q_j) / norm(va(r)_k - va(r)_j) = 1 / (8 uppi epsilon_0) sum_(k = 1)^n sum_(j = 1 \ j != k)^n (q_k q_j) / norm(va(r)_k - va(r)_j) \
+  &= 1 / 2 sum_(k = 1)^n q_k phi_("all but" va(r)_k) (va(r)_k).
 $
-The right hand side enumerates through
+As with previous instance, the natural extension hereof would be to consider a volume charge density distribution $rho(va(r))$, which is given by
+$
+  U_(va(E), "tot") = 1 / (8 uppi epsilon_0) integral.triple rho(va(r)) integral.triple_(va(r)' != va(r)) rho(va(r)') / norm(va(r) - va(r)') dif^3 r' dif^3 r
+$
