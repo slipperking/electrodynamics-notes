@@ -97,11 +97,11 @@ It is necessary to observe that this representation implicitly assumes that the 
 #proof[
   The potential, with $phi(oo) = 0$, is given by for $va(r) = va(z)$:
   $
-    phi(va(r)) & = 1 / (4 uppi epsilon_0) integral_C lambda / norm(va(z) - va(r)') dif l = integral_(-uppi)^uppi (lambda R dtheta) / sqrt(z^2 + R^2) = (2 uppi lambda R) / sqrt(z^2 + R^2).
+    phi(va(r)) & = 1 / (4 uppi epsilon_0) integral_C lambda / norm(va(z) - va(r)') dif l = 1 / (4 uppi epsilon_0)integral_(-uppi)^uppi (lambda R dtheta) / sqrt(z^2 + R^2) = 1 / (4 uppi epsilon_0)(2 uppi lambda R) / sqrt(z^2 + R^2).
   $
   Therefore, remarking by symmetry that the $x$- and $y$- components vanish,
   $
-    va(E)(va(r)) = -pdv(, x) phi(va(r)) vu(x) - pdv(, y) phi(va(r)) vu(y) - pdv(, z) phi(va(r)) vu(z) = - 1 / (4 uppi epsilon_0) pdv(, z) (2 uppi lambda R) / (z^2 + R^2) vu(z) = 1 / (4 uppi epsilon_0) (2 uppi lambda R) / (z^2 + R^2)^(3/2) va(z). qedhere
+    va(E)(va(z)) = -pdv(, x) phi(va(r)) vu(x) - pdv(, y) phi(va(r)) vu(y) - pdv(, z) phi(va(r)) vu(z) = - 1 / (4 uppi epsilon_0) pdv(, z) (2 uppi lambda R) / sqrt(z^2 + R^2) vu(z) = 1 / (4 uppi epsilon_0) (2 uppi lambda R) / (z^2 + R^2)^(3/2) va(z). qedhere
   $
 ]
 In the case of electrostatics, the six relations between $rho$, $va(E)$, and $phi$, all of which derived from superposition and Coulomb's law, are given as follows:
