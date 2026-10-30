@@ -20,5 +20,19 @@ $
 $
 As with previous instance, the natural extension hereof would be to consider a volume charge density distribution $rho(va(r))$, which is given by
 $
-  U_(va(E), "tot") = 1 / (8 uppi epsilon_0) integral.triple rho(va(r)) integral.triple_(va(r)' != va(r)) rho(va(r)') / norm(va(r) - va(r)') dif^3 r' dif^3 r
+  U_(va(E), "tot") = 1 / (8 uppi epsilon_0) integral.triple rho(va(r)) integral.triple_(va(r)' != va(r)) rho(va(r)') / norm(va(r) - va(r)') dif^3 r' dif^3 r.
 $
+In the case that $rho$ is truly continuous, without the consideration of representations involving $delta$, the above may be plainly expressed as
+$
+  U_(va(E), "tot") = 1 / (8 uppi epsilon_0) integral.triple integral.triple (rho(va(r)) rho(va(r)')) / norm(va(r) - va(r)') dif^3 r' dif^3 r = 1 / 2 integral.triple rho(va(r)) phi(va(r)) dif^3 r,
+$ <eq:total-electrostatic-energy-integral-no-E>
+because for a small $epsilon$-ball $B_epsilon$ centered at $va(r)$ ,
+$
+  abs(integral.triple_B_epsilon (rho(va(r))rho(va(r)')) / norm(va(r) - va(r)') dif^3 r') <= max abs(rho)^2 integral_0^epsilon integral.double_(partial B_(r')) 1 / u dif S' dif u = max abs(rho)^2 integral_0^epsilon 4 uppi u dif u = 2 uppi epsilon^2 -> 0.
+$
+By Gauss' Law, $epsilon_0 div va(E) = rho$, whence @eq:total-electrostatic-energy-integral-no-E gives
+$
+  U_(va(E), "tot") & = 1 / 2 integral.triple rho(va(r)) phi(va(r)) dif^3 r = epsilon_0 / 2 integral.triple phi div va(E) dif^3 r = epsilon_0 / 2 integral.triple [div(phi va(E)) - va(E) dot grad phi] dif^3 r \
+  &= lim_(R -> oo) epsilon_0 / 2 integral.surf_(r = R) phi va(E) dot dif va(S) + epsilon_0 / 2 integral.triple_(r < R) va(E)^2 dif^3 r
+$ <eq:total-electrostatic-energy-integral-with-E>
+(by the Divergence Theorem (@thm:divergence)). Imperatively, the expression in @eq:total-electrostatic-energy-integral-no-E holds throughout any volume which encloses all the charge, as all extraneous values for which $rho = 0$ contribute not to the integral. Correspondingly, this must entail, that in @eq:total-electrostatic-energy-integral-with-E, assuming $R$ sufficiently large as to enclose all charge, the volume integral can only be increasing therewith. It then must follow that the surface integral itself decreases, by an equal amount, to maintain this equality.
