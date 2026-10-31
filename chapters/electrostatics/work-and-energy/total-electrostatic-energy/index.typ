@@ -2,8 +2,8 @@
 #show: docs-subsubchapter.with(
   ..dargs("Total Electrostatic Energy"),
 )
-#let uetot = $U_("E" "tot")$
-#let uetoti = $U_("E" "tot" "no-self")$
+#let uetot = $U_("E", "tot")$
+#let uetoti = $U_("E", "tot", "no-self")$
 Now let us entertain the case of a collection of $n in NN$ point charges $q_1, ..., q_n$. The _total electrostatic energy_ $uetoti$ is defined to be the total amount of work necessary to be done (performed quasi-statically by some "external agent," or infinitely slowly such that the kinetic energy never changes) in order to move all the point charges to a specified configuration from spatial infinity.
 
 In the initial state, given that all charges lie at $oo$, we necessarily have $va(E) = 0$. Then the work required to bring the first charge $q_1$ to $va(r)_1$ is $W_1 = 0$. Upon completion hereof, the task of bringing a second charge $q_2$ now demands consideration of the potential field $ phi_1 : va(r) |-> 1 / (4 uppi epsilon_0) [q_1 / norm(va(r) - va(r)_1)] $ previously introduced by the first charge, which by @eq:electrostatic-work-to-bring-charge-to-point, is:
@@ -75,12 +75,16 @@ Assuming this compact support condition upon $rho$, #todo(block: false)[Vanish o
     uetot = epsilon_0 / 2 integral.triple_(RR^3) va(E)^2 dif^3 r.
   $
 ]
-In this formulation, the quantity $uetot$ is dependent on the electric field, and not necessarily $rho$. For this very reason $U_"tot"$ has also been given the name "electric field energy." In the field of general relativity, it becomes incumbent to consider $uetot$ as a part of the field, with a volume energy density $epsilon_0 / 2 va(E)^2$.
+In this formulation, the quantity $uetot$ is dependent on the electric field, and not necessarily $rho$. For this very reason $uetot$ has also been given the name "electric field energy." In the field of general relativity, it becomes incumbent to consider $uetot$ as a part of the field, with a volume energy density $epsilon_0 / 2 va(E)^2$.
 
 The total field energy can also be determined as the sum of _self_ and _interaction_ energies of any two constituent bodies, which constitutes the preceding developments of this section. For instance, consider a continuous volume charge distribution $rho$, separated into two bodies $rho = rho_1 + rho_2$, whence
 $
   uetot &= 1 / (8 uppi epsilon_0) integral.triple integral.triple (rho(va(r)) rho(va(r)')) / norm(va(r) - va(r)') dif^3 r' dif^3 r = 1 / (8 uppi epsilon_0) integral.triple integral.triple ((rho_1 + rho_2)(va(r)) (rho_1 + rho_2)(va(r)')) / norm(va(r) - va(r)') dif^3 r' dif^3 r\
   &= 1 / (8 uppi epsilon_0) integral.triple integral.triple (rho_1(va(r)) rho_1(va(r)') + rho_2(va(r)) rho_2(va(r)')) / norm(va(r) - va(r)') dif^3 r' dif^3 r + 1 / (4 uppi epsilon_0) integral.triple integral.triple (rho_1(va(r)) rho_2(va(r)')) / norm(va(r) - va(r)') dif^3 r' dif^3 r \
-  &= U_"self" + U_"int".
+  &= U_("E", "self") + U_("E", "int").
 $
-The term $U_"int"$ is the _interaction energy_ between the two distributions, which is precisely the potential energy between the two as defined in @eq:electrostatic-potential-energy-distribution.
+The term $U_"int"$ is the _interaction energy_ between the two distributions, which is precisely the potential energy between the two as defined in @eq:electrostatic-potential-energy-distribution. The previous relation entails that the given quantity does _not_ acquiesce to the superposition principle:
+$
+  U_("E", "tot", rho) = U_("E", "tot", rho_1) + U_("E", "tot", rho_2) + U_("E", "tot", "int")
+$
+by virtue of the quadraticity of its nature.
