@@ -104,16 +104,16 @@ and
   $
   (Green's second identity) and their vector forms
   $
-    integral.triple_V [-va(P) dot /* op(bold("curl"))^2 */ curl curl va(Q) + curl va(P) dot curl va(Q)] dif^3 r = integral.surf_(partial V) va(P) times curl va(Q) dot dif va(S),
+    integral.triple_V [-va(P) dot curl curl va(Q) + curl va(P) dot curl va(Q)] dif^3 r = integral.surf_(partial V) va(P) times curl va(Q) dot dif va(S),
   $
   (Green's first identity) or less verbosely,
   $
-    integral.triple_V [-va(P) dot op(bold("curl"))^2 va(Q) + op(bold("curl")) va(P) dot op(bold("curl")) va(Q)] dif^3 r = integral.surf_(partial V) va(P) times op(bold("curl")) va(Q) dot dif va(S),
+    integral.triple_V [-va(P) dot curls^2 va(Q) + curls va(P) dot curls va(Q)] dif^3 r = integral.surf_(partial V) va(P) times curls va(Q) dot dif va(S),
   $
   and Green's second identity
   $
     integral.triple_V [-va(P) dot curl curl va(Q) + va(Q) dot curl curl va(P)] dif^3 r = integral.surf_(partial V) [va(P) times curl va(Q) - va(Q) times curl va(P)] dot dif va(S), \
-    integral.triple_V [-va(P) dot op(bold("curl"))^2 va(Q) + va(Q) dot op(bold("curl"))^2 va(P)] dif^3 r = integral.surf_(partial V) [va(P) times op(bold("curl")) va(Q) - va(Q) times op(bold("curl")) va(P)] dot dif va(S).
+    integral.triple_V [-va(P) dot curls^2 va(Q) + va(Q) dot curls^2 va(P)] dif^3 r = integral.surf_(partial V) [va(P) times curls va(Q) - va(Q) times curls va(P)] dot dif va(S).
   $
 ] <cor:greens-identities>
 #proof(collapsed: not false)[

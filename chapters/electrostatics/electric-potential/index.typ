@@ -28,7 +28,7 @@ $
 $ <eq:gradient-of-electric-potential>
 by the arbitrariness of $va(a),va(b)$, for indeed if some $va(r)$ satisfied $va(E)(va(r)) + grad phi (va(r))!= 0$, then letting $ vu(u) = (va(E)(va(r)) + grad phi(va(r))) / norm(va(E)(va(r)) + grad phi(va(r))), $ the integral from $va(r)$ to $va(r) + vu(u) epsilon$ of $(va(E) + grad phi) dot dif va(l)'$ would be asymptotically equal to $norm(va(E)(va(r)) + grad phi(va(r))) epsilon != 0$ as $epsilon -> 0$, thereby insinuating a contradiction.
 
-Using the identity $laplacian = op(bold("div")) op(bold("grad"))$, Gauss' Law (@thm:gauss-law) entails that
+Using the identity $laplacian = divs grads$, Gauss' Law (@thm:gauss-law) entails that
 #theorem[Poisson's equation][
   $
     laplacian phi = -div va(E) = -rho / epsilon_0,
