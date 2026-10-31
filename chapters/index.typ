@@ -11,6 +11,8 @@
 #include "mathematical-preliminaries/index.typ"
 #include "maxwells-equations/index.typ"
 #include "electrostatics/index.typ"
+#include "electric-multipoles/index.typ"
+#include "conducting-matter/index.typ"
 
 #set heading(numbering: "A.1")
 #counter(heading).update(0)
