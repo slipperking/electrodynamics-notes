@@ -9,6 +9,7 @@
 // #include "test/index.typ"
 
 #include "mathematical-preliminaries/index.typ"
+#include "maxwells-equations/index.typ"
 #include "electrostatics/index.typ"
 
 #set heading(numbering: "A.1")

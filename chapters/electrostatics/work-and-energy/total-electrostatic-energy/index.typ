@@ -85,6 +85,6 @@ $
 $
 The term $U_"int"$ is the _interaction energy_ between the two distributions, which is precisely the potential energy between the two as defined in @eq:electrostatic-potential-energy-distribution. The previous relation entails that the given quantity does _not_ acquiesce to the superposition principle:
 $
-  U_("E", "tot", rho) = U_("E", "tot", rho_1) + U_("E", "tot", rho_2) + U_("E", "tot", "int")
+  U_("E", "tot")[rho] = U_("E", "tot")[rho_1] + U_("E", "tot")[rho_2] + U_("E", "tot", "int")
 $
 by virtue of the quadraticity of its nature.
