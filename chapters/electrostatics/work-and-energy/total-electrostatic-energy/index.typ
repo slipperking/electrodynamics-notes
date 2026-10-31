@@ -58,9 +58,9 @@ The formulation of $uetoti$ cannot be made dependent on the order in which the c
   $
 
 ]
-It could indeed transpire that the calculation through the given chosen order of assemblage is actually easier than a direct application of @eq:total-electrostatic-energy-integral-no-E.
+It could indeed transpire that calculation through the given chosen order of assemblage is actually easier than a direct application of @eq:total-electrostatic-energy-integral-no-E.
 
-But to obtain the significance, as hinted at earlier, which is beheld within @ex:uniform-ball-electrostatic-potential-energy, we consider a point charge $Q$, which could be precisely modeled by @ex:uniform-ball-electrostatic-potential-energy under the limiting condition $R -> 0^+$. The result, by virtue of the calculation performed previously, diverges thereunder, whereas the representation in @eq:total-electrostatic-energy-integral-discrete gives $0$? The confusion or described discrepancy arises from the inclusion of diagonal self-terms (or the relaxation of $va(r)' != va(r)$ in @eq:total-electrostatic-energy-integral-discrete). For the natural handling of these discrepancies, we will denote the remaining contribution of thus diagonal terms as the _self-energy_ of the localized "point charge" $dif Q$.
+But to obtain the significance, as hinted at earlier, which is beheld within @ex:uniform-ball-electrostatic-potential-energy, we consider a point charge $Q$, which could be precisely modeled by @ex:uniform-ball-electrostatic-potential-energy under the limiting condition $R -> 0^+$. The result, by virtue of the calculation performed previously, diverges thereunder, whereas the representation in @eq:total-electrostatic-energy-integral-discrete gives $0$---the confusion or described discrepancy arises from the inclusion of diagonal self-terms (or the relaxation of $va(r)' != va(r)$ in @eq:total-electrostatic-energy-integral-discrete). For the natural handling of these discrepancies, the remaining contribution of said diagonal terms---the _self-energy_---is defined and thus transpires to be infinite for the case of point charges.
 
 By Gauss' Law, $epsilon_0 div va(E) = rho$, whence @eq:total-electrostatic-energy-integral-no-E gives
 $
