@@ -56,8 +56,8 @@ by the Divergence Theorem (@thm:divergence).
 To illustrate the validity of the stress tensor in the given formulation @eq:force-stress-surface-equation, we proceed through the following example:
 #example[
   Let there be two point charges $q$ at $plus.minus d vu(z)$ ($d > 0$). Determine the electrostatic force exerted on the charge located at $d vu(z)$ by that located at $-d vu(z)$/*  by using the Maxwell electric stress tensor */.
-]
-#proof[
+] <ex:electric-stress-tensor-point-charges>
+#solution[to @ex:electric-stress-tensor-point-charges][
   Denote by
   $
     S_R &= partial V_R = {va(r) = x vu(x) + y vu(y) + z vu(z) : norm(r) = R and z >= 0} union {x vu(x) + y vu(y) : x^2 + y^2 <= R^2} \ & = L_R (subset.eq {norm(r) = R}) union P_R (subset.eq #[$x y$-plane])
@@ -81,7 +81,9 @@ To illustrate the validity of the stress tensor in the given formulation @eq:for
     &= lim_(R -> oo) 2 uppi R^2 Order(1 / R^4) + integral.double_P_R (4 q^2 r^2) / (16 uppi^2 epsilon_0 (r^2 + d^2)^3) (vu(r) times.o vu(r) - 1 / 2 vaa(I)) dot vu(n) dif S \
     &= integral_0^oo integral_(-uppi)^uppi (4 q^2 r^3) / (16 uppi^2 epsilon_0 (r^2 + d^2)^3) (vu(r) times.o vu(r) - 1 / 2 vaa(I)) dot vu(n) dif theta dif r \
     &= integral_0^oo integral_(-uppi)^uppi (4 q^2 r^3) / (16 uppi^2 epsilon_0 (r^2 + d^2)^3) (1 / 2 vu(z) - vu(r) (vu(r) dot vu(z))) dif theta dif r #tag[(where $vu(n) = -vu(z)$)] \
-    &= q^2 / (8 uppi^2 epsilon_0) integral_0^oo integral_(-uppi)^uppi r^3 / (r^2 + d^2)^3 vu(z) dif theta dif r \
+    &= q^2 / (8 uppi^2 epsilon_0) integral_0^oo integral_(-uppi)^uppi r^3 / (r^2 + d^2)^3 vu(z) dif theta dif r = 1 / (4 uppi epsilon_0) q^2 vu(z) integral_0^oo r^3 / (r^2 + d^2)^3 dif r \
+    &= 1 / (4 uppi epsilon_0) (q^2 vu(z)) / 2 integral_(d^2)^oo (u - d^2) / u^3 dif u = 1 / (4 uppi epsilon_0) (q^2 vu(z)) / 2 integral_(d^2)^oo (u - d^2) / u^3 dif u #tag[(where $u = r^2 + d^2$)]\
+    &= 1 / (4 uppi epsilon_0) (q^2 vu(z)) / 2 integral_(d^2)^oo (u - d^2) / u^3 dif u = 1 / (4 uppi epsilon_0) (q^2 vu(z)) / (4 d^2). qedhere
   $
   //
 ]
