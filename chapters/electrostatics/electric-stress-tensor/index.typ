@@ -45,7 +45,7 @@ The inside quantity is given by:
 ]
 By virtue of rewriting @eq:maxwell-electric-force-pre-tensor using the above, we have
 $
-  va(F) &= vu(e)_i integral.triple_V partial_j T_(i j) dif^3 r = vu(e)_i integral.triple_V div (vu(e)_i dot vaa(T)) dif^3 r \
+  va(F) &= vu(e)_i integral.triple_V partial_j T_(i j) dif^3 r = vu(e)_i integral.triple_V div (T_(i j) vu(e)_j) dif^3 r \
   &= vu(e)_i integral.triple_V div (vu(e)_i dot vaa(T)) dif^3 r = vu(e)_i integral.surf_(partial V) (vu(e)_i dot vaa(T)) dot dif va(S) \
   &=vu(e)_i [vu(e)_i dot integral.surf_(partial V) vaa(T) dot dif va(S)] = integral.surf_(partial V) vaa(T) dot dif va(S)
 $ <eq:force-stress-surface-equation>
