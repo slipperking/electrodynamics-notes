@@ -53,3 +53,35 @@ by the Divergence Theorem (@thm:divergence).
 #todo[
   Add a section in math preliminaries comprising tensors, product notations (including juxtaposition), the dot products, non-commutativity except symmetry
 ]
+To illustrate the validity of the stress tensor in the given formulation @eq:force-stress-surface-equation, we proceed through the following example:
+#example[
+  Let there be two point charges $q$ at $plus.minus d vu(z)$ ($d > 0$). Determine the electrostatic force exerted on the charge located at $d vu(z)$ by that located at $-d vu(z)$/*  by using the Maxwell electric stress tensor */.
+]
+#proof[
+  Denote by
+  $
+    S_R &= partial V_R = {va(r) = x vu(x) + y vu(y) + z vu(z) : norm(r) = R and z >= 0} union {x vu(x) + y vu(y) : x^2 + y^2 <= R^2} \ & = L_R (subset.eq {norm(r) = R}) union P_R (subset.eq #[$x y$-plane])
+  $
+  to be the closed hemispherical surface of radius $R$. The total electric field is thence given by
+  $
+    va(E)(va(r)) = 1 / (4 uppi epsilon_0) q / norm(va(r) - d vu(z))^3 (va(r) - d vu(z)) + 1 / (4 uppi epsilon_0) q / norm(va(r) + d vu(z))^3 (va(r) + d vu(z)),
+  $
+  $
+    va(r) in P_r &==> va(E)(va(r)) = q / (4 uppi epsilon_0) [(x vu(x) + y vu(y) - d vu(z)) / (x^2 + y^2 + d^2)^(3 / 2) + (x vu(x) + y vu(y) + d vu(z)) / (x^2 + y^2 + d^2)^(3 / 2)]= (2 q) / (4 uppi epsilon_0) va(r) / (r^2 + d^2)^(3 / 2) \
+    & ==> vaa(T)(va(r)) = (4 q^2 r^2) / (16 uppi^2 epsilon_0 (r^2 + d^2)^3) (vu(r) times.o vu(r) - 1 / 2 vaa(I)),
+  $
+  $
+    va(r) in L_R &==> va(E)(va(r)) = q / (4 uppi epsilon_0) [(va(r) - d vu(z)) / (x^2 + y^2 + (z - d)^2)^(3 / 2) + (va(r) + d vu(z)) / (x^2 + y^2 + (z + d)^2)^(3 / 2)] \ & wide wide quad = q / (4 uppi epsilon_0) (2va(r)) / (R^2 + Order(R))^(3 / 2) = Order(1 / R^2) #tag[(as $R -> oo$)] \
+    & ==> vaa(T)(va(r)) = Order(E^2) = Order(1 / R^4),
+  $
+  whence
+  $
+    va(F) &= lim_(R -> oo) integral.surf_S_R vaa(T) dot dif va(S) = lim_(R -> oo) integral.double_L_R vaa(T) dot dif va(S) + integral.double_P_R vaa(T) dot dif va(S) \
+    &= lim_(R -> oo) integral.double_L_R Order(1 / R^4) dif S + integral.double_P_R (4 q^2 r^2) / (16 uppi^2 epsilon_0 (r^2 + d^2)^3) (vu(r) times.o vu(r) - 1 / 2 vaa(I)) dot vu(n) dif S \
+    &= lim_(R -> oo) 2 uppi R^2 Order(1 / R^4) + integral.double_P_R (4 q^2 r^2) / (16 uppi^2 epsilon_0 (r^2 + d^2)^3) (vu(r) times.o vu(r) - 1 / 2 vaa(I)) dot vu(n) dif S \
+    &= integral_0^oo integral_(-uppi)^uppi (4 q^2 r^3) / (16 uppi^2 epsilon_0 (r^2 + d^2)^3) (vu(r) times.o vu(r) - 1 / 2 vaa(I)) dot vu(n) dif theta dif r \
+    &= integral_0^oo integral_(-uppi)^uppi (4 q^2 r^3) / (16 uppi^2 epsilon_0 (r^2 + d^2)^3) (1 / 2 vu(z) - vu(r) (vu(r) dot vu(z))) dif theta dif r #tag[(where $vu(n) = -vu(z)$)] \
+    &= q^2 / (8 uppi^2 epsilon_0) integral_0^oo integral_(-uppi)^uppi r^3 / (r^2 + d^2)^3 vu(z) dif theta dif r \
+  $
+  //
+]
