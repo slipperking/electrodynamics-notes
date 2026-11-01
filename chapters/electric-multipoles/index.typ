@@ -28,11 +28,11 @@ wherein the intermediate steps are justified iff the expansion converges, notabl
 
 Allow us the closer examination of a handful of individual terms
 $
-  phi(va(r)) & = 1 / (4 uppi epsilon_0) [integral.triple_(r' < R) rho(va(r)') dif^3 r' - integral.triple_(r' < R) rho(va(r)') r'_i_1 dif^3 r' partial_i_1 1 / r \
+  phi(va(r)) & = 1 / (4 uppi epsilon_0) [integral.triple_(r' < R) rho(va(r)') dif^3 r' 1/r - integral.triple_(r' < R) rho(va(r)') r'_i_1 dif^3 r' partial_i_1 1 / r \
     &wide wide""+ 1 / 2 integral.triple_(r' < R) rho(va(r)') r'_i_1 r'_i_2 dif^3 r' partial_i_1 partial_i_2 1 / r + dots.c] \
-  & = 1 / (4 uppi epsilon_0) [Q - (integral.triple_(r' < R) rho(va(r)') va(r)' dif^3 r') dot grad 1 / r \
+  & = 1 / (4 uppi epsilon_0) [Q/r - (integral.triple_(r' < R) rho(va(r)') va(r)' dif^3 r') dot grad 1 / r \
     &wide wide""+ 1 / 2 integral.triple_(r' < R) rho(va(r)') r'_i_1 r'_i_2 vu(e)_i_1 times.o vu(e)_i_2 dif^3 r' : partial_i_1 partial_i_2 vu(e)_i_1 times.o vu(e)_i_2 1 / r + dots.c] \
-  & = 1 / (4 uppi epsilon_0) [Q - (integral.triple_(r' < R) rho(va(r)') va(r)' dif^3 r') dot grad 1 / r \
+  & = 1 / (4 uppi epsilon_0) [Q/r - (integral.triple_(r' < R) rho(va(r)') va(r)' dif^3 r') dot grad 1 / r \
     &wide wide""+ 1 / 2 integral.triple_(r' < R) rho(va(r)') va(r)' times.o va(r)' dif^3 r' : grad times.o grad 1 / r \
     &wide wide quad"" - 1 / 6 integral.triple_(r' < R) rho(va(r)') va(r)'^(times.o 3) dif^3 r' colon.tri.op grad^(times.o 3) 1 / r + dots.c],
 $
@@ -51,7 +51,7 @@ wherein the follow definitions are utilized
 ]
 
 #definition[
-  The _electric quadruple moment_ is the dyadic tensor given by
+  The _electric quadrupole moment_ is the dyadic tensor given by
   $
     vaa(Q) = integral.triple_(r' < R) rho(va(r)') va(r)' times.o va(r)' dif^3 r'
   $
