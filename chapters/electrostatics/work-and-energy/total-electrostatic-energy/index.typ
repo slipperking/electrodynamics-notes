@@ -65,17 +65,17 @@ But to obtain the significance, as hinted at earlier, which is beheld within @ex
 By Gauss' Law, $epsilon_0 div va(E) = rho$, whence @eq:total-electrostatic-energy-integral-no-E gives
 $
   uetot & = 1 / 2 integral.triple rho(va(r)) phi(va(r)) dif^3 r = epsilon_0 / 2 integral.triple phi div va(E) dif^3 r = epsilon_0 / 2 integral.triple [div(phi va(E)) - va(E) dot grad phi] dif^3 r \
-  &= lim_(R -> oo) epsilon_0 / 2 integral.surf_(r = R) phi va(E) dot dif va(S) + epsilon_0 / 2 integral.triple_(r < R) va(E)^2 dif^3 r
+  &= lim_(R -> oo) epsilon_0 / 2 integral.surf_(r = R) phi va(E) dot dif va(S) + epsilon_0 / 2 integral.triple_(r < R) E^2 dif^3 r
 $ <eq:total-electrostatic-energy-integral-with-E>
 (by the Divergence Theorem (@thm:divergence)). Imperatively, the expression in @eq:total-electrostatic-energy-integral-no-E holds throughout any volume which encloses all the charge, as all extraneous values for which $rho = 0$ contribute not to the integral. Correspondingly, this must entail, that in @eq:total-electrostatic-energy-integral-with-E, assuming $R$ sufficiently large as to enclose all charge, the volume integral can only be increasing therewith. It then must follow that the surface integral itself decreases, by an equal amount, to maintain this equality.
 
 Assuming this compact support condition upon $rho$, #todo(block: false)[Vanish of term], the first integral vanishes, leaving in lieu thereof
 #definition[
   $
-    uetot = epsilon_0 / 2 integral.triple_(RR^3) va(E)^2 dif^3 r.
+    uetot = epsilon_0 / 2 integral.triple_(RR^3) E^2 dif^3 r.
   $
 ]
-In this formulation, the quantity $uetot$ is dependent on the electric field, and not necessarily $rho$. For this very reason $uetot$ has also been given the name "electric field energy." In the field of general relativity, it becomes incumbent to consider $uetot$ as a part of the field, with a volume energy density $epsilon_0 / 2 va(E)^2$.
+In this formulation, the quantity $uetot$ is dependent on the electric field, and not necessarily $rho$. For this very reason $uetot$ has also been given the name "electric field energy." In the field of general relativity, it becomes incumbent to consider $uetot$ as a part of the field, with a volume energy density $epsilon_0 / 2 E^2$.
 
 The total field energy can also be determined as the sum of _self_ and _interaction_ energies of any two constituent bodies, which constitutes the preceding developments of this section. For instance, consider a continuous volume charge distribution $rho$, separated into two bodies $rho = rho_1 + rho_2$, whence
 $

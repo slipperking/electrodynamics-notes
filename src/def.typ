@@ -11,3 +11,5 @@
 #let va(..args) = _va(vb(..args))
 #import "@preview/unify:0.8.1": num, qty
 #let pv = math.op("P.V.")
+
+#let vaa(..args) = _va(_va(vb(math.sans(..args))))
