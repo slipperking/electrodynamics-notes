@@ -1,7 +1,6 @@
 #import "/lib.typ": *
 #show: docs-subsubchapter.with(
-  title: [Convective Derivative],
-  route: "convective-derivative",
+  ..dargs("The Convective Derivative"),
 )
 In the general consideration of time-varying scalar field $phi(va(r), t)$, the change of $phi$ with respect to $t$, as observed by a stationary observer at $va(r)$, is given by $pdv(phi, t)$. Then the natural extension would be to consider the way in which $phi$ would change if the observer position also varied in time, i.e. $va(r)(t) = x(t) vu(x) + y(t) vu(y) + z(t) vu(z)$. The answer thereof is answered with a simple application of the chain rule:
 $

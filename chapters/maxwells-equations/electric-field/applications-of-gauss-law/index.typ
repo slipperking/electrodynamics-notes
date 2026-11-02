@@ -362,7 +362,7 @@ The first usage is readily demonstrated by the proof above. We hence provide the
     caption: [A Gaussian pillbox $S$ centered on the uniformly charged plane.],
   ) <fig:gaussian-pillbox>
 ]
-#example(restate: true, restate-keys: "ex:gaussian-surface-pillbox")[
+#example(restate: true)[
   An infinite plane coplanar with the $x y$-plane carries a surface charge density distribution $sigma$, whereby an electric field $va(E)$ is generated. Find $va(E)(va(r))$ at an arbitrary point $va(r)$.
 ] <ex:gaussian-surface-pillbox>
 #solution[to @ex:gaussian-surface-pillbox][

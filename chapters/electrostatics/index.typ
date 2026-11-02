@@ -1,7 +1,6 @@
 #import "/lib.typ": *
 #show: docs-chapter.with(
-  title: [Electrostatics],
-  route: "electrostatics",
+  ..dargs("Electrostatics"),
   children: {
     // include "electric-charges/index.typ"
     // include "current-density/index.typ"

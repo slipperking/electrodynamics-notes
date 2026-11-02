@@ -246,7 +246,8 @@
   /// -> bool
   defer: false,
   /// Keys used by @thm-restate.keys for filtering.
-  /// If ```typc auto```, defaults to an array containing @thm.supplement and @thm.name (if present).
+  /// If ```typc auto```, defaults to an array containing @thm.supplement,
+  /// @thm.name (if present), and the theorem's label as a string (if present).
   /// -> array
   restate-keys: auto,
   /// Formatting function controlling the appearance of the theorem
@@ -306,6 +307,8 @@
     link(thm.loc, [#supplement#thm.number])
   },
 ) = {
+  let infer-label-restate-key = restate-keys == auto
+
   if name == auto {
     if args != none and args.pos().len() > 0 {
       name = args.pos().first()
@@ -353,6 +356,7 @@
     restate: restate,
     defer: defer,
     restate-keys: restate-keys,
+    restate-keys-auto: infer-label-restate-key,
     ref-fmt: ref-fmt,
   )
 
@@ -374,7 +378,11 @@
         let loc = here()
         let number-computed = _computed-number(number, numbering, counter, base)
         let group = state("render-mode").get()
-        let thm = thm + (number: number-computed, loc: loc, group: group)
+        let thm = thm + (
+          number: number-computed,
+          loc: loc,
+          group: group,
+        )
         [
           #metadata(thm) <meta:thm-env-counter>
           #fmt(thm)

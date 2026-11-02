@@ -2,6 +2,7 @@
 #let authors = ("Slipper King",)
 #let date = "October 21, 2026"
 #let source-url = "https://github.com/slipperking/electrodynamics-notes"
+#let not-found-url = "https://slipperking.github.io/electrodynamics-notes/page-not-found/"
 
 #let join-oxford-commas(v) = {
   if v.len() < 2 { v.at(0, default: "") } else if v.len() == 2 { v.join(" and ") } else {

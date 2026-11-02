@@ -1,13 +1,49 @@
 // The theorem marker is the single source of truth. Keeping full theorem bodies
 // in an append-only state duplicated this data and repeatedly copied a growing
 // array during layout.
-#let _stored-theorems(at: auto, final: false) = {
+#let _stored-theorems(
+  at: auto,
+  final: false,
+  label-keys: (),
+  all-label-keys: false,
+) = {
   let target = selector(<meta:thm-env-counter>)
   if not final {
     target = target.before(if at == auto { here() } else { at })
   }
   let group = state("render-mode").get()
-  query(target).map(marker => marker.value).filter(thm => thm.group == group)
+
+  let entries = query(target)
+    .map(marker => (marker: marker, thm: marker.value))
+    .filter(entry => entry.thm.group == group)
+
+  // A trailing label belongs to the theorem's enclosing figure rather than to
+  // the metadata marker in its body. Associate the two after layout so this
+  // also works across the separate documents emitted by HTML bundle export.
+  if all-label-keys or label-keys.len() > 0 {
+    for theorem-figure in query(figure.where(kind: "thm-env")) {
+      let theorem-label = theorem-figure.fields().at("label", default: none)
+      if theorem-label != none {
+        let label-key = str(theorem-label)
+        if all-label-keys or label-keys.contains(label-key) {
+          let markers = query(selector(<meta:thm-env-counter>).within(theorem-figure.location()))
+          if markers.len() == 1 {
+            let marker-location = markers.first().location()
+            let index = entries.position(entry => entry.marker.location() == marker-location)
+            if index != none and entries.at(index).thm.restate-keys-auto {
+              let entry = entries.at(index)
+              if not entry.thm.restate-keys.contains(label-key) {
+                entry.thm.restate-keys.push(label-key)
+                entries.at(index) = entry
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  entries.map(entry => entry.thm)
 }
 
 /// Displays all theorem environments, can be filtered.
@@ -125,7 +161,7 @@
   final: false,
 ) = {
   context {
-    let thms = _stored-theorems(at: at, final: final)
+    let thms = _stored-theorems(at: at, final: final, all-label-keys: true)
     if filters.pos().len() > 0 {
       // Use arg_1 or ... or arg_n style filter
       thms = thms.filter(thm => filters.pos().any(x => x(thm)))
@@ -301,7 +337,23 @@
   all: false,
 ) = {
   context {
-    let thms = _stored-theorems(at: at, final: final)
+    let label-keys = ()
+    let all-label-keys = fmt != auto
+    for key in keys.pos() {
+      if type(key) == str {
+        label-keys.push(key)
+      } else if type(key) == array {
+        label-keys += key.filter(item => type(item) == str)
+      } else if type(key) == function {
+        all-label-keys = true
+      }
+    }
+    let thms = _stored-theorems(
+      at: at,
+      final: final,
+      label-keys: label-keys,
+      all-label-keys: all-label-keys,
+    )
     if not all {
       thms = thms.filter(thm => (thm.restate or thm.defer))
     }

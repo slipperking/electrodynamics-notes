@@ -32,6 +32,7 @@
 #let authors = _web.authors
 #let date = _web.date
 #let source-url = _web.source-url
+#let not-found-url = _web.not-found-url
 #let docs-cover = _web.docs-cover
 #let docs-frontmatter = _web.docs-frontmatter
 #let docs-chapter = _web.docs-chapter

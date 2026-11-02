@@ -80,6 +80,14 @@
 #let nothing = sym.diameter
 #let emptyset = sym.diameter
 #let interior(x) = $attach(limits(#x), t: circle.small)$
+#let hfrc(it) = {
+  set math.frac(style: "horizontal")
+  it
+}
+#let sfrc(it) = {
+  set math.frac(style: "skewed")
+  it
+}
 
 #let doubletilde(x) = $tilde(tilde(#x))$
 #let widearc(x) = $accent(x, paren.t)$

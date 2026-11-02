@@ -6,6 +6,7 @@
 #let authors = source.authors
 #let date = source.date
 #let source-url = source.source-url
+#let not-found-url = source.not-found-url
 
 #let render-mode = state("render-mode", "web")
 #let html-only = sys.inputs.at("html-only", default: "false") == "true"
@@ -102,6 +103,7 @@
 
 #let _title-route(title) = {
   lower(_plain-text(title))
+    .replace(regex("^the[ \t\r\n]+"), "")
     .replace(regex("['’‘ʼ＇]"), "")
     .replace(regex("[^a-z0-9]+"), "-")
     .trim("-")
@@ -632,7 +634,7 @@
 }
 
 #let _redirect-404-page() = {
-  let target = "https://slipperking.github.io/complex-analysis/page-not-found"
+  let target = not-found-url
 
   document("/404.html", title: "Redirecting…")[
     #show: document-styles.with(mode: "web")
