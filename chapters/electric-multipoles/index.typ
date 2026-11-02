@@ -40,7 +40,7 @@ $
     &wide wide + 1 / 2 integral.triple_(s' < R) rho(va(r)') va(s)' times.o va(s)' dif^3 r' : grad times.o grad 1 / s \
     &wide wide - 1 / 6 integral.triple_(s' < R) rho(va(r)') va(s)'^(times.o 3) dif^3 r' colon.tri.op grad^(times.o 3) 1 / s + dots.c], \
   & = 1 / (4 uppi epsilon_0) [Q / s - va(p) dot grad 1 / s + 1 / 2 vaa(Q) : grad^(times.o 2) 1 / s - 1 / 6 vb(O) colon.tri.op grad^(times.o 3) 1 / s + dots.c + (-1)^n / n! vb(Q)^((n)) limits(dot)^n grad^(times.o n) 1 / s + dots.c],
-$
+$ <eq:electric-multipole-expansion>
 wherein the following definitions are utilized
 #definition[
   The _electric monopole moment_ is simply the total charge
