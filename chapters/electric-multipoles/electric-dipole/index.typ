@@ -27,17 +27,19 @@ in the multipole expansion as provided in @eq:electric-multipole-expansion. It c
   $
 ]
 
-The corresponding dipole term in $phi$, defined to be the _electric dipole potential_, is given by
+The corresponding dipole term in $phi$, defined to be the _electric dipole potential_ for $s != 0$, is given by
 $
   phi_1(va(r)) = 1 / (4 uppi epsilon_0) (va(p) dot va(s)) / s^3.
-$
+$ <eq:electric-dipole-potential>
 From the moment we obtain the complete typification of the _electric dipole field_
 $
-  va(E)_1(va(r)) & = - 1 / (4 uppi epsilon_0) grad_((va(s))) (va(p) dot va(s)) / s^3 = - 1 / (4 uppi epsilon_0) [(va(p) dot grad) va(s) / s^3 + va(p) times (curl va(s) / s^3)] \
-  &=- 1 / (4 uppi epsilon_0) [1 / s^3 (va(p) dot grad) va(s) + va(s) (va(p) dot grad) 1 / s^3 - va(p) times (curl grad 1 / s)] #tag[($s != 0$)]\
+  va(E)_1(va(r)) & = - 1 / (4 uppi epsilon_0) grad_((va(s))) (va(p) dot va(s)) / s^3 = - 1 / (4 uppi epsilon_0) [(va(p) dot grad) va(s) / s^3 + va(p) times (curl va(s) / s^3)] #tag[($s != 0$)]\
+  &=- 1 / (4 uppi epsilon_0) [1 / s^3 (va(p) dot grad) va(s) + va(s) (va(p) dot grad) 1 / s^3 - va(p) times (curl grad 1 / s)] \
   &=- 1 / (4 uppi epsilon_0) [1 / s^3 (va(p) dot grad) va(s) - va(s) (va(p) dot (3 va(s)) / s^5)] = - 1 / (4 uppi epsilon_0) [1 / s^3 p_i partial_i s_j vu(e)_j - va(s) (va(p) dot (3 va(s)) / s^5)] \
   &= - 1 / (4 uppi epsilon_0) [1 / s^3 p_i delta_(i j) vu(e)_j - va(s) (va(p) dot (3 va(s)) / s^5)]= 1 / (4 uppi epsilon_0) (3 vu(s) (va(p) dot vu(s)) - va(p)) / s^3
 $ <eq:electric-dipole-field>
+away from the origin.
+
 Consider the choice of $rho$, $va(r)_0$, and the subsequent $phi$ and other variables such that the electric potential multipole expansion comprises no monopole term, in which case $Q$, the enclosed charge, is $0$. It transpires that in a multitude of practical cases, such as in atoms, water, etc., $Q = 0$, wherein the leading term is the dipole term at far ($s >> R$), whence with $s >> R$, $phi(va(r)) = phi_1 (va(r))$ (asymptotically).
 
 Appealing in @eq:electric-dipole-field to a spherical coordinate system $(s, theta, phi_"az")$ with a polar axis $vu(p)$, denoting by $theta$ the polar angle between $vu(s)$ and $vu(p)$ and by $phi_"az"$ an angle of rotation about $va(p)$ (with a fixed reference point), it follows thence that
