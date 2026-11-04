@@ -7,13 +7,7 @@ Where $rho$ is a volume charge density distribution in $Omega$, restricting $rho
 $
   va(F) = integral.triple_V rho_V (va(r)) va(E)_(Omega without V) (va(r)) dif^3 r.
 $
-Observation of the self-force that
-$
-  integral.triple_V rho_V va(E)_V (va(r)) dif^3 r &= 1 / (4 uppi epsilon_0) integral.triple_V integral.triple_V (rho_V (va(r)) rho_V (va(r)')) / norm(va(r) - va(r)')^3 (va(r) - va(r)') dif^3 r' dif^3 r \
-  &= 1 / (4 uppi epsilon_0) integral.triple_V integral.triple_V (rho_V (va(r)) rho_V (va(r)')) / norm(va(r) - va(r)')^3 va(r) dif^3 r' dif^3 r - /* integral.triple_V integral.triple_V */ (rho_V (va(r)) rho_V (va(r)')) / norm(va(r) - va(r)')^3 va(r)' dif^3 r' dif^3 r \
-  &= 1 / (4 uppi epsilon_0) integral.triple_V integral.triple_V (rho_V (va(r)) rho_V (va(r)')) / norm(va(r) - va(r)')^3 va(r) dif^3 r' dif^3 r - /* integral.triple_V integral.triple_V */ (rho_V (va(r)') rho_V (va(r))) / norm(va(r)' - va(r))^3 va(r) dif^3 r dif^3 r' = 0,
-$
-it thus follows that
+It thus follows from @eq:electric-distribution-force-self-vanish that
 $
   va(F) &= integral.triple_V rho_V (va(r)) va(E)_(Omega without V) (va(r)) dif^3 r = integral.triple_V rho (va(r)) (va(E)_(Omega without V) + va(E)_V) (va(r)) dif^3 r = integral.triple_V rho (va(r)) va(E) (va(r)) dif^3 r \
   &= epsilon_0 integral.triple_V (div va(E)) va(E) (va(r)) dif^3 r

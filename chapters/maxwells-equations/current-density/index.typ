@@ -3,7 +3,7 @@
   title: [Current and Current Density],
   route: "current-density",
 )
-The collective motion of electric charge in a time-static volume $V$ is known as _(volume) electric current_, whose properties and behavior are described by the _current density vector_ $va(J)(va(r), t)$ and its flux $I$ through a given bounded surface $S$, referred to as the _total electric current_. If the description of charges and their motion is to be modeled in analogy with fluid flow, then the current density corresponds to the volume flux density.
+The collective motion of electric charge in a time-independent volume $V$ is known as _(volume) electric current_, whose properties and behavior are described by the _current density vector_ $va(J)(va(r), t)$ and its flux $I$ through a given bounded surface $S$, referred to as the _total electric current_. If the description of charges and their motion is to be modeled in analogy with fluid flow, then the current density corresponds to the volume flux density.
 #definition[
   Define the _electric current density_ to be the rate at which electric charge passes through a unit area of a surface in the direction of charge motion. In other words, $va(J) dot dif va(S)$ is the amount of charge passing through the differential surface element per unit time.
 ]

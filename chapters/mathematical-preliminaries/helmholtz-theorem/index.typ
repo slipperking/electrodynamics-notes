@@ -4,7 +4,7 @@
   route: "Helmholtz-theorem",
 )
 #theorem[Helmholtz Decomposition Theorem][
-  For a sufficiently smooth time-static vector field $va(F) : V subset.eq RR^3 -> RR^3$, the Helmholtz Decomposition Theorem guarentees the existence of a decomposition of $va(F)$ by an irrotational field $va(F)_parallel$ with zero curl and a solenoidal field $va(F)_perp$ with zero divergence. Moreover, $exists phi$ such that $-grad phi = va(F)_parallel$, known as the _scalar potential_ of $va(F)_parallel$; and $exists va(A)$, the _vector potential_ of $va(F)_perp$, such that $va(F)_perp = curl va(A)$. Then
+  For a sufficiently smooth time-independent vector field $va(F) : V subset.eq RR^3 -> RR^3$, the Helmholtz Decomposition Theorem guarentees the existence of a decomposition of $va(F)$ by an irrotational field $va(F)_parallel$ with zero curl and a solenoidal field $va(F)_perp$ with zero divergence. Moreover, $exists phi$ such that $-grad phi = va(F)_parallel$, known as the _scalar potential_ of $va(F)_parallel$; and $exists va(A)$, the _vector potential_ of $va(F)_perp$, such that $va(F)_perp = curl va(A)$. Then
   $ va(F) = curl va(A) - grad phi. $
 ]
 A given decomposition may be explicitly given by:
