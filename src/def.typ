@@ -1,3 +1,8 @@
+#let gradsu(a) = $bold(nabla)_#a$
+#let divsu(a) = $bold(nabla)_#a dot.c$
+#let curlsu(a) = $bold(nabla)_#a times$
+#let laplaciansu(a) = $nabla_#a^2$
+
 #let gradp = $bold(nabla)'$
 #let divp = $bold(nabla)'dot.c$
 #let curlp = $bold(nabla)'times$

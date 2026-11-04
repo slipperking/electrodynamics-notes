@@ -42,11 +42,11 @@ away from the origin.
 
 Consider the choice of $rho$, $va(r)_0$, and the subsequent $phi$ and other variables such that the electric potential multipole expansion comprises no monopole term, in which case $Q$, the enclosed charge, is $0$. It transpires that in a multitude of practical cases, such as in atoms, water, etc., $Q = 0$, wherein the leading term is the dipole term at far ($s >> R$), whence with $s >> R$, $phi(va(r)) = phi_1 (va(r))$ (asymptotically).
 
-Appealing in @eq:electric-dipole-field to a spherical coordinate system $(s, theta, phi_"az")$ with a polar axis $vu(p)$, denoting by $theta$ the polar angle between $vu(s)$ and $vu(p)$ and by $phi_"az"$ an angle of rotation about $va(p)$ (with a fixed reference point), it follows thence that
+Appealing in @eq:electric-dipole-field to a spherical coordinate system $(s, theta, phi.alt)$ with a polar axis $vu(p)$, denoting by $theta$ the polar angle between $vu(s)$ and $vu(p)$ and by $phi.alt$ an angle of rotation about $va(p)$ (with a fixed reference point), it follows thence that
 $
   va(E)_1 (va(r)) /* = 1 / (4 uppi epsilon_0) (3 vu(s) p cos theta - va(p)) / s^3  */= 1 / (4 uppi epsilon_0) (3 vu(s) p cos theta - p[vu(s) cos theta - vu(theta) sin theta]) / s^3 = p / (4 uppi epsilon_0 s^3) [2 vu(s) cos theta + vu(theta) sin theta],
 $
-is azimuthally symmetric---if $phi_"az"$ were to change by some $delta phi_"az"$, such a variation would result in a rotation of $vu(r)$ and $vu(theta)$ by $delta phi_"az"$ about the $vu(p)$-axis; whereby the previous equation entails a rotation of $va(E)$ by $delta phi_"az"$ about the axis.
+is azimuthally symmetric---if $phi.alt$ were to change by some $delta phi.alt$, such a variation would result in a rotation of $vu(r)$ and $vu(theta)$ by $delta phi.alt$ about the $vu(p)$-axis; whereby the previous equation entails a rotation of $va(E)$ by $delta phi.alt$ about the axis.
 
 The historical motivation for the naming of "dipole" comes from the following geometric construction, due to Maxwell: consider a configuration wherein two point charges $plus.minus q / d$ respectively at $va(r)_0 plus.minus d vu(c) / 2$ are held within a sphere centered at $va(r)_0$ of radius $R$. With $d -> 0^+$, the electric dipole moment is
 $
@@ -73,5 +73,5 @@ whereto we refer as _the point dipole charge density_ distribution.
     rho(va(r)) = -va(p) dot grad delta(va(r) - va(r)_0),
   $
   for any nonzero vector $va(p)$, the electric dipole moment. The multipole expansion thereof about $va(r)_0$ comprises but a single dipole term.
-] <def:point-dipole>
+] <def:electric-point-dipole>
 It is incumbent to interpret @eq:point-dipole-charge-density in the distributional sense. Where the pure monopole is describable by a point charge, the pure dipole is likewise completely ascribable by the point dipole. The current knowledge of physicists accord to the nonexistence of naturally-occuring point dipoles, which is not to say that @eq:point-dipole-charge-density holds no practical utility; it often transpires as a utile approximation whensoever the analogous separation $d$ is relatively insignificant to the separation distance $s >> d$.

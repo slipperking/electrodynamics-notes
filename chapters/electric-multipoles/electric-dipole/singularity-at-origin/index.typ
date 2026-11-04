@@ -23,9 +23,10 @@ $
   &=1 / (4 uppi epsilon_0) (1 / R^3 integral.triple_V - 1 / epsilon^3 integral.triple_B_epsilon) vu(e)_i p_j delta_(i j) dif^3 r - integral.triple_B_epsilon va(E) dif^3 r \
   &=1 / (4 uppi epsilon_0) (1 / R^3 integral.triple_V - 1 / epsilon^3 integral.triple_B_epsilon) vu(e)_i p_i dif^3 r - integral.triple_B_epsilon va(E) dif^3 r \
   &=1 / (4 uppi epsilon_0) (4 / 3 uppi - 4 / 3 uppi) va(p) - integral.triple_B_epsilon va(E) dif^3 r = -integral.triple_B_epsilon va(E) dif^3 r,
-$
+$ <eq:moment-electric-field-point-dipole>
 wherein the equality must hold for all $epsilon < R$. From the last expression gives the motivation to write
 #theorem[Electric Point Dipole Field][
+  Distributionally,
   $
     va(E)(va(r)) = pv 1 / (4 uppi epsilon_0) (3 vu(s) (va(p) dot vu(s)) - va(p)) / s^3 - va(p) / (3 epsilon_0) delta(va(s)),
   $
@@ -34,6 +35,20 @@ wherein the equality must hold for all $epsilon < R$. From the last expression g
     pv integral.triple 1 / (4 uppi epsilon_0) (3 vu(s) (va(p) dot vu(s)) - va(p)) / s^3 dif^3 r = lim_(epsilon ->0^+) integral.triple_(s > epsilon) 1 / (4 uppi epsilon_0) (3 vu(s) (va(p) dot va(s)) - va(p)) / s^3 dif^3 r
   $
 ] <thm:electric-point-dipole-field>
-We shall now demonstrate the veracity of the above.
-// we need to demonstrate convergence/well definedness
-// then show consistency with the rho -p dot grad delta
+We shall now give intuition for the veracity of the above.
+
+Its well-definedness of the principal value is given in @eq:moment-electric-field-point-dipole in the case of spherical regions. For an arbitrary region $V$, it may be written as the union of a ball centered at $va(r)_0$ and its complement.
+
+Now assuming $rho = -va(p) dot grad delta(s)$, we have @thm:electric-point-dipole-field.
+$
+  -grad phi(va(r)) = 1 / (4 uppi epsilon_0) grad [va(p) dot (-vu(s) / s^2)] = 1 / (4 uppi epsilon_0) grad [va(p) dot grad 1 / s]
+$
+$
+  va(E) &= 1 / (4 uppi epsilon_0) p_j vu(e)_i partial_i partial_j 1 / s = 1 / (4 uppi epsilon_0) p_j partial_j vu(e)_i partial_i 1 / s \
+  &= 1 / (4 uppi epsilon_0) (va(p) dot grad) grad 1 / s = 1 / (4 uppi epsilon_0) va(p) dot grad times.o grad 1 / s.
+$
+The trace of the dyadic $grad times.o grad 1 / s$ is given by
+$
+  trace(grad times.o grad 1 / s) = laplacian 1 / s = -4 uppi delta(va(s)),
+$
+which is the source of the necessitated $delta$.

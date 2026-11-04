@@ -2,7 +2,10 @@
 #show: docs-subchapter.with(
   title: [The Electric Field],
   route: "electric-field",
-  children: include "applications-of-gauss-law/index.typ",
+  children: {
+    include "applications-of-gauss-law/index.typ"
+    include "solid-angle/index.typ"
+  },
 )
 Experimental work nearing the end of the 18th century established that in the case of approximated point charges, the force on a _test charge_ $q$ at $va(r)$ (which may or may not be stationary) due to $n$ stationary _source_ point charges $q_k$ at $va(r)_k$ follows the inverse-square law. We (for this instant) only consider the case of _electrostatics_ (where source charges are time-static), in which the relation holds. The formulation thereof is given by _Coulomb's Law_, for the case of a vacuum:
 #theorem[Coulomb's Law][
