@@ -7,7 +7,7 @@ Allow us to chance a closer examination of @eq:electric-dipole-field, wherein we
 
 To allow a more detailed observation thereof, first we derive
 #theorem[
-  An arbitrary localized electrostatic charge density distribution $rho(va(r))$ generates an electric field $va(E)(va(r))$. For any spherical volume $V$ (where we impose no restriction upon its center) enclosing the support of $rho$, the electric dipole moment is determinable from
+  An arbitrary localized electrostatic charge density distribution $rho(va(r))$ generates an electric field $va(E)(va(r))$. For any spherical volume $V$ (where we impose no restriction upon its center $va(r)_0$) enclosing the support of $rho$, the electric dipole moment about $va(r)_0$ is determinable from
   $
     va(p) = -3 epsilon_0 integral.triple_V va(E)(va(r)) dif^3 r.
   $
