@@ -13,8 +13,8 @@ $
   &= [1 - va(r) dot grad] ef(va(r)) integral.triple rho(va(r)') dif^3 r' + integral.triple (va(r)' dot grad) ef(va(r)) rho(va(r)') dif^3 r' \
   &= integral.triple (va(r)' dot grad) ef(va(r)) rho(va(r)') dif^3 r' = (integral.triple va(r)' rho(va(r)') dif^3 r' dot grad) ef(va(r)) \
   &= (va(p) dot grad) ef(va(r)) = p_i [partial_i E_("ext", j)] vu(e)_j = p_i [partial_j E_("ext", i)] vu(e)_j #tag[$("since" curl ef ==> partial_i E_("ext", j) = partial_j E_("ext", i))$] \
-  &= vu(e)_j partial_j p_i E_("ext", i) = grad (va(p) dot ef(va(r))) \
-$
+  &= vu(e)_j partial_j p_i E_("ext", i) = grad (va(p) dot ef(va(r)))
+$ <eq:electric-dipole-force>
 Where $va(N)$ is the torque,
 $
   va(N) & = integral.triple va(r)' rho(va(r)') times [ef(va(r)) + (va(s) dot grad) ef(va(r))] dif^3 r' \
@@ -26,12 +26,12 @@ $
   &= va(p) times ef + va(r) times [(integral.triple rho(va(r)') va(r)' dif^3 r' - va(r) integral.triple rho(va(r)') dif^3 r') dot grad] ef(va(r)) (+ Order(s^2)) \
   &= va(p) times ef + va(r) times (va(p) dot grad) ef(va(r)) (+ Order(s^2)) \
   &= va(p) times ef + va(r) times va(F)_"ext" (+ Order(s^2)).
-$
+$ <eq:electric-dipole-torque>
 The relation
 $
   va(N) = va(p) times ef + va(r) times va(F)_"ext"
 $
-is exact when $rho$ is the point dipole charge density distribution at $va(r)$. Indeed, by the distributional gradient,
+is exact when $rho$ is the point dipole charge density distribution at $va(r)$. Indeed, by the distributional gradient (integration by parts),
 $
   va(N) &= -integral.triple va(r)' times va(E)_"ext" (va(r)') va(p) dot gradp delta(va(s)) dif^3 r' = integral.triple delta(va(s)) (va(p) dot gradp) [va(r)' times va(E)_"ext" (va(r)')] dif^3 r' \
   &= (va(p) dot grad) [va(r) times va(E)_"ext" (va(r))] = p_i partial_i [epsilon_(j k l) vu(e)_j r_k E_("ext", l)] = p_i epsilon_(j k l) vu(e)_j partial_i [r_k E_("ext", l) ] \

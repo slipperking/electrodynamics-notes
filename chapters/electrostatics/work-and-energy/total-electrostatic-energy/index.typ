@@ -18,7 +18,7 @@ By repetition of said process across the span of all point charges,
 $
   uetoti &= sum_(k = 1)^n W_k = sum_(k = 1)^n q_k phi_(k-1)(va(r)_k) = sum_(k=1)^n q_k 1 / (4 uppi epsilon_0)[sum_(j = 1)^(k-1) q_j / norm(va(r)_k - va(r)_j)] = 1 / (4 uppi epsilon_0) sum_(k = 1)^n sum_(j = 1)^(k - 1) (q_k q_j) / norm(va(r)_k - va(r)_j) \
   & = 1 / (8 uppi epsilon_0) sum_(k = 1)^n sum_(j = 1)^(k - 1) (q_k q_j) / norm(va(r)_k - va(r)_j) + 1 / (8 uppi epsilon_0) sum_(j = 1)^(n - 1) sum_(k = j + 1)^n (q_k q_j) / norm(va(r)_k - va(r)_j) = 1 / (8 uppi epsilon_0) sum_(k = 1)^n sum_(j = 1 \ j != k)^n (q_k q_j) / norm(va(r)_k - va(r)_j) \
-  &= 1 / 2 sum_(k = 1)^n q_k phi_("all but" va(r)_k) (va(r)_k).
+  &= 1 / 2 sum_(k = 1)^n q_k phi_("all but" k) (va(r)_k).
 $ <eq:total-electrostatic-energy-integral-discrete>
 As with previous instance, the natural extension hereof would be to consider a volume charge density distribution $rho(va(r))$, which is given by
 $
@@ -32,18 +32,18 @@ because for a small $epsilon$-ball $B_epsilon$ centered at $va(r)$ ,
 $
   abs(integral.triple_B_epsilon (rho(va(r))rho(va(r)')) / norm(va(r) - va(r)') dif^3 r') <= max abs(rho)^2 integral_0^epsilon integral.double_(partial B_u) 1 / u dif S' dif u = max abs(rho)^2 integral_0^epsilon 4 uppi u dif u = 2 uppi epsilon^2 -> 0.
 $
-The form given in @eq:total-electrostatic-energy-integral-no-E is thus defined be the _total electrostatic potential energy_, whose important distinction from $uetoti$ is that we permit the diagonal cases in the integrand. In such a continuous distribution, as thus demonstrated, there is no difference therebetween. But it will not perpetually be as such, as shall be demonstrated in the immediate future.
+The form given in @eq:total-electrostatic-energy-integral-no-E is thus defined be the _total electrostatic energy_, whose important distinction from $uetoti$ is that we permit the diagonal cases in the integrand. In such a continuous distribution, as thus demonstrated, there is no difference therebetween. But it will not perpetually be as such, as shall be demonstrated in the immediate future.
 
-The formulation of $uetoti$ cannot be made dependent on the order in which the charges were thus assembled. With great relevance to the previously made distinction, we also wish to redirect attention to the crucial fact that the given formulation of the total potential energy gives rise to a fundamental limitation to the electrodynamic formulation by point charges, whereto we point:
+The formulation of $uetoti$ cannot be made dependent on the order wherein the charges were thus assembled. With great relevance to the previously made distinction, we also wish to redirect attention to the crucial fact that the given formulation of the total potential energy gives rise to a fundamental limitation to the electrodynamic formulation by point charges, whereto we point:
 #example[
   Consider a solid ball of radius $R$ carrying a uniform volume charge density
   $
     rho = Q / (4 / 3 uppi R^3).
   $
-  Compute its total electrostatic potential energy.
-] <ex:uniform-ball-electrostatic-potential-energy>
-#solution[to @ex:uniform-ball-electrostatic-potential-energy][
-  Allow us to approach by direction of assemblage. Consider the ordering in which at each iteration, we aim to add a spherical shell of thickness $dr$ where a solid sphere of $r$ is already present. At the present moment, the electric field in the field exterior, by virtue of the Spherical Shell Theorem (@thm:spherical-shell), is identical to that of a point charge $Q$, whereby the electric potential (of only charges already assembled) at a point on the sphere boundary is also equivalent to that of a point charge:
+  Compute its total electrostatic energy.
+] <ex:uniform-ball-total-electrostatic-energy>
+#solution[to @ex:uniform-ball-total-electrostatic-energy][
+  Allow us to approach by direction of assemblage. Consider the ordering wherein at each iteration, we aim to add a spherical shell of thickness $dr$ where a solid sphere of $r$ is already present. At the present moment, the electric field in the field exterior, by virtue of the Spherical Shell Theorem (@thm:spherical-shell), is identical to that of a point charge $Q$, whereby the electric potential (of only charges already assembled) at a point on the sphere boundary is also equivalent to that of a point charge:
   $
     phi_r (va(r)) = 1 / (4 uppi epsilon_0) (rho 4/3 uppi r^3) / r = 1 / (4 uppi epsilon_0) (Q r^2) / R^3
   $
@@ -60,7 +60,7 @@ The formulation of $uetoti$ cannot be made dependent on the order in which the c
 ]
 It could indeed transpire that calculation through the given chosen order of assemblage is actually easier than a direct application of @eq:total-electrostatic-energy-integral-no-E.
 
-But to obtain the significance, as hinted at earlier, which is beheld within @ex:uniform-ball-electrostatic-potential-energy, we consider a point charge $Q$, which could be precisely modeled by @ex:uniform-ball-electrostatic-potential-energy under the limiting condition $R -> 0^+$. The result, by virtue of the calculation performed previously, diverges thereunder, whereas the representation in @eq:total-electrostatic-energy-integral-discrete gives $0$---the confusion or described discrepancy arises from the inclusion of diagonal self-terms (or the relaxation of $va(r)' != va(r)$ in @eq:total-electrostatic-energy-integral-discrete). For the natural handling of these discrepancies, the remaining contribution of said diagonal terms---the _self-energy_---is defined and thus transpires to be infinite for the case of point charges.
+But to obtain the significance, as hinted at earlier, which is beheld within @ex:uniform-ball-total-electrostatic-energy, we consider a point charge $Q$, which could be precisely modeled by @ex:uniform-ball-total-electrostatic-energy under the limiting condition $R -> 0^+$. The result, by virtue of the calculation performed previously, diverges thereunder, whereas the representation in @eq:total-electrostatic-energy-integral-discrete gives $0$---the confusion or described discrepancy arises from the inclusion of diagonal self-terms (or the relaxation of $va(r)' != va(r)$ in @eq:total-electrostatic-energy-integral-discrete). For the natural handling of these discrepancies, the remaining contribution of said diagonal terms---the _self-energy_---is defined and thus transpires to be infinite for the case of point charges.
 
 By Gauss' Law, $epsilon_0 div va(E) = rho$, whence @eq:total-electrostatic-energy-integral-no-E gives
 $

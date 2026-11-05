@@ -7,7 +7,7 @@
     include "solid-angle/index.typ"
   },
 )
-Experimental work nearing the end of the 18th century established that in the case of approximated point charges, the force on a _test charge_ $q$ at $va(r)$ (which may or may not be stationary) due to $n$ stationary _source_ point charges $q_k$ at $va(r)_k$ follows the inverse-square law. We (for this instant) only consider the case of _electrostatics_ (where source charges are time-independent), in which the relation holds. The formulation thereof is given by _Coulomb's Law_, for the case of a vacuum:
+Experimental work nearing the end of the 18th century established that in the case of approximated point charges, the force on a _test charge_ $q$ at $va(r)$ (which may or may not be stationary) due to $n$ stationary _source_ point charges $q_k$ at $va(r)_k$ follows the inverse-square law. We (for this instant) only consider the case of _electrostatics_ (where source charges are time-independent), wherein the relation holds. The formulation thereof is given by _Coulomb's Law_, for the case of a vacuum:
 #theorem[Coulomb's Law][
   //
   $ va(F) = 1 / (4 uppi epsilon_0) sum_(k=1)^n (q q_k) / norm(va(r) - va(r)_k)^3 (va(r) - va(r)_k). $ <eq:coulombs-law>

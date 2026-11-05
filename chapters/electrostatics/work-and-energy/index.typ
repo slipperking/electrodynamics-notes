@@ -85,9 +85,11 @@ $
   delta U_"E" & = delta va(s) dot integral.triple rho_2(va(r)) grad phi_1(va(r)) d^3 r = -delta va(s) dot integral.triple rho_2(va(r)) va(E)_1(va(r)) d^3 r,
 $
 wherein the integral transpires precisely to be the Coulomb force, giving
-$
-  va(F) = -grad_va(s) U_"E" = integral.triple rho_2(va(r)) va(E)_1(va(r)) d^3 r.
-$
+#theorem[
+  $
+    va(F) = -grad_va(s) U_"E" = integral.triple rho_2(va(r)) va(E)_1(va(r)) d^3 r.
+  $ <eq:electric-force-bodies-virtual-gradient>
+] <thm:electric-force-bodies-virtual-gradient>
 The gradient is with respect to a rigid shift in the body of distribution $rho_2$ subject to the source field. Thence, if tasked to find the Coulomb force in @ex:greens-reciprocity-relation with
 $
   U_"E" = 1 / (4 uppi epsilon_0) (Q_1 Q_2) / norm(va(r)_2 - va(r)_1),

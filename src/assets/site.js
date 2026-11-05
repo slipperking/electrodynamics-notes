@@ -1023,22 +1023,44 @@
       return wrapper.innerHTML || "";
     }
 
-    function previewMarkupForUrl(rawHref) {
-      if (!rawHref) return Promise.resolve("");
+    function previewContentFromDocument(doc, url) {
+      if (!url.hash) return null;
+
+      var targetId = decodeURIComponent(url.hash.slice(1));
+      var target = doc.getElementById(targetId);
+      if (!target) return null;
+
+      var anchor = resolvePreviewAnchor(target);
+      if (anchor && /^H[1-6]$/.test(anchor.tagName)) {
+        return {
+          kind: "page",
+          src: url.href
+        };
+      }
+
+      var markup = renderPreviewFromDocument(doc, url);
+      return markup ? {
+        kind: "markup",
+        markup: markup
+      } : null;
+    }
+
+    function previewContentForUrl(rawHref) {
+      if (!rawHref) return Promise.resolve(null);
 
       var url;
       try {
         url = new URL(rawHref, window.location.href);
       } catch (_error) {
-        return Promise.resolve("");
+        return Promise.resolve(null);
       }
 
       if (/\.pdf(?:#|$)/i.test(url.href)) {
-        return Promise.resolve("");
+        return Promise.resolve(null);
       }
 
       if (url.pathname === window.location.pathname) {
-        return Promise.resolve(renderPreviewFromDocument(document, url));
+        return Promise.resolve(previewContentFromDocument(document, url));
       }
 
       return fetch(url.href).then(function (response) {
@@ -1046,9 +1068,9 @@
         return response.text();
       }).then(function (html) {
         var parsed = new DOMParser().parseFromString(html, "text/html");
-        return renderPreviewFromDocument(parsed, url);
+        return previewContentFromDocument(parsed, url);
       }).catch(function () {
-        return "";
+        return null;
       });
     }
 
@@ -1165,8 +1187,8 @@
         return;
       }
 
-      previewMarkupForUrl(normalizedUrl).then(function (markup) {
-        if (!markup) return;
+      previewContentForUrl(normalizedUrl).then(function (previewContent) {
+        if (!previewContent) return;
 
         // Before creating, check if it was opened during the fetch
         if (activePreviews.has(normalizedUrl)) return;
@@ -1174,9 +1196,19 @@
         var previewObj = createPreviewObj(normalizedUrl);
         activePreviews.set(normalizedUrl, previewObj);
 
-        previewObj.content.innerHTML = markup;
         previewObj.element.style.visibility = "hidden";
-        enhanceContent(previewObj.content);
+        if (previewContent.kind === "page") {
+          var frame = document.createElement("iframe");
+          frame.className = "ref-preview-frame";
+          frame.src = previewContent.src;
+          frame.title = "Referenced page preview";
+          frame.loading = "eager";
+          previewObj.element.classList.add("ref-preview-page");
+          previewObj.content.appendChild(frame);
+        } else {
+          previewObj.content.innerHTML = previewContent.markup;
+          enhanceContent(previewObj.content);
+        }
         placePreview(trigger, previewObj);
         previewObj.element.style.visibility = "";
       });

@@ -37,9 +37,7 @@ wherein the equality must hold for all $epsilon < R$. From the last expression g
 ] <thm:electric-point-dipole-field>
 We shall now give intuition for the veracity of the above.
 
-Its well-definedness of the principal value is given in @eq:moment-electric-field-point-dipole in the case of spherical regions. For an arbitrary region $V$, it may be written as the union of a ball centered at $va(r)_0$ and its complement.
-
-Now assuming $rho = -va(p) dot grad delta(s)$, we have @thm:electric-point-dipole-field.
+Its well-definedness of the principal value is given in @eq:moment-electric-field-point-dipole in the case of spherical regions./*  For an arbitrary region $V$, it may be written as the union of a ball centered at $va(r)_0$ and its complement. */ Now assuming $rho = -va(p) dot grad delta(s)$, we have from @eq:electric-point-dipole-potential that
 $
   -grad phi(va(r)) = 1 / (4 uppi epsilon_0) grad [va(p) dot (-vu(s) / s^2)] = 1 / (4 uppi epsilon_0) grad [va(p) dot grad 1 / s]
 $

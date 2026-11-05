@@ -931,10 +931,22 @@ math {
   line-height: 1.55;
 }
 
+.ref-preview-page {
+  width: min(46rem, calc(100vw - 2rem));
+  height: min(32rem, calc(100vh - var(--topbar-height) - 1.7rem));
+  padding: 0.45rem;
+  overflow: hidden;
+}
+
+.ref-preview-page .ref-preview-content {
+  width: 100%;
+  height: 100%;
+}
+
 .ref-preview-frame {
   display: block;
   width: 100%;
-  height: min(32rem, calc(100vh - var(--topbar-height) - 4rem));
+  height: 100%;
   border: 0;
   border-radius: 2px;
   background: var(--paper);

@@ -180,10 +180,11 @@
     it
   }
 
+  set text(font: "Lato") if text-font-mode == "web"
+  show math.equation: set text(font: "Lete Sans Math") if text-font-mode == "web"
+
   if mode == "pdf" {
     show smallcaps: it => _pdf-fake-smallcaps(it.body)
-    set text(font: "Lato") if text-font-mode == "web"
-    show math.equation: set text(font: "Lete Sans Math") if text-font-mode == "web"
     set page(
       paper: "a4",
       numbering: "1",

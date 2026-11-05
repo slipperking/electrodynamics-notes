@@ -23,7 +23,7 @@ Such is the utility herein of an auxiliary surface as $S'$, that it has received
 - A spherical surface concentric with a uniformly charged sphere and passing through the evaluation point.
 - A cylindrical surface coaxial with a uniformly charged cylinder and passing through the evaluation point.
 - A pillbox-shaped surface centered on an infinite charged plane, with its faces parallel to the plane and equidistant from it.
-The first usage is readily demonstrated by the proof above. We hence provide the examples in which electric field can be determined through the latter two.
+The first usage is readily demonstrated by the proof above. We hence provide the examples wherein electric field can be determined through the latter two.
 #figure-wrapper[
   #figure(
     {
