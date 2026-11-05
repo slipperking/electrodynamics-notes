@@ -40,6 +40,7 @@ whence
 #theorem[
   The total electrostatic energy of a system containing $n$ point dipoles with moments $va(p)_k$ respectively at $va(r)_k$ is given by
   $
-    U_("E", "tot") = 1 / 2 sum_(j = 1)^n sum_(k = 1 \ k != j)^n W_(j k) = -1 / 2 sum_(j = 1)^n va(p)_j dot va(E)_("all but" j) (va(r)_j) = 1 / (8 uppi epsilon_0) sum_(j = 1)^n sum_(k = 1 \ k != j)^n (va(p)_j dot va(p)_k - 3 (va(p)_j dot vu(s)_(j k)) (va(p)_k dot vu(s)_(j k))) / s_(j k)^3.
+    U_("E", "tot") &= 1 / 2 sum_(j = 1)^n sum_(k = 1 \ k != j)^n W_(j k) = -1 / 2 sum_(j = 1)^n va(p)_j dot va(E)_("all but" j) (va(r)_j) \
+    &= 1 / (8 uppi epsilon_0) sum_(j = 1)^n sum_(k = 1 \ k != j)^n (va(p)_j dot va(p)_k - 3 (va(p)_j dot vu(s)_(j k)) (va(p)_k dot vu(s)_(j k))) / s_(j k)^3.
   $
 ]

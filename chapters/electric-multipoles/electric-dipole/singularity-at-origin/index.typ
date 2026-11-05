@@ -13,7 +13,26 @@ To allow a more detailed observation thereof, first we derive
   $
 ]
 #proof[
-  #todo()
+  $
+    integral.triple_V va(E)(va(r)) dif^3 r &= 1 / (4 uppi epsilon_0) integral.triple_V integral.triple_V (rho(va(r)')) / norm(va(r) - va(r)')^3 (va(r) - va(r)') dif^3 r' dif^3 r \
+    & = -1 / (4 uppi epsilon_0) integral.triple_V integral.triple_V (rho(va(r)')) / norm(va(r)' - va(r))^3 (va(r)' - va(r)) dif^3 r dif^3 r',
+  $
+  wherein the inner integral
+  $
+    rho(va(r)') / (4 uppi epsilon_0) integral.triple_V (va(r)' - va(r)) / norm(va(r)' - va(r))^3 dif^3 r
+  $
+  is electric field given by the constant volume distribution $va(r) |-> rho(va(r)')$ supported in $V$ when evaluated at $va(r)'$.
+
+  By Gauss' Law (@eq:gauss-law-integral) or considering the Spherical Shell Theorem (@thm:spherical-shell), where $va(s)' = va(r)' - va(r)_0$, $s' = norm(va(s)')$, this quantity is given by
+  $
+    rho(va(r)') / (4 uppi epsilon_0) integral.triple_V (va(r)' - va(r)) / norm(va(r)' - va(r))^3 dif^3 r = cases(va(E) "from pt. charge" 4 / 3 uppi R^3 rho(va(r)') & "if" va(r)' in.not V\,, va(E) "from pt. charge" 4 / 3 uppi s'^3 rho(va(r)') & "otherwise",)
+  $
+  wherein the former is an impossibility, whence
+  $
+    integral.triple_V va(E)(va(r)) dif^3 r &= -1 / (4 uppi epsilon_0) integral.triple_V integral.triple_V (rho(va(r)')) / norm(va(r)' - va(r))^3 (va(r)' - va(r)) dif^3 r dif^3 r' \
+    &= -1/ (4 uppi epsilon_0) integral.triple_V (4 / 3 uppi s'^3 rho(va(r)')) va(s)' / s'^3 dif^3 r' \
+    &= -1/ (3 epsilon_0) integral.triple_V rho(va(r)') va(s)' dif^3 r' = -1/ (3 epsilon_0) va(p). qedhere
+  $
 ]
 In consideration therewith and of @eq:electric-dipole-potential, the point dipole must give, for $V = B_R$ a sphere of radius $R$ centered about $va(r)_0$,
 $
