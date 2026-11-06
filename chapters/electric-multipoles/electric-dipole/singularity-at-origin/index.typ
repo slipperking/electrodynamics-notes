@@ -3,7 +3,7 @@
   ..dargs("The Singularity at the Origin"),
 )
 
-Allow us to chance a closer examination of @eq:electric-dipole-field, wherein we made (implicitly) the assumption of $s != 0$. We shall preliminarily aver that the relationship (in a distributional or integrated sense) does not hold at the origin $va(r) = va(r)_0$.
+Allow us to chance a closer examination of the translated form of @eq:electric-dipole-field for a point dipole at $va(r)_0$, where $va(s) = va(r) - va(r)_0$ and $s != 0$. We shall preliminarily aver that the relationship (in a distributional or integrated sense) does not hold at the origin $va(r) = va(r)_0$.
 
 To allow a more detailed observation thereof, first we derive
 #theorem[
@@ -34,7 +34,7 @@ To allow a more detailed observation thereof, first we derive
     &= -1/ (3 epsilon_0) integral.triple_V rho(va(r)') va(s)' dif^3 r' = -1/ (3 epsilon_0) va(p). qedhere
   $
 ]
-In consideration therewith and of @eq:electric-dipole-potential, the point dipole must give, for $V = B_R$ a sphere of radius $R$ centered about $va(r)_0$,
+In consideration therewith and of the translated form of @eq:electric-dipole-potential, the point dipole must give, for $V = B_R$ a sphere of radius $R$ centered about $va(r)_0$,
 $
   va(p) / (3 epsilon_0) & = integral.triple_V grad phi dif^3 r = 1 / (4 uppi epsilon_0) (integral.surf_(s = R) - integral.surf_(s = epsilon)) (va(p) dot va(s)) / s^3 dif va(S) - integral.triple_B_epsilon va(E) dif^3 r #tag[(@cor:divergence-substitutions)] \
   &= 1 / (4 uppi epsilon_0) (1 / R^3 integral.surf_(s = R) - 1 / epsilon^3 integral.surf_(s = epsilon)) va(p) dot va(s) dif va(S) - integral.triple_B_epsilon va(E) dif^3 r \
@@ -51,7 +51,7 @@ wherein the equality must hold for all $epsilon < R$. From the last expression g
   $
   where the Cauchy principal value is defined as follows:
   $
-    pv integral.triple 1 / (4 uppi epsilon_0) (3 vu(s) (va(p) dot vu(s)) - va(p)) / s^3 dif^3 r = lim_(epsilon ->0^+) integral.triple_(s > epsilon) 1 / (4 uppi epsilon_0) (3 vu(s) (va(p) dot va(s)) - va(p)) / s^3 dif^3 r
+    pv integral.triple 1 / (4 uppi epsilon_0) (3 vu(s) (va(p) dot vu(s)) - va(p)) / s^3 dif^3 r = lim_(epsilon ->0^+) integral.triple_(s > epsilon) 1 / (4 uppi epsilon_0) (3 vu(s) (va(p) dot vu(s)) - va(p)) / s^3 dif^3 r
   $
 ] <thm:electric-point-dipole-field>
 We shall now give intuition for the veracity of the above.

@@ -17,14 +17,14 @@ in the multipole expansion as provided in @eq:electric-multipole-expansion. It c
   A given localized volume charge density distribution $rho$ whose total charge is $0$ yields the same dipole moment across all possible expansion points.
 ] <thm:electric-dipole-moment-exp-point-invariance>
 #proof[
-  Observing that
+  Consider respectively the moments $va(p)_1$, $va(p)_2$ about fixed points $va(r)_1$, $va(r)_2$. Observing that
   $
-    0 = (va(r)_0 - va(r)'_0) integral.triple rho(va(r)) dif^3 r' = integral.triple rho(va(r)) (va(r)_0 - va(r)'_0) dif^3 r',
+    0 = (va(r)_1 - va(r)_2) integral.triple rho(va(r)) dif^3 r = integral.triple rho(va(r)) (va(r)_1 - va(r)_2) dif^3 r,
   $
   it follows that
   $
-    va(p) &= integral.triple rho(va(r)) (va(r)' - va(r)_0) dif^3 r' = integral.triple rho(va(r)) (va(r)' - va(r)_0 + va(r)_0 - va(r)'_0) dif^3 r' \
-    &=integral.triple rho(va(r)) (va(r)' - va(r)'_0) dif^3 r' = va(p)'. qedhere
+    va(p)_1 &= integral.triple rho(va(r)) (va(r) - va(r)_1) dif^3 r = integral.triple rho(va(r)) (va(r) - va(r)_1 + va(r)_1 - va(r)_2) dif^3 r \
+    &=integral.triple rho(va(r)) (va(r) - va(r)_2) dif^3 r = va(p)_2. qedhere
   $
 ]
 
@@ -51,8 +51,8 @@ is azimuthally symmetric---if $phi.alt$ were to change by some $delta phi.alt$, 
 
 The historical motivation for the naming of "dipole" comes from the following geometric construction, due to Maxwell: consider a configuration wherein two point charges $plus.minus q / d$ respectively at $va(r)_0 plus.minus d vu(c) / 2$ are held within a sphere centered at $va(r)_0$ of radius $R$. With $d -> 0^+$, the electric dipole moment is
 $
-  va(p) &= lim_(d -> 0^+) integral.triple rho s dif^3 r = lim_(d -> 0^+) integral.triple sum_(+, -) plus.minus q / d delta(va(r) - va(r)_0 minus.plus d vu(c) / 2) va(r) dif^3 r \
-  &=lim_(d -> 0^+) sum_(+, -) plus.minus q / d (va(r)_0 plus.minus d vu(c) / 2) = q vu(c),
+  va(p) &= lim_(d -> 0^+) integral.triple rho va(s) dif^3 r = lim_(d -> 0^+) integral.triple sum_(+, -) plus.minus q / d delta(va(r) - va(r)_0 minus.plus d vu(c) / 2) va(s) dif^3 r \
+  &=lim_(d -> 0^+) sum_(+, -) plus.minus q / d (plus.minus d vu(c) / 2) = q vu(c),
 $
 wherewith the resulting electric potential is
 $
