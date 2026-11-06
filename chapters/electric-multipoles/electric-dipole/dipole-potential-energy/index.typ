@@ -36,7 +36,7 @@ $
 $
 whence such a rotation entails the following displacement in potential energy:
 $
-  delta U_E & = -delta(va(p) dot va(E)_"ext"(va(r))) = - delta va(p) dot va(E)_"ext" - va(p) dot delta va(E)_"ext" = - (delta va(theta) times va(p)) dot va(E)_"ext" - va(p) dot (delta va(r) dot grad) va(E)_"ext" (va(r)) \
+  delta U_E & = -delta(va(p) dot va(E)_"ext" (va(r))) = - delta va(p) dot va(E)_"ext" - va(p) dot delta va(E)_"ext" = - (delta va(theta) times va(p)) dot va(E)_"ext" - va(p) dot (delta va(r) dot grad) va(E)_"ext" (va(r)) \
   // todo, N should be torque about r0
   & = - delta va(theta) dot (va(p) times va(E)_"ext") - va(p) dot ((delta va(theta) times va(s)) dot grad) va(E)_"ext" (va(r)),
 $
