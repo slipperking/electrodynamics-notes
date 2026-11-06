@@ -40,7 +40,7 @@ $
   // todo, N should be torque about r0
   & = - delta va(theta) dot (va(p) times va(E)_"ext") - va(p) dot ((delta va(theta) times va(s)) dot grad) va(E)_"ext" (va(r)),
 $
-whereof closer examination of the second term gives
+wherein closer examination of the second term gives
 $
   va(p) dot ((delta va(theta) times va(s)) dot grad) va(E)_"ext" (va(r)) &= p_j (delta va(theta) times va(s))_i partial_i E_("ext", j) = p_j (epsilon_(i k l) delta theta_k s_l) partial_j E_("ext", i) \
   &= delta theta_k [epsilon_(k l i) s_l (p_j partial_j E_("ext", i))] = delta theta_k [epsilon_(k l i) s_l (va(p) dot grad va(E)_"ext")_i] \
@@ -52,9 +52,8 @@ $
 $
 wherein $va(N)$ is defined as in @sec:dipole-force-and-torque. If instead considering $va(N)_va(r)$ to be the torque about $va(r)$,
 $
-  delta U_E = - delta va(theta) dot [va(p) times va(E)_"ext"]= - delta va(theta) dot va(N)_va(r)
+  delta U_E = - delta va(theta) dot [va(p) times va(E)_"ext"]= - delta va(theta) dot va(N)_va(r).
 $
-
 We now characterize the total electrostatic energy $U_("E", "tot")$ in a system of point dipoles, by method of assemblage. In greater specificity, consider $n$ point dipoles with moments $va(p)_k$ respectively at $va(r)_k$. The discussion in @sec:total-electrostatic-energy gives this quantity to be
 $
   U_("E", "tot") = sum_(j = 1)^n sum_(k = 1)^(j - 1) W_(j k) = 1 / 2 sum_(j = 1)^n sum_(k = 1 \ k != j)^n W_(j k),

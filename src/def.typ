@@ -18,3 +18,5 @@
 #let pv = math.op("P.V.")
 
 #let vaa(..args) = _va(_va(vb(math.sans(..args))))
+
+#let argmin = math.limits(math.op($"arg" "min"$))
