@@ -50,7 +50,10 @@ whence
 $
   delta U_E = - delta va(theta) dot [va(p) times va(E)_"ext" + va(s) times va(F)_"ext"]= - delta va(theta) dot va(N)
 $
-wherein $va(N)$ is defined as in @sec:dipole-force-and-torque.
+wherein $va(N)$ is defined as in @sec:dipole-force-and-torque. If instead considering $va(N)_va(r)$ to be the torque about $va(r)$,
+$
+  delta U_E = - delta va(theta) dot [va(p) times va(E)_"ext"]= - delta va(theta) dot va(N)_va(r)
+$
 
 We now characterize the total electrostatic energy $U_("E", "tot")$ in a system of point dipoles, by method of assemblage. In greater specificity, consider $n$ point dipoles with moments $va(p)_k$ respectively at $va(r)_k$. The discussion in @sec:total-electrostatic-energy gives this quantity to be
 $
