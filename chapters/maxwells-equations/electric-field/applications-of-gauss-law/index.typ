@@ -176,11 +176,11 @@ The first usage is readily demonstrated by the proof above. We hence provide the
   $
   The symmetry of the cylinder entails that the electric field at any point in space possesses a vanishing $x$-component, whence the integrals over the bases vanish from the observation that $va(E)(va(r)') perp dif va(S)'$ thereon. There remains, therefore, only the contribution of the lateral surface; wherein the outward normal is parallel to the electric field, once again by symmetry, giving that
   $
-    Q_"enc" / epsilon_0 = integral.double_"lateral" E dif S' = E(va(r)) 4 uppi s L,
+    Q_"enc" / epsilon_0 = integral.double_"lateral" E dif S' = E(va(r)) 4 uppi rho_perp L,
   $
-  where $va(s) = s vu(s)$ is the radial vector from the $x$-axis to $va(r)$. It follows that
+  where $va(r)_perp = r_perp vu(r)_perp$ is the radial vector from the $x$-axis to $va(r)$. It follows that
   $
-    Q_"enc" / epsilon_0 = (2L uppi min{s, R}^2 rho) / epsilon_0 = E(va(r)) 4 uppi s L ==> va(E) (va(r)) = (min{s, R}^2 rho vu(s)) / (2 epsilon_0 s). qedhere
+    Q_"enc" / epsilon_0 = (2L uppi min{r_perp, R}^2 rho) / epsilon_0 = E(va(r)) 4 uppi r_perp L ==> va(E) (va(r)) = (min{r_perp, R}^2 rho vu(r)_perp) / (2 epsilon_0). qedhere
   $
 ]
 #figure-wrapper[
