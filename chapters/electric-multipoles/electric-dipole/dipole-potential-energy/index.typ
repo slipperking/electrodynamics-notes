@@ -5,13 +5,13 @@
 #let pf = $phi_"ext"$
 By @sec:work-and-energy, we may be determine the electrostatic potential energy on a neutral charge distribution $rho$ due to a slowly varying electric field $-grad pf$ to be
 $
-  U_E (va(r)) = integral.triple rho(va(r)') pf(va(r)') dif^3 r' & = integral.triple rho(va(r)') [pf(va(r)) + (va(r)' - va(r)) dot grad pf(va(r)) + Order(s^2)] dif^3 r' \
-  & = integral.triple rho(va(r)') [pf(va(r)) + (va(r)' - va(r)) dot grad pf(va(r))] dif^3 r' + Order(s^2) \
-  & = integral.triple rho(va(r)') [pf(va(r)) - va(r) dot grad pf(va(r))] dif^3 r' \
-  & quad "" + integral.triple rho(va(r)') va(r)' dot grad pf(va(r)) dif^3 r' + Order(s^2) \
-  & = - va(p)(va(r)) dot va(E)_"ext" (va(r)) (+ Order(s^2)).
+  U_E (va(r)) = integral.triple rho(va(r)') pf(va(r)') dif^3 r' & = integral.triple rho(va(r)') [pf(va(r)) + va(xi) dot grad pf(va(r)) + Order(xi^2)] dif^3 r' \
+  & = integral.triple rho(va(r)') [pf(va(r)) + (va(s)' - va(s)) dot grad pf(va(r))] dif^3 r' + Order(xi^2) \
+  & = integral.triple rho(va(r)') [pf(va(r)) - va(s) dot grad pf(va(r))] dif^3 r' \
+  & quad "" + integral.triple rho(va(r)') va(s)' dot grad pf(va(r)) dif^3 r' + Order(xi^2) \
+  & = - va(p) dot va(E)_"ext" (va(r)) + Order(xi^2).
 $
-Evidently as with before a point dipole at $va(r)$ renders this exact:
+Evidently as with previously a point dipole at $va(r)$ renders this exact:
 $
   U_E (va(r)) &= -integral.triple va(p) dot grad delta(va(r)' - va(r)) pf(va(r)') dif^3 r' = integral.triple va(p) dot grad pf(va(r)') delta(va(r)' - va(r)) dif^3 r' \
   &= va(p) dot grad pf(va(r)) = -va(p) dot va(E)_"ext" (va(r)).
@@ -22,7 +22,35 @@ $
 $
 because the virtual shift in $rho$ is equivalent to a shift in $va(r)$.
 
-#todo[Torque Verif]
+For particles at $va(r) = va(r)_0 + va(s)$ and $va(r)' = va(r)_0 + va(s)'$ rotating rigidly, we have mechanically
+$
+  dv(va(r), t) = dv(va(r)_0, t) + va(omega) times va(s), wide wide dv(va(r)', t) = dv(va(r)_0, t) + va(omega) times va(s)',
+$
+and moreover if we virtually apply a rotation fixing $va(r)_0$,
+$
+  delta va(r) = delta va(s) = delta va(theta) times va(s), wide wide delta va(r)' = delta va(s)' = delta va(theta) times va(s)'
+$
+Hence we have in analogy for a charge distribution virtually rotating about $va(r)_0$,
+$
+  delta va(p) = delta va(theta) times va(p),
+$
+whence such a rotation entails the following displacement in potential energy:
+$
+  delta U_E & = -delta(va(p) dot va(E)_"ext"(va(r))) = - delta va(p) dot va(E)_"ext" - va(p) dot delta va(E)_"ext" = - (delta va(theta) times va(p)) dot va(E)_"ext" - va(p) dot (delta va(r) dot grad) va(E)_"ext" (va(r)) \
+  // todo, N should be torque about r0
+  & = - delta va(theta) dot (va(p) times va(E)_"ext") - va(p) dot ((delta va(theta) times va(s)) dot grad) va(E)_"ext" (va(r)),
+$
+whereof closer examination of the second term gives
+$
+  va(p) dot ((delta va(theta) times va(s)) dot grad) va(E)_"ext" (va(r)) &= p_j (delta va(theta) times va(s))_i partial_i E_("ext", j) = p_j (epsilon_(i k l) delta theta_k s_l) partial_j E_("ext", i) \
+  &= delta theta_k [epsilon_(k l i) s_l (p_j partial_j E_("ext", i))] = delta theta_k [epsilon_(k l i) s_l (va(p) dot grad va(E)_"ext")_i] \
+  & = delta va(theta) dot [va(s) times (va(p) dot grad) va(E)_"ext"] = delta va(theta) dot [va(s) times va(F)_"ext"],
+$
+whence
+$
+  delta U_E = - delta va(theta) dot [va(p) times va(E)_"ext" + va(s) times va(F)_"ext"]= - delta va(theta) dot va(N)
+$
+wherein $va(N)$ is defined as in @sec:dipole-force-and-torque.
 
 We now characterize the total electrostatic energy $U_("E", "tot")$ in a system of point dipoles, by method of assemblage. In greater specificity, consider $n$ point dipoles with moments $va(p)_k$ respectively at $va(r)_k$. The discussion in @sec:total-electrostatic-energy gives this quantity to be
 $

@@ -15,7 +15,7 @@ Recall the electric dipole moment
 in the multipole expansion as provided in @eq:electric-multipole-expansion. It can be thought roughly related to a "center of mass" $overline(va(r))$ by $overline(va(r)) = va(p) / Q$. Fittingly, the electric dipole moment is generally nonzero for uneven charge distributions. Where $Q = 0$, we aver that the dipole moment is independent of the chosen $va(r)_0$, the verification whereof can be determined by choice of two differing origin points $va(r)_0$ and $va(r)'_0$:
 #theorem[
   A given localized volume charge density distribution $rho$ whose total charge is $0$ yields the same dipole moment across all possible expansion points.
-]
+] <thm:electric-dipole-moment-exp-point-invariance>
 #proof[
   Observing that
   $
