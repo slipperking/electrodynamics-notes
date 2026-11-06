@@ -12,7 +12,7 @@ Our representation makes no attempt to individually model the charge or density 
 
 The most general case of an electric dipole layer will consider an arbitrary surface $S$ and a surface dipole density $va(tau)(va(r)) = dv(va(p), S)$ which is not necessarily uniform in strength nor perpendicular to the surface in its directionality. @eq:electric-point-dipole-potential gives the electric potential to be
 $
-  phi(va(r)) = -1 / (4 uppi epsilon_0) integral dif va(p)' dot grad 1 / (-xi) = -1 / (4 uppi epsilon_0) integral.double_S va(tau)(va(r)') dot grad' 1 / xi dif S'
+  phi(va(r)) = -1 / (4 uppi epsilon_0) integral dif va(p)' dot grad 1 / xi = 1 / (4 uppi epsilon_0) integral.double_S va(tau)(va(r)') dot grad' 1 / xi dif S'
 $
 We wish to rewrite the potential as a volume integral. Similar to the way in which @sec:electric-charges expresses a surface distribution $sigma$ and a linear distribution $lambda$ as a volume density distribution, there exists a suitable generalization
 $
@@ -20,16 +20,16 @@ $
 $
 whence the previous relation is simply
 $
-  phi(va(r)) = -1 / (4 uppi epsilon_0) integral.triple delta_S (va(r)') va(tau)(argmin_(va(r)_S in S) norm(va(r)_S - va(r)')) dot gradp 1 / xi dif^3 r'.
+  phi(va(r)) = 1 / (4 uppi epsilon_0) integral.triple delta_S (va(r)') va(tau)(argmin_(va(r)_S in S) norm(va(r)_S - va(r)')) dot gradp 1 / xi dif^3 r'.
 $
 The choice of $argmin$ is not of great importance; our goal is to extend $va(tau)$ to be defined outside the surface, although $delta_S$ picks only points in $S$. For simplicity we shall simply write $va(r)_S$ to imply the given meaning.
 
 Therefore,
 $
-  phi(va(r)) &= -1 / (4 uppi epsilon_0) integral.triple delta_S (va(r)') va(tau)(va(r)_S) dot grad' 1 / xi dif^3 r' \
-  &= -1 / (4 uppi epsilon_0) integral.triple [gradp [delta_S (va(r)') va(tau)(va(r)_S) 1 / xi] - divp[delta_S (va(r)') va(tau)(va(r)_S)] 1 / xi] dif^3 r' \
-  &= -1 / (4 uppi epsilon_0) integral.triple [gradp [delta_S (va(r)') va(tau)(va(r)_S) 1 / xi] - divp[delta_S (va(r)') va(tau)(va(r)_S)] 1 / xi] dif^3 r' \
-  &= 1 / (4 uppi epsilon_0) integral.triple (divp [delta_S (va(r)') va(tau)(va(r)_S)]) / xi dif^3 r',
+  phi(va(r)) &= 1 / (4 uppi epsilon_0) integral.triple delta_S (va(r)') va(tau)(va(r)_S) dot grad' 1 / xi dif^3 r' \
+  &= 1 / (4 uppi epsilon_0) integral.triple [gradp [delta_S (va(r)') va(tau)(va(r)_S) 1 / xi] - divp[delta_S (va(r)') va(tau)(va(r)_S)] 1 / xi] dif^3 r' \
+  &= 1 / (4 uppi epsilon_0) integral.triple [gradp [delta_S (va(r)') va(tau)(va(r)_S) 1 / xi] - divp[delta_S (va(r)') va(tau)(va(r)_S)] 1 / xi] dif^3 r' \
+  &= 1 / (4 uppi epsilon_0) integral.triple (-divp [delta_S (va(r)') va(tau)(va(r)_S)]) / xi dif^3 r',
 $
 which is the precise result we would have obtained by setting
 #theorem[Volume Charge Distribution of an Electric Dipole Layer][
