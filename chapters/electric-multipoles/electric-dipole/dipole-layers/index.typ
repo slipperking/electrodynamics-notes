@@ -87,7 +87,7 @@ $
   div[delta_S (va(r)) va(tau)_perp (va(r)_S)] &= va(tau)_perp (va(r)_S) dot grad delta_S (va(r)) + [div va(tau)_perp (va(r)_S)] delta_S (va(r)) \
   &= div integral.double_S va(tau)_perp (va(r)') delta^3 (va(r) - va(r)') dif S' = integral.double_S va(tau)_perp (va(r)') dot grad delta^3 (va(r) - va(r)') dif S'.
 $
-As $va(r)_S$ remains invariant under sufficiently small displacements along $vu(n)_va(r)$, we aver that $divsu(perp) va(tau)_perp = 0$, whence it follows that $div va(tau)_perp = divsu(parallel) va(tau)_perp$. Hence
+As $va(r)_S$ remains invariant under sufficiently small displacements along $vu(n)_va(r)$, we aver that $divsu(perp) va(tau)_perp = 0$, whence it follows that $div va(tau)_perp = divsu(parallel) va(tau)_perp$. Thus,
 $
   va(tau)_perp (va(r)_S) dot grad delta_S (va(r)) + [div va(tau)_perp (va(r)_S)] delta_S (va(r)) &= tau_perp (va(r)_S) vu(n)_va(r)_S dot grad delta_S (va(r)) + [divsu(parallel) va(tau)_perp (va(r)_S)] delta_S (va(r)) \
   &=integral.double_S va(tau)_perp (va(r)') dot grad delta^3 (va(r) - va(r)') dif S',
@@ -98,7 +98,7 @@ $
   &= lambda(va(r)_(partial S)) delta_(partial S) (va(r)) - divsu(parallel) va(tau) (va(r)_S) delta_S (va(r)) - tau_perp (va(r)_S) vu(n)_va(r)_S dot grad delta_S (va(r)) \
 $
 #theorem[
-  The volume distribution of an electric dipole layer is
+  The volume distribution of an electric dipole layer characterized by a surface dipole density $va(tau)$ is
   $
     rho(va(r)) = -tau_perp (va(r)_S) [pdv(, n_va(r)_S) delta_S (va(r))] + sigma(va(r)_S) delta_S (va(r)) + lambda(va(r)_(partial S)) delta_(partial S) (va(r)),
   $
@@ -108,3 +108,12 @@ $
   $
   are the _effective surface and line charge densities_.
 ]
+Here we shall briefly consider a simpler case wherein $S = {z = 0}$. Accordingly, $va(r)_S = op("proj")_S va(r) = va(x) + va(y)$ and $vu(n) = vu(z)$. Then, where $delta$ is the one-dimensional Dirac delta,
+$
+  rho(va(r)) = -tau_z (va(r)_S) delta'(z) + sigma(va(r)_S) delta(z),
+$
+wherein a complete typification of $sigma$ is given by
+$
+  sigma = - (pdv(, x) + vu(y) pdv(, y)) dot va(tau).
+$
+(We have reasonably omitted the $lambda$ term: describing $S$ via the limit of concentric flat disks of increasing radii, we see that $supp delta_(partial S) -> {oo}$.)
