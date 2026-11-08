@@ -52,7 +52,7 @@ $
   va(tau) &= va(tau)_parallel + va(tau)_perp, wide "where" quad va(tau)_perp = vu(n) (vu(n) dot va(tau)) = vu(n) tau_perp, quad va(tau)_parallel = va(tau) - va(tau)_perp = (vaa(I) - vu(n)^(times.o 2)) dot va(tau), \
   grad &= grad_parallel + grad_perp, wide "where" quad grad_perp = vu(n)(vu(n) dot grad), quad grad_parallel = (vaa(I) - vu(n)^(times.o 2)) dot grad,
 $
-(here we define $tau_perp$ to be signed to be dependent on the direction of $vu(n)$) whence
+(wherein we define $tau_perp$ to be signed to be dependent on the direction of $vu(n)$) whence
 $
   rho(va(r)) = -integral.double_S va(tau)_parallel (va(r)') dot grad delta^3 (va(r) - va(r)') dif S' - integral.double_S va(tau)_perp (va(r)') dot grad delta^3 (va(r) - va(r)') dif S'.
 $ <eq:electric-dipole-layer-auxiliary-1>
@@ -98,7 +98,7 @@ $
   &= lambda(va(r)_(partial S)) delta_(partial S) (va(r)) - divsu(parallel) va(tau) (va(r)_S) delta_S (va(r)) - tau_perp (va(r)_S) vu(n)_va(r)_S dot grad delta_S (va(r)) \
 $
 #theorem[
-  The volume distribution of an electric dipole layer characterized by a surface dipole density $va(tau)$ is
+  The volume distribution of an electric dipole layer characterized by a surface dipole moment density $va(tau)$ is
   $
     rho(va(r)) = -tau_perp (va(r)_S) [pdv(, n_va(r)_S) delta_S (va(r))] + sigma(va(r)_S) delta_S (va(r)) + lambda(va(r)_(partial S)) delta_(partial S) (va(r)),
   $
@@ -111,9 +111,25 @@ $
 Here we shall briefly consider a simpler case wherein $S = {z = 0}$. Accordingly, $va(r)_S = op("proj")_S va(r) = va(x) + va(y)$ and $vu(n) = vu(z)$. Then, where $delta$ is the one-dimensional Dirac delta,
 $
   rho(va(r)) = -tau_z (va(r)_S) delta'(z) + sigma(va(r)_S) delta(z),
-$
+$ <eq:electric-dipole-layer-volume-density-distribution-expansion-flat>
 wherein a complete typification of $sigma$ is given by
 $
   sigma = - (pdv(, x) + vu(y) pdv(, y)) dot va(tau).
 $
 (We have reasonably omitted the $lambda$ term: describing $S$ via the limit of concentric flat disks of increasing radii, we see that $supp delta_(partial S) -> {oo}$.)
+
+In derivation of heuristics, let us consider a simplified representation thereof as a parallel plate capacitor, comprising two charged slabs of opposite sign.
+
+For the first term, continuing to consider $S = {z = 0}$, let the dipole moment density be directed entirely along $vu(z)$ with $tau_z$ constant. Consider then a slab of negative charge immediately below $S$ and a slab of positive charge immediately above $S$, each uniform for fixed $z$. The resulting microscopic charge density, which shall here be denoted by $rho_L (z)$, is typified by two peaks of opposite sign in the immediate neighbourhood of $z = 0$, negative for $z < 0$ and positive for $z > 0$, in such a manner that the total charge distribution is neutral:
+$
+  integral rho_L (z) dz = 0
+$
+with the dipole moment per unit area
+$
+  tau_z = integral z rho_L (z) dz.
+$
+In the macroscopic limit, wherein the separation of the slabs vanishes, the two peaks of $rho_L$ combine, similar much to the description $delta'$. (Appealing to the colloquial model of $delta$: a function with a single peak gives a derivative containing two opposite peaks, therefore it is natural for the macroscopic limit of $rho_L$ to contain $delta'$.) This is precisely the effect of the first term in @eq:electric-dipole-layer-volume-density-distribution-expansion-flat.
+
+The second term arises only when $va(tau)$ is nonconstant along $S$, for otherwise the effective surface charge vanishes by cancellation. If for instance the dipoles vary in a way such that each specific $va(tau)_parallel$ points toward a central point, then thereat would the effective charge transpire to be positive, as the negative ends of each dipole point away thence. The local excess is measured by the surface divergence, $sigma = - nabla_parallel dot va(tau)_parallel$, in which sense that a variation in the relative description of neighboring dipoles, such that they cannot eliminate one another, gives rise to the second term.
+
+// THIRD TERM!!!
