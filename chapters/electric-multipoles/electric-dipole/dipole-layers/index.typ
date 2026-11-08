@@ -120,7 +120,7 @@ $
 
 In derivation of heuristics, let us consider a simplified representation thereof as a parallel plate capacitor, comprising two charged slabs of opposite sign.
 
-For the first term, continuing to consider $S = {z = 0}$, let the dipole moment density be directed entirely along $vu(z)$ with $tau_z$ constant. Consider then a slab of negative charge immediately below $S$ and a slab of positive charge immediately above $S$, each uniform for fixed $z$. The resulting microscopic charge density, which shall here be denoted by $rho_L (z)$, is typified by two peaks of opposite sign in the immediate neighbourhood of $z = 0$, negative for $z < 0$ and positive for $z > 0$, in such a manner that the total charge distribution is neutral:
+For the first term, continuing to consider $S = {z = 0}$, let the dipole moment density be directed entirely along $vu(z)$ with $tau_z$ constant. Consider then a slab of negative charge immediately below $S$ and a slab of positive charge immediately above $S$, each uniform for fixed $z$. The resulting microscopic charge density, which shall here be denoted by $rho_L (z)$, is typified by two peaks of opposite sign in the immediate neighborhood of $z = 0$, negative for $z < 0$ and positive for $z > 0$, in such a manner that the total charge distribution is neutral:
 $
   integral rho_L (z) dz = 0
 $
