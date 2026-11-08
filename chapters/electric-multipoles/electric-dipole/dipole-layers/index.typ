@@ -134,3 +134,24 @@ The second term arises only when $va(tau)$ is nonconstant along $S$, for otherwi
 
 // THIRD TERM!!!
 The third term arises only when $partial S != emptyset$. Permit a brief and heuristic consideration of a neighborhood of $partial S$. Let $va(r)_(partial S)$ be a point of the edge, and let $vu(m)$ be the outward unit conormal thereat. The value $lambda = va(tau) dot vu(m)$ measures the component of the dipole density pointing outward from $S$ within its own plane, toward its edge. If this quantity is positive, $va(tau)$ points outward, and the positive end of each dipole near the edge lies nearer to $partial S$ than its negative end, insofar that at the outermost boundary $partial S$, the positive ends remain without canceling neighbor dipoles beyond the edge. If it is negative, the reverse implication holds and the leftover ends are negative. In the macroscopic limit, these uncancelled dipole ends give rise to an effective line charge $lambda$, and thus require the third term.
+
+Considering $va(r) in jinterior S$ so that the calculation of $rho$ need not include the $lambda$ term, we now rederive the boundary conditions for $va(E)$ upon crossing the dipole layer. For this we appeal to superposition; writing
+$ rho = -tau_perp pdv(, n_S)delta + sigma delta_S = rho_"dip" + rho_"surf", $
+identifying "above" with the side matching $vu(n)$ and "below" with the other,
+$
+  vu(n) times Delta va(E) = vu(n) times Delta va(E)_"dip" + vu(n) times Delta va(E)_"surf" = vu(n) times Delta va(E)_"dip"
+$
+since $Delta va(E)_"surf"$ is the precise change in electric field for a standard surface distribution $sigma$, which is parallel to $vu(n)$ by @sec:boundary-conditions.
+/* By Poisson's equation (@eq:poisson),
+$
+  laplacian phi_"dip" = -rho_"dip" / epsilon_0 = tau_perp / epsilon_0 pdv(, n_S)delta
+$
+ */
+Similar to therein shall we fix a small disk $D$ of radius $epsilon > 0$, whence
+$
+  Delta phi_"dip" & = Delta phi_("dip", S without D) + Delta phi_("dip", D) = Delta phi_("dip", D) \
+                  & = Delta integral.double_D
+$
+#todo[
+  Also add surface divergence theorem somewhere
+]

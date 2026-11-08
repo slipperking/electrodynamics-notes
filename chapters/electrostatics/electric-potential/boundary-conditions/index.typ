@@ -272,7 +272,7 @@ likewise that which lies at $va(r)_"below" = va(r)' - delta vu(n)$ is given by
 $
   va(E)(va(r)_"below") = va(E)_(S without D)(va(r)_"below") + va(E)_D (va(r)_"below"),
 $
-The first term of both $va(E)_(S without D)(va(r))$ has the explicit representation
+The first term of both has the explicit representation
 $
   va(E)_(S without D)(va(r)) = 1 / (4 uppi epsilon_0) integral.double_(S without D) (sigma(va(r)'')) / norm(va(r) - va(r)'')^3 (va(r) - va(r)'') dif S'',
 $
@@ -292,7 +292,7 @@ The force experienced by $D$, subject to the electric field of $S without D$, de
 $
   va(E)_(S without D)(va(r)) = 1/2 [va(E)(va(r)_"above") + va(E)(va(r)_"below")],
 $
-whence the force-pre-unit-area is
+whence the force-per-unit-area is
 $
   va(f) = lim_(D -> {va(r)'}) 1 / (uppi epsilon^2) integral.double_D sigma(va(r)'') va(E)_(S without D)(va(r)'') dif S'' &= lim_(D -> {va(r)'}) 1/2 [va(E)(va(r)_"above") + va(E)(va(r)_"below")] [#[average of $sigma$ on $D$]] \
   &= sigma(va(r)')1/2 [va(E)(va(r)_"above") + va(E)(va(r)_"below")].
