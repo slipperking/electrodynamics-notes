@@ -62,20 +62,20 @@ $
   &= integral.double_S [divpsu(parallel) [va(tau)_parallel (va(r)') delta^3(va(r) - va(r)')] - [divpsu(parallel) va(tau)_parallel (va(r)')] delta^3(va(r) - va(r)')] dif S'
 $ <eq:electric-dipole-layer-auxiliary-2>
 //
-Denote by $vu(m) = vu(m)_(va(r)')$ at $va(r)' in partial S$ the outward unit conormal tangent to $S$ and normal to $partial S$. Then
+Denote by $vu(m) = vu(m)_(va(r)') = (dif va(ell)') / (dif ell') times vu(n)$ at $va(r)' in partial S$ the outward unit conormal tangent to $S$ and normal to $partial S$. Then
 $
   integral.double_S divpsu(parallel) [va(tau)_parallel (va(r)') delta^3(va(r) - va(r)')] dif S' = integral.cont_(partial S) delta^3 (va(r) - va(r)') va(tau)_parallel (va(r)') dot vu(m)_(va(r)') dif ell'
 $
 Where
 $
   delta_(partial S)(va(r)) = integral.cont_(partial S) delta^3(va(r) - va(r)') dif ell', wide va(r)_(partial S) = argmin_(va(r)'' in partial S) norm(va(r) - va(r)''), \
-  lambda(va(r)_(partial S)) = va(tau)_parallel (va(r)_(partial S)) dot vu(m)_(va(r)_(partial S)),
+  lambda(va(r)_(partial S)) = va(tau)_parallel (va(r)_(partial S)) dot vu(m)_(va(r)_(partial S)) = va(tau) (va(r)_(partial S)) dot vu(m)_(va(r)_(partial S)),
 $ <eq:electric-dipole-layer-effective-line-charge-density>
-the first term of @eq:electric-dipole-layer-auxiliary-1 assumes the form (distributionally)
+the first term of @eq:electric-dipole-layer-auxiliary-2 assumes the form (distributionally)
 $
   integral.double_S divpsu(parallel) [va(tau)_parallel (va(r)') delta^3 (va(r) - va(r)')] dif S' = lambda(va(r)_(partial S)) delta_(partial S)(va(r)). /* #tag[(distributionally)] */
 $
-The second term of @eq:electric-dipole-layer-auxiliary-2 is similarly
+The second term of @eq:electric-dipole-layer-auxiliary-2 is similarly (up to a sign)
 $
   integral.double_S [divpsu(parallel) va(tau)_parallel (va(r)')] delta^3(va(r) - va(r)') dif S' = [divsu(parallel) va(tau)_parallel (va(r)_S)] delta_S (va(r)).
 $
@@ -87,7 +87,7 @@ $
   div[delta_S (va(r)) va(tau)_perp (va(r)_S)] &= va(tau)_perp (va(r)_S) dot grad delta_S (va(r)) + [div va(tau)_perp (va(r)_S)] delta_S (va(r)) \
   &= div integral.double_S va(tau)_perp (va(r)') delta^3 (va(r) - va(r)') dif S' = integral.double_S va(tau)_perp (va(r)') dot grad delta^3 (va(r) - va(r)') dif S'.
 $
-As $va(r)_S$ remains invariant under sufficiently small displacements along $vu(n)_va(r)$, we aver that $divsu(perp) va(tau)_perp = 0$, whence it follows that $div va(tau)_perp = divsu(parallel) va(tau)_perp$. Thus,
+As $va(r)_S$ remains invariant under sufficiently small displacements along $vu(n)_va(r)_S$, we aver that $divsu(perp) va(tau)_perp = 0$, whence it follows that $div va(tau)_perp = divsu(parallel) va(tau)_perp$. Thus,
 $
   va(tau)_perp (va(r)_S) dot grad delta_S (va(r)) + [div va(tau)_perp (va(r)_S)] delta_S (va(r)) &= tau_perp (va(r)_S) vu(n)_va(r)_S dot grad delta_S (va(r)) + [divsu(parallel) va(tau)_perp (va(r)_S)] delta_S (va(r)) \
   &=integral.double_S va(tau)_perp (va(r)') dot grad delta^3 (va(r) - va(r)') dif S',
@@ -104,7 +104,7 @@ $
   $
   wherein
   $
-    sigma = -divsu(parallel) va(tau), wide lambda = va(tau)_parallel dot vu(m)
+    sigma = -divsu(parallel) va(tau), wide lambda = va(tau) dot vu(m)
   $
   are the _effective surface and line charge densities_.
 ]
@@ -114,7 +114,7 @@ $
 $ <eq:electric-dipole-layer-volume-density-distribution-expansion-flat>
 wherein a complete typification of $sigma$ is given by
 $
-  sigma = - (pdv(, x) + vu(y) pdv(, y)) dot va(tau).
+  sigma = - (vu(x) pdv(, x) + vu(y) pdv(, y)) dot va(tau).
 $
 (We have reasonably omitted the $lambda$ term: describing $S$ via the limit of concentric flat disks of increasing radii, we see that $supp delta_(partial S) -> {oo}$.)
 
@@ -133,3 +133,4 @@ In the macroscopic limit, wherein the separation of the slabs vanishes, the two 
 The second term arises only when $va(tau)$ is nonconstant along $S$, for otherwise the effective surface charge vanishes by cancellation. If for instance the dipoles vary in a way such that each specific $va(tau)_parallel$ points toward a central point, then thereat would the effective charge transpire to be positive, as the negative ends of each dipole point away thence. The local excess is measured by the surface divergence, $sigma = - nabla_parallel dot va(tau)_parallel$, in which sense that a variation in the relative description of neighboring dipoles, such that they cannot eliminate one another, gives rise to the second term.
 
 // THIRD TERM!!!
+The third term arises only when $partial S != emptyset$. Permit a brief and heuristic consideration of a neighborhood of $partial S$. Let $va(r)_(partial S)$ be a point of the edge, and let $vu(m)$ be the outward unit conormal thereat. The value $lambda = va(tau) dot vu(m)$ measures the component of the dipole density pointing outward from $S$ within its own plane, toward its edge. If this quantity is positive, $va(tau)$ points outward, and the positive end of each dipole near the edge lies nearer to $partial S$ than its negative end, insofar that at the outermost boundary $partial S$, the positive ends remain without canceling neighbor dipoles beyond the edge. If it is negative, the reverse implication holds and the leftover ends are negative. In the macroscopic limit, these uncancelled dipole ends give rise to an effective line charge $lambda$, and thus require the third term.
