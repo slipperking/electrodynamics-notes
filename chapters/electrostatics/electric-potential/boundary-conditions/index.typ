@@ -244,7 +244,7 @@ $
 $
 whereby
 $
-  0 &= lim integral.cont_C va(E) dot dif va(l) = lim (integral_("sides of" epsilon) + integral_(va(r) \ "below")^(va(r) + ell vu(c)) + integral_(va(r) + ell vu(c) \ "above")^(va(r))) va(E) dot dif va(l) \
+  0 &= lim integral.cont_C va(E) dot dif va(ell) = lim (integral_("sides of" epsilon) + integral_(va(r) \ "below")^(va(r) + ell vu(c)) + integral_(va(r) + ell vu(c) \ "above")^(va(r))) va(E) dot dif va(ell) \
   &= lim Order(epsilon) + ell va(E)_"below" dot vu(c) - ell va(E)_"above" dot vu(c).
 $
 In other words, $forall va(T) in T_va(r) S$,

@@ -5,11 +5,11 @@
 )
 In the electrostatic case, the electric field $va(E)$ is irrotational by @eq:gauss-law. Then Stokes' Theorem (@thm:stokes) implies that for any arbitrary surface $S$,
 $
-  0 = integral.double_S curl va(E) dot dif va(S) = integral.cont_(partial S) va(E) dot dif va(l);
+  0 = integral.double_S curl va(E) dot dif va(S) = integral.cont_(partial S) va(E) dot dif va(ell);
 $
 equivalently, the line integral of the electric field is path-independent and therefore gives rise to a well-defined function
 $
-  phi(va(r)) = -integral^va(r) va(E)(va(r)') dot dif va(l)',
+  phi(va(r)) = -integral^va(r) va(E)(va(r)') dot dif va(ell)',
 $ <eq:electric-potential>
 where we integrate from a predefined reference point---the choice thereof is of little importance and different choices thereof result in functions differing by a constant, which disappear as we typically restrict our consideration and interests to the difference between values attained by $phi$.
 
@@ -20,13 +20,13 @@ where we integrate from a predefined reference point---the choice thereof is of 
 ]
 Thence the potential difference is given by
 $
-  -integral_(va(a))^va(b) va(E) dot dif va(l) = phi(va(b)) - phi(va(a)) = integral_va(a)^va(b) grad phi dot dif va(l) ==> integral_(va(a))^va(b) (va(E) + grad phi) dot dif va(l) = 0
+  -integral_(va(a))^va(b) va(E) dot dif va(ell) = phi(va(b)) - phi(va(a)) = integral_va(a)^va(b) grad phi dot dif va(ell) ==> integral_(va(a))^va(b) (va(E) + grad phi) dot dif va(ell) = 0
 $
 by the Gradient Theorem (@thm:gradient), whence
 $
   va(E) = -grad phi
 $ <eq:gradient-of-electric-potential>
-by the arbitrariness of $va(a),va(b)$, for indeed if some $va(r)$ satisfied $va(E)(va(r)) + grad phi (va(r))!= 0$, then letting $ vu(u) = (va(E)(va(r)) + grad phi(va(r))) / norm(va(E)(va(r)) + grad phi(va(r))), $ the integral from $va(r)$ to $va(r) + vu(u) epsilon$ of $(va(E) + grad phi) dot dif va(l)'$ would be asymptotically equal to $norm(va(E)(va(r)) + grad phi(va(r))) epsilon != 0$ as $epsilon -> 0$, thereby insinuating a contradiction.
+by the arbitrariness of $va(a),va(b)$, for indeed if some $va(r)$ satisfied $va(E)(va(r)) + grad phi (va(r))!= 0$, then letting $ vu(u) = (va(E)(va(r)) + grad phi(va(r))) / norm(va(E)(va(r)) + grad phi(va(r))), $ the integral from $va(r)$ to $va(r) + vu(u) epsilon$ of $(va(E) + grad phi) dot dif va(ell)'$ would be asymptotically equal to $norm(va(E)(va(r)) + grad phi(va(r))) epsilon != 0$ as $epsilon -> 0$, thereby insinuating a contradiction.
 
 Using the identity $laplacian = divs grads$, Gauss' Law (@thm:gauss-law) entails that
 #theorem[Poisson's Equation][
@@ -54,7 +54,7 @@ At times, it becomes incumbent to resolve the fundamental ambiguity---the refere
 
 However, it does transpire that there is a heuristically "natural" spot to define our reference point, and that is the point which is infinitely far from charge---the motivation hereof presupposes that $phi(va(r)_0) = 0$, where $va(r)_0$ is the chosen reference point. That is, we are integrating from the $oo$ point itself:
 $
-  phi(va(r)) = -integral_(oo)^va(r) va(E)(va(r)') dot dif va(l)'.
+  phi(va(r)) = -integral_(oo)^va(r) va(E)(va(r)') dot dif va(ell)'.
 $ <eq:electric-potential-oo>
 In a great number of previous examples a notion of an unbounded, infinite, and expansive charge distribution was entertained, whereupon the potential itself diverges everywhere and this convention fails---the resolution is hence to choose any other point as $va(r)_0$ and make explicit of such fact---although, in all practical cases no such charge distribution can continue indefinitely and such a convention poses no issue.
 
@@ -68,7 +68,7 @@ In a great number of previous examples a notion of an unbounded, infinite, and e
   $
   The electric potential, given by @eq:electric-potential-oo, is then
   $
-    phi(va(r)) &= -Q / (4 uppi epsilon_0) integral_oo^va(r) vu(r)' / r'^2 dot dif va(l)' = Q / (4 uppi epsilon_0) integral_oo^va(r) grad' 1 / r' dot dif va(l)' = 1 / (4 uppi epsilon_0) Q / r
+    phi(va(r)) &= -Q / (4 uppi epsilon_0) integral_oo^va(r) vu(r)' / r'^2 dot dif va(ell)' = Q / (4 uppi epsilon_0) integral_oo^va(r) grad' 1 / r' dot dif va(ell)' = 1 / (4 uppi epsilon_0) Q / r
   $
   by the Gradient Theorem (@thm:gradient). Moreover, $va(E)$ vanishes inside the sphere ($r < R$), so for all points therein, $grad phi = 0$, entailing the constancy of $phi$. As $phi$ attains the same values in $jinterior(S)$ as on $S$, the latter whereof are given by
   $
@@ -80,9 +80,9 @@ Previously we have defined $phi$ in terms of $va(E)$. However the vector express
 
 For a given volume charge density distribution $rho(va(r))$,
 $
-  phi(va(r)) &= -integral_oo^va(r) integral.triple (rho(va(r)') dif^3 r') / norm(va(r)'' - va(r)')^3 (va(r)'' - va(r)') dot dif va(l)'' \
-  &= - integral.triple rho(va(r)') integral_oo^va(r) (va(r)'' - va(r)') / norm(va(r)'' - va(r)')^3 dot dif va(l)'' dif^3 r' \
-  &= integral.triple rho(va(r)') integral_oo^va(r) grad 1 / norm(va(r)'' - va(r)') dot dif va(l)'' dif^3 r'
+  phi(va(r)) &= -integral_oo^va(r) integral.triple (rho(va(r)') dif^3 r') / norm(va(r)'' - va(r)')^3 (va(r)'' - va(r)') dot dif va(ell)'' \
+  &= - integral.triple rho(va(r)') integral_oo^va(r) (va(r)'' - va(r)') / norm(va(r)'' - va(r)')^3 dot dif va(ell)'' dif^3 r' \
+  &= integral.triple rho(va(r)') integral_oo^va(r) grad 1 / norm(va(r)'' - va(r)') dot dif va(ell)'' dif^3 r'
 $
 whereby the Gradient Theorem (@thm:gradient) implies
 #theorem[
@@ -97,7 +97,7 @@ It is necessary to observe that this representation implicitly assumes that the 
 #proof[
   The potential, with $phi(oo) = 0$, is given by for $va(r) = va(z)$:
   $
-    phi(va(r)) & = 1 / (4 uppi epsilon_0) integral_C lambda / norm(va(z) - va(r)') dif l = 1 / (4 uppi epsilon_0)integral_(-uppi)^uppi (lambda R dtheta) / sqrt(z^2 + R^2) = 1 / (4 uppi epsilon_0)(2 uppi lambda R) / sqrt(z^2 + R^2).
+    phi(va(r)) & = 1 / (4 uppi epsilon_0) integral_C lambda / norm(va(z) - va(r)') dif ell = 1 / (4 uppi epsilon_0)integral_(-uppi)^uppi (lambda R dtheta) / sqrt(z^2 + R^2) = 1 / (4 uppi epsilon_0)(2 uppi lambda R) / sqrt(z^2 + R^2).
   $
   Therefore, remarking by symmetry that the $x$- and $y$- components vanish,
   $
@@ -106,6 +106,6 @@ It is necessary to observe that this representation implicitly assumes that the 
 ]
 In the case of electrostatics, the six relations between $rho$, $va(E)$, and $phi$, all of which derived from superposition and Coulomb's law, are given as follows:
 $
-  rho = epsilon_0 div va(E) = -epsilon_0 laplacian phi,\ phi = -integral va(E) dot dif va(l) = 1 / (4 uppi epsilon_0) integral.triple rho / s dif^3 r,\ va(E) = -grad phi = 1 / (4 uppi epsilon_0) integral.triple rho / s^2 vu(s) dif^3 r,
+  rho = epsilon_0 div va(E) = -epsilon_0 laplacian phi,\ phi = -integral va(E) dot dif va(ell) = 1 / (4 uppi epsilon_0) integral.triple rho / s dif^3 r,\ va(E) = -grad phi = 1 / (4 uppi epsilon_0) integral.triple rho / s^2 vu(s) dif^3 r,
 $
 where $va(s)$ is the separation vector.

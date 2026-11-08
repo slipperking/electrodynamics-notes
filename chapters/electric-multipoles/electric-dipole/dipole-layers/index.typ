@@ -14,26 +14,97 @@ The most general case of an electric dipole layer will consider an arbitrary sur
 $
   phi(va(r)) = -1 / (4 uppi epsilon_0) integral dif va(p)' dot grad 1 / xi = 1 / (4 uppi epsilon_0) integral.double_S va(tau)(va(r)') dot grad' 1 / xi dif S'
 $
-We wish to rewrite the potential as a volume integral. Similar to the way in which @sec:electric-charges expresses a surface distribution $sigma$ and a linear distribution $lambda$ as a volume density distribution, there exists a suitable generalization
+We wish to rewrite the potential as a volume integral. Similar to the way in which @sec:electric-charges expresses a surface distribution $sigma$ and a line distribution $lambda$ as a volume density distribution, there exists a suitable generalization
 $
   delta_S (va(r)) = integral.double_S delta^3 (va(r) - va(r)') dif S'
 $
-whence the previous relation is simply
+Defining
 $
-  phi(va(r)) = 1 / (4 uppi epsilon_0) integral.triple delta_S (va(r)') va(tau)(argmin_(va(r)_S in S) norm(va(r)_S - va(r)')) dot gradp 1 / xi dif^3 r'.
+  va(r)'_S = argmin_(va(r)'' in S) norm(va(r)' - va(r)''), wide (va(r)_S = argmin_(va(r)'' in S) norm(va(r) - va(r)''))
+$
+the previous relation is simply
+$
+  phi(va(r)) = 1 / (4 uppi epsilon_0) integral.triple delta_S (va(r)') va(tau) (va(r)'_S) dot gradp 1 / xi dif^3 r'.
 $
 The choice of $argmin$ is not of great importance; our goal is to extend $va(tau)$ to be defined outside the surface, although $delta_S$ picks only points in $S$. For simplicity we shall simply write $va(r)_S$ to imply the given meaning.
 
-Therefore,
+We then have
 $
-  phi(va(r)) &= 1 / (4 uppi epsilon_0) integral.triple delta_S (va(r)') va(tau)(va(r)_S) dot grad' 1 / xi dif^3 r' \
-  &= 1 / (4 uppi epsilon_0) integral.triple [gradp [delta_S (va(r)') va(tau)(va(r)_S) 1 / xi] - divp[delta_S (va(r)') va(tau)(va(r)_S)] 1 / xi] dif^3 r' \
-  &= 1 / (4 uppi epsilon_0) integral.triple [gradp [delta_S (va(r)') va(tau)(va(r)_S) 1 / xi] - divp[delta_S (va(r)') va(tau)(va(r)_S)] 1 / xi] dif^3 r' \
-  &= 1 / (4 uppi epsilon_0) integral.triple (-divp [delta_S (va(r)') va(tau)(va(r)_S)]) / xi dif^3 r',
+  phi(va(r)) &= 1 / (4 uppi epsilon_0) integral.triple [divp [1 / xi delta_S (va(r)') va(tau) (va(r)'_S)] - (divp [delta_S (va(r)') va(tau) (va(r)'_S)]) / xi] dif^3 r' \
+  &= 1 / (4 uppi epsilon_0) integral.triple (-divp [delta_S (va(r)') va(tau) (va(r)'_S)]) / xi dif^3 r',
 $
 which is the precise result we would have obtained by setting
 #theorem[Volume Charge Distribution of an Electric Dipole Layer][
   $
-    rho(va(r)) = -divp [delta_S (va(r)') va(tau)(va(r)_S)] = -divp [delta_S (va(r)') va(tau)(argmin_(va(r)_S in S) norm(va(r)_S - va(r)'))]
+    rho(va(r)) = -div [delta_S (va(r)) va(tau) (va(r)_S)].
   $
+]
+Observe that
+$
+  delta_S (va(r)) va(tau) (va(r)_S) = integral.double_S delta^3 (va(r) - va(r)') va(tau) (va(r)_S) dif S' = integral.double_S va(tau) (va(r)') delta^3(va(r) - va(r)') dif S',
+$
+giving
+$
+  rho(va(r)) = -integral.double_S va(tau) (va(r)') dot grad delta^3 (va(r) - va(r)') dif S'.
+$
+Denote by $vu(n) = vu(n)_(va(r)')$ the unit surface normal and decompose
+$
+  va(tau) &= va(tau)_parallel + va(tau)_perp, wide "where" quad va(tau)_perp = vu(n) (vu(n) dot va(tau)) = vu(n) tau_perp, quad va(tau)_parallel = va(tau) - va(tau)_perp = (vaa(I) - vu(n)^(times.o 2)) dot va(tau), \
+  grad &= grad_parallel + grad_perp, wide "where" quad grad_perp = vu(n)(vu(n) dot grad), quad grad_parallel = (vaa(I) - vu(n)^(times.o 2)) dot grad,
+$
+(here we define $tau_perp$ to be signed to be dependent on the direction of $vu(n)$) whence
+$
+  rho(va(r)) = -integral.double_S va(tau)_parallel (va(r)') dot grad delta^3 (va(r) - va(r)') dif S' - integral.double_S va(tau)_perp (va(r)') dot grad delta^3 (va(r) - va(r)') dif S'.
+$ <eq:electric-dipole-layer-auxiliary-1>
+As generalized functions of $xi$, $grad = -gradp$ entails that
+$
+  -integral.double_S &va(tau)_parallel (va(r)') dot grad delta^3(va(r) - va(r)') dif S' = integral.double_S va(tau)_parallel (va(r)') dot gradp_parallel delta^3(va(r) - va(r)') dif S' \
+  &= integral.double_S [divpsu(parallel) [va(tau)_parallel (va(r)') delta^3(va(r) - va(r)')] - [divpsu(parallel) va(tau)_parallel (va(r)')] delta^3(va(r) - va(r)')] dif S'
+$ <eq:electric-dipole-layer-auxiliary-2>
+//
+Denote by $vu(m) = vu(m)_(va(r)')$ at $va(r)' in partial S$ the outward unit conormal tangent to $S$ and normal to $partial S$. Then
+$
+  integral.double_S divpsu(parallel) [va(tau)_parallel (va(r)') delta^3(va(r) - va(r)')] dif S' = integral.cont_(partial S) delta^3 (va(r) - va(r)') va(tau)_parallel (va(r)') dot vu(m)_(va(r)') dif ell'
+$
+Where
+$
+  delta_(partial S)(va(r)) = integral.cont_(partial S) delta^3(va(r) - va(r)') dif ell', wide va(r)_(partial S) = argmin_(va(r)'' in partial S) norm(va(r) - va(r)''), \
+  lambda(va(r)_(partial S)) = va(tau)_parallel (va(r)_(partial S)) dot vu(m)_(va(r)_(partial S)),
+$ <eq:electric-dipole-layer-effective-line-charge-density>
+the first term of @eq:electric-dipole-layer-auxiliary-1 assumes the form (distributionally)
+$
+  integral.double_S divpsu(parallel) [va(tau)_parallel (va(r)') delta^3 (va(r) - va(r)')] dif S' = lambda(va(r)_(partial S)) delta_(partial S)(va(r)). /* #tag[(distributionally)] */
+$
+The second term of @eq:electric-dipole-layer-auxiliary-2 is similarly
+$
+  integral.double_S [divpsu(parallel) va(tau)_parallel (va(r)')] delta^3(va(r) - va(r)') dif S' = [divsu(parallel) va(tau)_parallel (va(r)_S)] delta_S (va(r)).
+$
+In consideration of @eq:electric-dipole-layer-auxiliary-1, observe that
+$
+  delta_S (va(r)) va(tau)_perp (va(r)_S) = integral.double_S va(tau)_perp (va(r)') delta^3 (va(r) - va(r)') dif S',
+$
+$
+  div[delta_S (va(r)) va(tau)_perp (va(r)_S)] &= va(tau)_perp (va(r)_S) dot grad delta_S (va(r)) + [div va(tau)_perp (va(r)_S)] delta_S (va(r)) \
+  &= div integral.double_S va(tau)_perp (va(r)') delta^3 (va(r) - va(r)') dif S' = integral.double_S va(tau)_perp (va(r)') dot grad delta^3 (va(r) - va(r)') dif S'.
+$
+As $va(r)_S$ remains invariant under sufficiently small displacements along $vu(n)_va(r)$, we aver that $divsu(perp) va(tau)_perp = 0$, whence it follows that $div va(tau)_perp = divsu(parallel) va(tau)_perp$. Hence
+$
+  va(tau)_perp (va(r)_S) dot grad delta_S (va(r)) + [div va(tau)_perp (va(r)_S)] delta_S (va(r)) &= tau_perp (va(r)_S) vu(n)_va(r)_S dot grad delta_S (va(r)) + [divsu(parallel) va(tau)_perp (va(r)_S)] delta_S (va(r)) \
+  &=integral.double_S va(tau)_perp (va(r)') dot grad delta^3 (va(r) - va(r)') dif S',
+$
+which is the second term of @eq:electric-dipole-layer-auxiliary-1. Combining @eq:electric-dipole-layer-auxiliary-1, @eq:electric-dipole-layer-auxiliary-2, and @eq:electric-dipole-layer-effective-line-charge-density,
+$
+  rho(va(r)) &= lambda(va(r)_(partial S)) delta_(partial S) (va(r)) - [divsu(parallel) va(tau)_parallel (va(r)_S)] delta_S (va(r)) - [tau_perp (va(r)_S) vu(n)_va(r)_S dot grad delta_S (va(r)) + [divsu(parallel) va(tau)_perp (va(r)_S)] delta_S (va(r))] \
+  &= lambda(va(r)_(partial S)) delta_(partial S) (va(r)) - divsu(parallel) va(tau) (va(r)_S) delta_S (va(r)) - tau_perp (va(r)_S) vu(n)_va(r)_S dot grad delta_S (va(r)) \
+$
+#theorem[
+  The volume distribution of an electric dipole layer is
+  $
+    rho(va(r)) = -tau_perp (va(r)_S) [pdv(, n_va(r)_S) delta_S (va(r))] + sigma(va(r)_S) delta_S (va(r)) + lambda(va(r)_(partial S)) delta_(partial S) (va(r)),
+  $
+  wherein
+  $
+    sigma = -divsu(parallel) va(tau), wide lambda = va(tau)_parallel dot vu(m)
+  $
+  are the _effective surface and line charge densities_.
 ]

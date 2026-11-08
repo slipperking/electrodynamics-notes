@@ -9,7 +9,7 @@ Allow us to entertain the following electrostatic situation: for a specified cha
 // Therefore
 As the charge follows traverses between the points, we may find the total work performed by the electric force to be
 $
-  W_"E" = integral_va(a)^va(b) va(F) dot dif va(l) = q integral_va(a)^va(b) va(E) dot dif va(l) = -q integral_va(a)^va(b) grad phi dot dif va(l) = q[phi(va(a)) - phi(va(b))]
+  W_"E" = integral_va(a)^va(b) va(F) dot dif va(ell) = q integral_va(a)^va(b) va(E) dot dif va(ell) = -q integral_va(a)^va(b) grad phi dot dif va(ell) = q[phi(va(a)) - phi(va(b))]
 $
 (where we have utilized the Gradient Theorem, c.f. @thm:gradient). Denote by $W$ the work performed by the applied force, whence
 $
