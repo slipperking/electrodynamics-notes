@@ -173,16 +173,18 @@ $
 $
 For sufficiently small $epsilon$, $vu(n)$ and $tau_perp$ can be understood as approximately constant, thus
 $
-  Delta phi_"dip" & = Delta 1 / (4 uppi epsilon_0) integral.double_D tau_perp gradp 1 / xi dot dif va(S)' = -1 / (4 uppi epsilon_0) Delta [tau_perp (va(r)_S) vu(n)_va(r) dot integral.double_D (va(xi)) / xi^3 dif S'],
+  Delta phi_"dip" & = Delta 1 / (4 uppi epsilon_0) integral.double_D tau_perp gradp 1 / xi dot dif va(S)' = -1 / (4 uppi epsilon_0) Delta [tau_perp (va(r)_S) vu(n)_va(r)_S dot integral.double_D (va(xi)) / xi^3 dif S'],
 $
 where the integral on the right was computed in @ex:electric-field-at-point-for-uniformly-charged-disk to give
 $
-  Delta phi_"dip" & -> Delta tau_perp (va(r)_S) vu(n)_va(r) dot plus.minus (vu(n)_va(r)) / (2 epsilon_0) &= tau_perp / epsilon_0,
+  Delta phi_"dip" & -> Delta tau_perp (va(r)_S) vu(n)_va(r)_S dot plus.minus (vu(n)_va(r)_S) / (2 epsilon_0) &= tau_perp / epsilon_0,
 $ <eq:electric-dipole-layer-potential-dipole-term-boundary-potential>
 as $Delta va(r) -> 0$. Consequently,
 $
-  vu(n) times Delta va(E)_"dip" = 1 / epsilon_0 [grad tau_perp times vu(n)] /* = -(grad_parallel + grad_perp) tau_perp / epsilon_0,\
-                                                                            vu(n) times Delta va(E)_"dip" = -vu(n) times grad_parallel tau_perp / epsilon_0 - vu(n) times vu(n)(vu(n) dot grad) tau_perp / epsilon_0 = grad_parallel tau_perp / epsilon_0 times vu(n) */ = 1 / epsilon_0 [curl(tau_perp vu(n)) - tau_perp curl vu(n)] = (curl va(tau)_perp) / epsilon_0.
+  vu(n) times Delta va(E)_"dip" = 1 / epsilon_0 [grad tau_perp times vu(n)]
+  /* = -(grad_parallel + grad_perp) tau_perp / epsilon_0,\
+  vu(n) times Delta va(E)_"dip" = -vu(n) times grad_parallel tau_perp / epsilon_0 - vu(n) times vu(n)(vu(n) dot grad) tau_perp / epsilon_0 = grad_parallel tau_perp / epsilon_0 times vu(n) */
+  = 1 / epsilon_0 [curl(tau_perp vu(n)_S) - tau_perp curl vu(n)_S] = (curl va(tau)_perp) / epsilon_0
 $
 By @eq:electric-dipole-layer-pre-boundary-cross-product,
 #theorem[Boundary Conditions for a Dipole Layer][
