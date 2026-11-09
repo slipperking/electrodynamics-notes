@@ -135,7 +135,7 @@ The second term arises only when $va(tau)$ is nonconstant along $S$, for otherwi
 // THIRD TERM!!!
 The third term arises only when $partial S != emptyset$. Permit a brief and heuristic consideration of a neighborhood of $partial S$. Let $va(r)_(partial S)$ be a point of the edge, and let $vu(m)$ be the outward unit conormal thereat. The value $lambda = va(tau) dot vu(m)$ measures the component of the dipole density pointing outward from $S$ within its own plane, toward its edge. If this quantity is positive, $va(tau)$ points outward, and the positive end of each dipole near the edge lies nearer to $partial S$ than its negative end, insofar that at the outermost boundary $partial S$, the positive ends remain without canceling neighbor dipoles beyond the edge. If it is negative, the reverse implication holds and the leftover ends are negative. In the macroscopic limit, these uncancelled dipole ends give rise to an effective line charge $lambda$, and thus require the third term.
 
-Considering $va(r) in jinterior S$ so that the calculation of $rho$ need not include the $lambda$ term, we now rederive the boundary conditions for $va(E)$ upon crossing the dipole layer. For this we appeal to superposition; writing
+Considering $va(r) in S without partial S$ so that the calculation of $rho$ need not include the $lambda$ term, we now rederive the boundary conditions for $va(E)$ upon crossing the dipole layer. For this we appeal to superposition; writing
 $ rho = -tau_perp pdv(, n_S) delta_S + sigma delta_S = rho_"dip" + rho_"surf", $
 identifying "above" with the side matching $vu(n)$ and "below" with the other,
 $
@@ -150,34 +150,34 @@ $
 Similar to therein shall we fix a small disk $D$ of radius $epsilon > 0$ about $va(r)$, whence
 $
   Delta phi_"dip" & = Delta phi_("dip", S without D) + Delta phi_("dip", D) = Delta phi_("dip", D) \
-  & = 1 / (4 uppi epsilon_0) Delta integral.triple_(D times (-, +)) (rho_"dip" (va(r)')) / xi dif^3 r' = - 1 / (4 uppi epsilon_0) Delta integral.triple_(D times (-, +)) (tau_perp (va(r)') vu(n)_(va(r)'_S)) / xi dot gradp delta_S (va(r)') dif^3 r' \
-  & = - Delta 1 / (4 uppi epsilon_0) integral.triple_(D times (-, +)) (tau_perp (va(r)') vu(n)_(va(r)'_S) dot gradp) / xi integral.double_D delta^3 (va(r)' - va(r)'') dif S'' dif^3 r' \
+  & = 1 / (4 uppi epsilon_0) Delta integral.triple_(D times (-, +)) (rho_"dip" (va(r)')) / xi dif^3 r' = - 1 / (4 uppi epsilon_0) Delta integral.triple_(D times (-, +)) (tau_perp (va(r)'_S) vu(n)_(va(r)'_S)) / xi dot gradp delta_S (va(r)') dif^3 r' \
+  & = - Delta 1 / (4 uppi epsilon_0) integral.triple_(D times (-, +)) (tau_perp (va(r)'_S) vu(n)_(va(r)'_S) dot gradp) / xi integral.double_D delta^3 (va(r)' - va(r)'') dif S'' dif^3 r' \
   & = - Delta 1 / (4 uppi epsilon_0) integral.double_D integral.triple_(D times (-, +)) (tau_perp hat(n)_i) / xi partial_i delta^3 (va(r)' - va(r)'') dif^3 r' dif S'' \
   & = - Delta 1 / (4 uppi epsilon_0) integral.double_D integral.triple_(D times (-, +)) [partial_i ((tau_perp hat(n)_i) / xi delta^3) - delta^3 partial_i (tau_perp hat(n)_i) / xi] dif^3 r' dif S'' \
-  & = Delta 1 / (4 uppi epsilon_0) integral.double_D [grad'' dot (tau_perp (va(r)'') vu(n)_(va(r)''_S)) / xi - integral.surf_(partial [D times (-, +)]) (tau_perp vu(n)) / xi delta^3 dot dif va(S)'] dif S'' \
-  & = Delta 1 / (4 uppi epsilon_0) integral.double_D grad'' dot (tau_perp (va(r)'') vu(n)_(va(r)''_S)) / xi dif S''
+  & = Delta 1 / (4 uppi epsilon_0) integral.double_D [grad'' dot (tau_perp (va(r)''_S) vu(n)_(va(r)''_S)) / xi - integral.surf_(partial [D times (-, +)]) (tau_perp vu(n)) / xi delta^3 dot dif va(S)'] dif S'' \
+  & = Delta 1 / (4 uppi epsilon_0) integral.double_D grad'' dot (tau_perp (va(r)''_S) vu(n)_(va(r)''_S)) / xi dif S''
 $
-wherein have we used the Divergence Theorem (@thm:divergence), and the observation that the support of $delta$, $va(r)' = va(r)''$, can only be attained when $va(r)'' in partial [D times (-, +)]$, which occurs with zero measure with respect to the area measure for $D$. Hence, with a renaming of variables,
+wherein have we used the Divergence Theorem (@thm:divergence), and the observation that the support of $delta$, $va(r)' = va(r)''$, can only be attained when $va(r)'' in partial [D times (-, +)]$, which cannot occur with $D inter partial [D times (-, +)] = 0$. Hence, with a renaming of variables,
 $
-  Delta phi_"dip" & = Delta 1 / (4 uppi epsilon_0) integral.double_D divp (tau_perp (va(r)') vu(n)_(va(r)'_S)) / xi dif S' = 1 / (4 uppi epsilon_0) Delta integral.double_D [(tau_perp gradp 1 / xi + 1 / xi gradp tau_perp) dot vu(n) + tau_perp / xi divp vu(n)] dif S' \
+  Delta phi_"dip" & = Delta 1 / (4 uppi epsilon_0) integral.double_D divp (tau_perp (va(r)'_S) vu(n)_(va(r)'_S)) / xi dif S' = 1 / (4 uppi epsilon_0) Delta integral.double_D [(tau_perp gradp 1 / xi + 1 / xi gradp tau_perp) dot vu(n) + tau_perp / xi divp vu(n)] dif S' \
   &= Delta 1 / (4 uppi epsilon_0) integral.double_D [(tau_perp gradp 1 / xi + 1 / xi gradp tau_perp) dot vu(n) + tau_perp / xi divp vu(n)] dif S' \
   &= Delta 1 / (4 uppi epsilon_0) integral.double_D (gradp tau_perp dot vu(n) + tau_perp divp vu(n)) / xi dif S' + Delta 1 / (4 uppi epsilon_0) integral.double_D tau_perp gradp 1 / xi dot dif va(S)'.
 $
 Since for any bounded $f$,
 $
-  va(r) |-> integral.double_D f(va(r)') / xi dif va(r)'
+  va(r) |-> integral.double_D f(va(r)') / xi dif S'
 $
 is continuous, an application hereof gives
 $
-  Delta phi_"dip" & = Delta 1 / (4 uppi epsilon_0) integral.double_D tau_perp gradp 1 / xi dot dif va(S)' = -Delta 1 / (4 uppi epsilon_0) integral.double_D tau_perp (va(r)')(va(xi)) / xi^3 dot dif va(S)'.
+  Delta phi_"dip" & = Delta 1 / (4 uppi epsilon_0) integral.double_D tau_perp gradp 1 / xi dot dif va(S)' = -Delta 1 / (4 uppi epsilon_0) integral.double_D tau_perp (va(r)'_S)(va(xi)) / xi^3 dot dif va(S)'.
 $
-When $epsilon -> 0$, $vu(n)$ and $tau_perp$ are approximately constant, thus
+For sufficiently small $epsilon$, $vu(n)$ and $tau_perp$ can be understood as approximately constant, thus
 $
-  Delta phi_"dip" & = Delta 1 / (4 uppi epsilon_0) integral.double_D tau_perp gradp 1 / xi dot dif va(S)' = -1 / (4 uppi epsilon_0) Delta [tau_perp (va(r)) vu(n)_va(r) dot integral.double_D (va(xi)) / xi^3 dif S'],
+  Delta phi_"dip" & = Delta 1 / (4 uppi epsilon_0) integral.double_D tau_perp gradp 1 / xi dot dif va(S)' = -1 / (4 uppi epsilon_0) Delta [tau_perp (va(r)_S) vu(n)_va(r) dot integral.double_D (va(xi)) / xi^3 dif S'],
 $
 where the integral on the right was computed in @ex:electric-field-at-point-for-uniformly-charged-disk to give
 $
-  Delta phi_"dip" & -> Delta tau_perp (va(r)) vu(n)_va(r) dot plus.minus (vu(n)_va(r)) / (2 epsilon_0) &= tau_perp / epsilon_0,
+  Delta phi_"dip" & -> Delta tau_perp (va(r)_S) vu(n)_va(r) dot plus.minus (vu(n)_va(r)) / (2 epsilon_0) &= tau_perp / epsilon_0,
 $ <eq:electric-dipole-layer-potential-dipole-term-boundary-potential>
 as $Delta va(r) -> 0$. Consequently,
 $
@@ -187,8 +187,9 @@ $
 By @eq:electric-dipole-layer-pre-boundary-cross-product,
 #theorem[Boundary Conditions for a Dipole Layer][
   $
-    vu(n) times Delta va(E) = (curl va(tau)_perp) / epsilon_0.
+    vu(n) times Delta va(E) = (curl va(tau)_perp) / epsilon_0,
   $
+  where $va(tau)$ is continued by $va(tau)(va(r)) = va(tau)(va(r)_S)$.
 ]
 #todo[
   Make more explicit the definition of the curl of a surface-defined function and the vanishing of the curl of normal term
