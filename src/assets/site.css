@@ -256,8 +256,10 @@ math .math-link {
 }
 
 .topbar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 20;
   display: flex;
   align-items: center;
@@ -328,6 +330,7 @@ math .math-link {
   gap: 2rem;
   align-items: start;
   min-height: calc(100vh - var(--topbar-height));
+  margin-top: var(--topbar-height);
   padding: 0 1.6rem 2.5rem;
 }
 
@@ -1321,6 +1324,7 @@ figure svg {
 
   .layout {
     display: block;
+    margin-top: 0;
   }
 
   .content {

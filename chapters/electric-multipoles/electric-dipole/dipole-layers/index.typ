@@ -190,7 +190,7 @@ $
 By @eq:electric-dipole-layer-pre-boundary-cross-product,
 #theorem[Boundary Conditions for a Dipole Layer][
   $
-    vu(n) times Delta va(E) = (curl va(tau)_perp) / epsilon_0,
+    vu(n) times Delta va(E) = (curl va(tau)_perp) / epsilon_0.
   $
 ]
 #todo[
