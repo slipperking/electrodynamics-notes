@@ -3,7 +3,7 @@
   ..dargs("Electric Multipoles"),
   children: {
     include "electric-dipole/index.typ"
-    include "quadrupole/index.typ"
+    include "electric-quadrupole/index.typ"
     include "legendre-polynomials/index.typ"
     include "spherical-azimuthal-multipoles/index.typ"
   },
@@ -55,7 +55,7 @@ wherein the following definitions are utilized
   $
 ] <def:electric-dipole-moment>
 
-#definition[
+#definition(restate: true)[
   The _electric quadrupole moment_ is the dyadic tensor given by
   $
     vaa(Q) = integral.triple_(s' < R) rho(va(r)') va(s)' times.o va(s)' dif^3 r'

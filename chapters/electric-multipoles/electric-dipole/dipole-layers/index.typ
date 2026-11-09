@@ -47,7 +47,7 @@ giving
 $
   rho(va(r)) = -integral.double_S va(tau) (va(r)') dot grad delta^3 (va(r) - va(r)') dif S'.
 $
-Denote by $vu(n) = vu(n)_(va(r)')$ the unit surface normal and decompose
+Denote by $vu(n) = vu(n)(va(r)')$ the unit surface normal and decompose
 $
   va(tau) &= va(tau)_parallel + va(tau)_perp, wide "where" quad va(tau)_perp = vu(n) (vu(n) dot va(tau)) = vu(n) tau_perp, quad va(tau)_parallel = va(tau) - va(tau)_perp = (vaa(I) - vu(n)^(times.o 2)) dot va(tau), \
   grad &= grad_parallel + grad_perp, wide "where" quad grad_perp = vu(n)(vu(n) dot grad), quad grad_parallel = (vaa(I) - vu(n)^(times.o 2)) dot grad,
@@ -87,16 +87,17 @@ $
   div[delta_S (va(r)) va(tau)_perp (va(r)_S)] &= va(tau)_perp (va(r)_S) dot grad delta_S (va(r)) + [div va(tau)_perp (va(r)_S)] delta_S (va(r)) \
   &= div integral.double_S va(tau)_perp (va(r)') delta^3 (va(r) - va(r)') dif S' = integral.double_S va(tau)_perp (va(r)') dot grad delta^3 (va(r) - va(r)') dif S'.
 $
-As $va(r)_S$ remains invariant under sufficiently small displacements along $vu(n)_va(r)_S$, we aver that $divsu(perp) va(tau)_perp = 0$, whence it follows that $div va(tau)_perp = divsu(parallel) va(tau)_perp$. Thus,
+As $va(r)_S$ remains invariant under sufficiently small displacements along $vu(n)(va(r)_S)$, we aver that $divsu(perp) va(tau)_perp = 0$, whence it follows that $div va(tau)_perp = divsu(parallel) va(tau)_perp$. Thus,
 $
-  va(tau)_perp (va(r)_S) dot grad delta_S (va(r)) + [div va(tau)_perp (va(r)_S)] delta_S (va(r)) &= tau_perp (va(r)_S) vu(n)_va(r)_S dot grad delta_S (va(r)) + [divsu(parallel) va(tau)_perp (va(r)_S)] delta_S (va(r)) \
+  va(tau)_perp (va(r)_S) dot grad delta_S (va(r)) + [div va(tau)_perp (va(r)_S)] delta_S (va(r)) &= tau_perp (va(r)_S) vu(n)(va(r)_S) dot grad delta_S (va(r)) + [divsu(parallel) va(tau)_perp (va(r)_S)] delta_S (va(r)) \
   &=integral.double_S va(tau)_perp (va(r)') dot grad delta^3 (va(r) - va(r)') dif S',
 $
 which is the second term of @eq:electric-dipole-layer-auxiliary-1. Combining @eq:electric-dipole-layer-auxiliary-1, @eq:electric-dipole-layer-auxiliary-2, and @eq:electric-dipole-layer-effective-line-charge-density,
 $
-  rho(va(r)) &= lambda(va(r)_(partial S)) delta_(partial S) (va(r)) - [divsu(parallel) va(tau)_parallel (va(r)_S)] delta_S (va(r)) - [tau_perp (va(r)_S) vu(n)_va(r)_S dot grad delta_S (va(r)) + [divsu(parallel) va(tau)_perp (va(r)_S)] delta_S (va(r))] \
-  &= lambda(va(r)_(partial S)) delta_(partial S) (va(r)) - divsu(parallel) va(tau) (va(r)_S) delta_S (va(r)) - tau_perp (va(r)_S) vu(n)_va(r)_S dot grad delta_S (va(r)) \
+  rho(va(r)) &= lambda(va(r)_(partial S)) delta_(partial S) (va(r)) - [divsu(parallel) va(tau)_parallel (va(r)_S)] delta_S (va(r)) - [tau_perp (va(r)_S) vu(n)(va(r)_S) dot grad delta_S (va(r)) + [divsu(parallel) va(tau)_perp (va(r)_S)] delta_S (va(r))] \
+  &= lambda(va(r)_(partial S)) delta_(partial S) (va(r)) - divsu(parallel) va(tau) (va(r)_S) delta_S (va(r)) - tau_perp (va(r)_S) vu(n)(va(r)_S) dot grad delta_S (va(r))
 $
+As it shall transpire the necessity to perform differential operations, for simplicity shall we extend $va(tau)$ and $vu(n)$ by $va(tau)(va(r)) = va(tau)(va(r)_S)$ and $vu(n)(va(r)) = vu(n)(va(r)_S)$.
 #theorem[
   The volume distribution of an electric dipole layer characterized by a surface dipole moment density $va(tau)$ is
   $
@@ -150,16 +151,16 @@ $
 Similar to therein shall we fix a small disk $D$ of radius $epsilon > 0$ about $va(r)$, whence
 $
   Delta phi_"dip" & = Delta phi_("dip", S without D) + Delta phi_("dip", D) = Delta phi_("dip", D) \
-  & = 1 / (4 uppi epsilon_0) Delta integral.triple_(D times (-, +)) (rho_"dip" (va(r)')) / xi dif^3 r' = - 1 / (4 uppi epsilon_0) Delta integral.triple_(D times (-, +)) (tau_perp (va(r)'_S) vu(n)_(va(r)'_S)) / xi dot gradp delta_S (va(r)') dif^3 r' \
-  & = - Delta 1 / (4 uppi epsilon_0) integral.triple_(D times (-, +)) (tau_perp (va(r)'_S) vu(n)_(va(r)'_S) dot gradp) / xi integral.double_D delta^3 (va(r)' - va(r)'') dif S'' dif^3 r' \
+  & = 1 / (4 uppi epsilon_0) Delta integral.triple_(D times (-, +)) (rho_"dip" (va(r)')) / xi dif^3 r' = - 1 / (4 uppi epsilon_0) Delta integral.triple_(D times (-, +)) (tau_perp (va(r)'_S) vu(n)(va(r)'_S)) / xi dot gradp delta_S (va(r)') dif^3 r' \
+  & = - Delta 1 / (4 uppi epsilon_0) integral.triple_(D times (-, +)) (tau_perp (va(r)'_S) vu(n)(va(r)'_S) dot gradp) / xi integral.double_D delta^3 (va(r)' - va(r)'') dif S'' dif^3 r' \
   & = - Delta 1 / (4 uppi epsilon_0) integral.double_D integral.triple_(D times (-, +)) (tau_perp hat(n)_i) / xi partial_i delta^3 (va(r)' - va(r)'') dif^3 r' dif S'' \
   & = - Delta 1 / (4 uppi epsilon_0) integral.double_D integral.triple_(D times (-, +)) [partial_i ((tau_perp hat(n)_i) / xi delta^3) - delta^3 partial_i (tau_perp hat(n)_i) / xi] dif^3 r' dif S'' \
-  & = Delta 1 / (4 uppi epsilon_0) integral.double_D [grad'' dot (tau_perp (va(r)''_S) vu(n)_(va(r)''_S)) / xi - integral.surf_(partial [D times (-, +)]) (tau_perp vu(n)) / xi delta^3 dot dif va(S)'] dif S'' \
-  & = Delta 1 / (4 uppi epsilon_0) integral.double_D grad'' dot (tau_perp (va(r)''_S) vu(n)_(va(r)''_S)) / xi dif S''
+  & = Delta 1 / (4 uppi epsilon_0) integral.double_D [grad'' dot (tau_perp (va(r)''_S) vu(n)(va(r)''_S)) / xi - integral.surf_(partial [D times (-, +)]) (tau_perp vu(n)) / xi delta^3 dot dif va(S)'] dif S'' \
+  & = Delta 1 / (4 uppi epsilon_0) integral.double_D grad'' dot (tau_perp (va(r)''_S) vu(n)(va(r)''_S)) / xi dif S''
 $
 wherein have we used the Divergence Theorem (@thm:divergence), and the observation that the support of $delta$, $va(r)' = va(r)''$, can only be attained when $va(r)'' in partial [D times (-, +)]$, which cannot occur with $D inter partial [D times (-, +)] = 0$. Hence, with a renaming of variables,
 $
-  Delta phi_"dip" & = Delta 1 / (4 uppi epsilon_0) integral.double_D divp (tau_perp (va(r)'_S) vu(n)_(va(r)'_S)) / xi dif S' = 1 / (4 uppi epsilon_0) Delta integral.double_D [(tau_perp gradp 1 / xi + 1 / xi gradp tau_perp) dot vu(n) + tau_perp / xi divp vu(n)] dif S' \
+  Delta phi_"dip" & = Delta 1 / (4 uppi epsilon_0) integral.double_D divp (tau_perp (va(r)'_S) vu(n)(va(r)'_S)) / xi dif S' = 1 / (4 uppi epsilon_0) Delta integral.double_D [(tau_perp gradp 1 / xi + 1 / xi gradp tau_perp) dot vu(n) + tau_perp / xi divp vu(n)] dif S' \
   &= Delta 1 / (4 uppi epsilon_0) integral.double_D [(tau_perp gradp 1 / xi + 1 / xi gradp tau_perp) dot vu(n) + tau_perp / xi divp vu(n)] dif S' \
   &= Delta 1 / (4 uppi epsilon_0) integral.double_D (gradp tau_perp dot vu(n) + tau_perp divp vu(n)) / xi dif S' + Delta 1 / (4 uppi epsilon_0) integral.double_D tau_perp gradp 1 / xi dot dif va(S)'.
 $
@@ -173,25 +174,24 @@ $
 $
 For sufficiently small $epsilon$, $vu(n)$ and $tau_perp$ can be understood as approximately constant, thus
 $
-  Delta phi_"dip" & = Delta 1 / (4 uppi epsilon_0) integral.double_D tau_perp gradp 1 / xi dot dif va(S)' = -1 / (4 uppi epsilon_0) Delta [tau_perp (va(r)_S) vu(n)_va(r)_S dot integral.double_D (va(xi)) / xi^3 dif S'],
+  Delta phi_"dip" & = Delta 1 / (4 uppi epsilon_0) integral.double_D tau_perp gradp 1 / xi dot dif va(S)' = -1 / (4 uppi epsilon_0) Delta [tau_perp (va(r)_S) vu(n)(va(r)_S) dot integral.double_D (va(xi)) / xi^3 dif S'],
 $
 where the integral on the right was computed in @ex:electric-field-at-point-for-uniformly-charged-disk to give
 $
-  Delta phi_"dip" & -> Delta tau_perp (va(r)_S) vu(n)_va(r)_S dot plus.minus (vu(n)_va(r)_S) / (2 epsilon_0) &= tau_perp / epsilon_0,
+  Delta phi_"dip" & -> Delta tau_perp (va(r)_S) vu(n)(va(r)_S) dot plus.minus (vu(n)(va(r)_S)) / (2 epsilon_0) &= tau_perp / epsilon_0,
 $ <eq:electric-dipole-layer-potential-dipole-term-boundary-potential>
 as $Delta va(r) -> 0$. Consequently,
 $
   vu(n) times Delta va(E)_"dip" = 1 / epsilon_0 [grad tau_perp times vu(n)]
   /* = -(grad_parallel + grad_perp) tau_perp / epsilon_0,\
   vu(n) times Delta va(E)_"dip" = -vu(n) times grad_parallel tau_perp / epsilon_0 - vu(n) times vu(n)(vu(n) dot grad) tau_perp / epsilon_0 = grad_parallel tau_perp / epsilon_0 times vu(n) */
-  = 1 / epsilon_0 [curl(tau_perp vu(n)_S) - tau_perp curl vu(n)_S] = (curl va(tau)_perp) / epsilon_0
+  = 1 / epsilon_0 [curl(tau_perp vu(n)) - tau_perp curl vu(n)] = (curl va(tau)_perp) / epsilon_0
 $
 By @eq:electric-dipole-layer-pre-boundary-cross-product,
 #theorem[Boundary Conditions for a Dipole Layer][
   $
     vu(n) times Delta va(E) = (curl va(tau)_perp) / epsilon_0,
   $
-  where $va(tau)$ is continued by $va(tau)(va(r)) = va(tau)(va(r)_S)$.
 ]
 #todo[
   Make more explicit the definition of the curl of a surface-defined function and the vanishing of the curl of normal term
