@@ -1,4 +1,5 @@
 #import "/lib.typ": *
+#import "/build/visual-output/electric-quadrupole/lib.typ": *
 #show: docs-subchapter.with(
   ..dargs("The Electric Quadrupole"),
   children: {
@@ -23,6 +24,139 @@ As with @sec:electric-dipole,
     &=Q'_(i j) + p'_i (r'_(0, j) - r_(0, j)) + p'_j (r'_(0, i) - r_(0, i)) + (r'_(0, i) - r_(0, i))(r'_(0, j) - r_(0, j)) Q = Q'_(i j). qedhere
   $
 ]
+
+#figure-wrapper[
+  #figure(
+    {
+      set text(size: 0.95em)
+      canvas(
+        length: 1.44cm,
+        // debug-show: true,
+        {
+          import cetz.draw: *
+
+          let field-stroke = (paint: black, thickness: 0.62pt)
+          let vector-stroke = (paint: black, thickness: 0.8pt)
+          let point-x = -2.75
+          let charge-x = 2.75
+          let axis-bottom = -1.65
+          let c-half-x = 0.5
+          let p-half-x = 0.1573
+          let p-half-z = 0.3896
+
+          let shift-curve(curve, center) = curve.map(point => {
+            let (x, z) = point
+            (center + x, z)
+          })
+          let draw-generated-field(curves, arrows, center) = {
+            for curve in curves {
+              line(..shift-curve(curve, center), stroke: field-stroke)
+            }
+            for arrow in arrows {
+              let shifted-arrow = shift-curve(arrow, center)
+              mark(
+                shifted-arrow.at(0),
+                shifted-arrow.at(1),
+                ">>",
+                fill: black,
+                stroke: none,
+                scale: 0.78,
+              )
+            }
+          }
+
+          draw-generated-field(
+            point-quadrupole-curves,
+            point-quadrupole-arrows,
+            point-x,
+          )
+          draw-generated-field(
+            four-charge-quadrupole-curves,
+            four-charge-quadrupole-arrows,
+            charge-x,
+          )
+
+          line(
+            (point-x, 0),
+            (point-x + 0.78, 0),
+            stroke: vector-stroke,
+            mark: (end: ">>", fill: black),
+          )
+          line(
+            (point-x, 0),
+            (point-x + 0.2922, 0.7242),
+            stroke: vector-stroke,
+            mark: (end: ">>", fill: black),
+          )
+          circle((point-x, 0), radius: 3.4pt, fill: white, stroke: field-stroke)
+
+          for (offset-x, offset-z) in (
+            (c-half-x + p-half-x, p-half-z),
+            (-c-half-x + p-half-x, p-half-z),
+            (c-half-x - p-half-x, -p-half-z),
+            (-c-half-x - p-half-x, -p-half-z),
+          ) {
+            circle(
+              (charge-x + offset-x, offset-z),
+              radius: 4.2pt,
+              fill: white,
+              stroke: field-stroke,
+            )
+          }
+
+          content(
+            (point-x + 0.78, 0),
+            anchor: "west",
+            padding: 3pt,
+            math-rect($vu(c)$),
+          )
+          content(
+            (point-x + 0.2922, 0.7242),
+            anchor: "south",
+            padding: 3pt,
+            math-rect($va(p)$),
+          )
+          content(
+            (charge-x + c-half-x + p-half-x, p-half-z),
+            anchor: "south-west",
+            padding: 5pt,
+            math-rect($+q$),
+          )
+          content(
+            (charge-x - c-half-x + p-half-x, p-half-z),
+            anchor: "south-east",
+            padding: 5pt,
+            math-rect($-q$),
+          )
+          content(
+            (charge-x + c-half-x - p-half-x, -p-half-z),
+            anchor: "north-west",
+            padding: 5pt,
+            math-rect($-q$),
+          )
+          content(
+            (charge-x - c-half-x - p-half-x, -p-half-z),
+            anchor: "north-east",
+            padding: 5pt,
+            math-rect($+q$),
+          )
+          content(
+            (point-x, axis-bottom - 0.14),
+            anchor: "north",
+            [Point quadrupole],
+          )
+          content(
+            (charge-x, axis-bottom - 0.14),
+            anchor: "north",
+            [Four-charge quadrupole],
+          )
+        },
+      )
+    },
+    caption: [Field-lines of a point quadrupole and a quadrupole formed by four charges in a parallelogram, with sides $d vu(c)$ and $va(p)$ shown at left.],
+  ) <fig:point-and-four-charge-quadrupoles>
+]
+
 As with the previous two instances, the construction of this term is describable with aid from a _point quadrupole_. In particular, we consider four point charges in a checkerboard pattern converging to a single point. As such, we consider two point dipoles with moments $plus.minus va(p) / d$ at $va(r)_0 plus.minus d/2 vu(c)$ with a vanishing separation $d -> 0$.
 
 With @eq:electric-dipole-potential, the electrostatic potential of a point quadrupole is hence

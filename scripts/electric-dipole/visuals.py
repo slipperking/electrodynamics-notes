@@ -5,7 +5,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_ROOT = PROJECT_ROOT / "build" / "visual-output" / "electric-dipole"
 
-CHARGE_HALF_GAP = 0.42
+CHARGE_HALF_GAP = 0.315
 SEED_RADIUS = 0.035
 CAPTURE_RADIUS = 0.042
 INTEGRATION_STEP = 0.006
@@ -15,6 +15,8 @@ TWO_CHARGE_SEED_ANGLES = (-90, -55, -25, 5, 25, 37)
 POINT_DIPOLE_OUTER_RADII = (3.1, 4.4)
 TWO_CHARGE_OUTER_ANGLES = (53,)
 PANEL_X_LIMIT = 2.32
+PANEL_Z_LIMIT = 1.58
+DIPOLE_TILT = math.radians(-22)
 
 
 def add(a, b):
@@ -119,42 +121,52 @@ def resample(curve, sample_count=OUTPUT_SAMPLES):
     ]
 
 
-def clip_curve_to_x(curve, x_limit):
-    """Clip a polyline to |x| <= x_limit, retaining separate visible branches."""
+def clip_segment_to_panel(first, second):
+    """Liang-Barsky clipping for one segment against the final panel rectangle."""
+    dx = second[0] - first[0]
+    dz = second[1] - first[1]
+    start = 0.0
+    end = 1.0
+    boundaries = (
+        (-dx, first[0] + PANEL_X_LIMIT),
+        (dx, PANEL_X_LIMIT - first[0]),
+        (-dz, first[1] + PANEL_Z_LIMIT),
+        (dz, PANEL_Z_LIMIT - first[1]),
+    )
+    for direction, offset in boundaries:
+        if abs(direction) < 1e-12:
+            if offset < 0:
+                return None
+            continue
+        ratio = offset / direction
+        if direction < 0:
+            start = max(start, ratio)
+        else:
+            end = min(end, ratio)
+        if start > end:
+            return None
+    return (
+        (first[0] + start * dx, first[1] + start * dz),
+        (first[0] + end * dx, first[1] + end * dz),
+    )
+
+
+def clip_curve_to_panel(curve):
     segments = []
     current = []
-
-    def inside(point):
-        return abs(point[0]) <= x_limit
-
-    def boundary_intersection(first, second):
-        boundary_x = math.copysign(x_limit, second[0] if not inside(second) else first[0])
-        fraction = (boundary_x - first[0]) / (second[0] - first[0])
-        return (
-            boundary_x,
-            first[1] + fraction * (second[1] - first[1]),
-        )
-
-    previous = curve[0]
-    previous_inside = inside(previous)
-    if previous_inside:
-        current.append(previous)
-
-    for point in curve[1:]:
-        point_inside = inside(point)
-        if previous_inside and point_inside:
-            current.append(point)
-        elif previous_inside and not point_inside:
-            current.append(boundary_intersection(previous, point))
+    for first, second in zip(curve, curve[1:]):
+        clipped = clip_segment_to_panel(first, second)
+        if clipped is None:
             if len(current) >= 2:
                 segments.append(current)
             current = []
-        elif not previous_inside and point_inside:
-            current = [boundary_intersection(previous, point), point]
-
-        previous = point
-        previous_inside = point_inside
-
+            continue
+        clipped_first, clipped_second = clipped
+        if not current or distance(current[-1], clipped_first) > 1e-8:
+            if len(current) >= 2:
+                segments.append(current)
+            current = [clipped_first]
+        current.append(clipped_second)
     if len(current) >= 2:
         segments.append(current)
     return segments
@@ -171,6 +183,15 @@ def arrow_segment(curve, center_fraction=0.5, half_length_fraction=0.018):
 
 def mirror(curve):
     return [(-x, z) for x, z in curve]
+
+
+def rotate_to_oblique(curve):
+    cosine = math.cos(DIPOLE_TILT)
+    sine = math.sin(DIPOLE_TILT)
+    return [
+        (cosine * x - sine * z, sine * x + cosine * z)
+        for x, z in curve
+    ]
 
 
 def point_dipole_line(radius, side, samples=241):
@@ -261,18 +282,22 @@ def typst_let(name, value):
     return f"#let {name} = {value}\n"
 
 
-point_curves = [
-    point_dipole_line(radius, side)
-    for radius in (0.72, 1.12, 1.62, 2.18)
+point_source_curves = [
+    point_dipole_line(
+        radius,
+        side,
+        samples=481 if radius in POINT_DIPOLE_OUTER_RADII else 241,
+    )
+    for radius in (0.72, 1.12, 1.62, 2.18, *POINT_DIPOLE_OUTER_RADII)
     for side in (-1, 1)
 ]
-for radius in POINT_DIPOLE_OUTER_RADII:
-    for side in (-1, 1):
-        outer_curve = point_dipole_line(radius, side, samples=481)
-        point_curves.extend(
-            resample(segment, sample_count=120)
-            for segment in clip_curve_to_x(outer_curve, PANEL_X_LIMIT)
-        )
+point_curves = []
+for curve in point_source_curves:
+    point_curves.extend(
+        resample(segment, sample_count=120)
+        for segment in clip_curve_to_panel(rotate_to_oblique(curve))
+        if cumulative_lengths(segment)[-1] > 0.14
+    )
 point_arrows = [arrow_segment(curve) for curve in point_curves]
 
 # The -90-degree seed is the exact axial line. The remaining seeds cover the
@@ -281,14 +306,19 @@ right_two_charge_curves = [
     resample(integrate_two_charge_line(angle))
     for angle in TWO_CHARGE_SEED_ANGLES
 ]
-two_charge_curves = [right_two_charge_curves[0]]
+two_charge_source_curves = [right_two_charge_curves[0]]
 for curve in right_two_charge_curves[1:]:
-    two_charge_curves.extend((mirror(curve), curve))
+    two_charge_source_curves.extend((mirror(curve), curve))
 for angle in TWO_CHARGE_OUTER_ANGLES:
     outer_curve = integrate_two_charge_line(angle)
-    for segment in clip_curve_to_x(outer_curve, PANEL_X_LIMIT):
-        sampled_segment = resample(segment, sample_count=120)
-        two_charge_curves.extend((mirror(sampled_segment), sampled_segment))
+    two_charge_source_curves.extend((mirror(outer_curve), outer_curve))
+two_charge_curves = []
+for curve in two_charge_source_curves:
+    two_charge_curves.extend(
+        resample(segment, sample_count=120)
+        for segment in clip_curve_to_panel(rotate_to_oblique(curve))
+        if cumulative_lengths(segment)[-1] > 0.14
+    )
 two_charge_arrows = [arrow_segment(curve) for curve in two_charge_curves]
 
 # Integral curves of a smooth vector field cannot cross away from a charge.

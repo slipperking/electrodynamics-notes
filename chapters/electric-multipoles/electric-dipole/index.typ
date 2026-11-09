@@ -85,18 +85,14 @@ whereto we refer as _the point dipole charge density_ distribution.
         {
           import cetz.draw: *
 
-          let axis-stroke = (
-            paint: black,
-            thickness: 0.4pt,
-          )
           let field-stroke = (paint: black, thickness: 0.62pt)
           let vector-stroke = (paint: black, thickness: 0.8pt)
           let point-x = -2.75
           let charge-x = 2.75
-          let axis-half-width = 2.4
           let axis-bottom = -1.65
-          let axis-top = 1.75
-          let charge-half-gap = 0.42
+          let charge-half-gap = 0.315
+          let p-x = 0.374607
+          let p-z = 0.927184
 
           let shift-curve(curve, center) = curve.map(point => {
             let (x, z) = point
@@ -119,21 +115,6 @@ whereto we refer as _the point dipole charge density_ distribution.
             }
           }
 
-          for center in (point-x, charge-x) {
-            line(
-              (center - axis-half-width, 0),
-              (center + axis-half-width, 0),
-              stroke: axis-stroke,
-              mark: (end: ">>", fill: black),
-            )
-            line(
-              (center, axis-bottom),
-              (center, axis-top),
-              stroke: axis-stroke,
-              mark: (end: ">>", fill: black),
-            )
-          }
-
           draw-generated-field(
             point-dipole-curves,
             point-dipole-arrows,
@@ -147,7 +128,7 @@ whereto we refer as _the point dipole charge density_ distribution.
 
           line(
             (point-x, 0),
-            (point-x, 0.92),
+            (point-x + 0.92 * p-x, 0.92 * p-z),
             name: "point-moment",
             stroke: vector-stroke,
             mark: (end: ">>", fill: black),
@@ -156,69 +137,57 @@ whereto we refer as _the point dipole charge density_ distribution.
 
           line(
             (charge-x, 0),
-            (charge-x, 0.92),
+            (charge-x + 0.92 * p-x, 0.92 * p-z),
             name: "charge-moment",
             stroke: vector-stroke,
             mark: (end: ">>", fill: black),
           )
           circle(
-            (charge-x, charge-half-gap),
+            (
+              charge-x + charge-half-gap * p-x,
+              charge-half-gap * p-z,
+            ),
             radius: 4.2pt,
             fill: white,
             stroke: field-stroke,
           )
           circle(
-            (charge-x, -charge-half-gap),
+            (
+              charge-x - charge-half-gap * p-x,
+              -charge-half-gap * p-z,
+            ),
             radius: 4.2pt,
             fill: white,
             stroke: field-stroke,
           )
 
           content(
-            (point-x + axis-half-width, 0),
-            anchor: "west",
-            padding: 2pt,
-            math-rect($x$),
-          )
-          content(
-            (point-x, axis-top),
-            anchor: "south",
-            padding: 2pt,
-            math-rect($z$),
-          )
-          content(
-            (charge-x + axis-half-width, 0),
-            anchor: "west",
-            padding: 2pt,
-            math-rect($x$),
-          )
-          content(
-            (charge-x, axis-top),
-            anchor: "south",
-            padding: 2pt,
-            math-rect($z$),
-          )
-          content(
-            (point-x, 0.92),
+            (point-x + 0.92 * p-x, 0.92 * p-z),
             anchor: "south",
             padding: 5pt,
             math-rect($va(p)$),
           )
           content(
-            (charge-x, 0.92),
+            (charge-x + 0.92 * p-x, 0.92 * p-z),
             anchor: "south",
             padding: 5pt,
             math-rect($va(p)$),
           )
           content(
-            (charge-x, charge-half-gap),
-            anchor: "south",
+            (
+              charge-x + charge-half-gap * p-x,
+              charge-half-gap * p-z,
+            ),
+            anchor: "south-west",
             padding: 5pt,
             math-rect($+q$),
           )
           content(
-            (charge-x, -charge-half-gap),
-            anchor: "north",
+            (
+              charge-x - charge-half-gap * p-x,
+              -charge-half-gap * p-z,
+            ),
+            anchor: "north-east",
             padding: 5pt,
             math-rect($-q$),
           )
@@ -235,7 +204,7 @@ whereto we refer as _the point dipole charge density_ distribution.
         },
       )
     },
-    caption: [Field-lines of a point dipole and a dipole formed by two charges with a fixed dipole moment in the $+z$ direction.],
+    caption: [Field-lines of a point dipole and a dipole formed by two charges with the same fixed dipole moment $va(p)$ in the oblique direction shown.],
   ) <fig:point-and-two-charge-dipoles>
 ]
 It is incumbent to interpret @eq:point-dipole-charge-density in the distributional sense. Where the pure monopole is describable by a point charge, the pure dipole is likewise completely ascribable by the point dipole. The current knowledge of physicists accord to the nonexistence of naturally-occuring point dipoles, which is not to say that @eq:point-dipole-charge-density holds no practical utility; it often transpires as a utile approximation whensoever the analogous separation $d$ is relatively insignificant to the separation distance $s >> d$.
