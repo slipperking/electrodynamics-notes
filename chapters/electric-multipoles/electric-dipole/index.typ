@@ -49,10 +49,10 @@ $
 $
 is azimuthally symmetric---if $phi.alt$ were to change by some $delta phi.alt$, such a variation would result in a rotation of $vu(r)$ and $vu(theta)$ by $delta phi.alt$ about the $vu(p)$-axis; whereby the previous equation entails a rotation of $va(E)$ by $delta phi.alt$ about the axis.
 
-The historical motivation for the naming of "dipole" comes from the following geometric construction, due to Maxwell: consider a configuration wherein two point charges $plus.minus q / d$ respectively at $va(r)_0 plus.minus d vu(c) / 2$ are held within a sphere centered at $va(r)_0$ of radius $R$. With $d -> 0^+$, the electric dipole moment is
+The historical motivation for the naming of "dipole" comes from the following geometric construction, due to Maxwell: consider a configuration wherein two point charges $plus.minus q / d$ respectively at $va(r)_0 plus.minus d/2 vu(c)$ are held within a sphere centered at $va(r)_0$ of radius $R$. With $d -> 0^+$, the electric dipole moment is
 $
-  va(p) &= lim_(d -> 0^+) integral.triple rho va(s) dif^3 r = lim_(d -> 0^+) integral.triple sum_(+, -) plus.minus q / d delta(va(r) - va(r)_0 minus.plus d vu(c) / 2) va(s) dif^3 r \
-  &=lim_(d -> 0^+) sum_(+, -) plus.minus q / d (plus.minus d vu(c) / 2) = q vu(c),
+  va(p) &= lim_(d -> 0^+) integral.triple rho va(s) dif^3 r = lim_(d -> 0^+) integral.triple sum_(+, -) plus.minus q / d delta(va(r) - va(r)_0 minus.plus d / 2 vu(c)) va(s) dif^3 r \
+  &=lim_(d -> 0^+) sum_(+, -) plus.minus q / d (plus.minus d/2 vu(c)) = q vu(c),
 $
 wherewith the resulting electric potential is
 $

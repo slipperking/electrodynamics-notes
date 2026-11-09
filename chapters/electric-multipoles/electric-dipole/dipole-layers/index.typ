@@ -178,7 +178,7 @@ $
 $
 where the integral on the right was computed in @ex:electric-field-at-point-for-uniformly-charged-disk to give
 $
-  Delta phi_"dip" & -> Delta tau_perp (va(r)_S) vu(n)(va(r)_S) dot plus.minus (vu(n)(va(r)_S)) / (2 epsilon_0) &= tau_perp / epsilon_0,
+  Delta phi_"dip" & -> Delta tau_perp (va(r)) vu(n)(va(r)) dot plus.minus (vu(n)(va(r))) / (2 epsilon_0) &= tau_perp / epsilon_0,
 $ <eq:electric-dipole-layer-potential-dipole-term-boundary-potential>
 as $Delta va(r) -> 0$. Consequently,
 $
