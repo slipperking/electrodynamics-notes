@@ -158,7 +158,7 @@ $
   & = Delta 1 / (4 uppi epsilon_0) integral.double_D [grad'' dot (tau_perp (va(r)''_S) vu(n)(va(r)''_S)) / xi - integral.surf_(partial [D times (-, +)]) (tau_perp vu(n)) / xi delta^3 dot dif va(S)'] dif S'' \
   & = Delta 1 / (4 uppi epsilon_0) integral.double_D grad'' dot (tau_perp (va(r)''_S) vu(n)(va(r)''_S)) / xi dif S''
 $
-wherein have we used the Divergence Theorem (@thm:divergence), and the observation that the support of $delta$, $va(r)' = va(r)''$, can only be attained when $va(r)'' in partial [D times (-, +)]$, which cannot occur with $D inter partial [D times (-, +)] = 0$. Hence, with a renaming of variables,
+wherein have we used the Divergence Theorem (@thm:divergence), and the observation that the support of $delta$, $va(r)' = va(r)''$, can only be attained when $va(r)'' in partial [D times (-, +)]$, which cannot occur with $D inter partial [D times (-, +)] = emptyset$. Hence, with a renaming of variables,
 $
   Delta phi_"dip" & = Delta 1 / (4 uppi epsilon_0) integral.double_D divp (tau_perp (va(r)'_S) vu(n)(va(r)'_S)) / xi dif S' = 1 / (4 uppi epsilon_0) Delta integral.double_D [(tau_perp gradp 1 / xi + 1 / xi gradp tau_perp) dot vu(n) + tau_perp / xi divp vu(n)] dif S' \
   &= Delta 1 / (4 uppi epsilon_0) integral.double_D [(tau_perp gradp 1 / xi + 1 / xi gradp tau_perp) dot vu(n) + tau_perp / xi divp vu(n)] dif S' \

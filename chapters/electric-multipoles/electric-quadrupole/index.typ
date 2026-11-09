@@ -14,7 +14,7 @@ As with @sec:electric-dipole,
   If $Q = va(p) = 0$, then the electric quadrupole moment is independent of $va(r)_0$.
 ] <thm:electric-quadrupole-moment-exp-point-invariance>
 #proof[
-  Allow the consideration of two possible expansion points $va(r)_0$ and $va(r)'_0$ yielding two moments $vaa(Q)$ and $vaa(Q)'$ respectively. Then
+  Allow the consideration of two possible expansion points $va(r)_0$ and $va(r)'_0$ yielding two moments $vaa(Q)$ and $vaa(Q)'$ respectively. Then we also have $va(p) = va(p)' = 0$ by @thm:electric-dipole-moment-exp-point-invariance. Then
   $
     Q_(i j) &= integral.triple_(s' < R) rho s'_i s'_j dif^3 r' = integral.triple_(s' < R) rho(va(r)') (r'_i - r'_(0, i) + r'_(0, i) - r_(0, i))(r'_j - r'_(0, j) + r'_(0, j) - r_(0, j)) dif^3 r' \
     & = Q'_(i j) + integral.triple_(s' < R) rho(va(r)') (r'_i - r'_(0, i)) dif^3 r' (r'_(0, j) - r_(0, j)) \
