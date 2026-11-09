@@ -45,7 +45,7 @@ $
   & = - lim_(d -> 0^+) (2 va(p)) / d dot grad [-d / 2 vu(c) dot grad + d^3 Order(vu(c) dot grad)^3] delta(va(r) - va(r)_0),
 $
 giving
-#theorem[The Point Quadrupole Density Distribution][
+#theorem[Electric Point Quadrupole Density][
   $
     rho(va(r)) = (va(p) dot grad) (vu(c) dot grad) delta(va(r) - va(r)_0) = (va(p) times.o vu(c)) : grad^(times.o 2) delta(va(s)),
   $
@@ -62,7 +62,7 @@ $
   &= vu(c) times.o va(p) + va(p) times.o vu(c),
 $
 wherein we have used integration by parts twice. This confirms the quadrupole as the sole term in the multipole expansion for a given point quadrupole. The corresponding moment is given by
-#theorem[Electric Quadrupole Moment][
+#theorem[Electric Point Quadrupole Moment][
   $
     vaa(Q) = vu(c) times.o va(p) + va(p) times.o vu(c).
   $
