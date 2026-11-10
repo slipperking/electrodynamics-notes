@@ -25,4 +25,4 @@ We will now verify the veracity in the term "traceless":
     tr vaa(Theta) = Theta_(i j) delta_(i j) = delta_(i j) [3 Q_(i j) - delta_(i j) Q_(k k)] = 3 Q_(i i) - delta_(i j) delta_(i j) Q_(k k) = 3 tr vaa(Q) - tr vaa(I) tr vaa(Q) = 0. qedhere
   $
 ]
-It is incumbent to realize that the constraint $tr vaa(Theta) = 0$ implies---by symmetry---that the electric quadrupole can be determined by five numbers as two given numbers of the diagonal determine uniquely the third. This is also evident in the expression of @thm:electric-point-quadrupole-density that $va(p) in va(R)^3$ and $vu(c) in ["unit sphere"]$ give five degrees of freedom.
+It is incumbent to realize that the constraint $tr vaa(Theta) = 0$ implies---by symmetry---that the electric quadrupole can be determined by five numbers as two given numbers of the diagonal determine uniquely the third. This is also evident in the expression of @eq:electric-point-quadrupole-density-two-vectors that $va(p) in va(R)^3$ and $vu(c) in ["unit sphere"]$ give five degrees of freedom.

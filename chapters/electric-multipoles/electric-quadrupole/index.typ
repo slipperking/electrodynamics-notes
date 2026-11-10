@@ -185,11 +185,9 @@ $
   & = - lim_(d -> 0^+) (2 va(p)) / d dot grad [-d / 2 vu(c) dot grad + d^3 Order(vu(c) dot grad)^3] delta(va(r) - va(r)_0),
 $
 giving
-#theorem[Electric Point Quadrupole Density][
-  $
-    rho(va(r)) = (va(p) dot grad) (vu(c) dot grad) delta(va(r) - va(r)_0) = (va(p) times.o vu(c)) : grad^(times.o 2) delta(va(s)),
-  $
-] <thm:electric-point-quadrupole-density>
+$
+  rho(va(r)) = (va(p) dot grad) (vu(c) dot grad) delta(va(r) - va(r)_0) = (va(p) times.o vu(c)) : grad^(times.o 2) delta(va(s)),
+$ <eq:electric-point-quadrupole-density-two-vectors>
 whence
 $
   vaa(Q) &= integral.triple_(s' < R) rho(va(r)') va(s)'^(times.o 2) dif^3 r' = integral.triple_(s' < R) [(va(p) times.o vu(c)) : grad'^(times.o 2) delta(va(s)')] va(s)'^(times.o 2) dif^3 r' \
@@ -207,6 +205,12 @@ wherein we have used integration by parts twice. This confirms the quadrupole as
     vaa(Q) = vu(c) times.o va(p) + va(p) times.o vu(c).
   $
 ] <thm:electric-quadrupole-moment>
+whence and from @eq:electric-point-quadrupole-density-two-vectors,
+#theorem[Electric Point Quadrupole Density][
+  $
+    rho(va(r)) = 1 / 2 vaa(Q) : grad^(times.o 2) delta(va(s)).
+  $
+] <thm:electric-point-quadrupole-density>
 This symmetry in $vaa(Q)$ permits the corresponding matrix $vb(Q)$ under the basis ${vu(e)_1, vu(e)_2, vu(e)_3}$ to be written as
 $
   vb(Q) = xmat(3, 3, #{ (a, b) => $Q_(#a#b)$ })
