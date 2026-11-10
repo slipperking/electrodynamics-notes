@@ -66,6 +66,6 @@ $
 $
 The trace of the dyadic $grad times.o grad 1 / s$ is given by
 $
-  trace(grad times.o grad 1 / s) = laplacian 1 / s = -4 uppi delta(va(s)),
+  tr(grad times.o grad 1 / s) = laplacian 1 / s = -4 uppi delta(va(s)),
 $
 which is the source of the necessitated $delta$.

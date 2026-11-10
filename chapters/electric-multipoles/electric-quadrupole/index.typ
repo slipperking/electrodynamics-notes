@@ -201,3 +201,50 @@ wherein we have used integration by parts twice. This confirms the quadrupole as
     vaa(Q) = vu(c) times.o va(p) + va(p) times.o vu(c).
   $
 ] <thm:electric-quadrupole-moment>
+This symmetry in $vaa(Q)$ permits the corresponding matrix $vb(Q)$ under the basis ${vu(e)_1, vu(e)_2, vu(e)_3}$ to be written as
+$
+  vb(Q) = xmat(3, 3, #{ (a, b) => $Q_(#a#b)$ })
+$
+to be characterized by at most six independent numbers. Moreover,
+#theorem[Spectral Theorem][
+  The symmetric $3 times 3$ matrix $vb(M)$ can be unitarily diagonalized by an orthonormal basis of real eigenvectors.
+] <thm:symmetric-spectral-theorem>
+#proof(collapsed: true)[of @thm:symmetric-spectral-theorem][
+  Since for $va(x), va(y) in RR^3$,
+  $
+    va(x)^top vb(M) va(y) = va(y)^top vb(M) va(x).
+  $
+  The characteristic polynomial
+  $
+    lambda |-> det(vb(M) - lambda vb(I))
+  $
+  is a cubic with at least one real root $lambda_1$, whence $[vb(M) - lambda vb(I)]va(v) = 0$ has a nonzero solution $va(v)$, which we may assume to be a unit vector $vu(e)_1$ by normalization.
+
+  Denote by $vu(e)_1^perp$ the two-dimensional orthogonal complement of $vu(e)_1$, which is invariant under $vb(M)$ as for any $va(v) in vu(e)_1^perp$,
+  $
+    vu(e)_1^top (vb(M) va(v)) = va(v)^top vb(M) vu(e)_1 = va(v)^top lambda vu(e)_1 = 0.
+  $
+  Then restricting $vb(M)$ to the complement, $vb(M)_1 : vu(e)_1^perp -> vu(e)_1^perp$ is symmetric. In a basis ${vu(u), vu(v)}$ of $vu(e)_1^perp$, we have thence
+  $
+    vb(M)_1 = mat(a, b; b, d),
+  $
+  whereby $lambda |-> det(vb(M)_1 - lambda vb(I))$ has the discriminant
+  $ (a - d)^2 + 4b^2 >= 0, $
+  giving rise to a second eigenvalue $lambda_2$ and eigenvector $vu(e)_2^perp$. In the plane of $vu(e)_1^perp$, the unit vector orthogonal to $vu(e)_2^perp$ gives rise to the third eigenvector $vu(e)_3^perp$ with eigenvalue $lambda_3$. Expressing all all vectors in the basis ${vu(x), vu(y), vu(z)}$, we have
+  $
+    mat(|, |, |; vu(e)_1, vu(e)_2, vu(e)_3; |, |, |) dmat(lambda_1, lambda_2, lambda_3, fill: dot) &= mat(|, |, |; lambda_1 vu(e)_1, lambda_2 vu(e)_2, lambda_3 vu(e)_3; |, |, |)
+    &= mat(|, |, |; vb(M) vu(e)_1, vb(M) vu(e)_2, vb(M) vu(e)_3; |, |, |) = vb(M) mat(|, |, |; vu(e)_1, vu(e)_2, vu(e)_3; |, |, |),
+  $
+  wherein if we define
+  $
+    vb(U) = mat(|, |, |; vu(e)_1, vu(e)_2, vu(e)_3; |, |, |), wide vb(D) = dmat(lambda_1, lambda_2, lambda_3, fill: dot),
+  $
+  we obtain $vb(M) = vb(U)vb(D)vb(U)^(-1)$.
+]
+Hence, we have the following diagonal form of the dyadic tensor
+$ vaa(Q) = Q'_(x x) vu(e)'_1^(times.o 2) + Q'_(y y) vu(e)'_2^(times.o 2) + Q'_(z z) vu(e)'_3^(times.o 2). $
+for an orthonormal basis ${vu(e)'_1,vu(e)'_2,vu(e)'_3}$ the existence whereof was given in @thm:symmetric-spectral-theorem. Let the matrices for $vaa(Q)$ in the bases ${vu(e)'_1,vu(e)'_2,vu(e)'_3}$ and ${vu(e)_1, vu(e)_2, vu(e)_3}$ be denoted by $vb(Q)'$ and $vb(Q)$ respectively, which then satisfy
+$
+  vb(Q)' = vb(U)^(-1) vb(Q) vb(U).
+$
+This is known as the _principal axis_ coordinate system.
