@@ -24,7 +24,13 @@ As with @sec:electric-dipole,
     &=Q'_(i j) + p'_i (r'_(0, j) - r_(0, j)) + p'_j (r'_(0, i) - r_(0, i)) + (r'_(0, i) - r_(0, i))(r'_(0, j) - r_(0, j)) Q = Q'_(i j). qedhere
   $
 ]
-
+The corresponding quadrupole term in $phi$, the _electric quadrupole potential_, is given by (for $s != 0$)
+$
+  phi_2 (va(r)) &= 1 / (4 uppi epsilon_0) 1 / 2 integral.triple_(s' < R) rho(va(r)') s'_i s'_j d^3 r' partial_i partial_j 1 / s \
+  &= -1 / (4 uppi epsilon_0) 1 / 2 integral.triple_(s' < R) rho(va(r)') s'_i s'_j d^3 r' partial_i s_j / s^3 \
+  &= -1 / (4 uppi epsilon_0) 1 / 2 integral.triple_(s' < R) rho(va(r)') s'_i s'_j d^3 r' (s^3 partial_i s_j - s_j partial_i s^3) / s^6 \
+  &= 1 / (4 uppi epsilon_0) 1 / 2 integral.triple_(s' < R) rho(va(r)') s'_i s'_j d^3 r' (3 s_i s_j - s^2 delta_(i j)) / s^5.
+$ <eq:electric-quadrupole-potential>
 #figure-wrapper[
   #figure(
     {
@@ -183,7 +189,7 @@ giving
   $
     rho(va(r)) = (va(p) dot grad) (vu(c) dot grad) delta(va(r) - va(r)_0) = (va(p) times.o vu(c)) : grad^(times.o 2) delta(va(s)),
   $
-] <thm:electric-quadrupole-charge-density>
+] <thm:electric-point-quadrupole-density>
 whence
 $
   vaa(Q) &= integral.triple_(s' < R) rho(va(r)') va(s)'^(times.o 2) dif^3 r' = integral.triple_(s' < R) [(va(p) times.o vu(c)) : grad'^(times.o 2) delta(va(s)')] va(s)'^(times.o 2) dif^3 r' \
@@ -246,5 +252,5 @@ $ vaa(Q) = Q'_(1 1) vu(e)'_1^(times.o 2) + Q'_(2 2) vu(e)'_2^(times.o 2) + Q'_(3
 for an orthonormal basis ${vu(e)'_1,vu(e)'_2,vu(e)'_3}$ the existence whereof was given in @thm:symmetric-spectral-theorem. Let the matrices for $vaa(Q)$ in the bases ${vu(e)'_1,vu(e)'_2,vu(e)'_3}$ and ${vu(e)_1, vu(e)_2, vu(e)_3}$ be denoted by $vb(Q)'$ and $vb(Q)$ respectively, which then satisfy
 $
   vb(Q)' = vb(U)^(-1) vb(Q) vb(U).
-$
+$ <eq:electric-quadrupole-moment-principal-axis>
 This is known as the _principal axis_ coordinate system.
