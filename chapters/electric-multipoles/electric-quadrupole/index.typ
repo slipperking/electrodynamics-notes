@@ -252,7 +252,7 @@ to be characterized by at most six independent numbers. Moreover,
   we obtain $vb(M) = vb(U)vb(D)vb(U)^(-1)$.
 ]
 Hence, we have the following diagonal form of the dyadic tensor
-$ vaa(Q) = Q'_(1 1) vu(e)'_1^(times.o 2) + Q'_(2 2) vu(e)'_2^(times.o 2) + Q'_(3 3) vu(e)'_3^(times.o 2). $
+$ vaa(Q) = Q'_(1 1) vu(e)'_1^(times.o 2) + Q'_(2 2) vu(e)'_2^(times.o 2) + Q'_(3 3) vu(e)'_3^(times.o 2), $
 for an orthonormal basis ${vu(e)'_1,vu(e)'_2,vu(e)'_3}$ the existence whereof was given in @thm:symmetric-spectral-theorem. Let the matrices for $vaa(Q)$ in the bases ${vu(e)'_1,vu(e)'_2,vu(e)'_3}$ and ${vu(e)_1, vu(e)_2, vu(e)_3}$ be denoted by $vb(Q)'$ and $vb(Q)$ respectively, which then satisfy
 $
   vb(Q)' = vb(U)^(-1) vb(Q) vb(U).
