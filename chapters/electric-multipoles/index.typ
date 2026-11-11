@@ -39,7 +39,7 @@ $
   & = 1 / (4 uppi epsilon_0) [Q/s - (integral.triple_(s' < R) rho(va(r)') va(s)' dif^3 r') dot grad 1 / s \
     &wide wide + 1 / 2 integral.triple_(s' < R) rho(va(r)') va(s)' times.o va(s)' dif^3 r' : grad times.o grad 1 / s \
     &wide wide - 1 / 6 integral.triple_(s' < R) rho(va(r)') va(s)'^(times.o 3) dif^3 r' colon.tri.op grad^(times.o 3) 1 / s + dots.c], \
-  & = 1 / (4 uppi epsilon_0) [Q / s - va(p) dot grad 1 / s + 1 / 2 vaa(Q) : grad^(times.o 2) 1 / s - 1 / 6 vb(O) colon.tri.op grad^(times.o 3) 1 / s + dots.c + (-1)^n / n! vb(Q)^((n)) limits(dot)^n grad^(times.o n) 1 / s + dots.c],
+  & = 1 / (4 uppi epsilon_0) [Q - va(p) dot grad + /* 1 / 2  */vaa(Q) : grad^(times.o 2) - /* 1 / 6  */vb(O) colon.tri.op grad^(times.o 3) + dots.c + (-1)^n vb(C)^((n)) limits(dot)^n grad^(times.o n) + dots.c] 1 / s,
 $ <eq:electric-multipole-expansion>
 wherein the following definitions are utilized
 #definition[
@@ -56,15 +56,21 @@ wherein the following definitions are utilized
 ] <def:electric-dipole-moment>
 
 #definition(restate: true)[
-  The _electric quadrupole moment_ is the dyadic tensor given by
+  The _(primitive) electric quadrupole moment_ is the dyadic tensor given by
   $
-    vaa(Q) = integral.triple_(s' < R) rho(va(r)') va(s)' times.o va(s)' dif^3 r'
+    vaa(Q) = 1 / 2 integral.triple_(s' < R) rho(va(r)') va(s)' times.o va(s)' dif^3 r'
   $
 ] <def:electric-quadrupole-moment>
 #definition[
-  The _electric octupole moment_ is the triadic tensor given by
+  The _(primitive) electric octupole moment_ is the triadic tensor given by
   $
-    vb(Q)^((3)) = vb(O) = integral.triple_(s' < R) rho(va(r)') va(s)'^(times.o 3) dif^3 r'
+    vb(C)^((3)) = vaaa(O) = 1 / 6 integral.triple_(s' < R) rho(va(r)') va(s)'^(times.o 3) dif^3 r'
+  $
+]
+#definition[
+  The _(primitive) electric moment of order $n$_ is the $n$-adic tensor given by
+  $
+    vb(C)^((n)) = 1 / n! integral.triple_(s' < R) rho(va(r)') va(s)'^(times.o n) dif^3 r'
   $
 ]
 It often transpires that we restrict our consideration to not beyond the quadrupole moment. The naming of higher-order terms is given by powers of two accordingly (beyond the octupole we have the _hexadecapole_, or the $16$-pole; and further, _dotriacontapole_, or the $32$-pole, et cetera).

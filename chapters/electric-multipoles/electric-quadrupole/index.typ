@@ -17,11 +17,11 @@ As with @sec:electric-dipole,
 #proof[
   Allow the consideration of two possible expansion points $va(r)_0$ and $va(r)'_0$ yielding two moments $vaa(Q)$ and $vaa(Q)'$ respectively. Then we also have $va(p) = va(p)' = 0$ by @thm:electric-dipole-moment-exp-point-invariance. Then
   $
-    Q_(i j) &= integral.triple_(s' < R) rho s'_i s'_j dif^3 r' = integral.triple_(s' < R) rho(va(r)') (r'_i - r'_(0, i) + r'_(0, i) - r_(0, i))(r'_j - r'_(0, j) + r'_(0, j) - r_(0, j)) dif^3 r' \
-    & = Q'_(i j) + integral.triple_(s' < R) rho(va(r)') (r'_i - r'_(0, i)) dif^3 r' (r'_(0, j) - r_(0, j)) \
-    & quad "" + (r'_(0, i) - r_(0, i)) integral.triple_(s' < R) rho(va(r)') (r'_j - r'_(0, j)) dif^3 r' \
-    &wide"" + (r'_(0, i) - r_(0, i))(r'_(0, j) - r_(0, j)) integral.triple_(s' < R) rho(va(r)') dif^3 r' \
-    &=Q'_(i j) + p'_i (r'_(0, j) - r_(0, j)) + p'_j (r'_(0, i) - r_(0, i)) + (r'_(0, i) - r_(0, i))(r'_(0, j) - r_(0, j)) Q = Q'_(i j). qedhere
+    Q_(i j) &= 1/2 integral.triple_(s' < R) rho s'_i s'_j dif^3 r' = 1/2 integral.triple_(s' < R) rho(va(r)') (r'_i - r'_(0, i) + r'_(0, i) - r_(0, i))(r'_j - r'_(0, j) + r'_(0, j) - r_(0, j)) dif^3 r' \
+    & = Q'_(i j) + 1/2 integral.triple_(s' < R) rho(va(r)') (r'_i - r'_(0, i)) dif^3 r' (r'_(0, j) - r_(0, j)) \
+    & quad "" + 1/2 (r'_(0, i) - r_(0, i)) integral.triple_(s' < R) rho(va(r)') (r'_j - r'_(0, j)) dif^3 r' \
+    &wide"" + 1/2 (r'_(0, i) - r_(0, i))(r'_(0, j) - r_(0, j)) integral.triple_(s' < R) rho(va(r)') dif^3 r' \
+    &=Q'_(i j) + 1/2 p'_i (r'_(0, j) - r_(0, j)) + 1/2 p'_j (r'_(0, i) - r_(0, i)) + 1/2 (r'_(0, i) - r_(0, i))(r'_(0, j) - r_(0, j)) Q = Q'_(i j). qedhere
   $
 ]
 The corresponding quadrupole term in $phi$, the _electric quadrupole potential_, is given by (for $s != 0$)
@@ -176,7 +176,7 @@ $
 $ <eq:electric-point-quadrupole-potential>
 which bears resemblance to the quadrupole term of @eq:electric-multipole-expansion, if we had previously found
 $
-  vaa(Q) = vu(c) times.o va(p) + va(p) times.o vu(c), wide Q_(i j) = hat(c)_i p_j + p_i hat(c)_j
+  vaa(Q) = 1/2 (vu(c) times.o va(p) + va(p) times.o vu(c)), wide Q_(i j) = 1/2 (hat(c)_i p_j + p_i hat(c)_j)
 $
 to be consistent with @def:electric-quadrupole-moment. Notably, the charge density is expressible as the sum of that for two point dipoles:
 $
@@ -190,25 +190,25 @@ $
 $ <eq:electric-point-quadrupole-density-two-vectors>
 whence
 $
-  vaa(Q) &= integral.triple_(s' < R) rho(va(r)') va(s)'^(times.o 2) dif^3 r' = integral.triple_(s' < R) [(va(p) times.o vu(c)) : grad'^(times.o 2) delta(va(s)')] va(s)'^(times.o 2) dif^3 r' \
-  &= integral.triple_(s' < R) [(va(p) times.o vu(c)) : grad'^(times.o 2) delta(va(s)')] va(s)'^(times.o 2) dif^3 r' \
-  &= integral.triple_(s' < R) va(s)'^(times.o 2) p_m hat(c)_n partial'_m partial'_n delta(va(s)') dif^3 r' = p_m hat(c)_n integral.triple_(s' < R) delta(va(s)') partial'_m partial'_n (s'_i s'_j) dif^3 r' vu(e)_i times.o vu(e)_j \
-  &= p_m hat(c)_n integral.triple_(s' < R) delta(va(s)') partial'_m (s'_j partial'_n s'_i + s'_i partial'_n s'_j) dif^3 r' vu(e)_i times.o vu(e)_j \
-  &= p_m hat(c)_n integral.triple_(s' < R) delta(va(s)') (partial'_m s'_j partial'_n s'_i + s'_j partial'_m partial'_n s'_i + partial'_m s'_i partial'_n s'_j + s'_i partial'_m partial'_n s'_j) dif^3 r' vu(e)_i times.o vu(e)_j \
-  &= p_m hat(c)_n integral.triple_(s' < R) delta(va(s)') (delta_(m j) delta_(n i) + delta_(m i) delta_(n j)) dif^3 r' vu(e)_i times.o vu(e)_j \
-  &= (p_j hat(c)_i integral.triple_(s' < R) delta(va(s)') dif^3 r' + p_i hat(c)_j integral.triple_(s' < R) delta(va(s)') dif^3 r') vu(e)_i times.o vu(e)_j \
-  &= vu(c) times.o va(p) + va(p) times.o vu(c),
+  vaa(Q) &= 1/2 integral.triple_(s' < R) rho(va(r)') va(s)'^(times.o 2) dif^3 r' = 1/2 integral.triple_(s' < R) [(va(p) times.o vu(c)) : grad'^(times.o 2) delta(va(s)')] va(s)'^(times.o 2) dif^3 r' \
+  &= 1/2 integral.triple_(s' < R) [(va(p) times.o vu(c)) : grad'^(times.o 2) delta(va(s)')] va(s)'^(times.o 2) dif^3 r' \
+  &= 1/2 integral.triple_(s' < R) va(s)'^(times.o 2) p_m hat(c)_n partial'_m partial'_n delta(va(s)') dif^3 r' = 1/2 p_m hat(c)_n integral.triple_(s' < R) delta(va(s)') partial'_m partial'_n (s'_i s'_j) dif^3 r' vu(e)_i times.o vu(e)_j \
+  &= 1/2 p_m hat(c)_n integral.triple_(s' < R) delta(va(s)') partial'_m (s'_j partial'_n s'_i + s'_i partial'_n s'_j) dif^3 r' vu(e)_i times.o vu(e)_j \
+  &= 1/2 p_m hat(c)_n integral.triple_(s' < R) delta(va(s)') (partial'_m s'_j partial'_n s'_i + s'_j partial'_m partial'_n s'_i + partial'_m s'_i partial'_n s'_j + s'_i partial'_m partial'_n s'_j) dif^3 r' vu(e)_i times.o vu(e)_j \
+  &= 1/2 p_m hat(c)_n integral.triple_(s' < R) delta(va(s)') (delta_(m j) delta_(n i) + delta_(m i) delta_(n j)) dif^3 r' vu(e)_i times.o vu(e)_j \
+  &= 1/2 (p_j hat(c)_i integral.triple_(s' < R) delta(va(s)') dif^3 r' + p_i hat(c)_j integral.triple_(s' < R) delta(va(s)') dif^3 r') vu(e)_i times.o vu(e)_j \
+  &= 1/2 (vu(c) times.o va(p) + va(p) times.o vu(c)),
 $
 wherein we have used integration by parts twice. This confirms the quadrupole as the sole term in the multipole expansion for a given point quadrupole. The corresponding moment is given by
 #theorem[Electric Point Quadrupole Moment][
   $
-    vaa(Q) = vu(c) times.o va(p) + va(p) times.o vu(c).
+    vaa(Q) = 1/2 (vu(c) times.o va(p) + va(p) times.o vu(c)).
   $
 ] <thm:electric-quadrupole-moment>
 whence and from @eq:electric-point-quadrupole-density-two-vectors,
 #theorem[Electric Point Quadrupole Density][
   $
-    rho(va(r)) = 1 / 2 vaa(Q) : grad^(times.o 2) delta(va(s)).
+    rho(va(r)) = vaa(Q) : grad^(times.o 2) delta(va(s)).
   $
 ] <thm:electric-point-quadrupole-density>
 This symmetry in $vaa(Q)$ permits the corresponding matrix $vb(Q)$ under the basis ${vu(e)_1, vu(e)_2, vu(e)_3}$ to be written as
