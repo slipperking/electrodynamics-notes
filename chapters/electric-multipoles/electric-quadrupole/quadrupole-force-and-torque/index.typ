@@ -33,5 +33,11 @@ The representation without $Order(xi^3)$ is exact for a point quadrupole. The el
 $
   U_"E" &= integral.triple rho(va(r)') phi_"ext" (va(r)') dif^3 r' = integral.triple rho(va(r)') [phi_"ext" (va(r)) + va(xi) dot grad phi_"ext" (va(r)) + 1/2 va(xi)^(times.o 2) : grad^(times.o 2) phi_"ext" (va(r))] dif^3 r' \
   &= Q phi_"ext" (va(r)) + (va(p) - va(s) Q) dot grad phi_"ext" (va(r)) + [vaa(Q) - 1/2 (va(p) times.o va(s) + va(s) times.o va(p)) + 1/2 Q va(s)^(times.o 2)] : grad^(times.o 2) phi_"ext" (va(r)) \
-  &= vaa(Q) : grad^(times.o 2) phi_"ext" (va(r)) = -vaa(Q) : (grad times.o ef(va(r)))
+  &= vaa(Q) : grad^(times.o 2) phi_"ext" (va(r)) = -vaa(Q) : (grad times.o ef(va(r))) \
+  &= -1 / 3 vaa(Theta) : (grad times.o ef(va(r))) - 1 / 3 vaa(I) tr vaa(Q) : (grad times.o ef(va(r))) \
+  &= -1 / 3 vaa(Theta) : (grad times.o ef(va(r))) - (tr vaa(Q)) / 3 div ef(va(r))
+$
+If the source charge for $ef$ is far from $rho$, $div ef = rho_"ext" / epsilon_0 = 0$ by Gauss' Law (@thm:gauss-law), whence
+$
+  U_"E" = -1 / 3 vaa(Theta) : (grad times.o ef(va(r))).
 $
