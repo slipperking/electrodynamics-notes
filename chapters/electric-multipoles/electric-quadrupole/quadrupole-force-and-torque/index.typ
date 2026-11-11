@@ -19,8 +19,15 @@ and where $va(N)$ is about $va(r)_0$,
 $
   va(N) & = integral.triple va(s)' times rho(va(r)') ef(va(r)') dif^3 r' \
   & = va(s) times integral.triple rho(va(r)') ef(va(r)') dif^3 r' + integral.triple va(xi) times rho(va(r)') ef(va(r)') dif^3 r' \
-  & = va(s) times va(F)_"ext" + integral.triple va(xi) rho(va(r)') dif^3 r' times ef(va(r)) \
+  & = va(s) times va(F)_"ext" + integral.triple (va(s)' - va(s)) rho(va(r)') dif^3 r' times ef(va(r)) \
   &quad + integral.triple va(s)' rho(va(r)') times (va(s)' dot grad) ef(va(r)) dif^3 r' + integral.triple va(s) rho(va(r)') times (va(s) dot grad) ef(va(r)) dif^3 r' \
   &wide - integral.triple va(s)' rho(va(r)') times (va(s) dot grad) ef(va(r)) dif^3 r' - integral.triple va(s) rho(va(r)') times (va(s)' dot grad) ef(va(r)) dif^3 r' \
-  &wide quad"" + 1/2 integral.triple va(xi) rho(va(r)') times (va(xi)^(times.o 2) : grad^(times.o 2))ef(va(r)) dif^3 r'
+  &wide quad"" + 1/2 integral.triple va(xi) rho(va(r)') times (va(xi)^(times.o 2) : grad^(times.o 2))ef(va(r)) dif^3 r' \
+  &= va(s) times va(F)_"ext" + (va(p) - va(s) Q) times ef(va(r)) \
+  &quad""+ epsilon_(i j k) vu(e)_i integral.triple rho s'_j s'_l partial_l E_("ext", k) dif^3 r' + va(s) Q times (va(s) dot grad) ef(va(r)) - va(p) times (va(s) dot grad) ef(va(r)) - va(s) times (va(p) dot grad) ef(va(r)) + Order(xi^3) \
+  &= va(s) times va(F)_"ext" + 2 epsilon_(i j k) vu(e)_i Q_(j l) partial_l E_("ext", k) + Order(xi^3) \
+  &= va(s) times va(F)_"ext" + 2 epsilon_(i j k) vu(e)_i (vu(e)_j dot vaa(Q)) dot grad E_("ext", k) + Order(xi^3) \
+  &= va(s) times va(F)_"ext" + 2 vu(e)_j [(vu(e)_j dot vaa(Q)) dot grad] times ef(va(r)) + Order(xi^3) \
+  &= va(s) times va(F)_"ext" + 2 vaa(I) dot (vaa(Q) dot grad) times ef(va(r)) + Order(xi^3) \
+  &= va(s) times va(F)_"ext" + 2 (vaa(Q) dot grad) times ef(va(r)) + Order(xi^3)
 $
