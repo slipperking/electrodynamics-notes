@@ -671,7 +671,7 @@
           )
         } else {
           // finite width, use edge
-          box(width: 100%, {
+          block(width: 100%, breakable: true, {
             eq
             place(
               right + horizon,
