@@ -143,6 +143,7 @@
 
 #let document-styles(doc, mode: "pdf", todo: none) = {
   show: layout-limiter.with(max-iterations: 15)
+  show math.equation: set block(breakable: true)
   show ref: it => show-reference(it, mode, todo: todo)
   show math.equation: it => {
     let label = it.fields().at("label", default: none)
