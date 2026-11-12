@@ -18,10 +18,10 @@ Denote by $va(s) = va(r) - va(r)_0$ the separation vector from the center $va(r)
 $
   phi(va(r)) = 1 / (4 uppi epsilon_0) integral.triple_(s' < R) rho(va(r)') / norm(va(s) - va(s)') dif^3 r'.
 $
-In lieu of the complex expansion above, we observe $hfrc(1 / norm(va(s) - va(s)'))$:
+In lieu of the complex expansion above, we observe $hfrc(1 / norm(va(s) - va(s)'))$ for $s' > R$:
 $
   1 / norm(va(s) - va(s)') = ee^(-va(s)' dot grad) 1 / s = sum_(n = 0)^oo 1 / n! (-va(s)' dot grad)^n 1 / s,
-$
+$ <eq:electric-multipole-expansion-kernel>
 within the Coulomb integral. Thus, substitution thereof yields
 $
   phi(va(r)) &= 1 / (4 uppi epsilon_0) integral.triple_(s' < R) rho(va(r)') sum_(n = 0)^oo 1 / n! (-va(s)' dot grad)^n 1 / s dif^3 r' \
