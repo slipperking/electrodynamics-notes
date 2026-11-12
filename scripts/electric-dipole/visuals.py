@@ -5,18 +5,37 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_ROOT = PROJECT_ROOT / "build" / "visual-output" / "electric-dipole"
 
-CHARGE_HALF_GAP = 0.315
+TWO_CHARGE_HALF_SEPARATION = 0.15
 SEED_RADIUS = 0.035
 CAPTURE_RADIUS = 0.042
 INTEGRATION_STEP = 0.006
 MAX_STEPS = 20_000
 OUTPUT_SAMPLES = 220
-TWO_CHARGE_SEED_ANGLES = (-90, -55, -25, 5, 25, 37)
-POINT_DIPOLE_OUTER_RADII = (3.1, 4.4)
-TWO_CHARGE_OUTER_ANGLES = (53,)
+# Figure controls: loop count and compactified min/max radii set the shared
+# family; point-only inner radii fill the unresolved finite-size core smoothly.
+# half-separation sets the finite dipole size; moment angle is counterclockwise
+# from +x. Physical moment magnitude only rescales |E| and does not change these
+# normalized trajectories, while arrow length controls its displayed size.
+DIPOLE_MOMENT_ANGLE_DEGREES = 68.0
+DIPOLE_MOMENT_ARROW_LENGTH = 0.92
+POINT_DIPOLE_MARKER_RADIUS = 0.084
+POINT_DIPOLE_VIEW_ZOOM = 1.0
+POINT_DIPOLE_LOOP_COUNT = 16
+POINT_DIPOLE_MIN_RADIUS = 0.16
+POINT_DIPOLE_MAX_RADIUS = 20.0
+POINT_DIPOLE_RADIAL_COMPACTIFICATION = 0.35
+POINT_DIPOLE_INNER_MIN_RADIUS = 0.09
+POINT_DIPOLE_INNER_TARGET_GAP = 0.025
+ARROW_FRACTIONS = (0.30, 0.62, 0.42, 0.74, 0.52)
+FIELD_LINE_LIMIT = 40.0
 PANEL_X_LIMIT = 2.32
 PANEL_Z_LIMIT = 1.58
-DIPOLE_TILT = math.radians(-22)
+DIPOLE_MOMENT_ANGLE = math.radians(DIPOLE_MOMENT_ANGLE_DEGREES)
+DIPOLE_MOMENT_DIRECTION = (
+    math.cos(DIPOLE_MOMENT_ANGLE),
+    math.sin(DIPOLE_MOMENT_ANGLE),
+)
+DIPOLE_TILT = DIPOLE_MOMENT_ANGLE - math.pi / 2
 
 
 def add(a, b):
@@ -34,8 +53,8 @@ def distance(a, b):
 def normalized_field(point):
     """Exact field direction of equal charges +1 at +a and -1 at -a."""
     x, z = point
-    plus_dx, plus_dz = x, z - CHARGE_HALF_GAP
-    minus_dx, minus_dz = x, z + CHARGE_HALF_GAP
+    plus_dx, plus_dz = x, z - TWO_CHARGE_HALF_SEPARATION
+    minus_dx, minus_dz = x, z + TWO_CHARGE_HALF_SEPARATION
     plus_r = math.hypot(plus_dx, plus_dz)
     minus_r = math.hypot(minus_dx, minus_dz)
 
@@ -61,17 +80,17 @@ def integrate_two_charge_line(seed_angle_degrees):
     angle = math.radians(seed_angle_degrees)
     point = (
         SEED_RADIUS * math.cos(angle),
-        CHARGE_HALF_GAP + SEED_RADIUS * math.sin(angle),
+        TWO_CHARGE_HALF_SEPARATION + SEED_RADIUS * math.sin(angle),
     )
     curve = [point]
-    negative_charge = (0.0, -CHARGE_HALF_GAP)
+    negative_charge = (0.0, -TWO_CHARGE_HALF_SEPARATION)
 
     for _ in range(MAX_STEPS):
         point = rk4_step(point, INTEGRATION_STEP)
         curve.append(point)
         if distance(point, negative_charge) <= CAPTURE_RADIUS:
             break
-        if abs(point[0]) > 12 or abs(point[1]) > 12:
+        if abs(point[0]) > FIELD_LINE_LIMIT or abs(point[1]) > FIELD_LINE_LIMIT:
             raise RuntimeError(
                 f"field line seeded at {seed_angle_degrees} degrees escaped the diagram"
             )
@@ -204,6 +223,63 @@ def point_dipole_line(radius, side, samples=241):
     return curve
 
 
+def point_dipole_radii():
+    """Uniform steps in compactified radius, with a smooth outer expansion."""
+    compactification = POINT_DIPOLE_RADIAL_COMPACTIFICATION
+
+    def compactify(radius):
+        return radius / (radius + compactification)
+
+    def expand(value):
+        return compactification * value / (1 - value)
+
+    minimum = compactify(POINT_DIPOLE_MIN_RADIUS)
+    maximum = compactify(POINT_DIPOLE_MAX_RADIUS)
+    return tuple(
+        expand(
+            minimum
+            + (maximum - minimum) * index / (POINT_DIPOLE_LOOP_COUNT - 1)
+        )
+        for index in range(POINT_DIPOLE_LOOP_COUNT)
+    )
+
+
+def point_dipole_inner_radii():
+    """Even point-only scales below the finite-dipole matching radius."""
+    span = POINT_DIPOLE_MIN_RADIUS - POINT_DIPOLE_INNER_MIN_RADIUS
+    interval_count = max(1, math.ceil(span / POINT_DIPOLE_INNER_TARGET_GAP))
+    interval = span / interval_count
+    return tuple(
+        POINT_DIPOLE_INNER_MIN_RADIUS + interval * index
+        for index in range(interval_count)
+    )
+
+
+def two_charge_seed_angles():
+    """Exact finite-dipole seeds matching the point-line flux constants."""
+    return tuple(
+        math.degrees(
+            math.asin(
+                max(
+                    -1.0,
+                    min(1.0, 1 - 2 * TWO_CHARGE_HALF_SEPARATION / radius),
+                )
+            )
+        )
+        for radius in point_dipole_radii()
+    )
+
+
+def distributed_arrows(curves, curves_per_level, minimum_length):
+    arrows = []
+    for index, curve in enumerate(curves):
+        if cumulative_lengths(curve)[-1] <= minimum_length:
+            continue
+        level = index // curves_per_level
+        arrows.append(arrow_segment(curve, center_fraction=ARROW_FRACTIONS[level % len(ARROW_FRACTIONS)]))
+    return arrows
+
+
 def orientation(a, b, c):
     return (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])
 
@@ -286,40 +362,57 @@ point_source_curves = [
     point_dipole_line(
         radius,
         side,
-        samples=481 if radius in POINT_DIPOLE_OUTER_RADII else 241,
+        samples=481 if radius > 2.0 else 241,
     )
-    for radius in (0.72, 1.12, 1.62, 2.18, *POINT_DIPOLE_OUTER_RADII)
+    for radius in point_dipole_inner_radii() + point_dipole_radii()
     for side in (-1, 1)
 ]
 point_curves = []
 for curve in point_source_curves:
     point_curves.extend(
         resample(segment, sample_count=120)
-        for segment in clip_curve_to_panel(rotate_to_oblique(curve))
-        if cumulative_lengths(segment)[-1] > 0.14
+        for segment in clip_curve_to_panel([
+            scale(point, POINT_DIPOLE_VIEW_ZOOM)
+            for point in rotate_to_oblique(curve)
+        ])
+        if cumulative_lengths(segment)[-1] > 0.02
+        and min(distance(point, (0.0, 0.0)) for point in segment)
+        <= POINT_DIPOLE_MARKER_RADIUS
     )
-point_arrows = [arrow_segment(curve) for curve in point_curves]
+point_arrows = distributed_arrows(point_curves, curves_per_level=2, minimum_length=0.8)
 
-# The -90-degree seed is the exact axial line. The remaining seeds cover the
-# right half-plane; reflection supplies the left half without integration drift.
+# Exact flux matching supplies one finite line for every point-loop scale.
+# Reflection supplies the left half without integration drift. The limiting
+# straight boundary is intentionally omitted from both panels.
+two_charge_angles = two_charge_seed_angles()
 right_two_charge_curves = [
     resample(integrate_two_charge_line(angle))
-    for angle in TWO_CHARGE_SEED_ANGLES
+    for angle in two_charge_angles
 ]
-two_charge_source_curves = [right_two_charge_curves[0]]
-for curve in right_two_charge_curves[1:]:
+two_charge_source_curves = []
+for curve in right_two_charge_curves:
     two_charge_source_curves.extend((mirror(curve), curve))
-for angle in TWO_CHARGE_OUTER_ANGLES:
-    outer_curve = integrate_two_charge_line(angle)
-    two_charge_source_curves.extend((mirror(outer_curve), outer_curve))
+rotated_charges = rotate_to_oblique([
+    (0.0, TWO_CHARGE_HALF_SEPARATION),
+    (0.0, -TWO_CHARGE_HALF_SEPARATION),
+])
 two_charge_curves = []
 for curve in two_charge_source_curves:
     two_charge_curves.extend(
         resample(segment, sample_count=120)
         for segment in clip_curve_to_panel(rotate_to_oblique(curve))
         if cumulative_lengths(segment)[-1] > 0.14
+        and min(
+            distance(point, charge)
+            for point in segment
+            for charge in rotated_charges
+        ) <= CAPTURE_RADIUS
     )
-two_charge_arrows = [arrow_segment(curve) for curve in two_charge_curves]
+two_charge_arrows = distributed_arrows(
+    two_charge_curves,
+    curves_per_level=2,
+    minimum_length=0.8,
+)
 
 # Integral curves of a smooth vector field cannot cross away from a charge.
 # Keep an explicit polyline check so future seed or solver changes preserve it.
@@ -327,6 +420,10 @@ validate_no_intersections(point_curves, "point-dipole")
 validate_no_intersections(two_charge_curves, "two-charge")
 
 values = {
+    "dipole-moment-direction": point_to_typst(DIPOLE_MOMENT_DIRECTION),
+    "dipole-moment-arrow-length": f"{DIPOLE_MOMENT_ARROW_LENGTH:.6f}",
+    "point-dipole-view-zoom": f"{POINT_DIPOLE_VIEW_ZOOM:.6f}",
+    "two-charge-half-separation": f"{TWO_CHARGE_HALF_SEPARATION:.6f}",
     "point-dipole-curves": curves_to_typst(point_curves),
     "point-dipole-arrows": curves_to_typst(point_arrows),
     "two-charge-dipole-curves": curves_to_typst(two_charge_curves),
@@ -351,7 +448,7 @@ else:
     print(f"no changes to {lib_path}")
 
 for angle, curve in zip(
-    TWO_CHARGE_SEED_ANGLES,
+    two_charge_angles,
     right_two_charge_curves,
 ):
     maximum_x = max(abs(point[0]) for point in curve)

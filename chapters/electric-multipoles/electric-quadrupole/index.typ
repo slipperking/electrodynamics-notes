@@ -37,7 +37,7 @@ $ <eq:electric-quadrupole-potential>
       set text(size: 0.95em)
       canvas(
         length: 1.44cm,
-        // debug-show: true,
+        debug-show: true,
         {
           import cetz.draw: *
 
@@ -46,9 +46,9 @@ $ <eq:electric-quadrupole-potential>
           let point-x = -2.75
           let charge-x = 2.75
           let axis-bottom = -1.65
-          let c-half-x = 0.5
-          let p-half-x = 0.1573
-          let p-half-z = 0.3896
+          let (c-half-x, c-half-z) = quadrupole-c-half-vector
+          let (p-dir-x, p-dir-z) = quadrupole-p-direction
+          let (p-half-x, p-half-z) = quadrupole-p-half-vector
 
           let shift-curve(curve, center) = curve.map(point => {
             let (x, z) = point
@@ -71,6 +71,20 @@ $ <eq:electric-quadrupole-potential>
             }
           }
 
+          let separatrix-stroke = (
+            paint: black,
+            thickness: 0.52pt,
+            dash: "dashed",
+          )
+          let draw-separatrix-guides(center) = {
+            for guide in quadrupole-separatrix-guides {
+              line(..shift-curve(guide, center), stroke: separatrix-stroke)
+            }
+          }
+
+          draw-separatrix-guides(point-x)
+          draw-separatrix-guides(charge-x)
+
           draw-generated-field(
             point-quadrupole-curves,
             point-quadrupole-arrows,
@@ -84,23 +98,34 @@ $ <eq:electric-quadrupole-potential>
 
           line(
             (point-x, 0),
-            (point-x + 0.78, 0),
+            (
+              point-x + point-quadrupole-view-zoom * quadrupole-moment-arrow-length,
+              0,
+            ),
             stroke: vector-stroke,
             mark: (end: ">>", fill: black),
           )
           line(
             (point-x, 0),
-            (point-x + 0.2922, 0.7242),
+            (
+              point-x + point-quadrupole-view-zoom * quadrupole-moment-arrow-length * p-dir-x,
+              point-quadrupole-view-zoom * quadrupole-moment-arrow-length * p-dir-z,
+            ),
             stroke: vector-stroke,
             mark: (end: ">>", fill: black),
           )
-          circle((point-x, 0), radius: 3.4pt, fill: white, stroke: field-stroke)
+          circle(
+            (point-x, 0),
+            radius: 3.4pt,
+            fill: white,
+            stroke: field-stroke,
+          )
 
           for (offset-x, offset-z) in (
-            (c-half-x + p-half-x, p-half-z),
-            (-c-half-x + p-half-x, p-half-z),
-            (c-half-x - p-half-x, -p-half-z),
-            (-c-half-x - p-half-x, -p-half-z),
+            (c-half-x + p-half-x, c-half-z + p-half-z),
+            (-c-half-x + p-half-x, -c-half-z + p-half-z),
+            (c-half-x - p-half-x, c-half-z - p-half-z),
+            (-c-half-x - p-half-x, -c-half-z - p-half-z),
           ) {
             circle(
               (charge-x + offset-x, offset-z),
@@ -111,13 +136,19 @@ $ <eq:electric-quadrupole-potential>
           }
 
           content(
-            (point-x + 0.78, 0),
+            (
+              point-x + point-quadrupole-view-zoom * quadrupole-moment-arrow-length,
+              0,
+            ),
             anchor: "west",
             padding: 3pt,
             math-rect($vu(c)$),
           )
           content(
-            (point-x + 0.2922, 0.7242),
+            (
+              point-x + point-quadrupole-view-zoom * quadrupole-moment-arrow-length * p-dir-x,
+              point-quadrupole-view-zoom * quadrupole-moment-arrow-length * p-dir-z,
+            ),
             anchor: "south",
             padding: 3pt,
             math-rect($va(p)$),

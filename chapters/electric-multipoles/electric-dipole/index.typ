@@ -90,9 +90,8 @@ whereto we refer as _the point dipole charge density_ distribution.
           let point-x = -2.75
           let charge-x = 2.75
           let axis-bottom = -1.65
-          let charge-half-gap = 0.315
-          let p-x = 0.374607
-          let p-z = 0.927184
+          let charge-half-gap = two-charge-half-separation
+          let (p-x, p-z) = dipole-moment-direction
 
           let shift-curve(curve, center) = curve.map(point => {
             let (x, z) = point
@@ -128,16 +127,27 @@ whereto we refer as _the point dipole charge density_ distribution.
 
           line(
             (point-x, 0),
-            (point-x + 0.92 * p-x, 0.92 * p-z),
+            (
+              point-x + point-dipole-view-zoom * dipole-moment-arrow-length * p-x,
+              point-dipole-view-zoom * dipole-moment-arrow-length * p-z,
+            ),
             name: "point-moment",
             stroke: vector-stroke,
             mark: (end: ">>", fill: black),
           )
-          circle((point-x, 0), radius: 3.4pt, fill: white, stroke: field-stroke)
+          circle(
+            (point-x, 0),
+            radius: point-dipole-view-zoom * 3.4pt,
+            fill: white,
+            stroke: field-stroke,
+          )
 
           line(
             (charge-x, 0),
-            (charge-x + 0.92 * p-x, 0.92 * p-z),
+            (
+              charge-x + dipole-moment-arrow-length * p-x,
+              dipole-moment-arrow-length * p-z,
+            ),
             name: "charge-moment",
             stroke: vector-stroke,
             mark: (end: ">>", fill: black),
@@ -162,13 +172,19 @@ whereto we refer as _the point dipole charge density_ distribution.
           )
 
           content(
-            (point-x + 0.92 * p-x, 0.92 * p-z),
+            (
+              point-x + point-dipole-view-zoom * dipole-moment-arrow-length * p-x,
+              point-dipole-view-zoom * dipole-moment-arrow-length * p-z,
+            ),
             anchor: "south",
             padding: 5pt,
             math-rect($va(p)$),
           )
           content(
-            (charge-x + 0.92 * p-x, 0.92 * p-z),
+            (
+              charge-x + dipole-moment-arrow-length * p-x,
+              dipole-moment-arrow-length * p-z,
+            ),
             anchor: "south",
             padding: 5pt,
             math-rect($va(p)$),
