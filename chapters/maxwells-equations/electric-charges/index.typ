@@ -8,7 +8,20 @@ Electric phenomena arise from a property known as _electric charge_. Charged obj
 $ e = #qty("1.602176634e-19", "C"), $
 (wherein $"C"$ is the SI unit of charge, a coulomb).
 
-Despite this fundamental discreteness of charge, the historical developments of electromagnetic theory utilized the definition of a continuous charge per unit volume, or _volume charge density_ $rho(va(r))$ (here we omit the modern formulation of particles of fractional charge). In an infinitesimal volume $dif^3 r$, the charge contained therein is thence $dif Q = rho(va(r)) dif^3 r$. Then the total charge $Q$ in a volume $V$ is given by
+Despite this fundamental discreteness of charge, the historical developments of electromagnetic theory utilized the definition of a continuous charge per unit volume, or _volume charge density_ $rho(va(r))$ (here we omit the modern formulation of particles of fractional charge).
+
+#remark[
+  The considerations of quantum mechanics describe $rho$ to be derived from wavefunctions $Psi$. In particular, a system of $n$ particles of charge $q_k$ gives
+  $
+    rho(va(r)) & = integral sum_(k=1)^n q_k abs(Psi(va(r)_1, dots, va(r)_(k-1), va(r), va(r)_(k + 1), dots, va(r)_n))^2 product_(i != k) dif^3 r_i
+  $
+  where $Psi$ is a many-particle wavefunction and $abs(Psi)^2$ is the probability density of a specific configuration of the $n$ charges. In consideration of identical charges $q$,
+  $
+    rho(va(r)) & = n q integral abs(Psi(va(r), va(r)_2, dots, va(r)_n))^2 product_(i = 2)^n dif^3 r_i.
+  $
+]
+
+In an infinitesimal volume $dif^3 r$, the charge contained therein is thence $dif Q = rho(va(r)) dif^3 r$. Then the total charge $Q$ in a volume $V$ is given by
 $
   Q = integral.triple_V rho(va(r)) dif^3 r.
 $ <eq:enclosed-volume-charge>
