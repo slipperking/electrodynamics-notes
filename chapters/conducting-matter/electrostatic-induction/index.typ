@@ -44,10 +44,10 @@ All physical systems rearrange their charge distribution $rho$ in order to minim
     &= 1 / (8 uppi epsilon_0) integral.triple integral.triple [(rho(va(r)')) / xi'' delta(va(xi)') + (rho(va(r)'')) / xi'' delta(va(xi)) + rho(va(r)')rho(va(r)'') fdv(hfrc(1 / xi''), rho(va(r)))] dif^3 r' dif^3 r'' \
     &quad""+ phi_"ext" (va(r)) - lambda \
     &= 1 / (8 uppi epsilon_0) [integral.triple (rho(va(r)')) / xi dif^3 r' + integral.triple (rho(va(r)'')) / xi' dif^3 r''] + phi_"ext" (va(r)) - lambda \
-    &= phi_rho (va(r)) + phi_"ext" (va(r)) - lambda = 0,
+    &= phi_"self" (va(r)) + phi_"ext" (va(r)) - lambda = 0,
   $
   implying
   $
-    va(E) = va(E)_rho + va(E)_"ext" = 0. qedhere
+    va(E) = va(E)_"self" + va(E)_"ext" = 0. qedhere
   $
 ]
