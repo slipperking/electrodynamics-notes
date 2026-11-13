@@ -48,6 +48,6 @@ All physical systems rearrange their charge distribution $rho$ in order to minim
   $
   implying
   $
-    phi = phi_rho + phi_"ext" = 0. qedhere
+    va(E) = va(E)_rho + va(E)_"ext" = 0. qedhere
   $
 ]
