@@ -27,7 +27,8 @@ and its generalization
   $ integral.cont_(partial S) phi dif va(ell) = integral.double_S dif va(S) times grad phi $
   and
   $
-    integral.cont_(partial S) dif va(ell) times va(psi) = integral.double_S grad psi_k dif S_k - integral.double_S (div va(psi)) dif va(S).
+    integral.cont_(partial S) dif va(ell) times va(psi) &= integral.double_S grad psi_k dif S_k - integral.double_S (div va(psi)) dif va(S) \
+    &=integral.double_S (grad times.o va(psi)) dot va(S) - integral.double_S (div va(psi)) dif va(S).
   $
 ] <cor:stokes-substitutions>
 #proof(collapsed: true)[
@@ -117,7 +118,6 @@ and
   $
 ] <cor:greens-identities>
 #proof(collapsed: not false)[
-  #todo[Green's first and second]
   Let $va(F) = phi grad psi$ in @thm:divergence to obtain Green's first identity:
   $
     integral.surf_(partial V) phi grad psi dot dif va(S) & = integral.triple_V div(phi grad psi) dif^3 r= integral.triple_V [phi div grad psi + grad phi dot grad psi] dif^3 r.
