@@ -60,7 +60,7 @@ All physical systems rearrange their charge distribution $rho$ in order to minim
     &= U_"E" [delta rho] + lambda integral.triple delta rho dif^3 r \
     &= U_"E" [delta rho].
   $
-  Since $U_"E" [delta rho]$ is positive definite quantity,
+  Since $U_"E" [delta rho]$ is a positive definite quantity,
   $
     U_"E" [rho + delta rho; phi_"ext"] >= U_"E" [rho; phi_"ext"]. qedhere
   $
