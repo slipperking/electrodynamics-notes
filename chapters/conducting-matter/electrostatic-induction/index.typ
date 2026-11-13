@@ -56,7 +56,7 @@ All physical systems rearrange their charge distribution $rho$ in order to minim
     &quad""- U_"E" [rho] - V_"E" [rho; phi_"ext"] \
     &= U_"E" [delta rho] + V_"E" [rho; delta rho] + V_"E" [delta rho; phi_"ext"] \
     &= U_"E" [delta rho] + V_"E" [delta rho; phi_"self"] + V_"E" [delta rho; phi_"ext"] \
-    &= U_"E" [delta rho] + V_"E" [delta rho; lambda #[(external potential)]] \
+    &= U_"E" [delta rho] + V_"E" [delta rho; lambda #[(total potential)]] \
     &= U_"E" [delta rho] + lambda integral.triple delta rho dif^3 r \
     &= U_"E" [delta rho].
   $
