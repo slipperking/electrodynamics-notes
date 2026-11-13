@@ -13,7 +13,41 @@ $
 $
 It is imperative to understand that this model of charge separation and rearrangement is rather colloquial, and never does electrostatic induction in an actual metal involve large displacements of charges.
 
-All physical systems rearrange their charge distribution $rho$ in order to minimize their total energy $U_"tot"$, which we may assume comprises the electrostatic energy $U_("E", "tot")$ and the energy due to additional quantum mechanical processes. A perfect conductor introduces the implicit assumption that the latter contributes only negligibly to $U_"tot"$, except for their effect in defining and fixing the shape of the body. Therefore under these precursory conditions, the minimization of $U_"tot"$ is equivalent to the minimization of $U_("E", "tot")$. Hence gives rise to:
+All physical systems rearrange their charge distribution $rho$ in order to minimize their total energy $U_"tot"$, which we may assume comprises the electrostatic energy $U_"E"$ and the energy due to additional quantum mechanical processes. A perfect conductor introduces the implicit assumption that the latter contributes only negligibly to $U_"tot"$, except for their effect in defining and fixing the shape of the body. Therefore under these precursory conditions, the minimization of $U_"tot"$ is equivalent to the minimization of $U_"E"$. Hence gives rise to:
 #theorem[Thomson's Theorem][
-  The total electrostatic energy $U_("E", "tot")$ of a perfectly conducting body of fixed shape and total charge $Q$ is minimized when $Q$ is distributed throughout $V$ in a way rendering $phi$ constant.
+  The total electrostatic energy $U_"E"$ of a perfectly conducting body (in the presence of a fixed external electric field $-grad phi_"ext"$) of fixed shape and total charge $Q$ is minimized when $Q$ is distributed throughout $V$ in a way rendering $phi$ constant.
+]
+#proof[
+  #let fncdv = $fdv(, rho(va(r)))$
+  For simplicity we shall temporarily denote $va(xi)'' = va(r)'' - va(r)'$ and $va(xi)' = va(r)'' - va(r)$.
+
+  The quantity wherein we are interested to minimize is precisely @eq:total-electrostatic-in-external-field, or
+  $
+    U_"E" [rho, phi_"ext"] = 1 / (8 uppi epsilon_0) integral.triple_V integral.triple_V (rho(va(r)'') rho(va(r)')) / xi'' dif^3 r' dif^3 r'' + integral.triple_V rho(va(r)') phi_"ext" (va(r)') dif^3 r',
+  $
+  under the functional constraint
+  $
+    integral.triple_V rho(va(r)') dif^3 r' = Q.
+  $
+  By the method of Lagrange multipliers in functional form, this is equivalent to the unconstrained (in $va(r)$ and $lambda$) minimization of
+  $
+    I[rho] = U_"E" [rho, phi_"ext"] - lambda (integral.triple_V rho(va(r)) dif^3 r - Q),
+  $
+  requiring $(delta I) / (delta rho(va(r))) = 0$. This then gives
+  $
+    (delta I) / (delta rho(va(r))) &= fncdv 1 / (8 uppi epsilon_0) integral.triple_V integral.triple_V (rho(va(r)'') rho(va(r)')) / xi'' dif^3 r' dif^3 r'' \
+    &quad""+ fncdv integral.triple_V rho(va(r)') phi_"ext" (va(r)') dif^3 r' - lambda fncdv integral.triple_V rho(va(r)') dif^3 r' \
+    &= 1 / (8 uppi epsilon_0) integral.triple_V integral.triple_V fncdv (rho(va(r)'') rho(va(r)')) / xi'' dif^3 r' dif^3 r'' \
+    &quad""+ integral.triple_V fncdv [rho(va(r)') phi_"ext" (va(r)')] dif^3 r' - lambda integral.triple_V fncdv rho(va(r)') dif^3 r' \
+    &= 1 / (8 uppi epsilon_0) integral.triple integral.triple [(rho(va(r)')) / xi'' delta(va(xi)') + (rho(va(r)'')) / xi'' delta(va(xi)) + rho(va(r)')rho(va(r)'') fdv(hfrc(1 / xi''), rho(va(r)))] dif^3 r' dif^3 r'' \
+    &quad""+ integral.triple_V [delta(va(xi)) phi_"ext" (va(r)') + rho(va(r)') fncdv phi_"ext" (va(r)')] dif^3 r' - lambda integral.triple_V delta(va(xi)) dif^3 r' \
+    &= 1 / (8 uppi epsilon_0) integral.triple integral.triple [(rho(va(r)')) / xi'' delta(va(xi)') + (rho(va(r)'')) / xi'' delta(va(xi)) + rho(va(r)')rho(va(r)'') fdv(hfrc(1 / xi''), rho(va(r)))] dif^3 r' dif^3 r'' \
+    &quad""+ phi_"ext" (va(r)) - lambda \
+    &= 1 / (8 uppi epsilon_0) [integral.triple (rho(va(r)')) / xi dif^3 r' + integral.triple (rho(va(r)'')) / xi' dif^3 r''] + phi_"ext" (va(r)) - lambda \
+    &= phi_rho (va(r)) + phi_"ext" (va(r)) - lambda = 0,
+  $
+  implying
+  $
+    phi = phi_rho + phi_"ext" = 0. qedhere
+  $
 ]

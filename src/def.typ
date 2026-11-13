@@ -1,4 +1,4 @@
-#import "@preview/physica:0.9.8": grad
+#import "@preview/physica:0.9.8": grad, pdv
 #let gradsu(a) = $grad_#a$
 #let divsu(a) = $grad_#a dot.c$
 #let curlsu(a) = $grad_#a times$
@@ -27,3 +27,4 @@
 #let vaaa(..args) = _va(_va(_va(vb(math.sans(..args)))))
 
 #let argmin = math.limits(math.op($"arg" "min"$))
+#let fdv = pdv.with(d: sym.delta)

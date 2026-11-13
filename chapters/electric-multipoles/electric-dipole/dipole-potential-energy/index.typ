@@ -5,7 +5,7 @@
 #let pf = $phi_"ext"$
 By @sec:work-and-energy, we may be determine the electrostatic potential energy on a neutral charge distribution $rho$ due to a slowly varying electric field $-grad pf$ to be
 $
-  U_"E" (va(r)) = integral.triple rho(va(r)') pf(va(r)') dif^3 r' & = integral.triple rho(va(r)') [pf(va(r)) + va(xi) dot grad pf(va(r)) + Order(xi^2)] dif^3 r' \
+  V_"E" (va(r)) = integral.triple rho(va(r)') pf(va(r)') dif^3 r' & = integral.triple rho(va(r)') [pf(va(r)) + va(xi) dot grad pf(va(r)) + Order(xi^2)] dif^3 r' \
   & = integral.triple rho(va(r)') [pf(va(r)) + (va(s)' - va(s)) dot grad pf(va(r))] dif^3 r' + Order(xi^2) \
   & = integral.triple rho(va(r)') [pf(va(r)) - va(s) dot grad pf(va(r))] dif^3 r' \
   & quad "" + integral.triple rho(va(r)') va(s)' dot grad pf(va(r)) dif^3 r' + Order(xi^2) \
@@ -13,12 +13,12 @@ $
 $
 Evidently as with previously a point dipole at $va(r)$ renders this exact:
 $
-  U_"E" (va(r)) &= -integral.triple va(p) dot grad delta(va(r)' - va(r)) pf(va(r)') dif^3 r' = integral.triple va(p) dot grad pf(va(r)') delta(va(r)' - va(r)) dif^3 r' \
+  V_"E" (va(r)) &= -integral.triple va(p) dot grad delta(va(r)' - va(r)) pf(va(r)') dif^3 r' = integral.triple va(p) dot grad pf(va(r)') delta(va(r)' - va(r)) dif^3 r' \
   &= va(p) dot grad pf(va(r)) = -va(p) dot va(E)_"ext" (va(r)).
 $ <eq:electric-point-dipole-interaction-energy>
 The electric dipole force can be verified consistent herewith by @thm:electric-force-bodies-virtual-gradient
 $
-  va(F) = -grad U_"E" = -grad[-va(p) dot va(E)_"ext" (va(r))] = grad[va(p) dot va(E)_"ext" (va(r))].
+  va(F) = -grad V_"E" = -grad[-va(p) dot va(E)_"ext" (va(r))] = grad[va(p) dot va(E)_"ext" (va(r))].
 $
 because the virtual shift in $rho$ is equivalent to a shift in $va(r)$.
 
@@ -36,7 +36,7 @@ $
 $
 whence such a rotation entails the following displacement in potential energy:
 $
-  delta U_"E" & = -delta(va(p) dot va(E)_"ext" (va(r))) = - delta va(p) dot va(E)_"ext" - va(p) dot delta va(E)_"ext" = - (delta va(theta) times va(p)) dot va(E)_"ext" - va(p) dot (delta va(r) dot grad) va(E)_"ext" (va(r)) \
+  delta V_"E" & = -delta(va(p) dot va(E)_"ext" (va(r))) = - delta va(p) dot va(E)_"ext" - va(p) dot delta va(E)_"ext" = - (delta va(theta) times va(p)) dot va(E)_"ext" - va(p) dot (delta va(r) dot grad) va(E)_"ext" (va(r)) \
   // todo, N should be torque about r0
   & = - delta va(theta) dot (va(p) times va(E)_"ext") - va(p) dot ((delta va(theta) times va(s)) dot grad) va(E)_"ext" (va(r)),
 $
@@ -48,15 +48,15 @@ $
 $
 whence
 $
-  delta U_"E" = - delta va(theta) dot [va(p) times va(E)_"ext" + va(s) times va(F)_"ext"]= - delta va(theta) dot va(N)
+  delta V_"E" = - delta va(theta) dot [va(p) times va(E)_"ext" + va(s) times va(F)_"ext"]= - delta va(theta) dot va(N)
 $
 wherein $va(N)$ is defined as in @sec:dipole-force-and-torque. If instead considering $va(N)_va(r)$ to be the torque about $va(r)$,
 $
-  delta U_"E" = - delta va(theta) dot [va(p) times va(E)_"ext"]= - delta va(theta) dot va(N)_va(r).
+  delta V_"E" = - delta va(theta) dot [va(p) times va(E)_"ext"]= - delta va(theta) dot va(N)_va(r).
 $
-We now characterize the total electrostatic energy $U_("E", "tot")$ in a system of point dipoles, by method of assemblage. In greater specificity, consider $n$ point dipoles with moments $va(p)_k$ respectively at $va(r)_k$. The discussion in @sec:total-electrostatic-energy gives this quantity to be
+We now characterize the total electrostatic energy $U_"E"$ in a system of point dipoles, by method of assemblage. In greater specificity, consider $n$ point dipoles with moments $va(p)_k$ respectively at $va(r)_k$. The discussion in @sec:total-electrostatic-energy gives this quantity to be
 $
-  U_("E", "tot") = sum_(j = 1)^n sum_(k = 1)^(j - 1) W_(j k) = 1 / 2 sum_(j = 1)^n sum_(k = 1 \ k != j)^n W_(j k),
+  U_"E" = sum_(j = 1)^n sum_(k = 1)^(j - 1) W_(j k) = 1 / 2 sum_(j = 1)^n sum_(k = 1 \ k != j)^n W_(j k),
 $
 where $W_(j k)$ is the interaction energy between $va(r)_j$ and $va(r)_k$, which may be computed---by superposition---considering the electric field $va(E)_k$ to be $va(E)_"ext"$, to be the work necessitated to introduce the $j$-th dipole, wherefor @thm:electric-point-dipole-field gives
 $
@@ -70,7 +70,7 @@ whence
 #theorem[
   The total electrostatic energy of a system containing $n$ point dipoles with moments $va(p)_k$ respectively at $va(r)_k$ is given by
   $
-    U_("E", "tot") &= 1 / 2 sum_(j = 1)^n sum_(k = 1 \ k != j)^n W_(j k) = -1 / 2 sum_(j = 1)^n va(p)_j dot va(E)_("all but" j) (va(r)_j) \
+    U_"E" &= 1 / 2 sum_(j = 1)^n sum_(k = 1 \ k != j)^n W_(j k) = -1 / 2 sum_(j = 1)^n va(p)_j dot va(E)_("all but" j) (va(r)_j) \
     &= 1 / (8 uppi epsilon_0) sum_(j = 1)^n sum_(k = 1 \ k != j)^n (va(p)_j dot va(p)_k - 3 (va(p)_j dot vu(s)_(j k)) (va(p)_k dot vu(s)_(j k))) / s_(j k)^3.
   $
 ]
