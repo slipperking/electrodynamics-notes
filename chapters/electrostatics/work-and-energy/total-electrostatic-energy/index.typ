@@ -71,10 +71,12 @@ $ <eq:total-electrostatic-energy-integral-with-E>
 Assuming this compact support condition upon $rho$, #todo(block: false)[Vanish of term], the first integral vanishes, leaving in lieu thereof
 #definition[
   $
-    U_"E" = epsilon_0 / 2 integral.triple_(RR^3) E^2 dif^3 r.
-  $
-]
-In this formulation, the quantity $U_"E"$ is dependent on the electric field and not explicitly on $rho$. For this very reason $U_"E"$ has also been given the name "electric field energy." In the field of general relativity, it becomes incumbent to consider $U_"E"$ as a part of the field, with a volume energy density $epsilon_0 / 2 E^2$.
+    U_"E" [va(E)] = epsilon_0 / 2 integral.triple_(RR^3) E^2 dif^3 r.
+  $ <eq:electrostatic-field-energy>
+] <def:electrostatic-field-energy>
+In this formulation, the quantity $U_"E"$ is dependent on the electric field and not explicitly on $rho$. For this very reason $U_"E"$ has also been given the name "electric field energy." In the field of general relativity, it becomes incumbent to consider $U_"E"$ as a part of the field, with a volume energy density $epsilon_0 / 2 E^2$. It will transpire that defining an energy density as such is valid, although one must exercise caution before formulating such generalizations, for otherwise one might state this quantity to be instead $1/2 rho phi$.
+
+@eq:electrostatic-field-energy gives $U_E$ to be a positive-definite quantity. Observe the potential energy of a system of two negative point charges is negative, whensoever computed by @eq:total-electrostatic-energy-integral-discrete! (This once again shows that point charges must be considered with caution.)
 
 The total field energy can also be determined as the sum of _self_ and _interaction_ energies of any two constituent bodies, which constitutes the preceding developments of this section. For instance, consider a continuous volume charge distribution $rho$, separated into two bodies $rho = rho_1 + rho_2$, whence
 $
@@ -82,7 +84,11 @@ $
   &= 1 / (8 uppi epsilon_0) integral.triple integral.triple (rho_1(va(r)) rho_1(va(r)') + rho_2(va(r)) rho_2(va(r)')) / norm(va(r) - va(r)') dif^3 r' dif^3 r + 1 / (4 uppi epsilon_0) integral.triple integral.triple (rho_1(va(r)) rho_2(va(r)')) / norm(va(r) - va(r)') dif^3 r' dif^3 r \
   &= U_"self" + U_"int".
 $
-The term $U_"int"$ is the _interaction energy_ between the two distributions $V_"E" [rho_1; rho_2]$, which is precisely the potential energy between the two as defined in @eq:electrostatic-potential-energy-distribution. The previous relation entails that the given quantity does _not_ acquiesce to the superposition principle:
+The term $U_"int"$ is the _interaction energy_ between the two distributions $V_"E" [rho_1; rho_2]$, which is precisely the potential energy between the two as defined in @eq:electrostatic-potential-energy-distribution.
+
+(Herethroughout have we used both $V_"E" [rho_dot; rho_dot]$ and $V_"E" [rho_dot; phi_dot]$ for similar meanings. The precise intent should be interpreted from context.)
+
+The previous relation entails that the given quantity does _not_ acquiesce to the superposition principle:
 $
   U_"E" [rho] = U_"E" [rho_1] + U_"E" [rho_2] + V_"E" [rho_1; rho_2]
 $

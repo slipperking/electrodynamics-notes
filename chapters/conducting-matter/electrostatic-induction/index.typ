@@ -48,6 +48,20 @@ All physical systems rearrange their charge distribution $rho$ in order to minim
   $
   implying
   $
-    va(E) = va(E)_"self" + va(E)_"ext" = 0. qedhere
+    phi_"tot" = phi_"self" + phi_"ext" = lambda ==> va(E)_"tot" = va(E)_"self" + va(E)_"ext" = 0.
+  $
+  It is also possible to ascertain the minimality thereof, by applying arbitrarily the virtual variation $rho -> rho + delta rho$ under the constraint $integral rho = integral (rho + delta rho) = Q$, whereby
+  $
+    U_"E" [rho + delta rho; phi_"ext"] - U_"E" [rho; phi_"ext"] &= U_"E" [rho] + U_"E" [delta rho] + V_"E" [rho; delta rho] + V_"E" [rho; phi_"ext"] + V_"E" [delta rho; phi_"ext"] \
+    &quad""- U_"E" [rho] - V_"E" [rho; phi_"ext"] \
+    &= U_"E" [delta rho] + V_"E" [rho; delta rho] + V_"E" [delta rho; phi_"ext"] \
+    &= U_"E" [delta rho] + V_"E" [delta rho; phi_"self"] + V_"E" [delta rho; phi_"ext"] \
+    &= U_"E" [delta rho] + V_"E" [delta rho; lambda #[(external potential)]] \
+    &= U_"E" [delta rho] + lambda integral.triple delta rho dif^3 r \
+    &= U_"E" [delta rho].
+  $
+  Since $U_"E" [delta rho]$ is positive definite quantity,
+  $
+    U_"E" [rho + delta rho; phi_"ext"] >= U_"E" [rho; phi_"ext"]. qedhere
   $
 ]
