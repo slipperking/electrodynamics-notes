@@ -34,10 +34,9 @@ $ <eq:electric-quadrupole-potential>
 #figure-wrapper[
   #figure(
     {
-      set text(size: 0.95em)
       canvas(
         length: 1.44cm,
-        debug-show: true,
+        // debug-show: true,
         {
           import cetz.draw: *
 
@@ -194,7 +193,7 @@ $ <eq:electric-quadrupole-potential>
   ) <fig:point-and-four-charge-quadrupoles>
 ]
 
-As with the previous two instances, the construction of this term is describable with aid from a _point quadrupole_. In particular, we consider four point charges in a checkerboard pattern converging to a single point. As such, we consider two point dipoles with moments $plus.minus va(p) / d$ at $va(r)_0 plus.minus d/2 vu(c)$ with a vanishing separation $d -> 0$.
+As with the previous two instances, the construction of this term is describable with aid from a _point quadrupole_. In particular, we consider four point charges in a checkerboard pattern converging to a single point (@fig:point-and-four-charge-quadrupoles), which may be facilitated by considering two point dipoles with moments $plus.minus va(p) / d$ at $va(r)_0 plus.minus d/2 vu(c)$ with a vanishing separation $d -> 0$.
 
 With @eq:electric-dipole-potential, the electrostatic potential of a point quadrupole is hence
 $

@@ -48,40 +48,13 @@ $
   va(E)_1 (va(r)) /* = 1 / (4 uppi epsilon_0) (3 vu(s) p cos theta - va(p)) / s^3  */= 1 / (4 uppi epsilon_0) (3 vu(s) p cos theta - p[vu(s) cos theta - vu(theta) sin theta]) / s^3 = p / (4 uppi epsilon_0 s^3) [2 vu(s) cos theta + vu(theta) sin theta],
 $
 is azimuthally symmetric---if $phi.alt$ were to change by some $delta phi.alt$, such a variation would result in a rotation of $vu(r)$ and $vu(theta)$ by $delta phi.alt$ about the $vu(p)$-axis; whereby the previous equation entails a rotation of $va(E)$ by $delta phi.alt$ about the axis.
-
-The historical motivation for the naming of "dipole" comes from the following geometric construction, due to Maxwell: consider a configuration wherein two point charges $plus.minus q / d$ respectively at $va(r)_0 plus.minus d/2 vu(c)$ are held within a sphere centered at $va(r)_0$ of radius $R$. With $d -> 0^+$, the electric dipole moment is
-$
-  va(p) &= lim_(d -> 0^+) integral.triple rho va(s) dif^3 r = lim_(d -> 0^+) integral.triple sum_(+, -) plus.minus q / d delta(va(r) - va(r)_0 minus.plus d / 2 vu(c)) va(s) dif^3 r \
-  &=lim_(d -> 0^+) sum_(+, -) plus.minus q / d (plus.minus d/2 vu(c)) = q vu(c),
-$
-wherewith the resulting electric potential is
-$
-  phi(va(r)) &= lim_(d -> 0^+) 1 / (4 uppi epsilon_0) [hfrc(q / d) / norm(va(r) - va(r)_0 - d / 2 vu(c)) - hfrc(q / d) / norm(va(r) - va(r)_0 + d / 2 vu(c))] \
-  &= lim_(d -> 0^+) hfrc(q / d) / (4 uppi epsilon_0) (ee^(- d / 2 vu(c) dot grad) - ee^(d / 2 vu(c) dot grad)) 1 / s \
-  &= -lim_(d -> 0^+) hfrc(q / d) / (4 uppi epsilon_0) 2 sinh(d / 2 vu(c) dot grad) 1 / s \
-  &= -lim_(d -> 0^+) hfrc(q / d) / (4 uppi epsilon_0) [d vu(c) dot grad + d^3 Order(vu(c) dot grad)^3] 1 / s \
-  &= -q / (4 uppi epsilon_0) vu(c) dot grad 1 / s = -1 / (4 uppi epsilon_0) q vu(c) dot grad 1 / s = -1 / (4 uppi epsilon_0) va(p) dot grad 1 / s = phi_1 (va(r)),
-$ <eq:electric-point-dipole-potential>
-whence Poisson's Equation (@eq:poisson) gives
-$
-  rho(va(r)) &= -epsilon_0 laplacian phi(va(r)) = 1 / (4 uppi) q laplacian [vu(c) dot grad 1 / s] = 1 / (4 uppi) q partial_i partial_i hat(c)_j partial_j 1 / s \
-  & = 1 / (4 uppi) q hat(c)_j partial_j partial_i partial_i 1 / s = 1 / (4 uppi) q vu(c) dot grad laplacian 1 / s = -va(p) dot grad delta(va(r) - va(r)_0),
-$ <eq:point-dipole-charge-density>
-whereto we refer as _the point dipole charge density_ distribution.
-#definition[The Point Dipole][
-  The electrostatic _point dipole_ at $va(r)_0$ is the description imputed upon the charge distribution
-  $
-    rho(va(r)) = -va(p) dot grad delta(va(r) - va(r)_0),
-  $
-  for any nonzero vector $va(p)$, the electric dipole moment. The multipole expansion thereof about $va(r)_0$ comprises but a single dipole term.
-] <def:electric-point-dipole>
 #figure-wrapper[
   #figure(
     {
       set text(size: 0.95em)
       canvas(
         length: 1.44cm,
-        debug-show: true,
+        // debug-show: true,
         {
           import cetz.draw: *
 
@@ -223,4 +196,31 @@ whereto we refer as _the point dipole charge density_ distribution.
     caption: [Field-lines of a point dipole and a dipole formed by two charges with the same fixed dipole moment $va(p)$ in the oblique direction shown.],
   ) <fig:point-and-two-charge-dipoles>
 ]
+The historical motivation for the naming of "dipole" comes from the following geometric construction, due to Maxwell: consider a configuration wherein two point charges $plus.minus q / d$ respectively at $va(r)_0 plus.minus d/2 vu(c)$ are held within a sphere centered at $va(r)_0$ of radius $R$. With $d -> 0^+$ (refer to @fig:point-and-two-charge-dipoles), the electric dipole moment is
+$
+  va(p) &= lim_(d -> 0^+) integral.triple rho va(s) dif^3 r = lim_(d -> 0^+) integral.triple sum_(+, -) plus.minus q / d delta(va(r) - va(r)_0 minus.plus d / 2 vu(c)) va(s) dif^3 r \
+  &=lim_(d -> 0^+) sum_(+, -) plus.minus q / d (plus.minus d/2 vu(c)) = q vu(c),
+$
+wherewith the resulting electric potential is
+$
+  phi(va(r)) &= lim_(d -> 0^+) 1 / (4 uppi epsilon_0) [hfrc(q / d) / norm(va(r) - va(r)_0 - d / 2 vu(c)) - hfrc(q / d) / norm(va(r) - va(r)_0 + d / 2 vu(c))] \
+  &= lim_(d -> 0^+) hfrc(q / d) / (4 uppi epsilon_0) (ee^(- d / 2 vu(c) dot grad) - ee^(d / 2 vu(c) dot grad)) 1 / s \
+  &= -lim_(d -> 0^+) hfrc(q / d) / (4 uppi epsilon_0) 2 sinh(d / 2 vu(c) dot grad) 1 / s \
+  &= -lim_(d -> 0^+) hfrc(q / d) / (4 uppi epsilon_0) [d vu(c) dot grad + d^3 Order(vu(c) dot grad)^3] 1 / s \
+  &= -q / (4 uppi epsilon_0) vu(c) dot grad 1 / s = -1 / (4 uppi epsilon_0) q vu(c) dot grad 1 / s = -1 / (4 uppi epsilon_0) va(p) dot grad 1 / s = phi_1 (va(r)),
+$ <eq:electric-point-dipole-potential>
+whence Poisson's Equation (@eq:poisson) gives
+$
+  rho(va(r)) &= -epsilon_0 laplacian phi(va(r)) = 1 / (4 uppi) q laplacian [vu(c) dot grad 1 / s] = 1 / (4 uppi) q partial_i partial_i hat(c)_j partial_j 1 / s \
+  & = 1 / (4 uppi) q hat(c)_j partial_j partial_i partial_i 1 / s = 1 / (4 uppi) q vu(c) dot grad laplacian 1 / s = -va(p) dot grad delta(va(r) - va(r)_0),
+$ <eq:point-dipole-charge-density>
+whereto we refer as _the point dipole charge density_ distribution.
+#definition[The Point Dipole][
+  The electrostatic _point dipole_ at $va(r)_0$ is the description imputed upon the charge distribution
+  $
+    rho(va(r)) = -va(p) dot grad delta(va(r) - va(r)_0),
+  $
+  for any nonzero vector $va(p)$, the electric dipole moment. The multipole expansion thereof about $va(r)_0$ comprises but a single dipole term.
+] <def:electric-point-dipole>
+
 It is incumbent to interpret @eq:point-dipole-charge-density in the distributional sense. Where the pure monopole is describable by a point charge, the pure dipole is likewise completely characterizable by the point dipole. The current knowledge of physicists accord to the nonexistence of naturally-occuring point dipoles, which is not to say that @eq:point-dipole-charge-density holds no practical utility; it often transpires as a utile approximation whensoever the analogous separation $d$ is relatively insignificant to the separation distance $s >> d$.

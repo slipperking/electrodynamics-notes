@@ -170,7 +170,7 @@ The first usage is readily demonstrated by the proof above. We hence provide the
   A solid cylinder of infinite length and radius $R$ axially centered at the $x$-axis is uniformly charged with a volume density $rho$. Find the electric field at some arbitrary point $va(r)$.
 ] <ex:gaussian-surface-cylinder>
 #solution[to @ex:gaussian-surface-cylinder][
-  Denote by $S$ the coaxial cylinder of length $2L$ centered at $va(x) = op("proj")_vu(x) va(r)$ and disposed with axis parallel to the $x$-axis to be the Gaussian surface. By Gauss' Law,
+  Denote by $S$ the coaxial cylinder of length $2L$ centered at $va(x) = op("proj")_vu(x) va(r)$ and disposed with axis parallel to the $x$-axis to be the Gaussian surface, as described in @fig:gaussian-cylinder. By Gauss' Law,
   $
     Q_"enc" / epsilon_0 = integral.surf_S va(E)(va(r)') dot dif va(S)' = (integral.double_"lateral" + integral.double_"base1" + integral.double_"base2") va(E)(va(r)') dot dif va(S)'.
   $
@@ -366,7 +366,7 @@ The first usage is readily demonstrated by the proof above. We hence provide the
   An infinite plane coplanar with the $x y$-plane carries a surface charge density distribution $sigma$, whereby an electric field $va(E)$ is generated. Find $va(E)(va(r))$ at an arbitrary point $va(r)$.
 ] <ex:gaussian-surface-pillbox>
 #solution[to @ex:gaussian-surface-pillbox][
-  By virtue of symmetry, the electric field at $va(r)$ points in the $vu(z)$ direction (denote the respective component by $va(z) = z vu(z)$). Let $S$ be a "Gaussian pillbox," the colloquial term for a rectangular prism with two square faces of respective area $A$, parallel to the $x y$-plane equidistantly $abs(z)$ away therefrom, with four vertical faces whose normal vectors are orthogonal to the electric field thereat. Then
+  By virtue of symmetry, the electric field at $va(r)$ points in the $vu(z)$ direction (denote the respective component by $va(z) = z vu(z)$). Let $S$ be a "Gaussian pillbox," (the colloquial term for a rectangular prism with two square faces of respective area $A$, parallel to the $x y$-plane equidistantly $abs(z)$ away therefrom, with four vertical faces whose normal vectors are orthogonal to the electric field thereat) as demonstrated in @fig:gaussian-pillbox. Then
   $
     Q_"enc" / epsilon_0 = integral.surf_S va(E)(va(r)') dot dif va(S)' = (integral.double_(4 perp "faces") + integral.double_(2 parallel "faces")) va(E)(va(r)') dot dif va(S)' = 2 A E(va(r)).
   $

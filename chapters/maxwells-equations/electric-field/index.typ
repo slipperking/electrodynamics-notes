@@ -169,7 +169,7 @@ $ <eq:gauss-law-integral>
   ) <fig:uniformly-charged-line-geometry>
 ]
 #example[
-  Find the electric field a distance $z$ above the midpoint of a straight line segment of length $L$ carrying a uniform charge density $lambda$.
+  Find the electric field a distance $z$ above the midpoint of a straight line segment of length $L$ carrying a uniform charge density $lambda$ (@fig:uniformly-charged-line-geometry).
 ] <ex:electric-field-at-point-for-uniformly-charged-line>
 #solution[to @ex:electric-field-at-point-for-uniformly-charged-line][
   By @eq:electric-field-surface-line,
