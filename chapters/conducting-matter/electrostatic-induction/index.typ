@@ -162,7 +162,7 @@ It must follow that the distribution of the charge $Q$ must be distributed entir
 $
   va(E)_"out" (va(r)_S) - va(E)_"in" (va(r)_S) = sigma(va(r)_S) / epsilon_0 vu(n),
 $
-with $vu(n)$ denoting the exterior unit normal vector. By @thm:thomsons-theorem-electrostatics, whensoever in equilibrium $va(E)_"in" = 0$, whence
+with $vu(n)$ denoting the outward-facing unit normal vector. By @thm:thomsons-theorem-electrostatics, whensoever in equilibrium $va(E)_"in" = 0$, whence
 $
   va(E)_"out" (va(r)_S) times vu(n) = 0, wide va(E)_"out" (va(r)_S) dot vu(n) = E_"out" (va(r)_S) = sigma(va(r)_S) / epsilon_0,\
   sigma(va(r)_S) = epsilon_0 E_"out" (va(r)_S)
