@@ -13,17 +13,17 @@ $
 $
 whereby
 $
-  1 / norm(va(s) - va(s)') = 1 / s 1 / sqrt(1 - 2 x t + t^2) = 1 / s sum_(ell = 0)^oo evaluated(dv(, t, ell) 1 / sqrt(1 - 2 x t + t^2))_(t = 0) t^ell / ell!.
+  1 / norm(va(s) - va(s)') = 1 / s 1 / sqrt(1 - 2 x t + t^2) = 1 / s sum_(ell = 0)^oo evaluated(pdv(, t, [ell]) 1 / sqrt(1 - 2 x t + t^2))_(t = 0) t^ell / ell!.
 $
 wherein the function is singular for $t = x plus.minus ii sqrt(1 - x^2)$, notably occurring only when $abs(t) = 1$. Therefore, the previous representation is convergent for $abs(t) < 1$, whose veracity originates from $s' < R < s$. Let
 #definition[Legendre Polynomial][
   $
-    P_ell (x) = 1 / ell! evaluated(dv(, t, ell) 1 / sqrt(1 - 2 x t + t^2))_(t = 0) #tag[$(ell in NN)$]
-  $
+    P_ell (x) = 1 / ell! evaluated(pdv(, t, [ell]) 1 / sqrt(1 - 2 x t + t^2))_(t = 0), wide wide (ell in NN)
+  $ <eq:legendre-polynomial>
 ]
 be denoted a _Legendre polynomial_, the polynomiality whereof we shall now substantiate. Write
 $
-  F(x, t) = 1 / sqrt(1 - 2 x t + t^2) = sum_(ell = 0)^oo evaluated(dv(, t, ell) 1 / sqrt(1 - 2 x t + t^2))_(t = 0) t^ell / ell! = sum_(ell = 0)^oo P_ell (x) t^ell,\
+  F(x, t) = 1 / sqrt(1 - 2 x t + t^2) = sum_(ell = 0)^oo evaluated(pdv(, t, [ell]) 1 / sqrt(1 - 2 x t + t^2))_(t = 0) t^ell / ell! = sum_(ell = 0)^oo P_ell (x) t^ell,\
   pdv(F, t)(x,t) = (x - t) (1 - 2 x t + t^2)^(-3/2) = (x - t) / (1 - 2 x t + t^2) F(x,t),
 $
 giving
@@ -36,3 +36,36 @@ $
   (ell + 1) P_(ell + 1) (x) = x(2 ell + 1) P_ell (x) - ell P_(ell - 1)(x) , \
 $
 with polynomial base cases $P_0 (x) = 1$ and $P_1 (x) = x$, we aver from recursion that each $P_ell$ is a polynomial.
+
+The utilization of the raw expression @eq:legendre-polynomial is often inconvenient. In lieu thereof, we derive the _Rodrigues' formula_, for which we appeal to complex-analytic methods. Writing
+$
+  P_ell (x) = 1 / ell! evaluated(pdv(, t, [ell]) F(x,t))_(t = 0),
+$
+with $gamma = {t: abs(t) = 1/2 (<1)}$, by the Cauchy--Goursat Theorem we have
+$
+  P_ell (x) &= 1 / (2 uppi ii) integral.cont_gamma F(x,t) / (t^(ell + 1)) dt = 1 / (2 uppi ii) integral.cont_gamma dt / (t^(ell + 1) sqrt(1 - 2 x t + t^2)),
+$
+wherein $F = 1 / sqrt(1 - 2 x t + t^2)$ utilizes the principal branch square root and is analytic in $t$ on the unit disk. Utilize a substitution $z in CC$ such that
+$
+  sqrt(1 - 2 x t + t^2) = 1 - t z, \
+  1 - 2 x t + t^2 = 1 + t^2 z^2 - 2 t z ==> t^2 (z^2 - 1) + 2 t(x - z) = 0 ==> t = (2(z - x)) / (z^2 - 1), \
+  dt = (2(z^2 - 1) - 4z(z - x)) / (z^2 - 1)^2 dz = (2(1 - t z)) / (z^2 - 1) dz,\
+  Gamma = {z : abs((2(z - x)) / (z^2 - 1)) = 1/2 } = {(1 - sqrt(1 - 2 x t + t^2) ) / t : t in gamma},
+$
+giving
+$
+  P_ell (x) & = 1 / (2 uppi ii) integral.cont_Gamma (2(1 - t z)) / (z^2 - 1) dz / (((2(z - x)) / (z^2 - 1))^(ell + 1) (1 - t z)) = 1 / (2 uppi ii) integral.cont_Gamma ((z^2 - 1)^ell) / (2^ell (z - x)^(ell + 1)) dz \
+  & = 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell op("Ind")_Gamma x #tag[(Cauchy--Goursat Theorem)] \
+  & = 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell 1 / (2 uppi ii) integral.cont_Gamma dz / (z - x) \
+  &= 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell integral.cont_gamma dt / t(1- t z).
+$
+Expressing $F$ in lieu of $1 - t z$,
+$
+  P_ell (x) & = 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell 1 / (2 uppi ii) sum_(ell = 0)^oo P_ell (x) integral.cont_gamma t^(ell - 1) dt \
+  &= 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell 1 / (2 uppi ii) integral.cont_gamma t^(- 1) dt,
+$
+giving
+#theorem[Rodrigues' Formula][
+  $ P_ell (x) & = 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell. $
+]
+This consequently gives rise to

@@ -84,13 +84,13 @@ $
   &= 1 / (8 uppi epsilon_0) integral.triple integral.triple (rho_1(va(r)) rho_1(va(r)') + rho_2(va(r)) rho_2(va(r)')) / norm(va(r) - va(r)') dif^3 r' dif^3 r + 1 / (4 uppi epsilon_0) integral.triple integral.triple (rho_1(va(r)) rho_2(va(r)')) / norm(va(r) - va(r)') dif^3 r' dif^3 r \
   &= U_"self" + U_"int".
 $
-The term $U_"int"$ is the _interaction energy_ between the two distributions $V_"E" [rho_1; rho_2]$, which is precisely the potential energy between the two as defined in @eq:electrostatic-potential-energy-distribution.
+The term $U_"int"$ is the _interaction energy_ between the two distributions $V_"E" [rho_1, rho_2]$, which is precisely the potential energy between the two as defined in @eq:electrostatic-potential-energy-distribution.
 
-(Herethroughout have we used both $V_"E" [rho_dot; rho_dot]$ and $V_"E" [rho_dot; phi_dot]$ for similar meanings. The precise intent should be interpreted from context.)
+(Herethroughout have we used both $V_"E" [rho_dot, rho_dot]$ and $V_"E" [rho_dot; phi_dot]$ for similar meanings. The precise intent should be interpreted from context.)
 
 The previous relation entails that the given quantity does _not_ acquiesce to the superposition principle:
 $
-  U_"E" [rho] = U_"E" [rho_1] + U_"E" [rho_2] + V_"E" [rho_1; rho_2]
+  U_"E" [rho] = U_"E" [rho_1] + U_"E" [rho_2] + V_"E" [rho_1, rho_2]
 $
 by virtue of the quadraticity of its nature.
 
