@@ -67,5 +67,46 @@ $
 giving
 #theorem[Rodrigues' Formula][
   $ P_ell (x) & = 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell. $
-]
+] <thm:rodrigues-formula>
 This consequently gives rise to
+#theorem[The Orthogonality Relation][
+  $
+    integral_(-1)^1 P_ell (x) P_(ell') (x) dx = 2 / (2 ell + 1) delta_(ell ell').
+  $
+]
+#proof(collapsed: true)[of the Orthogonality Relation][
+  Without loss of generality we shall assume $ell >= ell'$. We substitute @thm:rodrigues-formula and integrate by parts:
+  $
+    integral_(-1)^1 P_ell (x) P_(ell') (x) dx & = 1 / (2^ell ell!) integral_(-1)^1 P_ell' (x) dv(, x, ell) (x^2 - 1)^ell dx \
+    & = 1 / (2^ell ell!) [evaluated(P_ell' (x) dv(, x, ell-1) (x^2 - 1)^ell)_(-1)^1 - integral_(-1)^1 P'_ell' (x) dv(, x, ell-1) (x^2 - 1)^ell dx].
+  $
+  For any $k < ell$, applying the Cauchy--Goursat Theorem gives
+  $
+    evaluated(dv(, x, k) [(x + 1)^ell (x-1)^ell])_(x = plus.minus 1) &= k! / (2 uppi ii) integral.cont_(abs(x minus.plus 1) = epsilon) ((x + 1)^ell (x-1)^ell) / (x minus.plus 1)^(k + 1) dx \
+    &= k! / (2 uppi ii) integral.cont_(abs(x minus.plus 1) = epsilon) (x plus.minus 1)^ell (x minus.plus 1)^(ell - k - 1) dx = 0,
+  $
+  whence we obtain
+  $
+    integral_(-1)^1 P_ell (x) P_(ell') (x) dx & = -1 / (2^ell ell!) integral_(-1)^1 P'_ell' (x) dv(, x, ell-1) (x^2 - 1)^ell dx \
+    &=1 / (2^ell ell!) integral_(-1)^1 P''_ell' (x) dv(, x, ell-2) (x^2 - 1)^ell dx \
+    &wide dots.v \
+    &=(-1)^ell / (2^ell ell!) integral_(-1)^1 P_ell'^((ell)) (x) (x^2 - 1)^ell dx.
+  $
+  If $ell' < ell$,
+  $
+    P_ell'^((ell)) (x) = 1 / (2^ell' ell'!) dv(, x, ell + ell') (x^2 - 1)^ell' = 0
+  $
+  by observation that the $ell + ell' > 2 ell'$-th derivative of a polynomial of degree $2 ell'$ vanishes. Thus $ell != ell'$ gives the original integral to be zero. If in lieu thereof $ell' = ell$,
+  $
+    P_ell'^((ell)) (x) & = 1 / (2^ell ell!) dv(, x, 2ell) (x^2 - 1)^ell \
+    & = 1 / (2^ell ell!) dv(, x, 2ell) [x^(2 ell) + #[[polynomial of degree $< 2 ell$]]] = (2 ell)! / (2^ell ell!),
+  $
+  whereupon
+  $
+    integral_(-1)^1 P_ell (x) P_(ell') (x) dx & = ((-1)^ell (2 ell)!) / (4^ell ell!^2) 2 integral_0^1 (x^2 - 1)^ell dx \
+    & = ((-1)^ell (2 ell)!) / (4^ell ell!^2) integral_(-1)^0 (t^ell) / (sqrt(t + 1)) dt = ((2 ell)!) / (4^ell ell!^2) integral_0^1 t^ell (1 - t)^(-1/2) dt \
+    &= ((2 ell)!) / (4^ell ell!^2) Beta(ell + 1, 1/2) = ((2 ell)!) / (4^ell ell!^2) (Gamma(ell + 1)Gamma(1/2)) / Gamma(ell + 3/2) \
+    &=((2 ell)!) / (4^ell ell!) 1/((ell + 1/2)(ell - 1/2) dots.c 1/2)=(2^(ell + 1)) / (4^ell ell!) ((2 ell)(2 ell - 1) dots.c 1)/((2 ell + 1)(2 ell - 1) dots.c 1) \
+    &=2 / (2^ell ell!) ((2 ell)(2 ell - 2) dots.c 2)/(2 ell + 1) = 2 / (2 ell + 1). qedhere
+  $
+]
