@@ -41,7 +41,7 @@ The utilization of the raw expression @eq:legendre-polynomial is often inconveni
 $
   P_ell (x) = 1 / ell! evaluated(pdv(, t, [ell]) F(x,t))_(t = 0),
 $
-with $gamma = {t: abs(t) = 1/2 (<1)}$, by the Cauchy--Goursat Theorem we have
+with $gamma = {t: abs(t) = 1/2 (<1)}$, by the Cauchy--Goursat (differentiation) formula we have
 $
   P_ell (x) &= 1 / (2 uppi ii) integral.cont_gamma F(x,t) / (t^(ell + 1)) dt = 1 / (2 uppi ii) integral.cont_gamma dt / (t^(ell + 1) sqrt(1 - 2 x t + t^2)),
 $
@@ -55,7 +55,7 @@ $
 giving
 $
   P_ell (x) & = 1 / (2 uppi ii) integral.cont_Gamma (2(1 - t z)) / (z^2 - 1) dz / (((2(z - x)) / (z^2 - 1))^(ell + 1) (1 - t z)) = 1 / (2 uppi ii) integral.cont_Gamma ((z^2 - 1)^ell) / (2^ell (z - x)^(ell + 1)) dz \
-  & = 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell op("Ind")_Gamma x #tag[(Cauchy--Goursat Theorem)] \
+  & = 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell op("Ind")_Gamma x #tag[(Cauchy--Goursat formula)] \
   & = 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell 1 / (2 uppi ii) integral.cont_Gamma dz / (z - x) \
   &= 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell integral.cont_gamma dt / t(1- t z).
 $
@@ -71,7 +71,7 @@ giving
 This consequently gives rise to
 #theorem[The Orthogonality Relation][
   $
-    integral_(-1)^1 P_ell (x) P_(ell') (x) dx = 2 / (2 ell + 1) delta_(ell ell').
+    integral_(-1)^1 P_ell (x) P_(ell') (x) dx = 2 / (2 ell + 1) delta_(ell ell')
   $
 ]
 #proof(collapsed: true)[of the Orthogonality Relation][
@@ -80,7 +80,7 @@ This consequently gives rise to
     integral_(-1)^1 P_ell (x) P_(ell') (x) dx & = 1 / (2^ell ell!) integral_(-1)^1 P_ell' (x) dv(, x, ell) (x^2 - 1)^ell dx \
     & = 1 / (2^ell ell!) [evaluated(P_ell' (x) dv(, x, ell-1) (x^2 - 1)^ell)_(-1)^1 - integral_(-1)^1 P'_ell' (x) dv(, x, ell-1) (x^2 - 1)^ell dx].
   $
-  For any $k < ell$, applying the Cauchy--Goursat Theorem gives
+  For any $k < ell$, applying the Cauchy--Goursat formula gives
   $
     evaluated(dv(, x, k) [(x + 1)^ell (x-1)^ell])_(x = plus.minus 1) &= k! / (2 uppi ii) integral.cont_(abs(x minus.plus 1) = epsilon) ((x + 1)^ell (x-1)^ell) / (x minus.plus 1)^(k + 1) dx \
     &= k! / (2 uppi ii) integral.cont_(abs(x minus.plus 1) = epsilon) (x plus.minus 1)^ell (x minus.plus 1)^(ell - k - 1) dx = 0,
@@ -110,3 +110,24 @@ This consequently gives rise to
     &=2 / (2^ell ell!) ((2 ell)(2 ell - 2) dots.c 2)/(2 ell + 1) = 2 / (2 ell + 1). qedhere
   $
 ]
+and also gives rise to
+#theorem[Completeness Relation][
+  $
+    sum_(ell = 0)^oo (2ell + 1) / 2 P_ell (x) P_ell (x') = delta(x - x').
+  $ <eq:legendre-polynomials-completeness-relation>
+]
+#proof(collapsed: true)[of the Completeness Relation][
+  //
+]
+The significance of these two relations are best understood mathematically. Let $L^2 ([-1,1])$ denote the Hilbert space of square-integrable functions on the specified interval, for which the inner product is given by
+$
+  chev(f, g) = integral_(-1)^1 f(x) g(x) dx.
+$
+The orthogonality relation implies that the collection of Legendre polynomials forms a countable orthogonal system for $L^2 ([-1,1])$. The relation @eq:legendre-polynomials-completeness-relation also assumes the following form, dependent on the filtering property:
+$
+  f(x) &= integral_(-1)^1 f(x') delta(x - x') dx' = integral_(-1)^1 f(x') sum_(ell = 0)^oo (2 ell + 1) / 2 P_ell (x) P_ell (x') dx' \
+  &= sum_(ell = 0)^oo (2ell + 1) / 2 P_ell (x) integral_(-1)^1 f(x') P_ell (x') dx' = sum_(ell = 0)^oo (2ell + 1) / 2 P_ell (x) chev(f, P_ell).
+$
+(Qualitatively, each $L^2 ([-1,1])$ function is the countably infinite linear combination of Legendre polynomials.) Thus the set of Legendre polynomials forms a countable basis of $L^2 ([-1,1])$ (and consequently proves the separability of $L^2 ([-1,1])$).
+
+(For further background on this Hilbert-space viewpoint, see #link("https://slipperking.github.io/complex-analysis/hilbert-spaces-of-holomorphic-functions/")[Chapter 10, _Hilbert Spaces of Holomorphic Functions_,] and in particular #link("https://slipperking.github.io/complex-analysis/hilbert-spaces-of-holomorphic-functions/orthonormal-systems-of-a-hilbert-space/")[§10.2, _Orthonormal Systems of a Hilbert Space_,] of @slipperking2025complexanalysis.)
