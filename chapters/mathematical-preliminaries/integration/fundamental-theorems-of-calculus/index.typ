@@ -28,7 +28,7 @@ and its generalization
   and
   $
     integral.cont_(partial S) dif va(ell) times va(psi) &= integral.double_S grad psi_k dif S_k - integral.double_S (div va(psi)) dif va(S) \
-    &=integral.double_S (grad times.o va(psi)) dot va(S) - integral.double_S (div va(psi)) dif va(S).
+    &=integral.double_S (grad times.o va(psi)) dot dif va(S) - integral.double_S (div va(psi)) dif va(S).
   $
 ] <cor:stokes-substitutions>
 #proof(collapsed: true)[
