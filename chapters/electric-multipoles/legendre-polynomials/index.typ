@@ -21,7 +21,11 @@ wherein the function is singular for $t = x plus.minus ii sqrt(1 - x^2)$, notabl
     P_ell (x) = 1 / ell! evaluated(pdv(, t, [ell]) 1 / sqrt(1 - 2 x t + t^2))_(t = 0), wide wide (ell in NN)
   $ <eq:legendre-polynomial>
 ]
-be denoted a _Legendre polynomial_, the polynomiality whereof we shall now substantiate. Write
+be denoted a _Legendre polynomial_.
+
+The proceeding majority of this section will be dedicated to the development of the mathematical theory required to formulate certain results. We will make use of certain mathematically analytic results that are not of great pertinence to the general comprehension of this text. The most important mathematical results are summarized in @thm:rodrigues-formula, @thm:legendre-polynomials-orthogonality-relation, and @thm:legendre-polynomials-completeness-relation.
+
+We shall substantiate the polynomiality of each $P_ell$ at present. Write
 $
   F(x, t) = 1 / sqrt(1 - 2 x t + t^2) = sum_(ell = 0)^oo evaluated(pdv(, t, [ell]) 1 / sqrt(1 - 2 x t + t^2))_(t = 0) t^ell / ell! = sum_(ell = 0)^oo P_ell (x) t^ell,\
   pdv(F, t)(x,t) = (x - t) (1 - 2 x t + t^2)^(-3/2) = (x - t) / (1 - 2 x t + t^2) F(x,t),
@@ -35,7 +39,11 @@ $
   (ell + 1) P_(ell + 1) (x) - 2 x ell P_(ell) (x) + (ell - 1) P_(ell - 1)(x) = x P_ell (x) - P_(ell - 1) (x), \
   (ell + 1) P_(ell + 1) (x) = x(2 ell + 1) P_ell (x) - ell P_(ell - 1)(x) , \
 $
-with polynomial base cases $P_0 (x) = 1$ and $P_1 (x) = x$, we aver from recursion that each $P_ell$ is a polynomial.
+with polynomial base cases $P_0 (x) = 1$ and $P_1 (x) = x$, we aver from recursion that each $P_ell$ is a polynomial. Thus we have, in its original form, relevant to the present practical application,
+
+$
+  1 / norm(va(s) - va(s)') = 1 / s sum_(ell = 0)^oo P_ell (va(s) dot va(s)') (s' / s)^ell, s' < s.
+$ <eq:inverse-separation-legendre-polynomial>
 
 The utilization of the raw expression @eq:legendre-polynomial is often inconvenient. In lieu thereof, we derive the _Rodrigues' formula_, for which we appeal to complex-analytic methods. Writing
 $
@@ -71,9 +79,9 @@ giving
 This consequently gives rise to
 #theorem[The Orthogonality Relation][
   $
-    integral_(-1)^1 P_ell (x) P_(ell') (x) dx = 2 / (2 ell + 1) delta_(ell ell')
+    integral_(-1)^1 P_ell (x) P_(ell') (x) dx = 2 / (2 ell + 1) delta_(ell ell').
   $
-]
+] <thm:legendre-polynomials-orthogonality-relation>
 #proof(collapsed: true)[of the Orthogonality Relation][
   Without loss of generality we shall assume $ell >= ell'$. We substitute @thm:rodrigues-formula and integrate by parts:
   $
@@ -110,24 +118,38 @@ This consequently gives rise to
     &=2 / (2^ell ell!) ((2 ell)(2 ell - 2) dots.c 2)/(2 ell + 1) = 2 / (2 ell + 1). qedhere
   $
 ]
-and also gives rise to
-#theorem[Completeness Relation][
-  $
-    sum_(ell = 0)^oo (2ell + 1) / 2 P_ell (x) P_ell (x') = delta(x - x').
-  $ <eq:legendre-polynomials-completeness-relation>
-]
-#proof(collapsed: true)[of the Completeness Relation][
-  //
-]
-The significance of these two relations are best understood mathematically. Let $L^2 ([-1,1])$ denote the Hilbert space of real square-integrable functions on the specified interval, for which the inner product is given by
+The significance of this relation is best understood mathematically. Let $L^2 ([-1,1])$ denote the Hilbert space of real square-integrable functions on the specified interval, for which the inner product is given by
 $
   chev(f, g) = integral_(-1)^1 f(x) g(x) dx.
 $
-The orthogonality relation implies that the collection of Legendre polynomials forms a countable orthogonal system for $L^2 ([-1,1])$. The relation @eq:legendre-polynomials-completeness-relation also assumes the following form, dependent on the filtering property (which was, in effect, the methodology of its proof):
+The orthogonality relation implies that the collection of Legendre polynomials forms a countable orthogonal system for $L^2 ([-1,1])$.
+
+Of relevancy is also the following distributional identity:
+#theorem[The Completeness Relation][
+  $
+    sum_(ell = 0)^oo (2ell + 1) / 2 P_ell (x) P_ell (x') = delta(x - x')
+  $ <eq:legendre-polynomials-completeness-relation>
+  distributionally (it does not converge pointwise).
+] <thm:legendre-polynomials-completeness-relation>
+The relation @eq:legendre-polynomials-completeness-relation also assumes the following form, dependent on the filtering property (which is, in effect, the methodology of its distributional form):
 $
   f(x) &= integral_(-1)^1 f(x') delta(x - x') dx' = integral_(-1)^1 f(x') sum_(ell = 0)^oo (2 ell + 1) / 2 P_ell (x) P_ell (x') dx' \
   &= sum_(ell = 0)^oo (2ell + 1) / 2 P_ell (x) integral_(-1)^1 f(x') P_ell (x') dx' = sum_(ell = 0)^oo (2ell + 1) / 2 P_ell (x) chev(f, P_ell).
 $
+#proof(collapsed: true)[of the Completeness Relation][
+  The linear $span$ of ${x^n}_(n = 0)^oo$ is equivalent to the span of the set of Legendre polynomials, by inductively eliminating lower degree terms through linear combinations.
+
+  Thus, any polynomial $p$ of degree $n$ is a finite linear combination of ${P_ell}_ell$, namely $sum_(ell = 0)^n c_ell P_ell (x)$, whereby the orthogonality of ${P_ell}$ performs the filtering action characterized by
+  $
+    chev(p, P_ell) = sum_(ell' = 0)^n c_ell' chev(P_ell', P_ell) = c_ell chev(P_ell, P_ell) = (2 c_ell) / (2 ell + 1).
+  $
+  By Bessel's Inequality,
+  $
+    norm(sum_(ell = 0)^n (2ell + 1 ) /2 P_ell (x) chev(f, P_ell))^2 = sum_(ell = 0)^n (2ell + 1 ) /2 chev(f, P_ell)^2 <= norm(f)^2.
+  $
+  Since polynomials are dense in $C([-1,1])$ by the Stone--Weierstrass theorem and $C([-1,1])$ is dense in $L^2 ([-1,1])$,
+  //
+]
 (Qualitatively, each $L^2 ([-1,1])$ function is the countably infinite linear combination of Legendre polynomials.) Thus the set of Legendre polynomials forms a complete countable orthogonal system of $L^2 ([-1,1])$ (and consequently proves the separability of $L^2 ([-1,1])$).
 
 (For further background on this Hilbert-space viewpoint, see #link("https://slipperking.github.io/complex-analysis/hilbert-spaces-of-holomorphic-functions/")[Chapter 10, _Hilbert Spaces of Holomorphic Functions_,] and in particular #link("https://slipperking.github.io/complex-analysis/hilbert-spaces-of-holomorphic-functions/orthonormal-systems-of-a-hilbert-space/")[§10.2, _Orthonormal Systems of a Hilbert Space_,] of @slipperking2025complexanalysis.)
