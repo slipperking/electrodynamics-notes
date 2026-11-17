@@ -1,4 +1,4 @@
-#import "@preview/physica:0.9.8": grad, pdv
+#import "@preview/physica:0.9.8": dd, grad, pdv
 #let gradsu(a) = $grad_#a$
 #let divsu(a) = $grad_#a dot.c$
 #let curlsu(a) = $grad_#a times$
@@ -28,3 +28,10 @@
 
 #let argmin = math.limits(math.op($"arg" "min"$))
 #let fdv = pdv.with(d: sym.delta)
+#let phiaz = $phi_"az"$
+#let delt = dd.with(d: sym.delta)
+#let deltas = $delt(s)$
+#let deltar = $delt(r)$
+#let deltatheta = $delt(theta)$
+#let deltaphi = $delt(phiaz)$
+

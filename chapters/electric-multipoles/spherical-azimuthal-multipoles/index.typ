@@ -9,4 +9,4 @@ $
             & = sin theta sin theta' (cos phi_"az" cos phi'_"az" + sin phi_"az" sin phi'_"az") + cos theta cos theta' \
             & =sin theta sin theta' cos(phi_"az" - phi'_"az") + cos theta cos theta'.
 $
-Herein do we aim to derive a more practical expression for $P_ell (cos gamma)$.
+It is our present intention to derive a more practical expression for $P_ell (cos gamma)$.
