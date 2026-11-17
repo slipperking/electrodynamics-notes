@@ -6,6 +6,7 @@
     include "electric-quadrupole/index.typ"
     include "legendre-polynomials/index.typ"
     include "spherical-azimuthal-multipoles/index.typ"
+    include "primitive-traceless-moments/index.typ"
   },
 )
 It is often the case that a localized charge distribution---bounded within a sphere of radius $R$ centered at $va(r)_0$---is of such complexity insofar that standard methods of study make the study thereof rather convoluted through traditional means. Suitably, practical applications demand the consequent use of necessitated approximations to specified degrees of precision.
