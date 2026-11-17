@@ -69,7 +69,7 @@ $
 $
 Expressing $F$ in lieu of $1 - t z$,
 $
-  P_ell (x) & = 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell 1 / (2 uppi ii) sum_(ell = 0)^oo P_ell (x) integral.cont_gamma t^(ell - 1) dt \
+  P_ell (x) & = 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell 1 / (2 uppi ii) sum_(ell' = 0)^oo P_ell' (x) integral.cont_gamma t^(ell' - 1) dt \
   &= 1 / (2^ell ell!) dv(, x, ell) (x^2 - 1)^ell 1 / (2 uppi ii) integral.cont_gamma t^(- 1) dt,
 $
 giving
@@ -118,7 +118,7 @@ This consequently gives rise to
     &=2 / (2^ell ell!) ((2 ell)(2 ell - 2) dots.c 2)/(2 ell + 1) = 2 / (2 ell + 1). qedhere
   $
 ]
-The significance of this relation is best understood mathematically. Let $L^2 ([-1,1])$ denote the Hilbert space of real square-integrable functions on the specified interval, for which the inner product is given by
+The significance of this relation is most readily understood mathematically. Let $L^2 ([-1,1])$ denote the Hilbert space of real square-integrable functions on the specified interval, for which the inner product is given by
 $
   chev(f, g) = integral_(-1)^1 f(x) g(x) dx.
 $
@@ -141,14 +141,30 @@ $
 
   Thus, any polynomial $p$ of degree $n$ is a finite linear combination of ${P_ell}_ell$, namely $sum_(ell = 0)^n c_ell P_ell (x)$, whereby the orthogonality of ${P_ell}$ performs the filtering action characterized by
   $
-    chev(p, P_ell) = sum_(ell' = 0)^n c_ell' chev(P_ell', P_ell) = c_ell chev(P_ell, P_ell) = (2 c_ell) / (2 ell + 1).
+    chev(p, P_ell) = sum_(ell' = 0)^n c_ell' chev(P_ell', P_ell) = c_ell chev(P_ell, P_ell) = (2 c_ell) / (2 ell + 1)
+  $ <eq:legendre-polynomials-completeness-relation-filtering>
+  whensoever $ell <= n$. By Bessel's Inequality,
   $
-  By Bessel's Inequality,
+    norm(sum_(ell = 0)^n (2ell + 1 ) /2 P_ell (x) chev(g, P_ell))^2 = sum_(ell = 0)^n (2ell + 1 ) /2 chev(g, P_ell)^2 <= norm(g)^2.
+  $ <eq:legendre-polynomials-completeness-relation-bessel>
+  Since polynomials are dense in $C([-1,1])$ by the Stone--Weierstrass theorem and $C([-1,1])$ is dense in $L^2 ([-1,1])$, for any $epsilon > 0$, $L^2$ function $f$, there exists a polynomial $p$ such that
   $
-    norm(sum_(ell = 0)^n (2ell + 1 ) /2 P_ell (x) chev(f, P_ell))^2 = sum_(ell = 0)^n (2ell + 1 ) /2 chev(f, P_ell)^2 <= norm(f)^2.
+    norm(f - p) < epsilon.
   $
-  Since polynomials are dense in $C([-1,1])$ by the Stone--Weierstrass theorem and $C([-1,1])$ is dense in $L^2 ([-1,1])$,
+  For $n >= deg p$,
   //
+  $
+    norm(f - sum_(ell = 0)^n (2ell + 1 ) /2 P_ell (x) chev(f, P_ell)) &<= norm(f - p) + norm(p - sum_(ell = 0)^n (2ell + 1 ) /2 P_ell (x) chev(p, P_ell)) \
+    & quad""+ norm(sum_(ell = 0)^n (2ell + 1 ) /2 P_ell (x) chev(p - f, P_ell)) \
+    &< epsilon + norm(p - f) < 2 epsilon
+  $
+  by applications of @eq:legendre-polynomials-completeness-relation-filtering and @eq:legendre-polynomials-completeness-relation-bessel.
+
+  Since $epsilon$ was arbitrary,
+  $
+    f(x) = sum_(ell = 0)^oo (2ell + 1 ) /2 P_ell (x) chev(f, P_ell) = integral_(-1)^1 f(x') [sum_(ell = 0)^oo (2 ell + 1) / 2 P_ell (x) P_ell (x')] dx',
+  $
+  wherein the satisfaction of the filtering property by the bracketed factor yields the desired assertion.
 ]
 (Qualitatively, each $L^2 ([-1,1])$ function is the countably infinite linear combination of Legendre polynomials.) Thus the set of Legendre polynomials forms a complete countable orthogonal system of $L^2 ([-1,1])$ (and consequently proves the separability of $L^2 ([-1,1])$).
 
