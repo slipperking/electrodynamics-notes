@@ -536,6 +536,31 @@ h3 {
   font-size: 1.13rem;
 }
 
+h4 {
+  margin: 1.35rem 0 0.45rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+h5,
+h6 {
+  margin: 1.15rem 0 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.numbered-heading-section > :is(h3, h4, h5, h6)::before {
+  content: "\00a7";
+}
+
+.numbered-heading-chapter > h2::before {
+  content: "Chapter ";
+}
+
+.numbered-heading-appendix > h2::before {
+  content: "Appendix ";
+}
+
 .page-title {
   margin: 0 0 1.35rem;
   padding-bottom: 0.72rem;

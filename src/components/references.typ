@@ -179,9 +179,28 @@ and target.value.at("type", default: none) == "typst-enum-item-label"
 and type(target.value) == dictionary
 and target.value.at("type", default: none) == explicit-ref-target-type
 
+#let _heading-reference(target) = {
+  if target.numbering == none {
+    return none
+  }
+  let number = numbering(target.numbering, ..counter(heading).at(target.location()))
+  let prefix = if target.level == 1 {
+    if type(target.numbering) == str and target.numbering.starts-with("A") {
+      [Appendix~]
+    } else {
+      [Chapter~]
+    }
+  } else {
+    [#sym.section]
+  }
+  link(target.location(), [#prefix#number])
+}
+
 #let _format-reference(reference, target) = {
   if target == none {
     none
+  } else if target.func() == heading and reference.form == "normal" and reference.supplement == auto {
+    _heading-reference(target)
   } else if target.func() == math.equation {
     _equation-reference(target)
   } else if target.func() == figure and target.kind == "thm-env" {

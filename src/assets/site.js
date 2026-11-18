@@ -680,8 +680,13 @@
       label.removeAttribute("class");
       stripNestedLinks(label);
       if (!isHeading) trimFinalPeriod(label);
-      if (isHeading && target !== pageSourceHeading && /^\d+(?:\.\d+)*\s/.test(label.textContent.trim())) {
-        anchor.appendChild(document.createTextNode("§"));
+      if (isHeading && target !== pageSourceHeading) {
+        var numbered = target.closest(".numbered-heading");
+        if (numbered) {
+          var prefix = numbered.classList.contains("numbered-heading-chapter") ? "Chapter "
+            : numbered.classList.contains("numbered-heading-appendix") ? "Appendix " : "\u00a7";
+          anchor.appendChild(document.createTextNode(prefix));
+        }
       }
       while (label.firstChild) anchor.appendChild(label.firstChild);
       item.appendChild(anchor);

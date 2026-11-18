@@ -1,6 +1,7 @@
 #import "/lib.typ": *
 #show: docs-subchapter.with(
   ..dargs("Legendre Polynomials"),
+  children: include "spherical-harmonics/index.typ",
 )
 
 Herein shall we rederive an expansion by replacing the expansion in @eq:electric-multipole-expansion-kernel in lieu thereof with the following:

@@ -6,7 +6,7 @@
 #set heading(numbering: "1.1")
 #counter(heading).update(0)
 
-// #include "test/index.typ"
+#include "test/index.typ"
 
 #include "mathematical-preliminaries/index.typ"
 #include "maxwells-equations/index.typ"

@@ -168,6 +168,19 @@
 
   show heading: it => if mode == "pdf" {
     _pdf-heading(it)
+  } else if it.numbering != none {
+    let kind = if it.level == 1 {
+      if type(it.numbering) == str and it.numbering.starts-with("A") {
+        "appendix"
+      } else {
+        "chapter"
+      }
+    } else {
+      "section"
+    }
+    html.elem("div", attrs: (class: "numbered-heading numbered-heading-" + kind))[
+      #it#heading-reset-marker(it.level)
+    ]
   } else {
     [#it#heading-reset-marker(it.level)]
   }
