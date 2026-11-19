@@ -6,5 +6,6 @@
     include "current-density/index.typ"
     include "conservation-of-charge/index.typ"
     include "electric-field/index.typ"
+    include "magnetism/index.typ"
   },
 )
