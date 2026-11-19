@@ -60,4 +60,39 @@ From this restriction upon $mu$, the differential equation for $T$ in @eq:spheri
 $
   1 / (sin theta) pdv(, theta)(sin theta pdv(T, theta)) + T(lambda - m^2 / (sin^2 theta)) = 0,
 $
-to be the general form of any such separable solution for $m in ZZ$.
+to be the general form of any such separable solution for $m in ZZ$. Letting $x = cos theta$,
+$
+  dv(, theta) = dv(x, theta) dv(, x) = -sin theta dv(, x),\
+  1 / (sin theta) pdv(, theta)(sin theta pdv(T, theta)) = -1 / (sin theta) pdv(, theta)(sin^2 theta pdv(T, x)) = pdv(, x) ((1- x^2) pdv(T, x)),\
+  pdv(, x) ((1- x^2) pdv(T, x)) + T (lambda - m^2 / (1 - x^2)) = 0.
+$
+Considering $va(s)' = vu(s)'$ of unit magnitude along the polar axis,
+$
+  1 / xi = sum_(ell = 0)^oo s'^ell / s^(ell + 1) P_ell (cos theta),
+$
+implying
+$
+  laplacian 1 / xi = 0 &= sum_(ell = 0) [1 / s^2 pdv(, s) (s^2 pdv(, s)) + 1 / s^2 laplacian_(S^2)](1 / s^(ell + 1) P_ell (cos theta)) \
+  &= sum_(ell = 0)^oo (P_ell (cos theta)) / s^2 pdv(, s)(s^2 pdv(, s) s^(-(ell + 1))) + 1 / s^(ell + 3) laplacian_(S^2) P_ell (cos theta) \
+  &= sum_(ell = 0)^oo ell(ell + 1) (P_ell (cos theta)) / s^(ell + 3) + 1 / s^(ell + 3) laplacian_(S^2) P_ell (cos theta),\
+  sum_(ell = 0)^oo 0 s^(-ell) = 0 & = sum_(ell = 0)^oo s^(-ell) [ell(ell + 1) P_ell (cos theta) + laplacian_(S^2) P_ell (cos theta)].
+$
+The uniqueness of Taylor expansions gives
+$
+  ell(ell + 1) P_ell (cos theta) + laplacian_(S^2) P_ell (cos theta) = 0,
+$
+whence it is clear that with $lambda = ell(ell + 1)$ and $Y(Omega) = P_ell (cos theta)$ gives a class of solutions with $m = 0$. Expanding,
+$
+  0 & = ell(ell + 1) P_ell (x) + pdv(, x)((1-x^2) pdv(P_ell, x)) \
+    & = ell(ell + 1) P_ell - 2x P'_ell + (1-x^2) P''_ell
+$
+for each $ell$; thus from $k$ differentiations,
+$
+  0 & = ell(ell + 1) P_ell^((k)) - dv(, x, k) (2x P'_ell) + dv(, x, k) [(1 - x^2) P''_ell] \
+  & = ell(ell + 1) P_ell^((k)) - dv(, x, k - 1) [2 P'_ell + 2x P^((2))_ell] + dv(, x, k - 1) [(1 - x^2) P^((3))_ell - 2 x P^((2))_ell] \
+  & = ell(ell + 1) P_ell^((k)) - dv(, x, k - 2) [4 P^((2))_ell + 2x P^((3))_ell] \
+  &quad""+ dv(, x, k - 2) [(1 - x^2) P^((4))_ell -4 x P^((3))_ell - 2 P^((2))_ell] \
+  &= ell(ell + 1) P_ell^((k)) - [2 k P^((k))_ell + 2x P^((k + 1))_ell] \
+  &quad""+ [(1 - x^2) P_ell^((k+2)) - 2 k x P_ell^((k+1)) - k(k-1) P_ell^((k))] \
+  &= (1 - x^2) P_ell^((k+2)) - 2x(k + 1) P_ell^((k + 1)) + [ell(ell + 1) - k(k + 1)] P_ell^((k)).
+$
