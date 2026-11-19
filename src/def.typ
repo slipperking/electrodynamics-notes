@@ -1,4 +1,14 @@
-#import "@preview/physica:0.9.8": dd, grad, pdv
+#import "@preview/physica:0.9.8": dd, pdv, va
+#let grad = math.arrow(math.bold($nabla$))
+#let div = {
+  math.arrow(math.bold($nabla$))
+  sym.dot
+}
+#let curl = {
+  math.arrow(math.bold($nabla$))
+  sym.times
+}
+
 #let gradsu(a) = $grad_#a$
 #let divsu(a) = $grad_#a dot.c$
 #let curlsu(a) = $grad_#a times$
