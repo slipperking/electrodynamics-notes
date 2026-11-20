@@ -50,12 +50,12 @@ $
 $
 once more by periodicity and observation that $F^*' = F'^*$. Hence we have $mu >= 0$, whence the general solution
 $
-  F'' + mu F = 0 ==> F(phiaz) = cases(A ee^(ii sqrt(mu) phiaz) + B ee^(-ii sqrt(mu) phiaz)& quad "if" mu != 0\,, A + B phiaz &quad "otherwise")
+  F'' + mu F = 0 ==> F(phiaz) = cases(A ee^(ii sqrt(mu) phiaz) + B ee^(-ii sqrt(mu) phiaz)& quad "if" mu != 0\,, A + B phiaz &quad "if" m = 0)
 $
 must be $2 uppi$-periodic, forcing $exp[2 uppi ii sqrt(mu)] = 1$ (i.e. $sqrt(mu)$ is an integer). By the symmetric nature of the given solution, we may assign any integer $m$ in lieu of $sqrt(mu)$, giving
 $
-  F'' + m^2 F = 0 ==> F(phiaz) = cases(A ee^(ii m phiaz) + B ee^(-ii m phiaz)& quad "if" m != 0\,, A "(constant)" &quad "otherwise").
-$
+  F'' + m^2 F = 0 ==> F(phiaz) &= cases(A ee^(ii m phiaz) + B ee^(-ii m phiaz)& quad "if" m != 0\,, A "(constant)" &quad "if" m = 0) \ &= A ee^(ii m phiaz) + B ee^(-ii m phiaz)
+$ <eq:spherical-harmonics-azimuthal-solution>
 From this restriction upon $mu$, the differential equation for $T$ in @eq:spherical-harmonics-second-separation gives
 $
   1 / (sin theta) pdv(, theta)(sin theta pdv(T, theta)) + T(lambda - m^2 / (sin^2 theta)) = 0,
@@ -95,4 +95,33 @@ $
   &= ell(ell + 1) P_ell^((k)) - [2 k P^((k))_ell + 2x P^((k + 1))_ell] \
   &quad""+ [(1 - x^2) P_ell^((k+2)) - 2 k x P_ell^((k+1)) - k(k-1) P_ell^((k))] \
   &= (1 - x^2) P_ell^((k+2)) - 2x(k + 1) P_ell^((k + 1)) + [ell(ell + 1) - k(k + 1)] P_ell^((k)).
+$ <eq:spherical-harmonics-legendre-polynomials-differential-equation>
+The functions (albeit poorly named, as they are not necessarily polynomials)
+#definition[Associated Legendre Polynomials][
+  $
+    P_ell^k (x) = (-1)^k (1-x^2)^(k / 2) P_ell^((k)) (x)
+  $
+]
+are our candidate solutions that we shall now test. Observe that
 $
+  dv(P_ell^k, x) & = (-1)^(k + 1) k x (1 - x^2)^(k/2 - 1) P_ell^((k)) (x) + (-1)^k (1 - x^2)^(k/2) P_ell^((k + 1)) (x) \
+                 & =(-1)^k (1 - x^2)^(k/2) [-(k x) / (1 - x^2) P_ell^((k)) + P_ell^((k+1)) ],
+$
+$
+  dv(P_ell^k, x, 2) & =(-1)^k x(2 - k)(1 - x^2)^(k/2 - 2) [-k x P_ell^((k)) + P_ell^((k+1)) (1 - x^2)] \
+  &quad""+ (-1)^k (1 - x^2)^(k/2 - 1) [-k P_ell^((k)) - x (k + 2) P_ell^((k + 1)) + P_ell^((k+2)) (1 - x^2)], \
+  & = (-1)^k (1 - x^2)^(k/2 - 2) [(1 - x^2)^2 P_ell^((k + 2)) - 2 k x (1 - x^2) P_ell^((k + 1)) + k ((k - 1) x^2 - 1) P_ell^((k))];
+$
+thus with $k = abs(m)$,
+$
+  pdv(, x) ((1- x^2) dv(P_ell^k, x)) + &P_ell^k (lambda - m^2 / (1 - x^2)) = -2 x dv(P_ell^k, x) + (1 - x^2) dv(P_ell^k, x, 2) + P_ell^k (lambda - k^2 / (1 - x^2)) \
+  &= (-1)^k (1 - x^2)^(k / 2) [(2 x^2 k) / (1 - x^2) P_ell^((k)) - 2 x P_ell^((k + 1))] \
+  & quad ""+(-1)^k (1 - x^2)^(k / 2) [(1 - x^2)P_ell^((k + 2)) - 2 k x P_ell^((k + 1)) + k ((k-1)x^2 -1) / (1 - x^2) P_ell^((k))] \
+  & wide"" + (-1)^k (1-x^2)^(k / 2) P_ell^((k))(lambda - k^2 / (1 - x^2)) \
+  &=(-1)^k (1 - x^2)^(k / 2) [(lambda -k (k+1)) P_ell^((k)) - 2x(k+1) P_ell^((k+1)) + (1 - x^2) P_ell^((k + 2))],
+$
+the bracketed term whereof we observe to be the precise form in @eq:spherical-harmonics-legendre-polynomials-differential-equation with $lambda = ell(ell + 1)$. Thus, this realization gives rise to the class of solutions
+$
+  T(theta) = P_ell^abs(m) (cos theta), quad lambda = ell(ell + 1), quad (k <= ell "so" P_ell^k equiv.not 0)
+$
+each corresponding to the corresponding solution for $F$ given in @eq:spherical-harmonics-azimuthal-solution.
