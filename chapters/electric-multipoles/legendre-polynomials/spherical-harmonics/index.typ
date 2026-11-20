@@ -132,16 +132,35 @@ $
 $
 which we have thus shown to satisfy the given condition on $laplacian_(S^2)$. It will transpire, that among many properties, $tilde(Y)_dot^dot$ satisfies an orthogonality relation permitting the definition of an orthonormal system. In verification hereof, we compute
 $
-  chev(tilde(Y)_ell^m, tilde(Y)_ell'^m') = integral.surf tilde(Y)_ell^m (Omega) tilde(Y)_ell'^(m'*) (Omega) dif Omega,
+  chev(tilde(Y)_ell^m, tilde(Y)_ell'^m') &= integral.surf tilde(Y)_ell^m (Omega) tilde(Y)_ell'^(m'*) (Omega) dif Omega \
+  &= integral_0^(2 uppi) integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) ee^(ii (m - m') phiaz) cos theta dtheta dif phiaz \
+  &= integral_0^(2 uppi) ee^(ii (m - m') phiaz) dif phiaz integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) cos theta dtheta \
+  &= 2 uppi delta_(m m') integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) cos theta dtheta,
 $
 wherein $z^* = overline(z)$ denotes the complex conjugate. In particular, if $ell = ell'$, $m = m'$,
 $
-  norm(tilde(Y)_ell^m)^2 &= integral.surf P_ell^abs(m) (cos theta)^2 dif Omega = 2 uppi integral_(-1)^1 (1-x^2)^(abs(m)) [P_ell^((abs(m))) (x)]^2 dif x \
+  norm(tilde(Y)_ell^m)^2 &= 2 uppi integral_(-1)^1 (1-x^2)^(abs(m)) [P_ell^((abs(m))) (x)]^2 dif x \
   & = 2 uppi (-1)^abs(m) integral_(-1)^1 dv(, x, abs(m))[(1-x^2)^(abs(m)) P_ell^((abs(m))) (x)] P_ell (x) dx.
 $
-By @eq:spherical-harmonics-legendre-polynomials-differential-equation,
+due to repeated applications of integration by parts. By @eq:spherical-harmonics-legendre-polynomials-differential-equation,
 $
-  (1 - x^2) P_ell^((j + 2)) - 2x (j + 1) P_ell^((j + 1)) = -(ell + j + 1)(ell - j) P_ell^((j)),\
-  dv(, x)[(1 - x^2)^(j+1) P_ell^((j + 1))] = -(ell + j + 1)(ell - j) P_ell^((j)),
+  (1 - x^2) P_ell^((j + 1)) - 2x j P_ell^((j)) = -(ell + j)(ell - j + 1) P_ell^((j - 1)),\
+  dv(, x)[(1 - x^2)^j P_ell^((j))] = -(ell + j)(ell - j + 1) (1 - x^2)^(j - 1) P_ell^((j - 1)),\
+  dv(, x, j)[(1 - x^2)^j P_ell^((j))] = -(ell + j)(ell - j + 1) dv(, x, j - 1)[(1 - x^2)^(j - 1) P_ell^((j - 1))],\
 $
-hence a repeated application
+hence a repeated application gives
+$
+  norm(tilde(Y)_ell^m)^2 & = 2 uppi (-1)^abs(m) integral_(-1)^1 [product_(j = 1)^abs(m) -(ell + j)(ell - j + 1)][P_ell (x)]^2 dx \
+  &=2 uppi integral_(-1)^1 [product_(j = 1)^abs(m) (ell + j) product_(j = 1 - abs(m))^0 (ell + j)][P_ell (x)]^2 dx \
+  &= 2 uppi (ell + abs(m))! / (ell - abs(m))! integral_(-1)^1 [P_ell (x)]^2 dx = (ell + abs(m))! / (ell - abs(m))! (4 uppi) / (2 ell + 1)
+$
+by the Legendre Orthogonality Relation (@thm:legendre-polynomials-orthogonality-relation). Thus we perform a normalization by
+#definition[Spherical Harmonics][
+  $
+    Y_ell^m (Omega) = sqrt((2 ell + 1) / ( 4uppi) (ell - abs(m))! / (ell + abs(m))!) P_ell^abs(m) (cos theta) ee^(ii m phiaz), #tag[$(abs(m) <= ell)$]
+  $
+]
+whence
+$
+  norm(Y_ell^m) = sqrt((2 ell + 1) / ( 4uppi) (ell - abs(m))! / (ell + abs(m))!) norm(tilde(Y)_ell^m) = 1.
+$ <eq:spherical-harmonics-unit-functions>
