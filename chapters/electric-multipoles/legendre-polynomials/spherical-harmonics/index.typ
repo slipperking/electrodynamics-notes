@@ -136,8 +136,12 @@ $
 $
 wherein $z^* = overline(z)$ denotes the complex conjugate. In particular, if $ell = ell'$, $m = m'$,
 $
-  norm(tilde(Y)_ell^m)^2 &= integral.surf P_ell^abs(m) (cos theta)^2 dif Omega = 2 uppi integral_(-1)^1 (1-x^2)^(abs(m)) P_ell^((abs(m))) (x)^2 dif x \
-  & = (2 uppi) / (4^ell ell!^2) integral_(-1)^1 (1-x^2)^(abs(m))[dv(, x, ell + abs(m)) (x^2 - 1)^ell]^2 dx \
-  & = (2 uppi) / (4^ell ell!^2) (-1)^abs(m) integral_(-1)^1 dv(, x, abs(m))[(1-x^2)^(abs(m)) dv(, x, ell + abs(m)) (x^2 - 1)^ell] dv(, x, ell) (x^2 - 1)^ell dx \
-  &=
+  norm(tilde(Y)_ell^m)^2 &= integral.surf P_ell^abs(m) (cos theta)^2 dif Omega = 2 uppi integral_(-1)^1 (1-x^2)^(abs(m)) [P_ell^((abs(m))) (x)]^2 dif x \
+  & = 2 uppi (-1)^abs(m) integral_(-1)^1 dv(, x, abs(m))[(1-x^2)^(abs(m)) P_ell^((abs(m))) (x)] P_ell (x) dx.
 $
+By @eq:spherical-harmonics-legendre-polynomials-differential-equation,
+$
+  (1 - x^2) P_ell^((j + 2)) - 2x (j + 1) P_ell^((j + 1)) = -(ell + j + 1)(ell - j) P_ell^((j)),\
+  dv(, x)[(1 - x^2)^(j+1) P_ell^((j + 1))] = -(ell + j + 1)(ell - j) P_ell^((j)),
+$
+hence a repeated application
