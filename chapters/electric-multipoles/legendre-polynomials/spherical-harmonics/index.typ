@@ -161,6 +161,8 @@ by the Legendre Orthogonality Relation (@thm:legendre-polynomials-orthogonality-
   $
 ]
 whence
-$
-  norm(Y_ell^m) = sqrt((2 ell + 1) / ( 4uppi) (ell - abs(m))! / (ell + abs(m))!) norm(tilde(Y)_ell^m) = 1.
-$ <eq:spherical-harmonics-unit-functions>
+#theorem[Orthonormality Relation][
+  $
+    chev(Y_ell^m, Y_ell'^m') = delta_(m m') delta_(ell ell').
+  $ <eq:spherical-harmonics-orthonormality>
+]
