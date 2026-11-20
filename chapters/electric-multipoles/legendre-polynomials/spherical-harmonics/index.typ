@@ -136,8 +136,8 @@ $
 $
 wherein $z^* = overline(z)$ denotes the complex conjugate. In particular, if $ell = ell'$, $m = m'$,
 $
-  norm(tilde(Y)_ell^m) &= integral.surf P_ell^abs(m) (cos theta)^2 dif Omega = integral_(-1)^1 (1-x^2)^(abs(m)) P_ell^((abs(m))) (x)^2 dif x \
-  & = 1 / (4^ell ell!^2) integral_(-1)^1 (1-x^2)^(abs(m))[dv(, x, ell + abs(m)) (x^2 - 1)^ell]^2 dx \
-  & = 1 / (4^ell ell!^2) integral_(-1)^1 dv(, x, abs(m))[(1-x^2)^(abs(m)) dv(, x, ell + abs(m)) (x^2 - 1)^ell] dv(, x, ell) (x^2 - 1)^ell dx \
+  norm(tilde(Y)_ell^m)^2 &= integral.surf P_ell^abs(m) (cos theta)^2 dif Omega = 2 uppi integral_(-1)^1 (1-x^2)^(abs(m)) P_ell^((abs(m))) (x)^2 dif x \
+  & = (2 uppi) / (4^ell ell!^2) integral_(-1)^1 (1-x^2)^(abs(m))[dv(, x, ell + abs(m)) (x^2 - 1)^ell]^2 dx \
+  & = (2 uppi) / (4^ell ell!^2) integral_(-1)^1 dv(, x, abs(m))[(1-x^2)^(abs(m)) dv(, x, ell + abs(m)) (x^2 - 1)^ell] dv(, x, ell) (x^2 - 1)^ell dx \
   &=
 $
