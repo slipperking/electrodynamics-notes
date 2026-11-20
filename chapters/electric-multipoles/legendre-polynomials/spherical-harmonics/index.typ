@@ -124,4 +124,20 @@ the bracketed term whereof we observe to be the precise form in @eq:spherical-ha
 $
   T(theta) = P_ell^abs(m) (cos theta), quad lambda = ell(ell + 1), quad (k <= ell "so" P_ell^k equiv.not 0)
 $
-each corresponding to the corresponding solution for $F$ given in @eq:spherical-harmonics-azimuthal-solution.
+each corresponding to the matching solutions for $F$ given in @eq:spherical-harmonics-azimuthal-solution.
+
+Thus we define
+$
+  tilde(Y)_ell^m (Omega) = P_ell^abs(m) (cos theta) ee^(ii m phiaz),
+$
+which we have thus shown to satisfy the given condition on $laplacian_(S^2)$. It will transpire, that among many properties, $tilde(Y)_dot^dot$ satisfies an orthogonality relation permitting the definition of an orthonormal system. In verification hereof, we compute
+$
+  chev(tilde(Y)_ell^m, tilde(Y)_ell'^m') = integral.surf tilde(Y)_ell^m (Omega) tilde(Y)_ell'^(m'*) (Omega) dif Omega,
+$
+wherein $z^* = overline(z)$ denotes the complex conjugate. In particular, if $ell = ell'$, $m = m'$,
+$
+  norm(tilde(Y)_ell^m) &= integral.surf P_ell^abs(m) (cos theta)^2 dif Omega = integral_(-1)^1 (1-x^2)^(abs(m)) P_ell^((abs(m))) (x)^2 dif x \
+  & = 1 / (4^ell ell!^2) integral_(-1)^1 (1-x^2)^(abs(m))[dv(, x, ell + abs(m)) (x^2 - 1)^ell]^2 dx \
+  & = 1 / (4^ell ell!^2) integral_(-1)^1 dv(, x, abs(m))[(1-x^2)^(abs(m)) dv(, x, ell + abs(m)) (x^2 - 1)^ell] dv(, x, ell) (x^2 - 1)^ell dx \
+  &=
+$
