@@ -137,10 +137,10 @@ $
   &= integral_0^(2 uppi) ee^(ii (m - m') phiaz) dif phiaz integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) cos theta dtheta \
   &= 2 uppi delta_(m m') integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) cos theta dtheta,
 $
-wherein $z^* = overline(z)$ denotes the complex conjugate. In particular, if $ell = ell'$, $m = m'$,
+wherein $z^* = overline(z)$ denotes the complex conjugate. In particular, we may assume $m = m'$ (for otherwise the value we aver to be $0$), giving
 $
-  norm(tilde(Y)_ell^m)^2 &= 2 uppi integral_(-1)^1 (1-x^2)^(abs(m)) [P_ell^((abs(m))) (x)]^2 dif x \
-  & = 2 uppi (-1)^abs(m) integral_(-1)^1 dv(, x, abs(m))[(1-x^2)^(abs(m)) P_ell^((abs(m))) (x)] P_ell (x) dx.
+  chev(tilde(Y)_ell^m, tilde(Y)_ell'^m') &= 2 uppi integral_(-1)^1 (1-x^2)^(abs(m)) P_ell^((abs(m))) (x)P_ell'^((abs(m))) (x) dif x \
+  & = 2 uppi (-1)^abs(m) integral_(-1)^1 dv(, x, abs(m))[(1-x^2)^(abs(m)) P_ell^((abs(m))) (x)] P_ell' (x) dx.
 $
 due to repeated applications of integration by parts. By @eq:spherical-harmonics-legendre-polynomials-differential-equation,
 $
@@ -150,9 +150,9 @@ $
 $
 hence a repeated application gives
 $
-  norm(tilde(Y)_ell^m)^2 & = 2 uppi (-1)^abs(m) integral_(-1)^1 [product_(j = 1)^abs(m) -(ell + j)(ell - j + 1)][P_ell (x)]^2 dx \
-  &=2 uppi integral_(-1)^1 [product_(j = 1)^abs(m) (ell + j) product_(j = 1 - abs(m))^0 (ell + j)][P_ell (x)]^2 dx \
-  &= 2 uppi (ell + abs(m))! / (ell - abs(m))! integral_(-1)^1 [P_ell (x)]^2 dx = (ell + abs(m))! / (ell - abs(m))! (4 uppi) / (2 ell + 1)
+  chev(tilde(Y)_ell^m, tilde(Y)_ell'^m') & = 2 uppi (-1)^abs(m) integral_(-1)^1 [product_(j = 1)^abs(m) -(ell + j)(ell - j + 1)]P_ell (x)P_ell' (x) dx \
+  &=2 uppi integral_(-1)^1 [product_(j = 1)^abs(m) (ell + j) product_(j = 1 - abs(m))^0 (ell + j)] P_ell (x)P_ell' (x) dx \
+  &= 2 uppi (ell + abs(m))! / (ell - abs(m))! integral_(-1)^1 P_ell (x)P_ell' (x) dx = (ell + abs(m))! / (ell - abs(m))! (4 uppi) / (2 ell + 1) delta_(ell ell')
 $
 by the Legendre Orthogonality Relation (@thm:legendre-polynomials-orthogonality-relation). Thus we perform a normalization by
 #definition[Spherical Harmonics][
