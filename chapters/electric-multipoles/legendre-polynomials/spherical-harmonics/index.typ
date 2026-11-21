@@ -205,7 +205,7 @@ Furthermore, this observation is supplanted with
   $
   where $delta_(S^2)$ is defined with the filtering property
   $
-    f(Omega) = integral.surf delta_(S^2)(Omega, Omega') dif Omega'.
+    f(Omega) = integral.surf f(Omega') delta_(S^2)(Omega, Omega') dif Omega'.
   $
   Equivalently,
   $
