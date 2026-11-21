@@ -160,9 +160,13 @@ by the Legendre Orthogonality Relation (@thm:legendre-polynomials-orthogonality-
     Y_ell^m (Omega) = sqrt((2 ell + 1) / ( 4uppi) (ell - abs(m))! / (ell + abs(m))!) P_ell^abs(m) (cos theta) ee^(ii m phiaz), #tag[$(abs(m) <= ell)$]
   $
 ]
-whence
+whence we obtain
 #theorem[Orthonormality Relation][
   $
-    chev(Y_ell^m, Y_ell'^m') = delta_(m m') delta_(ell ell').
+    chev(Y_ell^m, Y_ell'^m') = delta_(m m') delta_(ell ell')
   $ <eq:spherical-harmonics-orthonormality>
 ]
+and
+$
+  laplacian_(S^2) Y_ell^m = -ell(ell + 1) Y_ell^m.
+$
