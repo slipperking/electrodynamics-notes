@@ -186,7 +186,7 @@ and if $m < 0$,
 $
   Y_ell^m (Omega) & prop sqrt(x^2 + y^2)^(abs(m)) P_ell^((abs(m))) (z) ((x - ii y) / sqrt(x^2 + y^2))^abs(m) = P_ell^(abs(m)) (z) (x - ii y)^abs(m).
 $
-Hence we obtain the restriction of polynomials of three real variables onto $S^2$. We aver that any polynomial in $x,y,z$ on $S^2$ can be written as a finite linear combination of spherical harmonics in the form above. Writing $w = x + ii y$, for any such polynomial
+Hence we obtain the restriction of polynomials of three real variables onto $S^2$. We aver that any polynomial in $x,y,z$ on $S^2$ can be written as a finite linear combination of spherical harmonics in the form above. Writing $w = x + ii y$, any such polynomial
 $
   p(x,y,z) = sum_(i,j,k) x^i y^j z^k = sum_(i,j,k) ((w + w^*) / 2)^i ((w - w^*) / (2 ii))^j z^k = sum_(i,j,k) C_(i j k) (w + w^*)^i (w - w^*)^j z^k
 $
@@ -216,7 +216,7 @@ by the Fourier expansion with respect to a complete orthonormal system (see @sli
 
 An explicit form may be given to $delta_(S^2)$ by realizing that
 $
-  f(Omega) = integral.surf f(Omega') delta_(S^2)(Omega, Omega') dif Omega' ==> integral_0^(2 uppi) integral_0^uppi f(arccos z', phiaz') delta_(S^2) (Omega, Omega') dz' dif phiaz',
+  f(Omega) = integral.surf f(Omega') delta_(S^2)(Omega, Omega') dif Omega' = integral_0^(2 uppi) integral_(-1)^1 f(arccos z', phiaz') delta_(S^2) (Omega, Omega') dz' dif phiaz',
 $
 thus implying
 $
