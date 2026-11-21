@@ -11,7 +11,7 @@ For a given velocity field $va(v)(va(r), t)$ characterizing the motion of charge
 $
   va(J)(va(r), t) = rho(va(r), t) va(v)(va(r), t).
 $
-The surface current density is analogously
+As such, the SI unit given to $va(J)$ is $"C" "m"^(-2) "s"^(-1)$. The surface current density is analogously
 $
   va(K)(va(r),t) = sigma(va(r), t) va(v)(va(r),t).
 $
@@ -25,3 +25,5 @@ $
 (The convention of sign dictates the direction through which a surface needs to be crossed to constitute positive current.) Where $Q(t)$ is cumulative the amount of charge that passes the boundary by time $t$, it follows immediately that
 $ I = dv(Q, t) $
 by the endowed definition.
+
+The SI unit for current is the Ampère, which is therefore equivalent to $#qty(1, "A") = #qty(1, "C / s")$.

@@ -125,6 +125,16 @@ $
 $
 The orthogonality relation implies that the collection of Legendre polynomials forms a countable orthogonal system for $L^2 ([-1,1])$.
 
+#lemma[
+  Let $q_0, q_1, dots, q_n$ be polynomials such that $deg q_k = k$ for every $0 <= k <= n$. Then
+  $
+    span {q_0, q_1, dots, q_n} = span {1, x, dots, x^n}.
+  $
+] <lem:polynomials-successive-degrees-span>
+#proof(collapsed: true)[of @lem:polynomials-successive-degrees-span][
+  Each $q_k$ has degree at most $n$, so the left-hand span is contained in the right-hand span. Since $q_0$ is a nonzero constant, $1 in span{q_0}$. For $k >= 1$, write $q_k = a_k x^k + r_k (x)$, where $a_k != 0$ and $deg r_k < k$ if $r_k != 0$. If $1, x, dots, x^(k-1)$ belong to $span{q_0, dots, q_(k-1)}$, then so does $r_k$, and $x^k = (q_k - r_k) / a_k$ belongs to $span{q_0, dots, q_k}$. Induction thus gives the desired assertion.
+]
+
 Of relevancy is also the following distributional identity:
 #theorem[The Completeness Relation][
   $
@@ -138,9 +148,11 @@ $
   &= sum_(ell = 0)^oo (2ell + 1) / 2 P_ell (x) integral_(-1)^1 f(x') P_ell (x') dx' = sum_(ell = 0)^oo (2ell + 1) / 2 P_ell (x) chev(f, P_ell).
 $
 #proof(collapsed: true)[of the Completeness Relation][
-  The linear $span$ of ${x^n}_(n = 0)^oo$ is equivalent to the span of the set of Legendre polynomials, by inductively eliminating lower degree terms through linear combinations.
-
-  Thus, any polynomial $p$ of degree $n$ is a finite linear combination of ${P_ell}_ell$, namely $sum_(ell = 0)^n c_ell P_ell (x)$, whereby the orthogonality of ${P_ell}$ performs the filtering action characterized by
+  By @thm:rodrigues-formula, $P_ell$ has degree $ell$. Hence @lem:polynomials-successive-degrees-span gives
+  $
+    span{P_0, dots, P_n} = span{1, x, dots, x^n}.
+  $
+  Thus, any polynomial $p$ of degree $n$ is a finite linear combination $sum_(ell = 0)^n c_ell P_ell (x)$, whereby the orthogonality of ${P_ell}$ performs the filtering action characterized by
   $
     chev(p, P_ell) = sum_(ell' = 0)^n c_ell' chev(P_ell', P_ell) = c_ell chev(P_ell, P_ell) = (2 c_ell) / (2 ell + 1)
   $ <eq:legendre-polynomials-completeness-relation-filtering>

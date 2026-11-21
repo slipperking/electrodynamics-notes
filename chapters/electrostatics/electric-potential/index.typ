@@ -16,7 +16,7 @@ where we integrate from a predefined reference point---the choice thereof is of 
 #definition[Electric Potential][
   @eq:electric-potential is known as the _electric potential_. For two points $va(a), va(b)$, the expression
   $ phi(va(b)) - phi(va(a)) $
-  is referred to as the _potential difference_ between $va(a)$ and $va(b)$.
+  is referred to as the _potential difference_ (_voltage_) between $va(a)$ and $va(b)$. (The SI unit for electric potential is the volt ($#qty(1, "V") = #qty(1, "N m / C") = #qty(1, "J / C")$).)
 ]
 Thence the potential difference is given by
 $

@@ -6,7 +6,7 @@
 )
 Electric phenomena arise from a property known as _electric charge_. Charged objects are observed to exert forces on each other, which comprise attractive and repulsive forces. This motivated the formulation of a charge, denoted by $q in RR$. By observation, all free charges are _quantized_, implying all particles observed to have a charge equal to an integer multiple of the elementary electron charge
 $ e = #qty("1.602176634e-19", "C"), $
-(wherein $"C"$ is the SI unit of charge, a coulomb).
+(wherein $"C"$ is the SI unit of charge---a coulomb).
 
 Despite this fundamental discreteness of charge, the historical developments of electromagnetic theory utilized the definition of a continuous charge per unit volume, or _volume charge density_ $rho(va(r))$ (here we omit the modern formulation of particles of fractional charge).
 

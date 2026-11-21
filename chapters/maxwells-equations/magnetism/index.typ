@@ -8,7 +8,7 @@ It was later found in 1820 that a current-carrying wire produces effects compara
     va(F) &= -mu_0 / (4 uppi) integral.cont_L I dif va(ell) dot [sum_(k = 1)^N integral.cont_L_k I_k dif va(ell)_k times.o (va(r) - va(r)_k) / norm(va(r) - va(r)_k)^3] \ &= -mu_0 / (4 uppi) sum_(k = 1)^N integral.cont_L integral.cont_L_k I_k I (va(r) - va(r)_k) / norm(va(r) - va(r)_k)^3 dif va(ell)_k dot dif va(ell),
   $ <eq:magnetostatics-ampere-force>
 ]
-wherein the factor $mu_0 / (4 uppi)$ is due to the choice of $S I$ units, and
+wherein the factor $mu_0 / (4 uppi)$ is due to the choice of SI units, and
 $ mu_0 = #qty("1.256637061e-6", "N / A^2") $ is the _vacuum permeability_. In 1820, Biot and Savart determined
 #theorem[Biot--Savart Law][
   $
@@ -35,22 +35,26 @@ $ <eq:line-magnetostatic-force>
 One can also correctly guess that the field $va(B)$ satisfies the principle of superposition. The representation in @eq:biot-savart-law can be thought to be the sum of the magnetic fields due to each individual Ampèrian loop.
 It is imperative to impose the aforesaid condition in utilizing the previous results.
 
-The current $I$, which can be thought to be the one-dimensional analogue of the discussed cases in @sec:current-density, is the amount of charge per unit time passing any specified point in the wire. We may consider it to be an approximation of a three-dimensional tubular wire with line element $dif va(ell)$, where at a specified point $va(r)'$ with cross section $S_va(r)'$ we must have
+The current $I$, which can be thought to be the one-dimensional analogue of the discussed cases in @sec:current-density, is the amount of charge per unit time passing any specified point in the wire, which we shall consider to be an approximation of a three-dimensional tubular wire with line element $dif va(ell)_k$, where at a specified point $va(r)_k$ with cross section $S_va(r)_k$ we must have
 $
-  I dif va(ell)' = integral.double_S va(J)(va(r)'') dot dif va(S)'' dif va(ell)'
+  I_k dif va(ell)_k = integral.double_S va(J)_k (va(r)'_k) dot dif va(S)'_k dif va(ell)_k
 $
-Since the cross-sectional element $dif va(S)''$ points in the same direction as $dif va(ell)'$ and as $va(J)$ assuming the absence of transverse currents,
+Since the cross-sectional element $dif va(S)'_k$ points in the same direction as $dif va(ell)_k$ and as $va(J)$ assuming the absence of transverse currents,
 $
-  I dif va(ell)' = integral.double_S va(J) dif S'' dd(ell)' = integral.double_S va(J) [dif^3 r''],
+  I_k dif va(ell)_k = integral.double_S va(J)_k dif S'_k dif ell_k = integral.double_S va(J)_k [dif^3 r'_k],
 $
 whence this three-dimensional generalization transforms the Biot--Savart representation to the consequent space _definition_ of the magnetic field:
 $
   va(B)(va(r)) &= mu_0 / (4 uppi) sum_(k=1)^N integral.cont_L_k I_k dif va(ell)_k times (va(r) - va(r)_k) / norm(va(r) - va(r)_k)^3 \
-  &= mu_0 / (4 uppi) sum_(k=1)^N integral.cont_L_k integral.double_S va(J)(va(r)') dif^3 r' times (va(r) - va(r)') / norm(va(r) - va(r)')^3 \
+  &= mu_0 / (4 uppi) sum_(k=1)^N integral.cont_L_k integral.double_S va(J)_k (va(r)'_k) dif^3 r'_k times (va(r) - va(r)_k) / norm(va(r) - va(r)_k)^3 \
   &= mu_0 / (4 uppi) integral.triple va(J) (va(r)') times (va(r) - va(r)') / norm(va(r) - va(r)')^3 dif^3 r'.
 $
-
 The term _magnetostatics_ supplements the _steady-current_ condition $div va(J) = 0$, by introducing
 $
-  pdv(va(E), t) = pdv(va(B), t) = pdv(rho, t) = pdv(va(J), t) = 0
+  pdv(va(E), t) = pdv(va(B), t) = pdv(rho, t) = pdv(va(J), t) = 0.
 $ <eq:magnetostatics-condition>
+Furtherances in experimental development, equating the described phenomena with the behavior of permanent magnets, gave rise to
+$
+  div va(B) = 0 wide "and" wide curl va(B) = mu_0 va(J).
+$
+There is no universally agreed upon name given to the first equation. It is, as we shall thus describe, often referred to as _Gauss' Law for Magnetism_, the validity whereof holds even outside the magnetostatic case. The second equation, which is valid solely in the magnetostatic case, is referred to as _Ampère's Law_. Suitable modifications are necessitated to generalize beyond the magnetostatic case.

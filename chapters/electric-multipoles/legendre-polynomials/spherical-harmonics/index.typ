@@ -170,3 +170,46 @@ and
 $
   laplacian_(S^2) Y_ell^m = -ell(ell + 1) Y_ell^m.
 $
+Writing
+$
+  Y_ell^m (Omega) prop (sin theta)^abs(m) P_ell^((abs(m))) (cos theta) ee^(ii m phiaz)
+$
+and adopting the spherical substitution $x = sin theta cos phiaz$, $y = sin theta sin phiaz$, $z = cos theta$,
+$
+  Y_ell^m (Omega) & prop sqrt(x^2 + y^2)^(abs(m)) P_ell^((abs(m))) (z) ((x + ii y) / sqrt(x^2 + y^2))^m,
+$
+wherein if $m > 0$,
+$
+  Y_ell^m (Omega) & prop P_ell^(m) (z) (x + ii y)^m,
+$
+and if $m < 0$,
+$
+  Y_ell^m (Omega) & prop sqrt(x^2 + y^2)^(abs(m)) P_ell^((abs(m))) (z) ((x - ii y) / sqrt(x^2 + y^2))^abs(m) = P_ell^(abs(m)) (z) (x - ii y)^abs(m).
+$
+Hence we obtain the restriction of polynomials of three real variables onto $S^2$. We aver that any polynomial in $x,y,z$ on $S^2$ can be written as a finite linear combination of spherical harmonics in the form above. Writing $w = x + ii y$, for any such polynomial
+$
+  p(x,y,z) = sum_(i,j,k) x^i y^j z^k = sum_(i,j,k) ((w + w^*) / 2)^i ((w - w^*) / (2 ii))^j z^k = sum_(i,j,k) C_(i j k) (w + w^*)^i (w - w^*)^j z^k
+$
+can be expanded to have terms only in the form of $C'_(i j k) w^i w^(* j) z^k$. On the sphere, each $w w^*$ pair may be expressed as a factor of $(1 - z^2)$, whence
+$
+  p(x,y,z) = sum C w^k q(z) + sum C w^(*k) q(z),
+$
+or more specifically, each term is the product of $w^k$ or $w^(*k)$ with an ordinary polynomial $q$ in $z$ only. Observing that each $P_k^((k)), P_(k + 1)^((k)), P_(k + 2)^((k)), dots$ has respective degree $0, 1, 2, dots$, $q(z)$ may be expressed as a linear combination $ q(z) = sum_(j = 0)^n a_j P_(k + j)^((k))(z) ==> w^k q(z) = sum_(j = 0)^n alpha_j Y_(k + j)^k (z), wide w^(* k) q(z) = sum_(j = 0)^n alpha_j Y_(k + j)^(-k) (z). $
+Thus all polynomials $RR^3 -> CC$, when restricted to $S^2$, can be expressed as the finite linear combination of spherical harmonics. The former is dense in $L^2 (S^2)$, whence ${Y_ell^m}$ forms a complete orthonormal basis for $L^2 (S^2)$.
+
+Furthermore, this observation is supplanted with
+#theorem[Completeness Relation][
+  Distributionally
+  $
+    sum_(ell = 0)^oo sum_(m = -ell)^ell Y_ell^m (Omega) Y_ell^(m*) (Omega') = delta_(S^2) (Omega, Omega'),
+  $
+  where $delta_(S^2)$ is defined with the filtering property
+  $
+    f(Omega) = integral.surf delta_(S^2)(Omega, Omega') dif Omega'.
+  $
+  Equivalently,
+  $
+    sum_(ell = 0)^oo sum_(m = -ell)^ell Y_ell^m (Omega) chev(f, Y_ell^m) = sum_(ell = 0)^oo sum_(m = -ell)^ell Y_ell^m (Omega) [integral.surf f(Omega') Y_ell^(m*) (Omega') dif Omega'] = f(Omega).
+  $
+] <thm:spherical-harmonics-completeness-relation>
+by the Fourier expansion with respect to a complete orthonormal system (see @slipperking2025complexanalysis). A more concrete proof may be obtained by replicating the process so performed in @thm:legendre-polynomials-completeness-relation.
