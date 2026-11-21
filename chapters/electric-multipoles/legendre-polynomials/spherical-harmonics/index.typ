@@ -213,3 +213,13 @@ Furthermore, this observation is supplanted with
   $
 ] <thm:spherical-harmonics-completeness-relation>
 by the Fourier expansion with respect to a complete orthonormal system (see @slipperking2025complexanalysis). A more concrete proof may be obtained by replicating the process so performed in @thm:legendre-polynomials-completeness-relation.
+
+An explicit form may be given to $delta_(S^2)$ by realizing that
+$
+  f(Omega) = integral.surf f(Omega') delta_(S^2)(Omega, Omega') dif Omega' ==> integral_0^(2 uppi) integral_0^uppi f(arccos z', phiaz') delta_(S^2) (Omega, Omega') dz' dif phiaz',
+$
+thus implying
+$
+  delta_(S^2) (Omega, Omega') = delta(z - z') delta (phiaz - phiaz') = delta(cos theta - cos theta') delta(phiaz - phiaz').
+$
+The last result we aim to demonstrate at present will be of greatest applicability to our practical development.
