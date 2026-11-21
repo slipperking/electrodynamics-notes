@@ -133,9 +133,9 @@ $
 which we have thus shown to satisfy the given condition on $laplacian_(S^2)$. It will transpire, that among many properties, $tilde(Y)_dot^dot$ satisfies an orthogonality relation permitting the definition of an orthonormal system. In verification hereof, we compute
 $
   chev(tilde(Y)_ell^m, tilde(Y)_ell'^m') &= integral.surf tilde(Y)_ell^m (Omega) tilde(Y)_ell'^(m'*) (Omega) dif Omega \
-  &= integral_0^(2 uppi) integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) ee^(ii (m - m') phiaz) cos theta dtheta dif phiaz \
-  &= integral_0^(2 uppi) ee^(ii (m - m') phiaz) dif phiaz integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) cos theta dtheta \
-  &= 2 uppi delta_(m m') integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) cos theta dtheta,
+  &= integral_0^(2 uppi) integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) ee^(ii (m - m') phiaz) sin theta dtheta dif phiaz \
+  &= integral_0^(2 uppi) ee^(ii (m - m') phiaz) dif phiaz integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) sin theta dtheta \
+  &= 2 uppi delta_(m m') integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) sin theta dtheta,
 $
 wherein $z^* = overline(z)$ denotes the complex conjugate. In particular, we may assume $m = m'$ (for otherwise the value we aver to be $0$), giving
 $
