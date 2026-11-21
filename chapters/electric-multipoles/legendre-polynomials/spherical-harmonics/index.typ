@@ -220,6 +220,17 @@ $
 $
 thus implying
 $
-  delta_(S^2) (Omega, Omega') = delta(z - z') delta (phiaz - phiaz') = delta(cos theta - cos theta') delta(phiaz - phiaz').
+  delta_(S^2) (Omega, Omega') = delta(z - z') delta_(2 uppi) (phiaz - phiaz') = delta(cos theta - cos theta') delta_(2 uppi) (phiaz - phiaz').
 $
-The last result we aim to demonstrate at present will be of greatest applicability to our practical development.
+The last result we aim to demonstrate at present will be of greatest applicability to our practical development. For fixed $ell$ and $Omega'$, letting
+$
+  f(Omega) = P_ell (cos [#[angle between $Omega$ and $Omega'$]]) = P_ell (cos gamma),
+$
+an application of @thm:spherical-harmonics-completeness-relation gives
+$
+  P_ell (cos gamma) = sum_(ell' = 0)^oo sum_(m = -ell')^ell' Y_ell'^m (Omega) [integral.surf P_ell (cos [#[angle btn. $Omega'$ and $Omega''$]]) Y_ell'^(m*) (Omega'') dif Omega''].
+$
+Assigning spherical coordinates to the inner integral, such that the polar angle is measured from the axis of $Omega'$, we obtain
+$
+  P_ell (cos gamma) = sum_(ell' = 0)^oo sum_(m = -ell')^ell' Y_ell'^m (Omega) [integral.surf P_ell (cos [#[angle btn. $Omega'$ and $Omega''$]]) Y_ell'^(m*) (Omega'') dif Omega''].
+$
