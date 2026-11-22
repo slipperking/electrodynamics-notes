@@ -10,7 +10,7 @@ $
             & = sin theta sin theta' (cos phi_"az" cos phi'_"az" + sin phi_"az" sin phi'_"az") + cos theta cos theta' \
             & =sin theta sin theta' cos(phi_"az" - phi'_"az") + cos theta cos theta'.
 $
-It is our present intention to derive a more practical expression for $P_ell (cos gamma)$. It is precisely for this that we shall introduce the _spherical harmonics_.
+It is our present intention to derive a more practical expression for $P_ell (cos gamma)$. It is precisely for this that we shall introduce the _spherical harmonics_. (One may wish to avoid the intensive mathematical discussion which invariably proceeds; the most important results and definitions are given in @def:associated-legendre-polynomials, @def:spherical-harmonics, @thm:spherical-harmonics-orthonormality-relation, and most relevantly, @thm:spherical-harmonics-addition-theorem).
 
 Consider as in @eq:laplacian-spherical-coordinates, with $(s, theta, phiaz)$
 $
@@ -34,7 +34,7 @@ $
   lambda integral.surf_(S^2) abs(Y)^2 dif Omega &= -integral_0^(2 uppi) integral_0^uppi Y^* laplacian_(S^2) Y sin theta dif theta dif phiaz \
   &= -integral_0^(2 uppi) integral_0^uppi Y^* [pdv(, theta)(sin theta pdv(Y, theta)) + 1 / (sin theta) pdv(Y, phiaz, 2)] dif theta dif phiaz \
   &= -integral_0^(2uppi) [evaluated(Y^* sin theta pdv(Y, theta))_0^uppi - integral_0^uppi sin theta pdv(Y, theta)pdv(Y^*, theta) dif theta] dif phiaz \
-  &quad""- integral_0^uppi [evaluated((Y^* partial_phiaz Y) / (sin theta))_0^(2 uppi) - integral_0^(2 uppi) (partial_phiaz Y^* partial_phiaz Y) / (sin theta)] dtheta \
+  &quad""- integral_0^uppi [evaluated((Y^* partial_phiaz Y) / (sin theta))_0^(2 uppi) - integral_0^(2 uppi) (partial_phiaz Y^* partial_phiaz Y) / (sin theta) dif phiaz] dtheta \
   &= integral.surf_(S^2) (abs(partial_theta Y)^2 + abs(partial_phiaz Y)^2/ (sin^2 theta)) dif Omega
 $ <eq:spherical-harmonics-negative-eigenvalue>
 wherefor the elision of both integration by parts boundary terms is substantiated by $sin uppi = sin (0) = 0$ and the $2 uppi$-periodicity of $Y$ in $phiaz$ respectively. @eq:spherical-harmonics-negative-eigenvalue verifies $lambda >= 0$.
@@ -44,15 +44,15 @@ $
   laplacian_(S^2) Y = -lambda Y &==> F / (sin theta) pdv(, theta)(sin theta pdv(T, theta)) + T / (sin^2 theta) F'' = -lambda T F \
   & ==> (sin theta) / T pdv(, theta)(sin theta pdv(T, theta)) + lambda sin^2 theta = -(F'' (phiaz)) / F(phiaz).
 $ <eq:spherical-harmonics-second-separation>
-A variation in $phiaz$ leaves the left-hand side unchanged, and vice versa, whereby once more---as with before---give rise to a separation constant $mu$. In particular,
+A variation in $phiaz$ leaves the left-hand side unchanged, and vice versa, which once more---as with before---give rise to a separation constant $mu$. In particular,
 $
   mu F = -F'' ==> mu integral_0^(2 uppi) abs(F)^2 dif phiaz & = -integral_0^(2 uppi) F'' F^* dif phiaz = -[F' F^*]_0^(2uppi) + integral_0^(2 uppi) abs(F')^2 dif phiaz >= 0
 $
 once more by periodicity and observation that $F^*' = F'^*$. Hence we have $mu >= 0$, whence the general solution
 $
-  F'' + mu F = 0 ==> F(phiaz) = cases(A ee^(ii sqrt(mu) phiaz) + B ee^(-ii sqrt(mu) phiaz)& quad "if" mu != 0\,, A + B phiaz &quad "if" m = 0)
+  F'' + mu F = 0 ==> F(phiaz) = cases(A ee^(ii sqrt(mu) phiaz) + B ee^(-ii sqrt(mu) phiaz)& quad "if" mu != 0\,, A + B phiaz &quad "if" mu = 0)
 $
-must be $2 uppi$-periodic, forcing $exp[2 uppi ii sqrt(mu)] = 1$ (i.e. $sqrt(mu)$ is an integer). By the symmetric nature of the given solution, we may assign any integer $m$ in lieu of $sqrt(mu)$, giving
+must be $2 uppi$-periodic, forcing $exp[2 uppi ii sqrt(mu)] = 1$ (i.e. $sqrt(mu)$ is an integer). By the symmetric nature of the given solution, we may assign the integer $m$ (whose sign can be both positive or negative) in lieu of $sqrt(mu)$, giving
 $
   F'' + m^2 F = 0 ==> F(phiaz) &= cases(A ee^(ii m phiaz) + B ee^(-ii m phiaz)& quad "if" m != 0\,, A "(constant)" &quad "if" m = 0) \ &= A ee^(ii m phiaz) + B ee^(-ii m phiaz)
 $ <eq:spherical-harmonics-azimuthal-solution>
@@ -72,7 +72,7 @@ $
 $
 implying
 $
-  laplacian 1 / xi = 0 &= sum_(ell = 0) [1 / s^2 pdv(, s) (s^2 pdv(, s)) + 1 / s^2 laplacian_(S^2)](1 / s^(ell + 1) P_ell (cos theta)) \
+  laplacian 1 / xi = 0 &= sum_(ell = 0)^oo [1 / s^2 pdv(, s) (s^2 pdv(, s)) + 1 / s^2 laplacian_(S^2)](1 / s^(ell + 1) P_ell (cos theta)) \
   &= sum_(ell = 0)^oo (P_ell (cos theta)) / s^2 pdv(, s)(s^2 pdv(, s) s^(-(ell + 1))) + 1 / s^(ell + 3) laplacian_(S^2) P_ell (cos theta) \
   &= sum_(ell = 0)^oo ell(ell + 1) (P_ell (cos theta)) / s^(ell + 3) + 1 / s^(ell + 3) laplacian_(S^2) P_ell (cos theta),\
   sum_(ell = 0)^oo 0 s^(-ell) = 0 & = sum_(ell = 0)^oo s^(-ell) [ell(ell + 1) P_ell (cos theta) + laplacian_(S^2) P_ell (cos theta)].
@@ -81,7 +81,7 @@ The uniqueness of Taylor expansions gives
 $
   ell(ell + 1) P_ell (cos theta) + laplacian_(S^2) P_ell (cos theta) = 0,
 $
-whence it is clear that with $lambda = ell(ell + 1)$ and $Y(Omega) = P_ell (cos theta)$ gives a class of solutions with $m = 0$. Expanding,
+whence it is clear that $lambda = ell(ell + 1)$ and $Y(Omega) = P_ell (cos theta)$ give a class of solutions with $m = 0$. Expanding,
 $
   0 & = ell(ell + 1) P_ell (x) + pdv(, x)((1-x^2) pdv(P_ell, x)) \
     & = ell(ell + 1) P_ell - 2x P'_ell + (1-x^2) P''_ell
@@ -101,7 +101,7 @@ The functions (albeit poorly named, as they are not necessarily polynomials)
   $
     P_ell^k (x) = (-1)^k (1-x^2)^(k / 2) P_ell^((k)) (x)
   $
-]
+] <def:associated-legendre-polynomials>
 are our candidate solutions that we shall now test. Observe that
 $
   dv(P_ell^k, x) & = (-1)^(k + 1) k x (1 - x^2)^(k/2 - 1) P_ell^((k)) (x) + (-1)^k (1 - x^2)^(k/2) P_ell^((k + 1)) (x) \
@@ -159,13 +159,13 @@ by the Legendre Orthogonality Relation (@thm:legendre-polynomials-orthogonality-
   $
     Y_ell^m (Omega) = sqrt((2 ell + 1) / ( 4uppi) (ell - abs(m))! / (ell + abs(m))!) P_ell^abs(m) (cos theta) ee^(ii m phiaz), #tag[$(abs(m) <= ell)$]
   $
-]
+] <def:spherical-harmonics>
 whence we obtain
 #theorem[Orthonormality Relation][
   $
     chev(Y_ell^m, Y_ell'^m') = delta_(m m') delta_(ell ell')
   $ <eq:spherical-harmonics-orthonormality>
-]
+] <thm:spherical-harmonics-orthonormality-relation>
 and
 $
   laplacian_(S^2) Y_ell^m = -ell(ell + 1) Y_ell^m.
@@ -180,24 +180,24 @@ $
 $
 wherein if $m > 0$,
 $
-  Y_ell^m (Omega) & prop P_ell^(m) (z) (x + ii y)^m,
+  Y_ell^m (Omega) & prop P_ell^((m)) (z) (x + ii y)^m,
 $
 and if $m < 0$,
 $
-  Y_ell^m (Omega) & prop sqrt(x^2 + y^2)^(abs(m)) P_ell^((abs(m))) (z) ((x - ii y) / sqrt(x^2 + y^2))^abs(m) = P_ell^(abs(m)) (z) (x - ii y)^abs(m).
+  Y_ell^m (Omega) & prop sqrt(x^2 + y^2)^(abs(m)) P_ell^((abs(m))) (z) ((x - ii y) / sqrt(x^2 + y^2))^abs(m) = P_ell^((abs(m))) (z) (x - ii y)^abs(m).
 $
 Hence we obtain the restriction of polynomials of three real variables onto $S^2$. We aver that any polynomial in $x,y,z$ on $S^2$ can be written as a finite linear combination of spherical harmonics in the form above. Writing $w = x + ii y$, any such polynomial
 $
-  p(x,y,z) = sum_(i,j,k) x^i y^j z^k = sum_(i,j,k) ((w + w^*) / 2)^i ((w - w^*) / (2 ii))^j z^k = sum_(i,j,k) C_(i j k) (w + w^*)^i (w - w^*)^j z^k
+  p(x,y,z) = sum_(i,j,k) c x^i y^j z^k = sum_(i,j,k) c ((w + w^*) / 2)^i ((w - w^*) / (2 ii))^j z^k = sum_(i,j,k) c (w + w^*)^i (w - w^*)^j z^k
 $
-can be expanded to have terms only in the form of $C'_(i j k) w^i w^(* j) z^k$. On the sphere, each $w w^*$ pair may be expressed as a factor of $(1 - z^2)$, whence
+can be expanded to have terms only in the form of $c w^i w^(* j) z^k$. (Herein have we reused $c$ to denote any arbitrary constant which may vary depending on the beholding term, all to avoid potential pedantry). On the sphere, each $w w^*$ pair may be expressed as a factor of $(1 - z^2)$, whence
 $
-  p(x,y,z) = sum C w^k q(z) + sum C w^(*k) q(z),
+  p(x,y,z) = sum c w^k q(z) + sum c w^(*k) q(z),
 $
-or more specifically, each term is the product of $w^k$ or $w^(*k)$ with an ordinary polynomial $q$ in $z$ only. Observing that each $P_k^((k)), P_(k + 1)^((k)), P_(k + 2)^((k)), dots$ has respective degree $0, 1, 2, dots$, $q(z)$ may be expressed as a linear combination $ q(z) = sum_(j = 0)^n a_j P_(k + j)^((k))(z) ==> w^k q(z) = sum_(j = 0)^n alpha_j Y_(k + j)^k (z), wide w^(* k) q(z) = sum_(j = 0)^n alpha_j Y_(k + j)^(-k) (z). $
-Thus all polynomials $RR^3 -> CC$, when restricted to $S^2$, can be expressed as the finite linear combination of spherical harmonics. The former is dense in $L^2 (S^2)$, whence ${Y_ell^m}$ forms a complete orthonormal basis for $L^2 (S^2)$.
+or more specifically, each term is the product of $w^k$ or $w^(*k)$ with an ordinary polynomial $q$ in $z$ only. Observing that each $P_k^((k)), P_(k + 1)^((k)), P_(k + 2)^((k)), dots$ has respective degree $0, 1, 2, dots$, $q(z)$ may be expressed as a linear combination $ q(z) = sum_(j = 0)^n a_j P_(k + j)^((k))(z) ==> w^k q(z) = sum_(j = 0)^n alpha_j Y_(k + j)^k (Omega), wide w^(* k) q(z) = sum_(j = 0)^n alpha_j Y_(k + j)^(-k) (Omega). $
+Thus all polynomials $RR^3 -> CC$, when restricted to $S^2$, can be expressed as a finite linear combination of spherical harmonics. The former is dense in $L^2 (S^2)$, whence ${Y_ell^m}$ forms a complete orthonormal basis for $L^2 (S^2)$.
 
-Furthermore, this observation is supplanted with
+Furthermore, this observation is supplemented with
 #theorem[Completeness Relation][
   Distributionally
   $
@@ -230,7 +230,57 @@ an application of @thm:spherical-harmonics-completeness-relation gives
 $
   P_ell (cos gamma) = sum_(ell' = 0)^oo sum_(m = -ell')^ell' Y_ell'^m (Omega) [integral.surf P_ell (cos [#[angle btn. $Omega'$ and $Omega''$]]) Y_ell'^(m*) (Omega'') dif Omega''].
 $
-Assigning spherical coordinates to the inner integral, such that the polar angle is measured from the axis of $Omega'$, we obtain
+Choose a rotation $R$ such that $Omega' = R vu(z)$ (i.e. the rotation maps the north pole to $Omega'$). Then
 $
-  P_ell (cos gamma) = sum_(ell' = 0)^oo sum_(m = -ell')^ell' Y_ell'^m (Omega) [integral.surf P_ell (cos [#[angle btn. $Omega'$ and $Omega''$]]) Y_ell'^(m*) (Omega'') dif Omega''].
+  P_ell (cos gamma) &= sum_(ell' = 0)^oo sum_(m = -ell')^ell' Y_ell'^m (Omega) [integral.surf P_ell (cos [#[angle btn. $Omega'$ and $R Omega''$]]) Y_ell'^(m*) (R Omega'') dif Omega''] \
+  &=sum_(ell' = 0)^oo sum_(m = -ell')^ell' Y_ell'^m (Omega) [integral.surf P_ell (cos [#[angle btn. $vu(z)$ and $Omega''$]]) Y_ell'^(m*) (R Omega'') dif Omega''] \
+  &=sum_(ell' = 0)^oo sum_(m = -ell')^ell' Y_ell'^m (Omega) [sqrt((4 uppi) / (2 ell + 1)) chev(Y_ell^0, Y_ell'^m compose R)].
+$ <eq:spherical-harmonics-addition-theorem-intermediate>
+Evidently we have
 $
+  laplacian_(S^2) Y_ell^0 = -ell(ell + 1) Y_ell^0, wide laplacian_(S^2) (Y_ell'^m compose R) = -ell'(ell' + 1) Y_ell'^m compose R,
+$
+whence, by integration by parts moving the Laplacian from $Y_ell^0$ to $Y_ell'^m compose R$,
+$
+  -ell(ell + 1) chev(Y_ell^0, Y_ell'^m compose R) & = chev(laplacian_(S^2) Y_ell^0, Y_ell'^m compose R) \
+                                                  & = chev(Y_ell^0, laplacian_(S^2) (Y_ell'^m compose R)) \
+                                                  & = -ell'(ell' + 1) chev(Y_ell^0, Y_ell'^m compose R),
+$ <eq:spherical-harmonics-addition-theorem-distributional-parts>
+equivalently giving
+$
+  [(ell - ell')(ell + ell' + 1)] chev(Y_ell^0, Y_ell'^m compose R) = 0.
+$
+Thus whensoever $ell != ell'$, for equality to be established the integral must vanish, whereby
+$
+  chev(Y_ell^0, Y_ell'^m compose R) = delta_(ell ell') chev(Y_ell^0, Y_ell^m compose R),
+$ <eq:spherical-harmonics-addition-theorem-intermediate-2>
+(wherein the integral on the right-hand side requires only $ell = ell'$ as is otherwise nullified by $delta_(ell ell')$). For any $ell'' >= 0$, replicating the process in @eq:spherical-harmonics-addition-theorem-distributional-parts and @eq:spherical-harmonics-addition-theorem-intermediate-2 gives
+$
+  [(ell'' - ell)(ell'' + ell + 1)] chev(Y_ell''^(m'), Y_ell^m compose R) = 0,\
+  chev(Y_ell''^(m'), Y_ell^m compose R) = delta_(ell ell'')chev(Y_ell^m', Y_ell^m compose R),
+$
+whence a Fourier expansion gives
+$
+  Y_ell^m compose R (Omega'') = sum_(ell'' = 0)^oo sum_(m' = -ell'')^ell'' chev(Y_ell^m compose R, Y_ell''^(m')) Y_ell''^(m') (Omega'') = sum_(m' = -ell)^ell chev(Y_ell^m compose R, Y_ell^(m')) Y_ell^m' (Omega'').
+$ <eq:spherical-harmonics-addition-theorem-fourier>
+Evaluating at $Omega'' = vu(z)$, since $theta'' = 0$ we must have
+$
+  P_ell^abs(m') (cos theta'') = (-1)^abs(m') (sin theta'')^abs(m') P_ell^((abs(m'))) (cos theta'') = cases(P_ell (1) &quad"if" m' = 0\,, 0&quad"if" m' != 0,)
+$
+whereby we restrict our attention solely to when $m' = 0$ in @eq:spherical-harmonics-addition-theorem-fourier, giving
+$
+  Y_ell^m (R Omega'') = chev(Y_ell^m compose R, Y_ell^0) Y_ell^0 (Omega'') = chev(Y_ell^m compose R, Y_ell^0) sqrt((2 ell + 1) / (4 uppi)) P_ell (1),\
+  Y_ell^m (Omega') = sqrt((2 ell + 1) / (4 uppi)) chev(Y_ell^m compose R, Y_ell^0), \
+  Y_ell^(m*) (Omega') = sqrt((2 ell + 1) / (4 uppi)) chev(Y_ell^0, Y_ell^m compose R),
+$
+Thus @eq:spherical-harmonics-addition-theorem-intermediate-2 gives
+$
+  chev(Y_ell^0, Y_ell'^m compose R) = delta_(ell ell') sqrt((4 uppi) / (2 ell + 1)) Y_ell^(m*) (Omega'),
+$
+whereby @eq:spherical-harmonics-addition-theorem-intermediate is simply
+#theorem[Addition Theorem][
+  For two directions $Omega$ and $Omega'$ separated by the angle $gamma$,
+  $
+    P_ell (cos gamma) = (4 uppi) / (2 ell + 1) sum_(m = -ell)^ell Y_ell^m (Omega) Y_ell^(m*) (Omega').
+  $ <eq:spherical-harmonics-addition-theorem>
+] <thm:spherical-harmonics-addition-theorem>

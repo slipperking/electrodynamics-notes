@@ -1,8 +1,6 @@
 #import "/lib.typ": *
 #show: docs-chapter.with(
-  title: "Test",
-  route: "test",
-  description: "Test",
+  ..dargs("Test"),
 )
 
 1. #lorem(20)
@@ -50,3 +48,5 @@ $
     ]
   ]
 ]
+
+Hither shall we reference @sec:test

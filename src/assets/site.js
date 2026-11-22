@@ -906,6 +906,12 @@
     function resolvePreviewAnchor(target) {
       if (!target) return null;
 
+      // Typst attaches the fragment ID to the wrapper for numbered headings.
+      if (target.matches(".numbered-heading")) {
+        var heading = target.querySelector(":scope > :is(h1, h2, h3, h4, h5, h6)");
+        if (heading) return heading;
+      }
+
       function previewBlockSelector() {
         return ".thm-box, .thm-proof, .display-math, figure, li, p, h1, h2, h3, h4, h5, h6";
       }
