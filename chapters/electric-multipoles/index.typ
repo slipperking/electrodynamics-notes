@@ -11,6 +11,8 @@
 )
 It is often the case that a localized charge distribution---bounded within a sphere of radius $R$ centered at $va(r)_0$---is of such complexity insofar that standard methods of study make the study thereof rather convoluted through traditional means. Suitably, practical applications demand the consequent use of necessitated approximations to specified degrees of precision.
 
+(The development of the immediately proceeding sections will entertain only the _exterior multipole expansion_, wherein a charge distribution is localized and effects are evaluated at distance. In future sections (@sec:spherical-and-azimuthal-multipoles) we will expand our consideration to charge distributions evaluated at interior cavities via the _interior multipole expansion_.)
+
 This is also the precise problem that Taylor approximations aim to solve. Perhaps more accurately can the foreshadowed approximation be more analogous to the principal parts of Laurent expansions of a holomorphic function. They both are, in disparate manners, pole expansions; in the complex case,
 $
   1 / (z - z') = 1 / ((z - a) - (z' - a)) = sum_(n = 0)^oo (z' - a)^n / (z - a)^(n + 1).

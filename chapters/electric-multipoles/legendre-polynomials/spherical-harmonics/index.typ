@@ -201,7 +201,7 @@ and adopting the spherical substitution $x = sin theta cos phiaz$, $y = sin thet
 $
   Y_ell^m (Omega) & prop sqrt(x^2 + y^2)^(abs(m)) P_ell^((abs(m))) (z) ((x + ii y) / sqrt(x^2 + y^2))^m,
 $
-wherein if $m > 0$,
+wherein if $m >= 0$,
 $
   Y_ell^m (Omega) & prop P_ell^((abs(m))) (z) (x + ii y)^abs(m),
 $
