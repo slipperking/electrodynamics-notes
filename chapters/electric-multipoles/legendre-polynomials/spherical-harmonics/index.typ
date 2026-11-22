@@ -65,7 +65,7 @@ $
   dv(, theta) = dv(x, theta) dv(, x) = -sin theta dv(, x),\
   1 / (sin theta) pdv(, theta)(sin theta pdv(T, theta)) = -1 / (sin theta) pdv(, theta)(sin^2 theta pdv(T, x)) = pdv(, x) ((1- x^2) pdv(T, x)),\
   pdv(, x) ((1- x^2) pdv(T, x)) + T (lambda - m^2 / (1 - x^2)) = 0.
-$
+$ <eq:spherical-harmonics-second-separation-intermediate>
 Considering $va(s)' = vu(s)'$ of unit magnitude along the polar axis,
 $
   1 / xi = sum_(ell = 0)^oo s'^ell / s^(ell + 1) P_ell (cos theta),
@@ -98,11 +98,16 @@ $
 $ <eq:spherical-harmonics-legendre-polynomials-differential-equation>
 The functions (albeit poorly named, as they are not necessarily polynomials)
 #definition[Associated Legendre Polynomials][
+  For integers $ell >= 0$ and $0 <= k <= ell$, define for $x in [-1,1]$,
   $
-    P_ell^k (x) = (-1)^k (1-x^2)^(k / 2) P_ell^((k)) (x)
+    P_ell^k (x) = (-1)^k (1-x^2)^(k / 2) P_ell^((k)) (x),
+  $
+  where $P_ell^((k))$ is the $k$th derivative of $P_ell$, so $P_ell^0 = P_ell$. For $1 <= k <= ell$, define
+  $
+    P_ell^(-k) (x) = (-1)^k (ell - k)! / (ell + k)! P_ell^k (x) = (ell - k)! / (ell + k)! (1-x^2)^(k / 2) P_ell^((k)) (x).
   $
 ] <def:associated-legendre-polynomials>
-are our candidate solutions that we shall now test. Observe that
+are our candidate solutions that we shall now test. Observe that for $k >= 0$,
 $
   dv(P_ell^k, x) & = (-1)^(k + 1) k x (1 - x^2)^(k/2 - 1) P_ell^((k)) (x) + (-1)^k (1 - x^2)^(k/2) P_ell^((k + 1)) (x) \
                  & =(-1)^k (1 - x^2)^(k/2) [-(k x) / (1 - x^2) P_ell^((k)) + P_ell^((k+1)) ],
@@ -112,7 +117,7 @@ $
   &quad""+ (-1)^k (1 - x^2)^(k/2 - 1) [-k P_ell^((k)) - x (k + 2) P_ell^((k + 1)) + P_ell^((k+2)) (1 - x^2)], \
   & = (-1)^k (1 - x^2)^(k/2 - 2) [(1 - x^2)^2 P_ell^((k + 2)) - 2 k x (1 - x^2) P_ell^((k + 1)) + k ((k - 1) x^2 - 1) P_ell^((k))];
 $
-thus with $k = abs(m)$,
+thus matching form with @eq:spherical-harmonics-second-separation-intermediate and letting $k = abs(m)$,
 $
   pdv(, x) ((1- x^2) dv(P_ell^k, x)) + &P_ell^k (lambda - m^2 / (1 - x^2)) = -2 x dv(P_ell^k, x) + (1 - x^2) dv(P_ell^k, x, 2) + P_ell^k (lambda - k^2 / (1 - x^2)) \
   &= (-1)^k (1 - x^2)^(k / 2) [(2 x^2 k) / (1 - x^2) P_ell^((k)) - 2 x P_ell^((k + 1))] \
@@ -122,25 +127,27 @@ $
 $
 the bracketed term whereof we observe to be the precise form in @eq:spherical-harmonics-legendre-polynomials-differential-equation with $lambda = ell(ell + 1)$. Thus, this realization gives rise to the class of solutions
 $
-  T(theta) = P_ell^abs(m) (cos theta), quad lambda = ell(ell + 1), quad (k <= ell "so" P_ell^k equiv.not 0)
+  T(theta) = P_ell^k (cos theta), quad lambda = ell(ell + 1), quad (k <= ell "so" P_ell^k equiv.not 0)
 $
-each corresponding to the matching solutions for $F$ given in @eq:spherical-harmonics-azimuthal-solution.
-
-Thus we define
+each corresponding to the matching solutions for $F$ given in @eq:spherical-harmonics-azimuthal-solution. Furthermore, since $P_ell^(-k)$ is a constant multiple of $P_ell^k$ and the differential equation depends on $m^2$, all functions in the form of
 $
-  tilde(Y)_ell^m (Omega) = P_ell^abs(m) (cos theta) ee^(ii m phiaz),
+  T(theta) = P_ell^m (cos theta), quad lambda = ell(ell + 1), quad (abs(m) <= ell "so" P_ell^m equiv.not 0)
 $
-which we have thus shown to satisfy the given condition on $laplacian_(S^2)$. It will transpire, that among many properties, $tilde(Y)_dot^dot$ satisfies an orthogonality relation permitting the definition of an orthonormal system. In verification hereof, we compute
+are coherent solutions. Thus we define
+$
+  tilde(Y)_ell^m (Omega) = P_ell^m (cos theta) ee^(ii m phiaz),
+$
+which we have thus shown to satisfy the given condition on $laplacian_(S^2)$. It will transpire, that among many properties, $tilde(Y)_dot^dot$ satisfies an orthogonality relation permitting the definition of an orthonormal system. In verification hereof, we compute ($forall m: -ell <= m <= ell$)
 $
   chev(tilde(Y)_ell^m, tilde(Y)_ell'^m') &= integral.surf tilde(Y)_ell^m (Omega) tilde(Y)_ell'^(m'*) (Omega) dif Omega \
-  &= integral_0^(2 uppi) integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) ee^(ii (m - m') phiaz) sin theta dtheta dif phiaz \
-  &= integral_0^(2 uppi) ee^(ii (m - m') phiaz) dif phiaz integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) sin theta dtheta \
-  &= 2 uppi delta_(m m') integral_0^uppi P_ell^abs(m) (cos theta) P_ell'^abs(m') (cos theta) sin theta dtheta,
+  &= integral_0^(2 uppi) integral_0^uppi P_ell^m (cos theta) P_ell'^m' (cos theta) ee^(ii (m - m') phiaz) sin theta dtheta dif phiaz \
+  &= integral_0^(2 uppi) ee^(ii (m - m') phiaz) dif phiaz integral_0^uppi P_ell^m (cos theta) P_ell'^m' (cos theta) sin theta dtheta \
+  &= 2 uppi delta_(m m') integral_0^uppi P_ell^m (cos theta) P_ell'^m' (cos theta) sin theta dtheta,
+$ <eq:spherical-harmonics-pre-normalization>
+wherein $z^*$ denotes the complex conjugate of $z$. In particular, we may assume $m = m'$ (for otherwise the value we aver to be $0$). For $m >= 0$, this gives
 $
-wherein $z^* = overline(z)$ denotes the complex conjugate. In particular, we may assume $m = m'$ (for otherwise the value we aver to be $0$), giving
-$
-  chev(tilde(Y)_ell^m, tilde(Y)_ell'^m') &= 2 uppi integral_(-1)^1 (1-x^2)^(abs(m)) P_ell^((abs(m))) (x)P_ell'^((abs(m))) (x) dif x \
-  & = 2 uppi (-1)^abs(m) integral_(-1)^1 dv(, x, abs(m))[(1-x^2)^(abs(m)) P_ell^((abs(m))) (x)] P_ell' (x) dx.
+  chev(tilde(Y)_ell^m, tilde(Y)_ell'^m) &= 2 uppi integral_(-1)^1 (1-x^2)^m P_ell^((m)) (x) P_(ell')^((m)) (x) dif x \
+  & = 2 uppi (-1)^m integral_(-1)^1 dv(, x, m)[(1-x^2)^m P_ell^((m)) (x)] P_ell' (x) dx.
 $
 due to repeated applications of integration by parts. By @eq:spherical-harmonics-legendre-polynomials-differential-equation,
 $
@@ -150,20 +157,36 @@ $
 $
 hence a repeated application gives
 $
-  chev(tilde(Y)_ell^m, tilde(Y)_ell'^m') & = 2 uppi (-1)^abs(m) integral_(-1)^1 [product_(j = 1)^abs(m) -(ell + j)(ell - j + 1)]P_ell (x)P_ell' (x) dx \
-  &=2 uppi integral_(-1)^1 [product_(j = 1)^abs(m) (ell + j) product_(j = 1 - abs(m))^0 (ell + j)] P_ell (x)P_ell' (x) dx \
-  &= 2 uppi (ell + abs(m))! / (ell - abs(m))! integral_(-1)^1 P_ell (x)P_ell' (x) dx = (ell + abs(m))! / (ell - abs(m))! (4 uppi) / (2 ell + 1) delta_(ell ell')
+  chev(tilde(Y)_ell^m, tilde(Y)_ell'^m) & = 2 uppi (-1)^m integral_(-1)^1 [product_(j = 1)^m -(ell + j)(ell - j + 1)] P_ell (x) P_ell' (x) dx \
+  &= 2 uppi integral_(-1)^1 [product_(j = 1)^m (ell + j) product_(j = 1 - m)^0 (ell + j)] P_ell (x) P_ell' (x) dx \
+  &= 2 uppi (ell + m)! / (ell - m)! integral_(-1)^1 P_ell (x) P_(ell') (x) dx = (ell + m)! / (ell - m)! (4 uppi) / (2 ell + 1) delta_(ell ell')
 $
-by the Legendre Orthogonality Relation (@thm:legendre-polynomials-orthogonality-relation). Thus we perform a normalization by
+by the Legendre Orthogonality Relation (@thm:legendre-polynomials-orthogonality-relation). Thus we perform a normalization by defining (even for negative $m$)
 #definition[Spherical Harmonics][
   $
-    Y_ell^m (Omega) = sqrt((2 ell + 1) / ( 4uppi) (ell - abs(m))! / (ell + abs(m))!) P_ell^abs(m) (cos theta) ee^(ii m phiaz), #tag[$(abs(m) <= ell)$]
+    Y_ell^m (Omega) = sqrt((2 ell + 1) / (4 uppi) (ell - m)! / (ell + m)!) P_ell^m (cos theta) ee^(ii m phiaz), #tag[$(abs(m) <= ell)$]
   $
+  which we denote by the _spherical harmonic of degree $ell$ and order $m$_.
 ] <def:spherical-harmonics>
-whence we obtain
+For $1 <= m <= ell$, the definition of $P_ell^(-m)$ gives
+$
+  Y_ell^(-m) (Omega) = (-1)^m Y_ell^(m*) (Omega).
+$
+Thus for any $m, m'$, with no restriction upon sign, we have from @eq:spherical-harmonics-pre-normalization
+$
+  chev(Y_ell^m, Y_ell'^m') = delta_(m m') chev(Y_ell^m, Y_ell'^m) = cases(
+    delta_(m m') chev(Y_ell^abs(m), Y_ell'^abs(m)) & quad"if" m >= 0\,,
+    delta_(m m') chev((-1)^m Y_ell^(abs(m)*), (-1)^m Y_ell'^(abs(m)*)) & quad"if" m < 0\,
+  )
+$
+wherein the second case reduces exactly to the first. Thus
+$
+  chev(Y_ell^m, Y_ell'^m') = delta_(m m') chev(Y_ell^abs(m), Y_ell'^abs(m)).
+$
+Hence from normalization,
 #theorem[Orthonormality Relation][
   $
-    chev(Y_ell^m, Y_ell'^m') = delta_(m m') delta_(ell ell')
+    chev(Y_ell^m, Y_ell'^m') = delta_(m m') delta_(ell ell'), wide -ell <= m <= ell
   $ <eq:spherical-harmonics-orthonormality>
 ] <thm:spherical-harmonics-orthonormality-relation>
 and
@@ -180,7 +203,7 @@ $
 $
 wherein if $m > 0$,
 $
-  Y_ell^m (Omega) & prop P_ell^((m)) (z) (x + ii y)^m,
+  Y_ell^m (Omega) & prop P_ell^((abs(m))) (z) (x + ii y)^abs(m),
 $
 and if $m < 0$,
 $
@@ -194,7 +217,7 @@ can be expanded to have terms only in the form of $c w^i w^(* j) z^k$. (Herein h
 $
   p(x,y,z) = sum c w^k q(z) + sum c w^(*k) q(z),
 $
-or more specifically, each term is the product of $w^k$ or $w^(*k)$ with an ordinary polynomial $q$ in $z$ only. Observing that each $P_k^((k)), P_(k + 1)^((k)), P_(k + 2)^((k)), dots$ has respective degree $0, 1, 2, dots$, $q(z)$ may be expressed as a linear combination $ q(z) = sum_(j = 0)^n a_j P_(k + j)^((k))(z) ==> w^k q(z) = sum_(j = 0)^n alpha_j Y_(k + j)^k (Omega), wide w^(* k) q(z) = sum_(j = 0)^n alpha_j Y_(k + j)^(-k) (Omega). $
+or more specifically, each term is the product of $w^k$ or $w^(*k)$ with an ordinary polynomial $q$ in $z$ only. Observing that each $P_k^((k)), P_(k + 1)^((k)), P_(k + 2)^((k)), dots$ has respective degree $0, 1, 2, dots$, $q(z)$ may be expressed as a linear combination $ q(z) = sum_(j = 0)^n a_j P_(k + j)^((k))(z) ==> w^k q(z) = sum_(j = 0)^n alpha_j Y_(k + j)^k (Omega), wide w^(* k) q(z) = sum_(j = 0)^n beta_j Y_(k + j)^(-k) (Omega). $
 Thus all polynomials $RR^3 -> CC$, when restricted to $S^2$, can be expressed as a finite linear combination of spherical harmonics. The former is dense in $L^2 (S^2)$, whence ${Y_ell^m}$ forms a complete orthonormal basis for $L^2 (S^2)$.
 
 Furthermore, this observation is supplemented with
@@ -263,9 +286,9 @@ whence a Fourier expansion gives
 $
   Y_ell^m compose R (Omega'') = sum_(ell'' = 0)^oo sum_(m' = -ell'')^ell'' chev(Y_ell^m compose R, Y_ell''^(m')) Y_ell''^(m') (Omega'') = sum_(m' = -ell)^ell chev(Y_ell^m compose R, Y_ell^(m')) Y_ell^m' (Omega'').
 $ <eq:spherical-harmonics-addition-theorem-fourier>
-Evaluating at $Omega'' = vu(z)$, since $theta'' = 0$ we must have
+By evaluating the associated Legendre polynomials at $Omega'' = vu(z)$, since $theta'' = 0$ we must have
 $
-  P_ell^abs(m') (cos theta'') = (-1)^abs(m') (sin theta'')^abs(m') P_ell^((abs(m'))) (cos theta'') = cases(P_ell (1) &quad"if" m' = 0\,, 0&quad"if" m' != 0,)
+  P_ell^m' (cos theta'') = cases(P_ell (1) &quad"if" m' = 0\,, 0&quad"if" m' != 0,)
 $
 whereby we restrict our attention solely to when $m' = 0$ in @eq:spherical-harmonics-addition-theorem-fourier, giving
 $
