@@ -57,3 +57,42 @@ Furthermore,
     phi(va(r)) = 1 / (4 uppi epsilon_0) sum_(ell = 0)^oo sum_(m = -ell)^ell B_ell^m Y_ell^(m*) (Omega) s^ell.
   $
 ] <thm:electric-interior-spherical-multipole-expansion>
+In the relevant event wherein $rho$ exhibits azimuthal symmetry, i.e. where $rho$ is independent of $phiaz$, the corresponding moments are
+$
+  A_ell^m & = (4 uppi) / (2 ell + 1) integral.triple_(RR^3) rho(va(r)') Y_ell^(m*) (Omega') s'^ell dif^3 r' \
+  & = (4 uppi) / (2 ell + 1) integral_0^R integral_0^uppi rho(va(r)') [integral_0^(2 uppi) Y_ell^(m*) (Omega') dif phiaz'] s'^ell s'^2 sin theta' dif theta' dif s' \
+  & = (4 uppi) / (2 ell + 1) integral_0^R integral_0^uppi rho(va(r)') [2 uppi delta_(m 0) sqrt((2 ell + 1) / (4 uppi)) P_ell^0 (cos theta')] s'^ell s'^2 sin theta' dif theta' dif s' \
+  &= delta_(m 0) A_ell^0,
+$
+and similarly,
+$
+  B_ell^m = delta_(m 0) B_ell^0.
+$
+Therefore,
+$
+  phi(va(r)) = 1 / (4 uppi epsilon_0) sum_(ell = 0)^oo sqrt((2 ell + 1) / (4 uppi)) A_ell^0 (P_ell (cos theta)) / s^(ell + 1), #tag[(exterior)] \
+  phi(va(r)) = 1 / (4 uppi epsilon_0) sum_(ell = 0)^oo sqrt((2 ell + 1) / (4 uppi)) B_ell^0 P_ell (cos theta) s^ell. #tag[(interior)]
+$
+Defining
+#definition[Electric Exterior Azimuthal Multipole Moment][
+  $
+    A_ell = integral.triple rho(va(r)') P_ell (cos theta') s'^ell dif^3 r'
+  $
+]
+and
+#definition[Electric Interior Azimuthal Multipole Moment][
+  $
+    B_ell = integral.triple (rho(va(r)')) / s'^(ell + 1) P_ell (cos theta') dif^3 r',
+  $
+]
+we then have
+#theorem[Electric Azimuthal Multipole Expansion][
+  1. Where $rho(va(r'))$ is supported in $s' < R$ and azimuthally symmetric about the axis with direction $vu(z)$ passing through $va(r)_0$, then for $s > R$,
+  $
+    phi(va(r)) = 1 / (4 uppi epsilon_0) sum_(ell = 0)^oo A_ell (P_ell (cos theta)) / s^(ell + 1).
+  $
+  2. Where $rho(va(r'))$ is supported in $s' > R$ and azimuthally symmetric about the axis with direction $vu(z)$ passing through $va(r)_0$, then for $s < R$,
+  $
+    phi(va(r)) = 1 / (4 uppi epsilon_0) sum_(ell = 0)^oo B_ell P_ell (cos theta) s^ell.
+  $
+]
