@@ -96,3 +96,35 @@ we then have
     phi(va(r)) = 1 / (4 uppi epsilon_0) sum_(ell = 0)^oo B_ell P_ell (cos theta) s^ell.
   $
 ]
+#example[
+  Consider a sphere of radius $R$ with an azimuthally symmetric (about $vu(z)$) surface charge distribution given by $sigma(va(r)_S) = sigma_0 cos theta$. Determine its electric potential.
+] <ex:azimuthally-symmetric-surface-distribution-potential>
+#solution[to @ex:azimuthally-symmetric-surface-distribution-potential (by multipoles)][
+  A computation of the respective surface azimuthal moments gives
+  $
+    A_ell & = integral.surf_(r' = R) sigma(va(r)') P_ell (cos theta') r'^ell dif S' = 2 uppi R^ell sigma_0 integral_0^uppi cos theta' P_ell (cos theta') R^2 sin theta' dtheta' \
+    &= 2 uppi R^(ell + 2) sigma_0 integral_(-1)^1 z' P_ell (z') dz' = 2 uppi R^(ell + 2) sigma_0 integral_(-1)^1 P_1(z') P_ell (z') dz' #tag[$(z' = cos theta')$] \
+    &= 2 uppi R^(ell + 2) delta_(ell 1) 2 / (2 ell + 1) = (4 uppi) / 3 R^(ell + 2) delta_(ell 1), #tag[(the $perp$ relation; @thm:legendre-polynomials-orthogonality-relation)]
+  $
+  and
+  $
+    B_ell & = 1 / R^(ell + 1)integral.surf_(r' = R) sigma(va(r)') P_ell (cos theta') dif S' \
+          & = (2 uppi) / (R^(ell - 1)) integral_(-1)^1 P_1 (z') P_ell (z') dz' = (4 uppi) / 3 R^(1 - ell) delta_(ell 0),
+  $
+  whence for $r > R$
+  $
+    phi(va(r)) & = 1 / (4 uppi epsilon_0) sum_(ell = 0)^oo A_ell / (r^(ell + 1)) P_ell (cos theta) \
+    &= 1 / (4 uppi epsilon_0) sum_(ell = 0)^oo (4 uppi R^(ell + 2) delta_(ell 1)) / (3 r^(ell + 1)) P_ell (cos theta) = 1 / (3 epsilon_0) R^3 / r^2 cos theta.
+  $
+  and similarly for $r < R$,
+  $
+    phi(va(r)) & = 1 / (4 uppi epsilon_0) sum_(ell = 0)^oo B_ell P_ell (cos theta) r^ell = 1 / (3 epsilon_0) r cos theta.
+  $
+  Thus for all $va(r)$
+  $
+    phi(va(r)) = 1 / (3 epsilon_0) cases(R^3 / r^2 cos theta&quad"if" r > R\,, r cos theta&quad"if" r < R.) qedhere
+  $
+]
+// #solution[to @ex:azimuthally-symmetric-surface-distribution-potential (alternative)][
+
+// ]
