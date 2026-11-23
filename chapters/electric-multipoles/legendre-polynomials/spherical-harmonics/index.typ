@@ -3,7 +3,7 @@
   ..dargs("Spherical Harmonics"),
 )
 
-The representation of @eq:inverse-separation-legendre-polynomial, wherein have we denoted $vu(s) dot vu(s)' = cos gamma$, is often inconvenient in considering natural situations involving spherical symmetry, whose natural models rely on the spherical coordinates $va(s) = (s, theta, phi_"az")$ and $va(s)' = (s', theta', phi'_"az")$. To understand this inconvenience,
+The representation of @eq:inverse-distance-legendre-polynomial, wherein have we denoted $vu(s) dot vu(s)' = cos gamma$, is often inconvenient in considering natural situations involving spherical symmetry, whose natural models rely on the spherical coordinates $va(s) = (s, theta, phi_"az")$ and $va(s)' = (s', theta', phi'_"az")$. To understand this inconvenience,
 $
   cos gamma & = (sin theta cos phi_"az" vu(x) + sin theta sin phi_"az" vu(y) + cos theta vu(z)) \
             & quad""dot (sin theta' cos phi'_"az" vu(x) + sin theta' sin phi'_"az" vu(y) + cos theta' vu(z)) \

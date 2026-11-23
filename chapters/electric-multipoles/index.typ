@@ -41,9 +41,16 @@ $
     &wide wide + 1 / 2 integral.triple_(s' < R) rho(va(r)') s'_i_1 s'_i_2 dif^3 r' partial_i_1 partial_i_2 1 / s + dots.c] \
   & = 1 / (4 uppi epsilon_0) [Q/s - (integral.triple_(s' < R) rho(va(r)') va(s)' dif^3 r') dot grad 1 / s \
     &wide wide + 1 / 2 integral.triple_(s' < R) rho(va(r)') va(s)' times.o va(s)' dif^3 r' : grad times.o grad 1 / s \
-    &wide wide - 1 / 6 integral.triple_(s' < R) rho(va(r)') va(s)'^(times.o 3) dif^3 r' colon.tri.op grad^(times.o 3) 1 / s + dots.c], \
-  & = 1 / (4 uppi epsilon_0) [Q - va(p) dot grad + /* 1 / 2  */vaa(Q) : grad^(times.o 2) - /* 1 / 6  */vb(O) colon.tri.op grad^(times.o 3) + dots.c + (-1)^n vb(C)^((n)) limits(dot)^n grad^(times.o n) + dots.c] 1 / s,
-$ <eq:electric-multipole-expansion>
+    &wide wide - 1 / 6 integral.triple_(s' < R) rho(va(r)') va(s)'^(times.o 3) dif^3 r' colon.tri.op grad^(times.o 3) 1 / s + dots.c],
+$
+thus
+#theorem[Electric Multipole Expansion][
+  For $s > R$, where $rho$ is supported in the sphere of radius $R$ centered at $va(r)_0$,
+  $
+    phi(va(r)) & = 1 / (4 uppi epsilon_0) sum_(n = 0)^oo (-1)^n vb(C)^((n)) limits(dot)^n grad^(times.o n) 1 / s \
+    &=1 / (4 uppi epsilon_0) [Q - va(p) dot grad + /* 1 / 2  */vaa(Q) : grad^(times.o 2) - /* 1 / 6  */vb(O) colon.tri.op grad^(times.o 3) + dots.c + (-1)^n vb(C)^((n)) limits(dot)^n grad^(times.o n) + dots.c] 1 / s,
+  $ <eq:electric-multipole-expansion>
+] <thm:electric-multipole-expansion>
 wherein the following definitions are utilized
 #definition[
   The _electric monopole moment_ is simply the total charge
@@ -78,4 +85,4 @@ wherein the following definitions are utilized
 ]
 It often transpires that we restrict our consideration to not beyond the quadrupole moment. The naming of higher-order terms is given by powers of two accordingly (beyond the octupole we have the _hexadecapole_, or the $16$-pole; and further, _dotriacontapole_, or the $32$-pole, et cetera).
 
-If $rho$ is a spherically symmetric volume charge density distribution in ${s' <= R}$, the corresponding multipole expansion leaves but the monopole term, which is the precise potential for a point charge.
+If $rho$ is a spherically symmetric volume charge density distribution in ${s' <= R}$, the corresponding multipole expansion leaves but the monopole term, which is the precise potential for a point charge. The results of point charges are not of primary interest in this chapter. We thus direct our attention to the other terms.

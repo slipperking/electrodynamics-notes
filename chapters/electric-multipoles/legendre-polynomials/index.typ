@@ -43,8 +43,8 @@ $
 with polynomial base cases $P_0 (x) = 1$ and $P_1 (x) = x$, we aver from recursion that each $P_ell$ is a polynomial. Thus we have, in its original form, relevant to the present practical application,
 
 $
-  1 / norm(va(s) - va(s)') = 1 / s sum_(ell = 0)^oo P_ell (va(s) dot va(s)') (s' / s)^ell, s' < s.
-$ <eq:inverse-separation-legendre-polynomial>
+  1 / norm(va(s) - va(s)') = 1 / s sum_(ell = 0)^oo P_ell (vu(s) dot vu(s)') (s' / s)^ell, wide s' < s.
+$ <eq:inverse-distance-legendre-polynomial>
 
 The utilization of the raw expression @eq:legendre-polynomial is often inconvenient. In lieu thereof, we derive the _Rodrigues' formula_, for which we appeal to complex-analytic methods. Writing
 $
