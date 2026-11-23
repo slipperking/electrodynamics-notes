@@ -97,7 +97,7 @@ we then have
   $
 ]
 #example[
-  Consider a sphere of radius $R$ with an azimuthally symmetric (about $vu(z)$) surface charge distribution given by $sigma(va(r)_S) = sigma_0 cos theta$. Determine its electric potential.
+  Consider an origin-centered sphere of radius $R$ with an azimuthally symmetric (about $vu(z)$) surface charge distribution given by $sigma(va(r)_S) = sigma_0 cos theta$. Determine its electric potential.
 ] <ex:azimuthally-symmetric-surface-distribution-potential>
 #solution[to @ex:azimuthally-symmetric-surface-distribution-potential (by multipoles)][
   A computation of the respective surface azimuthal moments gives
@@ -125,6 +125,10 @@ we then have
     phi(va(r)) = 1 / (3 epsilon_0) cases(R^3 / r^2 cos theta&quad"if" r > R\,, r cos theta&quad"if" r < R.) qedhere
   $
 ]
-// #solution[to @ex:azimuthally-symmetric-surface-distribution-potential (alternative)][
-
-// ]
+#remark[
+  On all regions charge free, which may comprise the interior and the exterior, the potential must satisfy the Laplace equation:
+  $
+    laplacian phi = 0.
+  $
+  The coefficients $A$ and $B$ can be thought to have been chosen to satisfy the boundary conditions set by @eq:electrostatic-surface-boundary-matching-condition.
+]

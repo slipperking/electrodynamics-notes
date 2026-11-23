@@ -44,7 +44,7 @@ $
     &wide wide - 1 / 6 integral.triple_(s' < R) rho(va(r)') va(s)'^(times.o 3) dif^3 r' colon.tri.op grad^(times.o 3) 1 / s + dots.c],
 $
 thus
-#theorem[Electric Multipole Expansion][
+#theorem[Electric Cartesian Multipole Expansion][
   For $s > R$, where $rho$ is supported in the sphere of radius $R$ centered at $va(r)_0$,
   $
     phi(va(r)) & = 1 / (4 uppi epsilon_0) sum_(n = 0)^oo (-1)^n vb(C)^((n)) limits(dot)^n grad^(times.o n) 1 / s \

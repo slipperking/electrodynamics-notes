@@ -254,8 +254,8 @@ $
 entailing the normal component as the sole component in the difference:
 $
   Delta va(E) = sigma / epsilon_0 vu(n) ==> Delta grad phi = -sigma / epsilon_0 vu(n) ==> Delta grad phi dot vu(n) = Delta pdv(phi, n) = -sigma / epsilon_0,
-$
-where $pdv(phi, n)$ is the normal derivative.
+$ <eq:electrostatic-surface-boundary-matching-condition>
+where $pdv(phi, n)$ is the normal derivative. @eq:electrostatic-surface-boundary-matching-condition is the _boundary matching condition_ for a surface charge distribution.
 /*
 
 Suppose there were a surface $S$ carrying a surface charge density distribution $sigma(va(r))$  */

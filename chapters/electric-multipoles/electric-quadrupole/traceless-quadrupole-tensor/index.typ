@@ -16,9 +16,13 @@ Thus we are provided with sufficient motivation to define
   Denote by $Theta_(i j)$ the _electric traceless quadrupole moment_, given by the symmetric dyadic tensor
   $
     Theta_(i j) = 1/2 integral.triple_(s' < R) rho(va(r)') (3 s'_i s'_j - delta_(i j) s'^2) d^3 r' = 3 Q_(i j) - delta_(i j) Q_(k k), \
-    vaa(Theta) = Theta_(i j) vu(e)_i times.o vu(e)_j = 3 vaa(Q) - vaa(I) tr vaa(Q).
+    vaa(Theta) = Theta_(i j) vu(e)_i times.o vu(e)_j = 3 vaa(Q) - vaa(I) tr vaa(Q)
   $
 ]
+to give
+$
+  phi_2 (va(r)) = 1 / (4 uppi epsilon_0) vaa(Theta) : va(s)^(times.o 2) / s^5.
+$ <eq:traceless-quadrupole-tensor-potential>
 We will now verify the veracity in the term "traceless":
 #proof[of the Tracelessness of $vaa(Theta)$][
   $
