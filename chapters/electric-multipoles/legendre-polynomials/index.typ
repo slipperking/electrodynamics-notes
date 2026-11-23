@@ -40,7 +40,16 @@ $
   (ell + 1) P_(ell + 1) (x) - 2 x ell P_(ell) (x) + (ell - 1) P_(ell - 1)(x) = x P_ell (x) - P_(ell - 1) (x), \
   (ell + 1) P_(ell + 1) (x) = x(2 ell + 1) P_ell (x) - ell P_(ell - 1)(x) , \
 $
-with polynomial base cases $P_0 (x) = 1$ and $P_1 (x) = x$, we aver from recursion that each $P_ell$ is a polynomial. Thus we have, in its original form, relevant to the present practical application,
+with polynomial base cases $P_0 (x) = 1$ and $P_1 (x) = x$, we aver from recursion that each $P_ell$ is a polynomial.
+
+#remark[
+  It may also be observed that since $P_0$ and $P_1$ only contain exponents of parity matching the subscripts $0$ and $1$ respectively, an inductive process shows that the parity of each exponent in $P_ell$ matches the parity of $ell$, which is to say that for each $ell$,
+  $
+    P_ell (x) = a_(ell, ell) x^ell + a_(ell, ell - 2) x^(ell - 2) + dots.c.
+  $ <eq:legendre-polynomials-every-other-power>
+  The inductive process also shows $P_ell$ is of degree $ell$.
+]
+Thus we have, in its original form, relevant to the present practical application,
 
 $
   1 / norm(va(s) - va(s)') = 1 / s sum_(ell = 0)^oo P_ell (vu(s) dot vu(s)') (s' / s)^ell, wide s' < s.

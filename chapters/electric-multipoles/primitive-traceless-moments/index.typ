@@ -13,6 +13,5 @@ $
 $
 It is our present intention to generalize this "traceless" expression from arbitrarily chosen primitive moments. In particular, we make use of @eq:inverse-distance-legendre-polynomial to write (where $rho(va(r)')$ is supported in $s' > s$)
 $
-  phi(va(r)) & = 1 / (4 uppi epsilon_0) integral.triple rho(va(r)') / xi dif^3 r' \
-  // & = 1 / (4 uppi epsilon_0) sum_(ell = 0)^oo 1 / s^(ell + 1) integral.triple rho(va(r)') P_ell ((s_i s'_i) / (s s')) s'^ell dif^3 r'
+  phi(va(r)) & = 1 / (4 uppi epsilon_0) integral.triple rho(va(r)') / xi dif^3 r' = 1 / (4 uppi epsilon_0) sum_(ell = 0)^oo 1 / s^(ell + 1) integral.triple rho(va(r)') P_ell (vu(s) dot vu(s)') s'^ell dif^3 r'
 $
