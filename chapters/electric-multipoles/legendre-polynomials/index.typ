@@ -45,9 +45,9 @@ with polynomial base cases $P_0 (x) = 1$ and $P_1 (x) = x$, we aver from recursi
 #remark[
   It may also be observed that since $P_0$ and $P_1$ only contain exponents of parity matching the subscripts $0$ and $1$ respectively, an inductive process shows that the parity of each exponent in $P_ell$ matches the parity of $ell$, which is to say that for each $ell$,
   $
-    P_ell (x) = a_(ell, ell) x^ell + a_(ell, ell - 2) x^(ell - 2) + dots.c.
+    P_ell (x) = a_(ell, ell) x^ell + a_(ell, ell - 2) x^(ell - 2) + dots.c,
   $ <eq:legendre-polynomials-every-other-power>
-  The inductive process also shows $P_ell$ is of degree $ell$.
+  containing powers differing by two. The inductive process also shows $P_ell$ is of degree $ell$.
 ]
 Thus we have, in its original form, relevant to the present practical application,
 
