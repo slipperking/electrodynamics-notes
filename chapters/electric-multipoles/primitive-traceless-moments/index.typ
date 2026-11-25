@@ -9,7 +9,7 @@ $
 $
 wherein each term contains a $ell$-fold tensor contraction with a primitive Cartesian moment. In @sec:traceless-quadrupole-tensor (more specifically @eq:traceless-quadrupole-tensor-potential), we obtained the alternate representation
 $
-  vaa(Q) : grad^(times.o 2) = vaa(Theta) : (va(s)^(times.o 2)) / s^5.
+  vaa(Q) : grad^(times.o 2) 1 / s = vaa(Theta) : (va(s)^(times.o 2)) / s^5.
 $
 It is our present intention to generalize this "traceless" expression from arbitrarily chosen primitive moments. In particular, we make use of @eq:inverse-distance-legendre-polynomial to write (where $rho(va(r)')$ is supported in $s' < s$)
 $
