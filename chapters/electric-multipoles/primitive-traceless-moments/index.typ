@@ -99,6 +99,5 @@ $
 Thus, one may find (in continuation of @eq:traceless-electric-multipole-moment-tracelessness) that (where homogeneity is with respect to $va(s)$)
 $
   tr_(i_m i_n) vb(T)^((ell)) & = -(4 uppi) / ell! evaluated(partial'_alpha [rho(va(r)') s'^(2 ell + 1)])_(va(r)_0) \
-  & = -(4 uppi) / ell! sum_(k <= alpha) binom(alpha, k) (partial'_k rho)(va(r)_0) [#[hom. func. of deg. $2 ell + 1 - abs(alpha - k) >= ell + 3$]](va(s) = 0) \
-  &= 0.
+  & = -(4 uppi) / ell! sum_(k <= alpha) binom(alpha, k) (partial'_k rho)(va(r)_0) [#[hom. func. of deg. $2 ell + 1 - abs(alpha - k) >= ell + 3$]](va(s) = 0) = 0.
 $
