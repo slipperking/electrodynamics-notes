@@ -46,9 +46,59 @@ By the distributional derivative $integral f partial delta = -integral delta par
 $
   delta_(i_n i_m) T^((ell))_(i_1 dots.c i_ell) &= -(4 uppi) / ell! integral.triple delta(va(s)') [product_(k != m,n) partial'_i_k] [rho(va(r)') s'^(2 ell + 1)] dif^3 r' \
   & = -(4 uppi) / ell! evaluated([product_(k != m,n) partial'_i_k] [rho(va(r)') s'^(2 ell + 1)])_(va(r)_0).
+$ <eq:traceless-electric-multipole-moment-tracelessness>
+(Herewith to facilitate our discussion it will become rather imperative the introduction of relevant terminology.)
+#definition[
+  A function $f(va(r))$ is said to be _homogeneous of degree $d in NN$_ iff for any $lambda >= 0$,
+  $
+    f(lambda va(r)) = lambda^d f(va(r)).
+  $
+]
+(One of the defining properties of linearity is homogeneity of degree $1$.)
+
+Of the various properties of homogeneous functions, we note that the derivative of $f(lambda va(r))$, along any such component of $va(r)$, such as $r_k$, may be computed by the chain rule to be
 $
-// For some fixed $j$,
-// $
-//   partial'_i_j [rho(va(r)') s'^(2 ell + 1)] &= partial'_i_j rho(va(r)') s'^(2 ell + 1) + rho(va(r)') partial'_i_j sqrt(s'^2_i_k)^(2 ell + 1) \
-//   & = rho_(i_j) rho(va(r)') s'^(2 ell + 1) + rho(va(r)') (2 ell + 1) s'^(2 ell) (2 s'_i_j)
-// $
+  partial_k [f(lambda va(r))] = (grad f)(lambda va(r)) dot partial_k (lambda va(r)) = (grad f)(lambda va(r)) dot lambda vu(e)_k = lambda (partial_k f)(lambda va(r)),
+$
+and by the homogeneity of $f$ to be
+$
+  partial_k [f(lambda va(r))] = partial_k [lambda^d f(va(r))] = lambda^d (partial_k f) (va(r)),
+$
+whence we have
+#lemma[
+  Where $f(va(r))$ is homogeneous with degree $d$,
+  $
+    (partial_k f) (lambda va(r)) = lambda^(d - 1) (partial_k f)(va(r))
+  $
+  is homogeneous with degree $d - 1$.
+] <lem:derivative-of-homogeneous-function-is-homogeneous>
+In contending with iterated derivatives of unspecified arbitrary indices, it becomes of often utility to use
+#definition[Multi-Index][
+  A $3$-tuple $alpha = (alpha_1, alpha_2, alpha_3)$ of nonnegative integers, known as a _multi-index_, is defined with the following notations:
+  $
+    abs(alpha) = alpha_1 + alpha_2 + alpha_3, quad partial_alpha = partial_i^alpha_i = (partial^abs(alpha)) / (partial r_1^(alpha_1) partial r_2^(alpha_2) partial r_3^(alpha_3)).
+  $
+]
+The multi-indices define a partial ordering through total component comparison. The additive and subtractive operations are also defined component-wise. Thus we obtain
+#lemma[
+  Where $f$ is homogeneous with degree $d$, for a multi-index $alpha:abs(alpha) <= d$, $partial_alpha f$ is homogeneous with degree $d - abs(alpha)$.
+] <lem:multi-index-homogeneous-function-derivative-degree-decrement>
+Moreover, we have the following generalization of the product rule:
+#lemma[
+  Where $f,g$ are two functions in $RR^3$ and $alpha$ is a multi-index,
+  $
+    partial_alpha (f g) = sum_(k <= alpha) binom(alpha, k) (partial_k f) (partial_(alpha - k) g) = sum_(k <= alpha) binom(alpha_1, k_1) binom(alpha_2, k_2) binom(alpha_3, k_3) (partial_k f) (partial_(alpha - k) g),
+  $
+] <lem:multi-index-generalized-leibniz-rule>
+which may be obtained by performing induction whilst incrementing the value of $abs(alpha)$.
+
+The specified indices $i_1,i_2,dots,i_ell$ (without $m,n$) in @eq:traceless-electric-multipole-moment-tracelessness construct the multi-index corresponding to
+$
+  alpha = (sum_(k != m,n) delta_(i_k 1), sum_(k != m,n) delta_(i_k 2), sum_(k != m,n) delta_(i_k 3)), quad (abs(alpha) = ell - 2).
+$
+Thus, one may find (in continuation of @eq:traceless-electric-multipole-moment-tracelessness) that (where homogeneity is with respect to $va(s)$)
+$
+  tr_(i_m i_n) vb(T)^((ell)) & = -(4 uppi) / ell! evaluated(partial'_alpha [rho(va(r)') s'^(2 ell + 1)])_(va(r)_0) \
+  & = -(4 uppi) / ell! sum_(k <= alpha) binom(alpha, k) (partial'_k rho)(va(r)_0) [#[hom. func. of deg. $2 ell + 1 - abs(alpha - k) >= ell + 3$]](va(s) = 0) \
+  &= 0.
+$
