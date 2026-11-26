@@ -167,4 +167,23 @@ $
   va(E)_"out" (va(r)_S) times vu(n) = 0, wide va(E)_"out" (va(r)_S) dot vu(n) = E_"out" (va(r)_S) = sigma(va(r)_S) / epsilon_0,\
   sigma(va(r)_S) = epsilon_0 E_"out" (va(r)_S)
 $
+#example[
+  Determine the electric potential and the dipole moment due to a neutral conducting sphere of radius $R$ in the presence of a constant external electric field $va(E)_0$. Then determine the surface charge density $sigma$.
+] <ex:electrostatic-induction-neutral-conducting-sphere>
+#solution[to @ex:electrostatic-induction-neutral-conducting-sphere][
+  #lorem(2)
 
+  Permit the consideration of the axis parallel to $va(E)_0$ passing through the center of the sphere. (Without loss of generality may we assume such axis to be $vu(z)$ whence $va(E)_0 = E_0 vu(z)$). Due to symmetry the potential thereabout, by azimuthal symmetry thus may we write (where $theta$ is the polar angle from aforesaid axis):
+  $
+    va(E)_"self" (r < R, theta) = -va(E)_0 = - E_0 vu(z) ==> phi_"self" (r<R, theta) = E_0 r cos theta = E_0 r P_1(cos theta),
+  $
+  (wherein we have set the potential to be zero at the origin.) Moreover, the azimuthal multipole expansion (by @thm:electric-azimuthal-multipole-expansion) gives for the exterior case
+  $
+    phi_"self" (r > R, theta) = 1 / (4 uppi epsilon_0)sum_(ell = 0)^oo A_ell (P_ell (cos theta)) / r^(ell + 1) = 1 / (4 uppi epsilon_0) [A_0 / r + A_1 (cos theta) / r^2 + dots.c]
+  $
+  By continuity we aver from
+  $
+    1 / (4 uppi epsilon_0) [A_0 / R P_0 (cos theta) + (A_1 / R^2 - 4 uppi epsilon_0 E_0 R) P_1 (cos theta) + sum_(ell = 2)^oo A_ell (P_ell (cos theta)) / R^(ell + 1)] = 0
+  $
+  and the linear independence of the Legendre polynomials to claim that each coefficient vanishes, @todo.
+]

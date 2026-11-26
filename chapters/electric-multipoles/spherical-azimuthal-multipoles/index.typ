@@ -78,13 +78,13 @@ Defining
   $
     A_ell = integral.triple rho(va(r)') P_ell (cos theta') s'^ell dif^3 r'
   $
-]
+] <def:electric-exterior-azimuthal-multipole-moment>
 and
 #definition[Electric Interior Azimuthal Multipole Moment][
   $
     B_ell = integral.triple (rho(va(r)')) / s'^(ell + 1) P_ell (cos theta') dif^3 r',
   $
-]
+] <def:electric-interior-azimuthal-multipole-moment>
 we then have
 #theorem[Electric Azimuthal Multipole Expansion][
   1. Where $rho(va(r'))$ is supported in $s' < R$ and azimuthally symmetric about the axis with direction $vu(z)$ passing through $va(r)_0$, then for $s > R$,
@@ -95,7 +95,7 @@ we then have
   $
     phi(va(r)) = 1 / (4 uppi epsilon_0) sum_(ell = 0)^oo B_ell P_ell (cos theta) s^ell.
   $
-]
+] <thm:electric-azimuthal-multipole-expansion>
 #example[
   Consider an origin-centered sphere of radius $R$ with an azimuthally symmetric (about $vu(z)$) surface charge distribution given by $sigma(va(r)_S) = sigma_0 cos theta$. Determine its electric potential.
 ] <ex:azimuthally-symmetric-surface-distribution-potential>
