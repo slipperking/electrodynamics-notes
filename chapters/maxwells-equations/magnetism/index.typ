@@ -23,12 +23,12 @@ $ <eq:line-magnetostatic-force>
   We appeal to a simple substitution yielding
   $
     integral.cont_L I &dif va(ell) times va(B)(va(r)) = integral.cont_L I dif va(ell) times [mu_0 / (4 uppi) sum_(k=1)^N integral.cont_L_k I_k dif va(ell)_k times (va(r) - va(r)_k) / norm(va(r) - va(r)_k)^3] \
-    &= mu_0 / (4 uppi) sum_(k=1)^N integral.cont_L integral.cont I I_k dif va(ell) times (dif va(ell)_k times (va(r) - va(r)_k) / norm(va(r) - va(r)_k)^3) \
-    &= mu_0 / (4 uppi) sum_(k=1)^N integral.cont_L integral.cont_L_k I I_k [dif va(ell) (dif va(ell)_k dot (va(s)_k) / s_k^3) - (va(s)_k) / s_k^3 (dif va(ell) dot dif va(ell)_k)] \
-    &= mu_0 / (4 uppi) sum_(k=1)^N integral.cont_L I [integral.cont_L_k I_k (va(s)_k) / s_k^3 dot dif va(ell)_k] dif va(ell) - integral.cont_L I integral.cont_L_k I_k (va(s)_k) / s_k^3 (dif va(ell) dot dif va(ell)_k) \
-    &= -mu_0 / (4 uppi) [sum_(k=1)^N integral.cont_L I I_k (integral.cont_L_k grad 1 / s_k dot dif va(ell)_k) dif va(ell) + integral.cont_L integral.cont_L_k I I_k (va(s)_k) / s_k^3 (dif va(ell) dot dif va(ell)_k)]\
+    &= mu_0 / (4 uppi) sum_(k=1)^N integral.cont_L integral.cont_L_k I I_k dif va(ell) times (dif va(ell)_k times (va(r) - va(r)_k) / norm(va(r) - va(r)_k)^3) \
+    &= mu_0 / (4 uppi) sum_(k=1)^N integral.cont_L integral.cont_L_k I I_k [dif va(ell)_k (dif va(ell) dot (va(s)_k) / s_k^3) - (va(s)_k) / s_k^3 (dif va(ell) dot dif va(ell)_k)] \
+    &= mu_0 / (4 uppi) sum_(k=1)^N integral.cont_L_k [integral.cont_L I I_k (va(s)_k) / s_k^3 dot dif va(ell)] dif va(ell)_k - integral.cont_L I integral.cont_L_k I_k (va(s)_k) / s_k^3 (dif va(ell) dot dif va(ell)_k) \
+    &= -mu_0 / (4 uppi) [sum_(k=1)^N integral.cont_L_k (integral.cont_L I I_k grad 1 / s_k dot dif va(ell)) dif va(ell)_k + integral.cont_L integral.cont_L_k I I_k (va(s)_k) / s_k^3 (dif va(ell) dot dif va(ell)_k)]\
     \
-    &= -mu_0 / (4 uppi) integral.cont_L integral.cont_L_k I I_k (va(s)_k) / s_k^3 (dif va(ell) dot dif va(ell)_k)
+    &= -mu_0 / (4 uppi) sum_(k=1)^N integral.cont_L integral.cont_L_k I I_k (va(s)_k) / s_k^3 (dif va(ell) dot dif va(ell)_k)
   $
   by the Gradient Theorem (@thm:gradient).
 ]
