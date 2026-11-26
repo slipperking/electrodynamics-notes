@@ -15,6 +15,6 @@ As averred previously with the point quadrupole construction, the number of inde
 $
   phi(va(r)) = 1 / (4 uppi epsilon_0) (-va(c)_1 dot grad) dots.c (-va(c)_ell dot grad) 1 / s = 1 / (4 uppi epsilon_0) C (-vu(c)_1 dot grad) dots.c (-vu(c)_ell dot grad) 1 / s.
 $
-In its factorized form, each $vu(c)_k$ is restricted to a unit sphere giving rise to two degrees of freedom and the factor $C$ provides an additional degree of freedom. Thus $2 ell + 1$ arises to be the total number of degrees of freedom.
+In its factorized form, each $vu(c)_k$ is restricted to $S^2$, giving rise to two degrees of freedom; and the factor $C$ provides an additional degree of freedom. Thus $2 ell + 1$ arises to be the total number of degrees of freedom.
 
-Thus the traceless representation can be observed to be of maximum efficiency. In contrast thereto, it is often that two different primitive moments give rise to the same electric potential.
+Hence, the traceless representation can be observed to be of maximum possible efficiency. In contrast thereto, it is often that two different primitive moments give rise to the same electric potential.
