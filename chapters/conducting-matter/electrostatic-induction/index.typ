@@ -168,7 +168,7 @@ $
   sigma(va(r)_S) = epsilon_0 E_"out" (va(r)_S)
 $
 #example[
-  Determine the electric potential and the dipole moment due to a neutral conducting sphere of radius $R$ in the presence of a constant external electric field $va(E)_0$. Then determine the surface charge density $sigma$.
+  Determine the generated electric potential $phi_"self"$ and the dipole moment due to a neutral origin-centered conducting sphere of radius $R$ in the presence of a constant external electric field $va(E)_0$. Then determine the surface charge density $sigma$.
 ] <ex:electrostatic-induction-neutral-conducting-sphere>
 #solution[to @ex:electrostatic-induction-neutral-conducting-sphere][
   #lorem(2)
@@ -185,5 +185,23 @@ $
   $
     1 / (4 uppi epsilon_0) [A_0 / R P_0 (cos theta) + (A_1 / R^2 - 4 uppi epsilon_0 E_0 R) P_1 (cos theta) + sum_(ell = 2)^oo A_ell (P_ell (cos theta)) / R^(ell + 1)] = 0
   $
-  and the linear independence of the Legendre polynomials to claim that each coefficient vanishes, @todo.
+  and the linear independence of the Legendre polynomials as demonstrated by the Orthogonality Relation (@thm:legendre-polynomials-orthogonality-relation) to claim that each coefficient vanishes---in particular,
+  $
+    A_1 = 4 uppi epsilon_0 E_0 R^3, wide ell != 1 ==> A_ell = 0,
+  $
+  and as such,
+  $
+    phi_"self" (r, theta) = cases(E_0 r cos theta &quad "if" r < R\,, (E_0 R^3) / r^2 cos theta&quad"if" r > R.)
+  $
+  The potential due to a pure point dipole with moment $va(p) = p vu(z)$ is given by
+  $
+    phi_2 (va(r)) = -1 / (4 uppi epsilon_0) va(p) dot grad 1 / r = 1 / (4 uppi epsilon_0) (va(p) dot vu(r)) / r^2 = 1 / (4 uppi epsilon_0) (p cos theta) / r^2,
+  $
+  whence identification with $phi_"self" (r > R)$ insinuates that whensoever outside the conducting sphere the potential behaves identically to a point dipole with dipole moment
+  $
+    va(p) = 4 uppi epsilon_0 R^3 va(E)_0 = alpha epsilon_0 va(E)_0,
+  $
+  wherein the constant $alpha = 4 uppi R^3$ is known as the _polarizability_.
+
+  By the boundary conditions,
 ]
