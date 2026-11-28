@@ -10,7 +10,7 @@
     include "counting-multipole-moments/index.typ"
   },
 )
-It is often the case that a localized charge distribution---bounded within a sphere of radius $R$ centered at $va(r)_0$---is of such complexity insofar that standard methods of study make the study thereof rather convoluted through traditional means. Suitably, practical applications demand the consequent use of necessitated approximations to specified degrees of precision.
+It is often the case that a localized charge distribution---bounded within a sphere of radius $R$ centered at $va(r)_0$---is of such complexity insomuch that standard methods of study make the study thereof rather convoluted through traditional means. Suitably, practical applications demand the consequent use of necessitated approximations to specified degrees of precision.
 
 (The development of the immediately proceeding sections will entertain only the _exterior multipole expansion_, wherein a charge distribution is localized and effects are evaluated at distance. In future sections (@sec:spherical-and-azimuthal-multipoles) we will expand our consideration to charge distributions evaluated at interior cavities via the _interior multipole expansion_.)
 

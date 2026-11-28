@@ -2,7 +2,7 @@
 #show: docs-subchapter.with(
   ..dargs("Counting Multipole Moments"),
 )
-The primitive moments of the form $C^((ell))_(i_1 i_2 dots.c i_ell)$ are fully symmetric with respect to an interchange of any two indices. Therefore, the number of degrees of freedom to characterize a primitive moment is given by the number of ways to partition $ell$ indistinguishable indices to exactly one of $x, y, z$ regardless of order, equivalent to the number of such multi-indices with norm $ell$. The method of stars and bars gives this quantity to be $ binom(ell + 3 - 1, 3 - 1) = binom(ell + 2, 2) = 1/2 (ell + 2)(ell + 1). $
+The primitive moments of the form $C^((ell))_(i_1 i_2 dots.c i_ell)$ are fully symmetric with respect to an interchange of any two indices. Therefore, the number of degrees of freedom to characterize a primitive moment is given by the number of ways to partition $ell$ indistinguishable indices each to exactly one of $x, y, z$ regardless of order, equivalent to the number of such multi-indices with norm $ell$. The method of stars and bars gives this quantity to be $ binom(ell + 3 - 1, 3 - 1) = binom(ell + 2, 2) = 1/2 (ell + 2)(ell + 1). $
 The traceless moments $T^((ell))_(i_1 i_2 dots.c i_ell)$ are similarly symmetric, but subject to the additional condition given by
 $
   delta_(i_n i_m) T^((ell))_(i_1 dots.c i_ell) = 0.

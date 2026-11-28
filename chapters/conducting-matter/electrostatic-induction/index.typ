@@ -158,7 +158,7 @@ All physical systems rearrange their charge distribution $rho$ in order to minim
     U_"E" [rho + delta rho; phi_"ext"] >= U_"E" [rho; phi_"ext"]. qedhere
   $
 ]
-It must follow that the distribution of the charge $Q$ must be distributed entirely to $S = partial V$. The boundary matching conditions, for a specified $va(r)_S in S$, are
+It must follow that the distribution of the charge $Q$ must be distributed entirely to $S = partial V$. The boundary matching conditions as given in @eq:electrostatic-surface-boundary-matching-condition, for a specified $va(r)_S in S$, are
 $
   va(E)_"out" (va(r)_S) - va(E)_"in" (va(r)_S) = sigma(va(r)_S) / epsilon_0 vu(n),
 $
@@ -171,7 +171,7 @@ $
   Determine the generated electric potential $phi_"self"$ and the dipole moment due to a neutral origin-centered conducting sphere of radius $R$ in the presence of a constant external electric field $va(E)_0$. Then determine the surface charge density $sigma$.
 ] <ex:electrostatic-induction-neutral-conducting-sphere>
 #solution[to @ex:electrostatic-induction-neutral-conducting-sphere][
-  #lorem(2)
+  // #lorem(2)
 
   Permit the consideration of the axis parallel to $va(E)_0$ passing through the center of the sphere. (Without loss of generality may we assume such axis to be $vu(z)$ whence $va(E)_0 = E_0 vu(z)$). Due to symmetry the potential thereabout, by azimuthal symmetry thus may we write (where $theta$ is the polar angle from aforesaid axis):
   $
@@ -199,9 +199,25 @@ $
   $
   whence identification with $phi_"self" (r > R)$ insinuates that whensoever outside the conducting sphere the potential behaves identically to a point dipole with dipole moment
   $
-    va(p) = 4 uppi epsilon_0 R^3 va(E)_0 = alpha epsilon_0 va(E)_0,
+    va(p) = 4 uppi epsilon_0 R^3 va(E)_0 = alpha va(E)_0,
   $
-  wherein the constant $alpha = 4 uppi R^3$ is known as the _polarizability_.
-
-  By the boundary conditions,
+  wherein the constant $alpha = 4 uppi R^3 epsilon_0$ is known as the _electric polarizability_. By the boundary conditions, it may be found that
+  $
+    epsilon_0 va(E)_"tot" (va(r)_S "(out)") dot vu(n) = sigma(va(r)_S),
+  $
+  wherein the quantity $phi_"tot"$ may be obtained from the aforewritten to be
+  $
+    va(E)_"tot" (va(r) "(out)") = va(E)_"ext" (va(r) "(out)") - grad phi_"self" (va(r) "(out)") = va(E)_0 - grad (E_0 R^3) / r^2 cos theta,
+  $
+  whence
+  $
+    sigma(va(r)_S) & = epsilon_0 [E_0 cos theta - vu(n) dot evaluated(grad (E_0 R^3 z / r^3))_(va(r) = va(r)_S)] \
+    & = epsilon_0 [E_0 cos theta - vu(n) dot E_0 R^3 evaluated((grad z 1 / r^3 + z grad 1 / r^3))_(va(r) = va(r)_S)] \
+    // & = epsilon_0 [E_0 cos theta - vu(n) dot E_0 R^3 evaluated((vu(z) / r^3 - (3 z) / r^4 vu(r)))_(va(r) = va(r)_S)] \
+    & = epsilon_0 [E_0 cos theta - vu(n) dot E_0 R^3 (vu(z) / R^3 - (3 cos theta) / R^3 vu(r))].
+  $
+  By $vu(n) = vu(r)$,
+  $
+    sigma(va(r)_S) = epsilon_0 [E_0 cos theta - E_0 (cos theta - 3 cos theta)] = 3 epsilon_0 E_0 cos theta. qedhere
+  $
 ]
